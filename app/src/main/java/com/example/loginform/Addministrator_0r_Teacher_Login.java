@@ -1,0 +1,30 @@
+package com.example.loginform;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.text.SpannableString;
+import android.text.style.UnderlineSpan;
+import android.view.View;
+import android.widget.TextView;
+
+public class Addministrator_0r_Teacher_Login extends AppCompatActivity {
+
+    TextView forgotPasswordLink;
+    SpannableString content;
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_addministrator0r_teacher_login);
+        forgotPasswordLink=findViewById(R.id.forgot);
+        content = new SpannableString("Forgot Password?");
+        content.setSpan(new UnderlineSpan(), 0, content.length(), 0);
+        forgotPasswordLink.setText(content);
+        forgotPasswordLink.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(Addministrator_0r_Teacher_Login.this, TeacherForgotPasswordActivity.class));
+            }
+        });
+    }
+}

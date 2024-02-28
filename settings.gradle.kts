@@ -13,5 +13,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "PresencePro"
+rootProject.name = "LOginForm"
 include(":app")

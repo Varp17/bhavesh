@@ -8,19 +8,19 @@
     android:background="#FFFFFF"
     tools:context=".MainActivity">
 
-
     <EditText
         android:id="@+id/editTextText"
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:layout_margin="60dp"
-        android:layout_marginTop="60dp"
-        android:background="@drawable/edittextinput"
-        android:hint="Enrollment No."
+        android:layout_marginTop="20dp"
+        android:background="@drawable/teacheredittext"
+        android:hint="Teacher Id."
         android:inputType="number"
         android:padding="10dp"
         android:textColor="#070707"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.575"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView4" />
 
@@ -31,7 +31,7 @@
         android:layout_marginLeft="60dp"
         android:layout_marginTop="32dp"
         android:layout_marginRight="60dp"
-        android:background="@drawable/edittextinput"
+        android:background="@drawable/teacheredittext"
         android:hint="Password"
         android:inputType="textPassword"
         android:padding="10dp"
@@ -46,17 +46,17 @@
         android:id="@+id/button"
         android:layout_width="104dp"
         android:layout_height="53dp"
-        android:layout_marginTop="60dp"
-        android:layout_marginBottom="60dp"
-        android:layout_marginRight="60dp"
         android:layout_marginLeft="60dp"
-        android:background="@drawable/loginbutton"
+        android:layout_marginTop="60dp"
+        android:layout_marginRight="60dp"
+        android:layout_marginBottom="60dp"
+        android:background="@drawable/teacherlogin"
         android:text="Login"
-        app:layout_constraintBottom_toTopOf="@+id/teacherlogin"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/forgot"
-        app:layout_constraintVertical_bias="0.104" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/forgot"
@@ -69,21 +69,9 @@
         app:layout_constraintEnd_toEndOf="@+id/word"
         app:layout_constraintTop_toBottomOf="@+id/editTextText" />
 
-    <TextView
-        android:id="@+id/teacherlogin"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:text="Administrator/Teacher Login"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView3"
-        app:layout_constraintVertical_bias="0.961" />
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/title"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="3dp"
@@ -97,10 +85,10 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0"
-        app:srcCompat="@drawable/title" />
+        app:srcCompat="@drawable/t_title" />
 
     <ImageView
-        android:id="@+id/imageView3"
+        android:id="@+id/motive"
         android:layout_width="158dp"
         android:layout_height="84dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -109,21 +97,20 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.125"
-        app:srcCompat="@drawable/motive" />
+        app:srcCompat="@drawable/t_motive" />
 
     <ImageView
         android:id="@+id/imageView4"
-        android:layout_width="197dp"
-        android:layout_height="142dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
 
         android:scaleType="fitXY"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.254"
-        app:srcCompat="@drawable/aaaaa" />
+        app:layout_constraintVertical_bias="0.234"
+        app:srcCompat="@drawable/teacher" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
