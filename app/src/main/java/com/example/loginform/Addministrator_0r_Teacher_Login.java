@@ -7,11 +7,13 @@ import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.style.UnderlineSpan;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 public class Addministrator_0r_Teacher_Login extends AppCompatActivity {
 
     TextView forgotPasswordLink;
+    Button login;
     SpannableString content;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,6 +22,14 @@ public class Addministrator_0r_Teacher_Login extends AppCompatActivity {
         content = new SpannableString("Forgot Password?");
         content.setSpan(new UnderlineSpan(), 0, content.length(), 0);
         forgotPasswordLink.setText(content);
+        login=findViewById(R.id.button);
+        login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(getApplicationContext(), administrotor_panel.class);
+                startActivity(intent);
+            }
+        });
         forgotPasswordLink.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
