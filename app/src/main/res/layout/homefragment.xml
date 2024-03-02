@@ -11,95 +11,96 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="20dp"
         android:text="Upcoming Events"
         android:textColor="#0E0E0E"
         android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/image_slider"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.023" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.denzcoskun.imageslider.ImageSlider
         android:id="@+id/image_slider"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:layout_marginTop="66dp"
-        android:layout_marginBottom="179dp"
+        android:layout_marginBottom="30dp"
+
         app:iss_auto_cycle="true"
-        app:iss_corner_radius="20"
+        app:iss_corner_radius="100"
         app:iss_delay="1000"
         app:iss_period="1000"
         app:iss_text_align="CENTER"
-        app:layout_constraintBottom_toTopOf="@+id/datemsg"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/teachernamemsg"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.034" />
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <TextView
         android:id="@+id/hellomsg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="112dp"
-        android:layout_marginBottom="399dp"
+        android:layout_marginStart="7dp"
+        android:layout_marginEnd="3dp"
         android:text="Hello"
         android:textColor="#0E0E0E"
         android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/image_slider" />
+        app:layout_constraintBaseline_toBaselineOf="@+id/teachernamemsg"
+        app:layout_constraintEnd_toStartOf="@+id/teachernamemsg"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/teachernamemsg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
-        android:layout_marginStart="8dp"
+        android:layout_marginBottom="42dp"
         android:text="Teacher Name"
         android:textColor="#0E0E0E"
         android:textSize="20sp"
-        app:layout_constraintBaseline_toBaselineOf="@+id/hellomsg"
-        app:layout_constraintStart_toEndOf="@+id/hellomsg" />
+        app:layout_constraintBottom_toTopOf="@+id/datemsg"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/hellomsg"
+        app:layout_constraintTop_toBottomOf="@+id/image_slider" />
 
     <TextView
         android:id="@+id/datemsg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="48dp"
-        android:layout_marginBottom="10dp"
+        android:layout_marginStart="21dp"
+        android:layout_marginBottom="8dp"
         android:text="07 Feb, Wednesday"
         android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@+id/todshcedule"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/image_slider" />
+        app:layout_constraintTop_toBottomOf="@+id/teachernamemsg" />
 
     <TextView
         android:id="@+id/todshcedule"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
-        android:layout_marginBottom="271dp"
+        android:layout_marginBottom="13dp"
         android:text="Today's Schedule"
         android:textColor="#0E0E0E"
         android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/scheduleimg"
         app:layout_constraintStart_toStartOf="@+id/datemsg"
         app:layout_constraintTop_toBottomOf="@+id/datemsg" />
 
     <ImageView
         android:id="@+id/scheduleimg"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="28dp"
+        android:layout_width="232dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginBottom="40dp"
         android:src="@drawable/aaaaa"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.555"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/todshcedule"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintStart_toStartOf="@+id/todshcedule"
+        app:layout_constraintTop_toBottomOf="@+id/todshcedule" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
