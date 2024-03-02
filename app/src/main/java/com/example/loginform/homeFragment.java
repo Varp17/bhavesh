@@ -1,5 +1,6 @@
 package com.example.loginform;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -7,6 +8,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.denzcoskun.imageslider.ImageSlider;
 import com.denzcoskun.imageslider.constants.ScaleTypes;
@@ -66,6 +68,7 @@ public class homeFragment extends Fragment {
     }
 
     ImageSlider image_slider;
+    ImageView scheduleimg;
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
@@ -73,9 +76,18 @@ public class homeFragment extends Fragment {
         image_slider = rootView.findViewById(R.id.image_slider);
 
         List<SlideModel> imageList = new ArrayList<>();
-        imageList.add(new SlideModel(R.drawable.aaaaa, ScaleTypes.FIT));
-        imageList.add(new SlideModel(R.drawable.motive,ScaleTypes.FIT));
+        imageList.add(new SlideModel(R.drawable.ronaldo, ScaleTypes.FIT));
+        imageList.add(new SlideModel(R.drawable.sunilchettri,ScaleTypes.FIT));
+        scheduleimg=rootView.findViewById(R.id.scheduleimg);
+        scheduleimg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(rootView.getContext(), maximizeimage.class);
 
+                intent.putExtra("img",R.drawable.aaaaa);
+                startActivity(intent);
+            }
+        });
 
         image_slider.setImageList(imageList); // true for auto sliding
         return rootView;
