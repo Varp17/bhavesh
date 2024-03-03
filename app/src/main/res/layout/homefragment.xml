@@ -35,9 +35,7 @@
         app:iss_text_align="CENTER"
         app:layout_constraintBottom_toTopOf="@+id/teachernamemsg"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" >
-
-    </com.denzcoskun.imageslider.ImageSlider>
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <TextView
         android:id="@+id/hellomsg"
@@ -105,52 +103,17 @@
         app:layout_constraintTop_toBottomOf="@+id/todshcedule" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/floabtnmange"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/manageicon50"
-        app:backgroundTint="#7E7E7E"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.915"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.922"
-        app:tint="@color/white" />
-
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/floatbtnfeedback"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-
-        android:layout_marginBottom="12dp"
-        android:src="@drawable/paper_plane_50"
-        app:backgroundTint="#7E7E7E"
-        app:layout_constraintBottom_toTopOf="@+id/floabtnmange"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.915"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.997"
-        app:tint="@color/white" />
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/editbannerbtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@null"
-        android:outlineProvider="none"
-        android:src="@drawable/icons8_create_32"
-
-        android:background="@drawable/edittextinput"
-        app:layout_constraintBottom_toTopOf="@+id/floatbtnfeedback"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.542"
-        app:tint="@color/white" />
+        app:backgroundTint="#05C5E3"
+        app:tint="@color/white"
+        android:src="@drawable/alert_24"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
