@@ -29,6 +29,7 @@
                 android:textColor="#FFFDFD"
                 android:textSize="24sp"
                 android:textStyle="bold"
+                android:layout_marginStart="0dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/notificationbtn"
                 app:layout_constraintHorizontal_bias="0.304"
@@ -36,13 +37,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
 
-            <ImageButton
-                android:id="@+id/notificationbtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="140dp"
-                android:background="@null"
-                android:src="@drawable/notification_icon" />
+
 
         </androidx.appcompat.widget.Toolbar>
 
