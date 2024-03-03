@@ -1,4 +1,4 @@
-package com.example.loginform;
+package administratorpkg;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,7 +13,9 @@ import android.widget.ImageView;
 import com.denzcoskun.imageslider.ImageSlider;
 import com.denzcoskun.imageslider.constants.ScaleTypes;
 import com.denzcoskun.imageslider.models.SlideModel;
-import com.denzcoskun.imageslider.constants.ScaleTypes;
+import com.example.loginform.R;
+import com.example.loginform.maximizeimage;
+
 import java.util.ArrayList;
 import java.util.List;
 

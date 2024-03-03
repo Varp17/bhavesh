@@ -1,4 +1,4 @@
-package com.example.loginform;
+package administratorpkg;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -9,6 +9,8 @@ import android.text.style.UnderlineSpan;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+
+import com.example.loginform.R;
 
 public class Addministrator_0r_Teacher_Login extends AppCompatActivity {
 
