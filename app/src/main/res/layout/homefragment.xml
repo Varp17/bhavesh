@@ -37,6 +37,11 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" >
 
+        <ImageView
+            android:id="@+id/imageView5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/icons8_create_32" />
     </com.denzcoskun.imageslider.ImageSlider>
 
     <TextView
@@ -135,22 +140,7 @@
         app:layout_constraintVertical_bias="0.997"
         app:tint="@color/white" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/editbannerbtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@null"
-        android:outlineProvider="none"
-        android:src="@drawable/icons8_create_32"
 
-        android:background="@drawable/edittextinput"
-        app:layout_constraintBottom_toTopOf="@+id/floatbtnfeedback"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.542"
-        app:tint="@color/white" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
