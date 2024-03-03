@@ -1,16 +1,18 @@
-package administratorpkg;
+package com.example.loginform;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.TableLayout;
 import android.widget.Toast;
 
-import com.example.loginform.R;
+import com.example.loginform.databinding.ActivityMainBinding;
 import com.google.android.material.tabs.TabLayout;
 
 public class administrotor_panel extends AppCompatActivity {
