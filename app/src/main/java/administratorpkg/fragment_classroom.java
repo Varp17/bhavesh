@@ -1,22 +1,34 @@
 package administratorpkg;
 
+import android.content.Context;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 
 import com.example.loginform.R;
+
+import java.util.ArrayList;
+
+import javax.security.auth.Subject;
 
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link fragment_classroom#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class fragment_classroom extends Fragment {
 
+
+public class fragment_classroom extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -25,6 +37,10 @@ public class fragment_classroom extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private ArrayList<Subjects>subjectsArrayList;
+    private String[] subjectname;
+    private String[] teachername;
+    private RecyclerView recyclerview;
 
     public fragment_classroom() {
         // Required empty public constructor
@@ -60,7 +76,63 @@ public class fragment_classroom extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_classroom, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_classroom, container, false);
+        dataInitialize();
+
+
+        return rootView;
     }
+
+
+
+
+
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        dataInitialize();
+
+        recyclerview = view.findViewById(R.id.classroomrecyclerview1);
+        recyclerview.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerview.setHasFixedSize(true);
+        ClassrromViewAdapter classrromViewAdapter = new ClassrromViewAdapter(getContext(),subjectsArrayList);
+        recyclerview.setAdapter(classrromViewAdapter);
+        classrromViewAdapter.notifyDataSetChanged();
+
+
+    }
+
+
+
+
+
+
+
+
+
+
+    private void dataInitialize(){
+        subjectsArrayList = new ArrayList<>();
+        subjectname = new String[]{
+                getString(R.string.sub1),
+                getString(R.string.sub2),
+                getString(R.string.sub3),
+                getString(R.string.sub4),
+
+        };
+        teachername = new String[]{
+                getString(R.string.tech1),
+                getString(R.string.tech2),
+                getString(R.string.tech3),
+                getString(R.string.tech4)
+        };
+        for(int i=0;i<subjectname.length;i++){
+            Subjects subjects = new Subjects((subjectname[i]),teachername[i]);
+            subjectsArrayList.add(subjects);
+        }
+
+
+    }
+
 }

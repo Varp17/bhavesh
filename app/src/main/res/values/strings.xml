@@ -18,6 +18,14 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="next">Next</string>
     <string name="previous">Previous</string>
+    <string name="sub1">Mad</string>
+    <string name="sub2">PHP</string>
+    <string name="sub3">Python</string>
+    <string name="sub4">ETI</string>
+    <string name="tech2">Vaisnavi</string>
+    <string name="tech3">Trupti</string>
+    <string name="tech4">Shirin madam</string>
+    <string name="tech1">Prerana</string>
 
     <string name="lorem_ipsum">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam in scelerisque sem. Mauris
