@@ -1,8 +1,10 @@
-package com.example.loginform;
+package administratorpkg;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.example.loginform.R;
 
 public class TeacherForgotPasswordActivity extends AppCompatActivity {
 

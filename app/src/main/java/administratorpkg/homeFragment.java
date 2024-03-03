@@ -1,5 +1,6 @@
-package com.example.loginform;
+package administratorpkg;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -7,6 +8,16 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+
+import com.denzcoskun.imageslider.ImageSlider;
+import com.denzcoskun.imageslider.constants.ScaleTypes;
+import com.denzcoskun.imageslider.models.SlideModel;
+import com.example.loginform.R;
+import com.example.loginform.maximizeimage;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -43,22 +54,45 @@ public class homeFragment extends Fragment {
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
+
         return fragment;
     }
 
-    @Override
+
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
     }
 
-    @Override
+    ImageSlider image_slider;
+    ImageView scheduleimg;
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.homefragment, container, false);
+        View rootView = inflater.inflate(R.layout.homefragment, container, false);
+        image_slider = rootView.findViewById(R.id.image_slider);
+
+        List<SlideModel> imageList = new ArrayList<>();
+        imageList.add(new SlideModel(R.drawable.ronaldo, ScaleTypes.FIT));
+        imageList.add(new SlideModel(R.drawable.sunilchettri,ScaleTypes.FIT));
+        scheduleimg=rootView.findViewById(R.id.scheduleimg);
+        scheduleimg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(rootView.getContext(), maximizeimage.class);
+
+                intent.putExtra("img",R.drawable.aaaaa);
+                startActivity(intent);
+            }
+        });
+
+        image_slider.setImageList(imageList); // true for auto sliding
+        return rootView;
+
     }
 }
