@@ -21,12 +21,15 @@
         <item
             android:id="@+id/nav_attendance"
             android:title="Attendance"
-            android:icon="@drawable/attendace_icon"/>
+            android:icon="@drawable/attendace_icon"
+           />
 
         <item
             android:id="@+id/nav_notification"
             android:title="Notification"
-            android:icon="@drawable/notification_icon"/>
+            android:icon="@drawable/notification_icon"
+            app:showAsAction="ifRoom"
+            />
 
         <item
             android:id="@+id/nav_document"
