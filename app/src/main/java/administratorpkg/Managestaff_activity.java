@@ -38,7 +38,7 @@ public class Managestaff_activity extends AppCompatActivity {
         toolbar=findViewById(R.id.toolbar);
 
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle(" ");
+        getSupportActionBar().setTitle("Manage Staff");
 
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,drawerLayout,toolbar,R.string.navigation_drawer_open,R.string.navigation_drawer_close);

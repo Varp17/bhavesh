@@ -25,7 +25,7 @@
                 android:id="@+id/menutitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="PresencePro"
+                android:text=""
                 android:textColor="#FFFDFD"
                 android:textSize="24sp"
                 android:textStyle="bold"

@@ -37,7 +37,7 @@ public class administrotor_panel extends AppCompatActivity {
         toolbar=findViewById(R.id.toolbar);
       
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle(" ");
+        getSupportActionBar().setTitle("PresencePro");
 
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,drawerLayout,toolbar,R.string.navigation_drawer_open,R.string.navigation_drawer_close);

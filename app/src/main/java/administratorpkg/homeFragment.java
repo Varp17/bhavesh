@@ -71,16 +71,24 @@ public class homeFragment extends Fragment {
 
     ImageSlider image_slider;
     ImageView scheduleimg;
+    com.google.android.material.floatingactionbutton.FloatingActionButton floabtnmange;
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.homefragment, container, false);
         image_slider = rootView.findViewById(R.id.image_slider);
-
+        floabtnmange=rootView.findViewById(R.id.floabtnmange);
         List<SlideModel> imageList = new ArrayList<>();
         imageList.add(new SlideModel(R.drawable.ronaldo, ScaleTypes.FIT));
         imageList.add(new SlideModel(R.drawable.sunilchettri,ScaleTypes.FIT));
         scheduleimg=rootView.findViewById(R.id.scheduleimg);
+        floabtnmange.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent= new Intent(getContext(), Managestaff_activity.class);
+                startActivity(intent);
+            }
+        });
         scheduleimg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
