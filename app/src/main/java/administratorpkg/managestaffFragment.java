@@ -24,7 +24,7 @@ public class managestaffFragment extends Fragment {
 
     // TODO: Rename and change types of parameters
     private String mParam1;
-    private String mParam2;
+    public String mParam2;
 
     public managestaffFragment() {
         // Required empty public constructor
@@ -56,6 +56,13 @@ public class managestaffFragment extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
+
+
+
+
+
+
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

@@ -22,10 +22,19 @@
     <string name="sub2">PHP</string>
     <string name="sub3">Python</string>
     <string name="sub4">ETI</string>
-    <string name="tech2">Vaisnavi</string>
-    <string name="tech3">Trupti</string>
+    <string name="tech2">Vaishnavi Ma\'am</string>
+    <string name="tech3">Trupti Ma\'am</string>
     <string name="tech4">Shirin madam</string>
-    <string name="tech1">Prerana</string>
+    <string name="tech1">Prerna Ma\'am</string>
+    <string name="home">Home</string>
+    <string name="timetable">Timetable</string>
+    <string name="Classroom">Classroom</string>
+    <string name="Attendance">Attendance</string>
+    <string name="Notification">Notification</string>
+    <string name="Document">Document</string>
+    <string name="Edit_Banner">Edit Banner</string>
+    <string name="feedback">Feedback</string>
+    <string name="Logout">Logout</string>
 
     <string name="lorem_ipsum">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam in scelerisque sem. Mauris

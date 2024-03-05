@@ -1,44 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/menubar"
     >
 
     <group android:checkableBehavior="single"
         android:id="@+id/grp1">
         <item
             android:id="@+id/nav_home"
-            android:title="Home"
+            android:title="@string/home"
+            android:background="@drawable/item_background"
             android:icon="@drawable/home_icon"/>
         <item
             android:id="@+id/timetable"
-            android:title="Timetable"
-            android:icon="@drawable/timetable_icon"/>
+            android:title="@string/timetable"
+            android:background="@drawable/item_background"
+            android:icon="@drawable/timetable_icon"
+
+            />
 
         <item
             android:id="@+id/nav_classroom"
-            android:title="Classroom"
+            android:title="@string/Classroom"
+            android:background="@drawable/item_background"
             android:icon="@drawable/classroom_icon"/>
 
         <item
             android:id="@+id/nav_attendance"
-            android:title="Attendance"
+            android:title="@string/Attendance"
+            android:background="@drawable/item_background"
             android:icon="@drawable/attendace_icon"
            />
 
         <item
             android:id="@+id/nav_notification"
-            android:title="Notification"
+            android:title="@string/Notification"
+            android:background="@drawable/item_background"
             android:icon="@drawable/notification_icon"
             app:showAsAction="ifRoom"
             />
 
         <item
             android:id="@+id/nav_document"
-            android:title="Document"
+            android:title="@string/Document"
+            android:background="@drawable/item_background"
             android:icon="@drawable/document_icon"/>
         <item
             android:id="@+id/banner_edit"
-            android:title="Edit banner"
+            android:title="@string/Edit_Banner"
+            android:background="@drawable/item_background"
             android:icon="@drawable/edit_icon"/>
     </group>
 
@@ -48,12 +58,14 @@
 
         <item
             android:id="@+id/nav_feedback"
-            android:title="Feedback"
+            android:title="@string/feedback"
+            android:background="@drawable/item_background"
             android:icon="@drawable/feedback_icon"/>
 
         <item
             android:id="@+id/nav_logout"
-            android:title="Logout"
+            android:title="@string/Logout"
+            android:background="@drawable/item_background"
             android:icon="@drawable/logout_icon"/>
     </group>
 
