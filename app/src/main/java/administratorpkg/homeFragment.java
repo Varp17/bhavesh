@@ -96,8 +96,7 @@ public class homeFragment extends Fragment {
         profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent= new Intent(getContext(), activity_addministrator_profile.class);
-                startActivity(intent);
+
             }
         });
         scheduleimg.setOnClickListener(new View.OnClickListener() {
