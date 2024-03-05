@@ -28,4 +28,11 @@
         <item name="android:textColor" Parent="Theme.AppCompat.DayNight.NoActionBar" >#ffff</item>
         <item name="android:background" Parent="Theme.AppCompat.DayNight.NoActionBar" >@drawable/edittextloginblue</item>
     </style>
+
+<!--    &lt;!&ndash; res/values-night/themes.xml (night) &ndash;&gt;-->
+<!--    <style name="logo" parent="Theme.AppCompat">-->
+<!--        <item name="android:windowBackground">@drawable/teacherwhitelogo</item>-->
+<!--        <item name="nightModeIcon">@drawable/teacherwhitelogo</item>-->
+<!--    </style>-->
+
 </resources>
