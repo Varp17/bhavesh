@@ -12,7 +12,7 @@
             android:background="@drawable/item_background"
             android:icon="@drawable/home_icon"/>
         <item
-            android:id="@+id/timetable"
+            android:id="@+id/nav_timetable"
             android:title="@string/timetable"
             android:background="@drawable/item_background"
             android:icon="@drawable/timetable_icon"

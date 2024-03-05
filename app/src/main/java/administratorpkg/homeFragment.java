@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.denzcoskun.imageslider.ImageSlider;
 import com.denzcoskun.imageslider.constants.ScaleTypes;
@@ -85,7 +86,7 @@ public class homeFragment extends Fragment {
         imageList.add(new SlideModel(R.drawable.ronaldo, ScaleTypes.FIT));
         imageList.add(new SlideModel(R.drawable.sunilchettri,ScaleTypes.FIT));
         scheduleimg=rootView.findViewById(R.id.scheduleimg);
-        profile=inflater.inflate(R.layout.header, container, false).findViewById(R.id.profile);
+        profile=inflater.inflate(R.layout.header, container, false).findViewById(R.id.profileimg);
         floabtnmange.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -96,6 +97,7 @@ public class homeFragment extends Fragment {
         profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Toast.makeText(getContext(), "hello suyog home fragment", Toast.LENGTH_SHORT).show();
             }
         });
         scheduleimg.setOnClickListener(new View.OnClickListener() {

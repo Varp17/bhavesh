@@ -12,10 +12,12 @@ import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -23,8 +25,12 @@ import android.widget.Toast;
 import com.example.loginform.MainActivity;
 import com.example.loginform.R;
 import com.example.loginform.administrtor_profile;
+import com.example.loginform.maximizeimage;
 import com.google.android.material.navigation.NavigationView;
+import com.google.android.material.tabs.TabItem;
 import com.google.android.material.tabs.TabLayout;
+
+import java.util.zip.Inflater;
 
 public class administrotor_panel extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     Toolbar toolbar;
@@ -36,6 +42,9 @@ public class administrotor_panel extends AppCompatActivity implements Navigation
       ViewPager vpager;
       TabLayout tabLayout;
       FragmentAdapter myFragmentAdapter;
+      Menu menu;
+      MenuItem menu_home,menu_classroom;
+      TabItem classroomtab;
 
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +55,7 @@ public class administrotor_panel extends AppCompatActivity implements Navigation
         navigationView=findViewById(R.id.nav_view);
         toolbar=findViewById(R.id.toolbar);
 
-      
+
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("PresencePro");
 
@@ -55,13 +64,36 @@ public class administrotor_panel extends AppCompatActivity implements Navigation
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
-
-
+        menu=navigationView.getMenu();
+        menu_home=menu.findItem(R.id.nav_home);
+        menu_classroom=menu.findItem(R.id.nav_classroom);
+            menu_home.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+                @Override
+                public boolean onMenuItemClick(@NonNull MenuItem item) {
+                    drawerLayout.closeDrawer(GravityCompat.START);
+                    tabLayout.setScrollPosition(0,0f,true);
+                    vpager.setCurrentItem(0);
+                    return false;
+                }
+            });
         vpager=findViewById(R.id.vpager);
         myFragmentAdapter=new FragmentAdapter(getSupportFragmentManager());
         vpager.setAdapter(myFragmentAdapter);
         tabLayout=findViewById(R.id.tabLayout);
         tabLayout.setupWithViewPager(vpager);
+        menu_classroom.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(@NonNull MenuItem item) {
+                drawerLayout.closeDrawer(GravityCompat.START);
+                tabLayout.setScrollPosition(1,0f,true);
+                vpager.setCurrentItem(1);
+                return false;
+            }
+        });
+
+
+
+
 //        notification.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {
