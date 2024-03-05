@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF"
+    style="@style/SCREEN"
     tools:context=".MainActivity">
 
 
@@ -15,7 +15,7 @@
         android:layout_height="50dp"
         android:layout_margin="60dp"
         android:layout_marginTop="60dp"
-        android:background="@drawable/edittextinput"
+        style="@style/TEXT"
         android:hint="Enrollment No."
         android:inputType="number"
         android:padding="10dp"
@@ -31,7 +31,7 @@
         android:layout_marginLeft="60dp"
         android:layout_marginTop="32dp"
         android:layout_marginRight="60dp"
-        android:background="@drawable/edittextinput"
+        style="@style/TEXT"
         android:hint="Password"
         android:inputType="textPassword"
         android:padding="10dp"
@@ -52,6 +52,7 @@
         android:layout_marginLeft="60dp"
         android:background="@drawable/loginbutton"
         android:text="Login"
+        style="@style/BUTTON"
         app:layout_constraintBottom_toTopOf="@+id/teacherlogin"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -62,7 +63,7 @@
         android:id="@+id/forgot"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
+        style="@style/TEXT"
         android:layout_marginTop="100dp"
         android:layout_marginEnd="20dp"
         android:text="Forgot Password?"

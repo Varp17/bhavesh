@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import com.denzcoskun.imageslider.ImageSlider;
@@ -25,6 +26,7 @@ import java.util.List;
  * create an instance of this fragment.
  */
 public class homeFragment extends Fragment {
+
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -71,16 +73,33 @@ public class homeFragment extends Fragment {
 
     ImageSlider image_slider;
     ImageView scheduleimg;
+    ImageView profile;
+    com.google.android.material.floatingactionbutton.FloatingActionButton floabtnmange;
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.homefragment, container, false);
         image_slider = rootView.findViewById(R.id.image_slider);
-
+        floabtnmange=rootView.findViewById(R.id.floabtnmange);
         List<SlideModel> imageList = new ArrayList<>();
         imageList.add(new SlideModel(R.drawable.ronaldo, ScaleTypes.FIT));
         imageList.add(new SlideModel(R.drawable.sunilchettri,ScaleTypes.FIT));
         scheduleimg=rootView.findViewById(R.id.scheduleimg);
+        profile=inflater.inflate(R.layout.header, container, false).findViewById(R.id.profile);
+        floabtnmange.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent= new Intent(getContext(), Managestaff_activity.class);
+                startActivity(intent);
+            }
+        });
+        profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent= new Intent(getContext(), activity_addministrator_profile.class);
+                startActivity(intent);
+            }
+        });
         scheduleimg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

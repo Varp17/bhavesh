@@ -14,7 +14,7 @@
         android:layout_marginTop="15dp"
         android:layout_marginBottom="20dp"
         android:text="Upcoming Events"
-        android:textColor="#0E0E0E"
+       style="@style/TEXT"
         android:textSize="24sp"
         app:layout_constraintBottom_toTopOf="@+id/image_slider"
         app:layout_constraintEnd_toEndOf="parent"
@@ -37,6 +37,11 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" >
 
+        <ImageView
+            android:id="@+id/imageView5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/icons8_create_32" />
     </com.denzcoskun.imageslider.ImageSlider>
 
     <TextView
@@ -46,7 +51,7 @@
         android:layout_marginStart="7dp"
         android:layout_marginEnd="3dp"
         android:text="Hello"
-        android:textColor="#0E0E0E"
+        style="@style/TEXT"
         android:textSize="20sp"
         app:layout_constraintBaseline_toBaselineOf="@+id/teachernamemsg"
         app:layout_constraintEnd_toStartOf="@+id/teachernamemsg"
@@ -57,10 +62,10 @@
         android:id="@+id/teachernamemsg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
+        style="@style/TEXT"
         android:layout_marginBottom="42dp"
         android:text="Teacher Name"
-        android:textColor="#0E0E0E"
+
         android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/datemsg"
         app:layout_constraintEnd_toEndOf="parent"
@@ -74,6 +79,7 @@
         android:layout_marginStart="21dp"
         android:layout_marginBottom="8dp"
         android:text="07 Feb, Wednesday"
+        style="@style/TEXT"
         android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@+id/todshcedule"
         app:layout_constraintStart_toStartOf="parent"
@@ -86,7 +92,7 @@
 
         android:layout_marginBottom="13dp"
         android:text="Today's Schedule"
-        android:textColor="#0E0E0E"
+        style="@style/TEXT"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/scheduleimg"
@@ -109,7 +115,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/manageicon50"
-        app:backgroundTint="#7E7E7E"
+        app:backgroundTint="#515959"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.915"
@@ -126,7 +132,7 @@
 
         android:layout_marginBottom="12dp"
         android:src="@drawable/paper_plane_50"
-        app:backgroundTint="#7E7E7E"
+        app:backgroundTint="#515959"
         app:layout_constraintBottom_toTopOf="@+id/floabtnmange"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.915"
@@ -135,22 +141,7 @@
         app:layout_constraintVertical_bias="0.997"
         app:tint="@color/white" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/editbannerbtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@null"
-        android:outlineProvider="none"
-        android:src="@drawable/icons8_create_32"
 
-        android:background="@drawable/edittextinput"
-        app:layout_constraintBottom_toTopOf="@+id/floatbtnfeedback"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.542"
-        app:tint="@color/white" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

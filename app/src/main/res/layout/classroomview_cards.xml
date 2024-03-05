@@ -12,6 +12,7 @@
         android:layout_height="match_parent"
         android:background="@drawable/classroomviewcardsdesign"
         android:layout_marginTop="10dp"
+
         android:layout_margin="10dp"
         android:paddingBottom="10dp"
         >
@@ -37,7 +38,8 @@
             android:layout_marginStart="110dp"
             android:layout_marginEnd="30dp"
             android:text="Subject_name"
-            android:textColor="@color/black"
+            style="@style/TEXT"
+
             android:textSize="30sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
@@ -49,9 +51,10 @@
             android:id="@+id/teachername"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/black"
+
             android:layout_marginBottom="4dp"
             android:text="Teacher_name"
+            style="@style/TEXT"
             android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
