@@ -4,4 +4,28 @@
         <!-- Customize your dark theme here. -->
         <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
     </style>
+
+
+    <style name="SCREEN">
+        <item name="android:background">#A82B2A2A</item>
+    </style>
+    <!-- texts background if dark mode on -->
+    <style name="EDITTEXT">
+        <item name="android:textColor" Parent="Theme.AppCompat.DayNight.NoActionBar">#FFFFFF</item>
+        <item name="android:background" Parent="Theme.AppCompat.DayNight.NoActionBar">@drawable/teacheredittextnight</item>
+    </style>
+
+    <!-- button background if light is on -->
+    <style name="BUTTON">
+        <item name="android:background">@drawable/teacherlogin</item>
+    </style>
+
+    <style name="TEXT">
+        <item name="android:textColor" >#ffff</item>
+    </style>
+
+    <style name="edittextLoginblue">
+        <item name="android:textColor" Parent="Theme.AppCompat.DayNight.NoActionBar" >#ffff</item>
+        <item name="android:background" Parent="Theme.AppCompat.DayNight.NoActionBar" >@drawable/edittextloginblue</item>
+    </style>
 </resources>
