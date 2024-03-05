@@ -9,9 +9,12 @@
     android:padding="30dp">
 
     <ImageView
-        android:layout_width="65dp"
-        android:layout_height="68dp"
+        android:id="@+id/profile"
+        android:layout_width="69dp"
+        android:layout_height="71dp"
         android:layout_marginStart="2dp"
+        android:background="@null"
+        android:clickable="true"
         android:src="@drawable/profile_icon"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
