@@ -36,7 +36,7 @@ public class administrotor_panel extends AppCompatActivity implements Navigation
       ViewPager vpager;
       TabLayout tabLayout;
       FragmentAdapter myFragmentAdapter;
-      ConstraintLayout profilebackground;
+
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,7 +45,7 @@ public class administrotor_panel extends AppCompatActivity implements Navigation
         drawerLayout=findViewById(R.id.Drawer_lay);
         navigationView=findViewById(R.id.nav_view);
         toolbar=findViewById(R.id.toolbar);
-        profilebackground=findViewById(R.id.profilebackground);
+
       
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("PresencePro");
@@ -56,12 +56,7 @@ public class administrotor_panel extends AppCompatActivity implements Navigation
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
 
-        profilebackground.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent=new Intent(getApplicationContext(), administrtor_profile.class);
-            }
-        });
+
         vpager=findViewById(R.id.vpager);
         myFragmentAdapter=new FragmentAdapter(getSupportFragmentManager());
         vpager.setAdapter(myFragmentAdapter);
