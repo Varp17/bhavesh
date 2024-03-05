@@ -4,19 +4,4 @@
         <!-- Customize your dark theme here. -->
         <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
     </style>
-
-    <!-- Light Mode -->
-    <!-- Screen background if dark mode on  -->
-    <style name="SCREEN">
-        <item name="android:background">#A82B2A2A</item>
-    </style>
-    <!-- texts background if dark mode on -->
-    <style name="TEXT">
-        <item name="android:textColor">#FFFFFF</item>
-    </style>
-
-    <!-- button background if light is on -->
-    <style name="BUTTON">
-        <item name="android:background">@drawable/teacherlogin</item>
-    </style>
 </resources>

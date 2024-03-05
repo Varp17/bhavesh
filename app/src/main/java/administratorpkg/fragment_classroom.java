@@ -1,5 +1,7 @@
 package administratorpkg;
 
+import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
 
@@ -14,8 +16,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.TextView;
 
 import com.example.loginform.R;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
@@ -41,6 +47,9 @@ public class fragment_classroom extends Fragment {
     private String[] subjectname;
     private String[] teachername;
     private RecyclerView recyclerview;
+    Dialog myDialog;
+
+    FloatingActionButton openbtn;
 
     public fragment_classroom() {
         // Required empty public constructor
@@ -73,9 +82,13 @@ public class fragment_classroom extends Fragment {
         }
     }
 
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+//        View view = inflater.inflate(R.layout.fragment_classroom, container, false);
 
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_classroom, container, false);
@@ -84,9 +97,6 @@ public class fragment_classroom extends Fragment {
 
         return rootView;
     }
-
-
-
 
 
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -100,18 +110,28 @@ public class fragment_classroom extends Fragment {
         recyclerview.setAdapter(classrromViewAdapter);
         classrromViewAdapter.notifyDataSetChanged();
 
+        openbtn = view.findViewById(R.id.addsubjectbtn);
+        openbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                TextView closebtn;
+                myDialog = new Dialog(requireContext());
+                myDialog.setContentView(R.layout.add_subject_floating_panel);
+                closebtn = myDialog.findViewById(R.id.closeaddsubjectpanel);
+
+                closebtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        myDialog.dismiss();
+                    }
+                });
+
+                myDialog.show();
+            }
+        });
+
 
     }
-
-
-
-
-
-
-
-
-
-
     private void dataInitialize(){
         subjectsArrayList = new ArrayList<>();
         subjectname = new String[]{
@@ -131,7 +151,6 @@ public class fragment_classroom extends Fragment {
             Subjects subjects = new Subjects((subjectname[i]),teachername[i]);
             subjectsArrayList.add(subjects);
         }
-
 
     }
 

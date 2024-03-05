@@ -31,6 +31,7 @@
             app:srcCompat="@android:drawable/ic_menu_edit" />
 
         <TextView
+            android:paddingTop="10dp"
             android:id="@+id/subjectname"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
