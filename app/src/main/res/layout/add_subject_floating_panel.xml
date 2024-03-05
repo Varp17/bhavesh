@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/add_subject_panel"
+    android:layout_width="350dp"
+    android:layout_height="475dp"
+    android:layout_gravity="center"
+    android:background="#A3ACAC"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/closeaddsubjectpanel"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_gravity="end"
+        android:background="@drawable/close_btn_design"
+        android:gravity="center"
+        android:text="X"
+        android:textColor="#DD0404"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:layout_marginEnd="5dp"
+        android:layout_marginTop="5dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:orientation="vertical">
+
+        <!-- Subject Name -->
+        <EditText
+            android:id="@+id/editTextSubjectName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Subject Name"
+            android:layout_margin="10dp"/>
+
+        <!-- Teacher Name -->
+        <EditText
+            android:id="@+id/editTextTeacherName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Teacher Name"
+            android:layout_margin="10dp"/>
+
+        <!-- Add more form elements as needed -->
+
+    </LinearLayout>
+
+</LinearLayout>
