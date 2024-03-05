@@ -33,4 +33,13 @@
         <item name="android:textColor" Parent="Theme.AppCompat.DayNight.NoActionBar">#D7000000</item>
         <item name="android:background" Parent="Theme.AppCompat.DayNight.NoActionBar">@drawable/edittextloginblueday</item>
     </style>
+
+
+<!--    <style name="logo" parent="Theme.AppCompat.Light.DarkActionBar">-->
+<!--        <item name="android:windowBackground">@drawable/teacher</item>-->
+<!--        <item name="nightModeIcon">@drawable/teacher</item>-->
+<!--    </style>-->
+
+
+
 </resources>
