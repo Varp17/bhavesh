@@ -1,36 +1,24 @@
 package administratorpkg;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.Toast;
 
-import com.example.loginform.MainActivity;
 import com.example.loginform.R;
-import com.example.loginform.administrtor_profile;
-import com.example.loginform.maximizeimage;
 import com.google.android.material.navigation.NavigationView;
-import com.google.android.material.tabs.TabItem;
 import com.google.android.material.tabs.TabLayout;
-
-import java.util.zip.Inflater;
 
 public class administrotor_panel extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     Toolbar toolbar;
@@ -44,7 +32,7 @@ public class administrotor_panel extends AppCompatActivity implements Navigation
       FragmentAdapter myFragmentAdapter;
       Menu menu;
       MenuItem menu_home,menu_classroom;
-      TabItem classroomtab;
+      ImageView profileimg;
 
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,9 +52,19 @@ public class administrotor_panel extends AppCompatActivity implements Navigation
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
+        ImageView profileImg = navigationView.getHeaderView(0).findViewById(R.id.profileimg);
         menu=navigationView.getMenu();
         menu_home=menu.findItem(R.id.nav_home);
         menu_classroom=menu.findItem(R.id.nav_classroom);
+        profileImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Handle click on profile image
+                // For example, you can open a new activity to view the profile details
+                Intent intent = new Intent(administrotor_panel.this, administrtor_profile.class);
+                startActivity(intent);
+            }
+        });
             menu_home.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
                 @Override
                 public boolean onMenuItemClick(@NonNull MenuItem item) {

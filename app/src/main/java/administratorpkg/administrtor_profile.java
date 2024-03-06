@@ -1,5 +1,6 @@
-package com.example.loginform;
+package administratorpkg;
 
+import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -16,12 +17,13 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import com.example.loginform.R;
 import com.google.android.material.navigation.NavigationView;
 
 public class administrtor_profile extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     Toolbar toolbar;
-
+    private static final int CONTENT_VIEW_ID = 10101010;
     DrawerLayout drawerLayout;
     NavigationView navigationView;
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,13 +37,19 @@ public class administrtor_profile extends AppCompatActivity implements Navigatio
 
 
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("PresencePro");
+        getSupportActionBar().setTitle("Profile");
+
 
         navigationView.bringToFront();
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,drawerLayout,toolbar,R.string.navigation_drawer_open,R.string.navigation_drawer_close);
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
+//        if (savedInstanceState == null) {
+//            administrator_profile_fragment newFragment = new administrator_profile_fragment();
+//            FragmentTransaction ft = getFragmentManager().beginTransaction();
+//            ft.add(R.layout.activity_administrtor_profile, administrator_profile_fragment,"suyog").commit();
+//        }
     }
     public boolean onCreateOptionsMenu(Menu menu) {
 
