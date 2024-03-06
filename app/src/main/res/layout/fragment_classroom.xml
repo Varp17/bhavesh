@@ -21,6 +21,8 @@
         android:id="@+id/addsubjectbtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:backgroundTint="@color/apna_color"
+        android:src="@drawable/add_button"
         android:layout_marginEnd="29dp"
         android:layout_marginBottom="16dp"
         app:layout_constraintBottom_toBottomOf="parent"

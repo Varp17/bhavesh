@@ -15,7 +15,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.example.loginform.R;
@@ -24,6 +26,8 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import org.w3c.dom.Text;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import javax.security.auth.Subject;
 
@@ -47,7 +51,10 @@ public class fragment_classroom extends Fragment {
     private String[] subjectname;
     private String[] teachername;
     private RecyclerView recyclerview;
-    Dialog myDialog;
+    Dialog myDialog ;
+
+
+
 
     FloatingActionButton openbtn;
 
@@ -103,6 +110,8 @@ public class fragment_classroom extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         dataInitialize();
 
+
+
         recyclerview = view.findViewById(R.id.classroomrecyclerview1);
         recyclerview.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerview.setHasFixedSize(true);
@@ -118,6 +127,71 @@ public class fragment_classroom extends Fragment {
                 myDialog = new Dialog(requireContext());
                 myDialog.setContentView(R.layout.add_subject_floating_panel);
                 closebtn = myDialog.findViewById(R.id.closeaddsubjectpanel);
+
+                Spinner spinnerTeacher = myDialog.findViewById(R.id.spinnerTeacher);
+                Spinner spinnerSubject = myDialog.findViewById(R.id.spinnerSubject);
+                Spinner spinnerYear = myDialog.findViewById(R.id.spinnerYear);
+
+                if(myDialog!=null){
+
+                    List<String> subjectList = Arrays.asList("MAD", "PHP", "Python", "ETI");
+                    List<String> teacherList = Arrays.asList("Prerana Mam", "Vaishnavi Mam", "Trupti Mam", "Shirin Mam");
+                    List<String> yearList = Arrays.asList("FY","SY","TY");
+
+                    ArrayAdapter<String> teacherAdapter = new ArrayAdapter<>(requireContext(), android.R.layout.simple_spinner_item, teacherList);
+                    teacherAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    spinnerTeacher.setAdapter(teacherAdapter);
+
+                    ArrayAdapter<String> subjectAdapter = new ArrayAdapter<>(requireContext(), android.R.layout.simple_spinner_item, subjectList);
+                    subjectAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    spinnerSubject.setAdapter(subjectAdapter);
+
+                    ArrayAdapter<String> yearAdapter = new ArrayAdapter<>(requireContext(), android.R.layout.simple_spinner_item, yearList);
+                    yearAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    spinnerYear.setAdapter(yearAdapter);
+
+                    // Listener for Teacher Names spinner
+                    spinnerTeacher.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                        @Override
+                        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                            String selectedTeacher = (String) parent.getItemAtPosition(position);
+                            // Handle the selected teacher as needed
+                        }
+
+                        @Override
+                        public void onNothingSelected(AdapterView<?> parent) {
+                            // Do nothing here if needed
+                        }
+                    });
+
+// Listener for Subject Names spinner
+                    spinnerSubject.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                        @Override
+                        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                            String selectedSubject = (String) parent.getItemAtPosition(position);
+                            // Handle the selected subject as needed
+                        }
+
+                        @Override
+                        public void onNothingSelected(AdapterView<?> parent) {
+                            // Do nothing here if needed
+                        }
+                    });
+
+// Listener for Years spinner
+                    spinnerYear.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                        @Override
+                        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                            String selectedYear = (String) parent.getItemAtPosition(position);
+                            // Handle the selected year as needed
+                        }
+
+                        @Override
+                        public void onNothingSelected(AdapterView<?> parent) {
+                            // Do nothing here if needed
+                        }
+                    });
+                }
 
                 closebtn.setOnClickListener(new View.OnClickListener() {
                     @Override
