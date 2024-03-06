@@ -36,6 +36,20 @@
     <string name="feedback">Feedback</string>
     <string name="Logout">Logout</string>
 
+
+    <string name="noti1">Classroom</string>
+    <string name="noti2">student</string>
+    <string name="noti3">teacher</string>
+    <string name="noti4">attendance</string>
+    <string name="noti5">seminar</string>
+
+
+    <string name="desp1">Attendnace is Done!!</string>
+    <string name="desp2">come for lecture</string>
+    <string name="desp3">important class From .....</string>
+    <string name="desp4">your Attendance is less than 75%</string>
+    <string name="desp5">Gather For Seminar</string>
+
     <string name="lorem_ipsum">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam in scelerisque sem. Mauris
         volutpat, dolor id interdum ullamcorper, risus dolor egestas lectus, sit amet mattis purus
