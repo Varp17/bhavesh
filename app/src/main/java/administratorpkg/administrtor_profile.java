@@ -25,6 +25,7 @@ public class administrtor_profile extends AppCompatActivity implements Navigatio
     Toolbar toolbar;
     private static final int CONTENT_VIEW_ID = 10101010;
     DrawerLayout drawerLayout;
+
     NavigationView navigationView;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

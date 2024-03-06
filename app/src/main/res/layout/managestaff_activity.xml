@@ -76,7 +76,7 @@
 
         <androidx.viewpager.widget.ViewPager
 
-            android:id="@+id/vpagermanage"
+            android:id="@+id/vpager"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:contentDescription="" >
