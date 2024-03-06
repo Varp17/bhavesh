@@ -59,10 +59,11 @@ public class administrotor_panel extends AppCompatActivity implements Navigation
         profileImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Handle click on profile image
-                // For example, you can open a new activity to view the profile details
+
                 Intent intent = new Intent(administrotor_panel.this, administrtor_profile.class);
                 startActivity(intent);
+                finishActivity(R.id.managestaff);
+
             }
         });
             menu_home.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
@@ -92,12 +93,6 @@ public class administrotor_panel extends AppCompatActivity implements Navigation
 
 
 
-//        notification.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Toast.makeText(administrotor_panel.this, "clicked notification icon", Toast.LENGTH_LONG).show();
-//            }
-//        });
 
 
     }

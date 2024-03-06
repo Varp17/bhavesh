@@ -45,11 +45,6 @@ public class administrtor_profile extends AppCompatActivity implements Navigatio
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
-//        if (savedInstanceState == null) {
-//            administrator_profile_fragment newFragment = new administrator_profile_fragment();
-//            FragmentTransaction ft = getFragmentManager().beginTransaction();
-//            ft.add(R.layout.activity_administrtor_profile, administrator_profile_fragment,"suyog").commit();
-//        }
     }
     public boolean onCreateOptionsMenu(Menu menu) {
 

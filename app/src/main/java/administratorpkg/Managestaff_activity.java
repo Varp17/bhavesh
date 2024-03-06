@@ -32,8 +32,9 @@ public class Managestaff_activity extends AppCompatActivity {
     ViewPager vpagermanage;
     TabLayout tabLayout;
     managestaffadapter managestaffadapter ;
-//    Menu menu;
-//    MenuItem menu_home;
+    Menu menu;
+    MenuItem menu_home;
+    MenuItem menu_classroom;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,7 +47,7 @@ public class Managestaff_activity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Manage Staff");
 
-
+        navigationView.bringToFront();
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,drawerLayout,toolbar,R.string.navigation_drawer_open,R.string.navigation_drawer_close);
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
@@ -57,18 +58,30 @@ public class Managestaff_activity extends AppCompatActivity {
         vpagermanage.setAdapter(managestaffadapter);
         tabLayout=findViewById(R.id.tabLayout);
         tabLayout.setupWithViewPager(vpagermanage);
-//        menu=navigationView.getMenu();
-//        menu_home=menu.findItem(R.id.nav_home);
-//        menu_home.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-//            @Override
-//            public boolean onMenuItemClick(@NonNull MenuItem item) {
-//                drawerLayout.closeDrawer(GravityCompat.START);
-////                Intent intent=new Intent(getApplicationContext(), administrotor_panel.class);
-////                startActivity(intent);
-//                finish();
-//                return false;
-//            }
-//        });
+        menu=navigationView.getMenu();
+        menu_home=menu.findItem(R.id.nav_home);
+        menu_classroom=menu.findItem(R.id.nav_classroom);
+        menu_home.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(@NonNull MenuItem item) {
+                drawerLayout.closeDrawer(GravityCompat.START);
+                Intent intent=new Intent(getApplicationContext(), administrotor_panel.class);
+                startActivity(intent);
+
+                return false;
+            }
+        });
+        menu_classroom.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(@NonNull MenuItem item) {
+                Intent intent=new Intent(getApplicationContext(), administrotor_panel.class);
+                startActivity(intent);
+                drawerLayout.closeDrawer(GravityCompat.START);
+                tabLayout.setScrollPosition(1,0f,true);
+                vpagermanage.setCurrentItem(1);
+                return false;
+            }
+        });
 
     }
 

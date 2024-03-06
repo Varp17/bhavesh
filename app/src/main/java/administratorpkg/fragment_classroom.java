@@ -3,6 +3,7 @@ package administratorpkg;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -18,6 +19,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import com.example.loginform.R;
@@ -115,7 +117,21 @@ public class fragment_classroom extends Fragment {
         recyclerview = view.findViewById(R.id.classroomrecyclerview1);
         recyclerview.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerview.setHasFixedSize(true);
-        ClassrromViewAdapter classrromViewAdapter = new ClassrromViewAdapter(getContext(),subjectsArrayList);
+        recyclerviewonclick recyclerviewonclick=new recyclerviewonclick() {
+            @Override
+            public void onItemClick(int position) {
+                Intent intent=new Intent(getContext(), classroomClicked_activity.class);
+
+
+                    intent.putExtra("name",subjectname[position]);
+
+
+
+
+                startActivity(intent);
+            }
+        };
+        ClassrromViewAdapter classrromViewAdapter = new ClassrromViewAdapter(getContext(),subjectsArrayList, recyclerviewonclick);
         recyclerview.setAdapter(classrromViewAdapter);
         classrromViewAdapter.notifyDataSetChanged();
 

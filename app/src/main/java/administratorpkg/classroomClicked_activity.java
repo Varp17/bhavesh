@@ -1,5 +1,6 @@
 package administratorpkg;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -43,9 +44,10 @@ public class classroomClicked_activity extends AppCompatActivity implements Navi
         navigationView=findViewById(R.id.nav_view);
         toolbar=findViewById(R.id.toolbar);
 
-
+        Intent intent=getIntent();
+        String subname=intent.getStringExtra("name");
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Subject Name");
+        getSupportActionBar().setTitle(subname);
 
         navigationView.bringToFront();
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,drawerLayout,toolbar,R.string.navigation_drawer_open,R.string.navigation_drawer_close);
