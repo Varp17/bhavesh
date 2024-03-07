@@ -16,58 +16,25 @@ import androidx.core.view.GravityCompat;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.viewpager.widget.ViewPager;
 
 import com.example.loginform.R;
 import com.google.android.material.navigation.NavigationView;
 
-public class administrtor_profile extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
-
-    Toolbar toolbar;
-    private static final int CONTENT_VIEW_ID = 10101010;
-    DrawerLayout drawerLayout;
-
-    NavigationView navigationView;
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        setContentView(R.layout.activity_administrtor_profile);
-//        notification=findViewById(R.id.notificationbtn);
-        drawerLayout=findViewById(R.id.Drawer_lay);
-        navigationView=findViewById(R.id.nav_view);
-        toolbar=findViewById(R.id.toolbar);
+public class administrtor_profile extends varchi_line {
 
 
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Profile");
-
-
-        navigationView.bringToFront();
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,drawerLayout,toolbar,R.string.navigation_drawer_open,R.string.navigation_drawer_close);
-        drawerLayout.addDrawerListener(toggle);
-        toggle.syncState();
-        navigationView.setNavigationItemSelectedListener(this);
-    }
-    public boolean onCreateOptionsMenu(Menu menu) {
-
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menubaradmin, menu);
-
-        return true;
-
+    @Override
+    int getLayoutresId() {
+        return R.layout.activity_administrtor_profile;
     }
 
     @Override
-    public void onBackPressed() {
-        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
-            drawerLayout.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
-        }
+    String getactionbarTiile_in_varchi_line() {
+        return "PROFIlE";
     }
 
-    @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-        return true;
-    }
 
 }
+

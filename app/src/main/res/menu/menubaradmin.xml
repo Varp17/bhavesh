@@ -4,16 +4,23 @@
     android:id="@+id/menubar"
     >
 
+
     <group android:checkableBehavior="single"
         android:id="@+id/grp1">
+
+
         <item
             android:id="@+id/nav_home"
             android:title="@string/home"
+            android:color="@color/textcolor2"
             android:background="@drawable/item_background"
             android:icon="@drawable/home_icon"/>
         <item
             android:id="@+id/nav_timetable"
+
             android:title="@string/timetable"
+            android:state_focused="true"
+            android:color="@color/textcolor"
             android:background="@drawable/item_background"
             android:icon="@drawable/timetable_icon"
 
@@ -21,33 +28,40 @@
 
         <item
             android:id="@+id/nav_classroom"
+
             android:title="@string/Classroom"
             android:background="@drawable/item_background"
+            android:color="@color/textcolor3"
             android:icon="@drawable/classroom_icon"/>
 
         <item
             android:id="@+id/nav_attendance"
+            android:color="@color/textcolor4"
             android:title="@string/Attendance"
             android:background="@drawable/item_background"
             android:icon="@drawable/attendace_icon"
-           />
+
+            />
 
         <item
             android:id="@+id/nav_notification"
             android:title="@string/Notification"
+            android:color="@color/textcolor2"
             android:background="@drawable/item_background"
             android:icon="@drawable/notification_icon"
-            app:showAsAction="ifRoom"
+            app:showAsAction="always"
             />
 
         <item
             android:id="@+id/nav_document"
             android:title="@string/Document"
+            android:color="@color/textcolor2"
             android:background="@drawable/item_background"
             android:icon="@drawable/document_icon"/>
         <item
             android:id="@+id/banner_edit"
             android:title="@string/Edit_Banner"
+            android:color="@color/textcolor1"
             android:background="@drawable/item_background"
             android:icon="@drawable/edit_icon"/>
     </group>
@@ -59,12 +73,14 @@
         <item
             android:id="@+id/nav_feedback"
             android:title="@string/feedback"
+            android:color="@color/textcolor3"
             android:background="@drawable/item_background"
             android:icon="@drawable/feedback_icon"/>
 
         <item
             android:id="@+id/nav_logout"
             android:title="@string/Logout"
+            android:color="@color/textcolor1"
             android:background="@drawable/item_background"
             android:icon="@drawable/logout_icon"/>
     </group>

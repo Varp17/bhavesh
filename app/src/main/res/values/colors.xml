@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
     <color name="black">#FF000000</color>
     <color name="apna_color">#05C5E3</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="textcolor" android:state_focused="true">#FF4081</color>
+    <color name="textcolor1" android:state_selected="true">#C51162</color>
+    <color name="textcolor2" android:state_checked="true" >#00E5FF</color>
+    <color name="textcolor3" android:state_pressed="true" >#00E5FF</color>
+    <color name="textcolor4" android:state_window_focused="true" >#00E5FF</color>
+
+
+
 </resources>

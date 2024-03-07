@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
@@ -16,13 +18,14 @@ import androidx.core.view.GravityCompat;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.loginform.R;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.tabs.TabLayout;
 
-public abstract class varchi_line extends AppCompatActivity {
+public abstract class varchi_line extends AppCompatActivity  {
 
     Toolbar toolbar;
     DrawerLayout drawerLayout;
@@ -31,13 +34,14 @@ public abstract class varchi_line extends AppCompatActivity {
 
     ViewPager vpagermanage;
     TabLayout tabLayout;
-    managestaffadapter managestaffadapter ;
+    FragmentAdapter managestaffadapter ;
     Menu menu;
     MenuItem menu_home;
     MenuItem menu_classroom;
 
     abstract int getLayoutresId() ;
     abstract String getactionbarTiile_in_varchi_line();
+
 
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,28 +60,32 @@ public abstract class varchi_line extends AppCompatActivity {
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
 
-        vpagermanage=findViewById(R.id.vpager);
-        if(vpagermanage!=null)
-        {
 
 
 
-        managestaffadapter=new managestaffadapter(getSupportFragmentManager());
-        vpagermanage.setAdapter(managestaffadapter);
-        }
-        tabLayout=findViewById(R.id.tabLayout);
-        tabLayout.setupWithViewPager(vpagermanage);
 
         menu=navigationView.getMenu();
         menu_home=menu.findItem(R.id.nav_home);
         menu_classroom=menu.findItem(R.id.nav_classroom);
+        ImageView profileImg = navigationView.getHeaderView(0).findViewById(R.id.profileimg);
+        profileImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(getApplicationContext(), administrtor_profile.class);
+                startActivity(intent);
+                finish();
+                finishActivity(R.id.managestaff);
+
+            }
+        });
         menu_home.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(@NonNull MenuItem item) {
                 drawerLayout.closeDrawer(GravityCompat.START);
                 Intent intent=new Intent(getApplicationContext(), administrotor_panel.class);
                 startActivity(intent);
-
+                finish();
                 return false;
             }
         });
@@ -86,9 +94,12 @@ public abstract class varchi_line extends AppCompatActivity {
             public boolean onMenuItemClick(@NonNull MenuItem item) {
                 Intent intent=new Intent(getApplicationContext(), administrotor_panel.class);
                 startActivity(intent);
+                finish();
                 drawerLayout.closeDrawer(GravityCompat.START);
-                tabLayout.setScrollPosition(1,0f,true);
-                vpagermanage.setCurrentItem(1);
+                if(tabLayout!=null) {
+                    tabLayout.setScrollPosition(1, 0f, true);
+                    vpagermanage.setCurrentItem(1);
+                }
                 return false;
             }
         });
@@ -103,6 +114,20 @@ public abstract class varchi_line extends AppCompatActivity {
 
         return true;
 
+    }
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        // Handle your menu items here
+        if (id == R.id.nav_notification && getactionbarTiile_in_varchi_line()!= "NOTICE FOR COLLEGE") {
+
+            Intent intent=new Intent(getApplicationContext(), all_college_notiFication_from_Administrator.class);
+            startActivity(intent);
+            finish();
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
 
