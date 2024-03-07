@@ -64,6 +64,7 @@ public class administrotor_panel extends AppCompatActivity implements Navigation
 
                 Intent intent=new Intent(getApplicationContext(), all_college_notiFication_from_Administrator.class);
                 startActivity(intent);
+                finish();
                 return false;
             }
         });
@@ -73,7 +74,7 @@ public class administrotor_panel extends AppCompatActivity implements Navigation
 
                 Intent intent = new Intent(administrotor_panel.this, administrtor_profile.class);
                 startActivity(intent);
-                finishActivity(R.id.managestaff);
+                finish();
 
             }
         });
@@ -127,7 +128,19 @@ public class administrotor_panel extends AppCompatActivity implements Navigation
             super.onBackPressed();
         }
     }
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
 
+        // Handle your menu items here
+        if (id == R.id.nav_notification ) {
+
+            Intent intent=new Intent(getApplicationContext(), all_college_notiFication_from_Administrator.class);
+            startActivity(intent);
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
 
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         return true;

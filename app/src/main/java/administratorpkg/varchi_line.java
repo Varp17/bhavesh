@@ -25,7 +25,7 @@ import com.example.loginform.R;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.tabs.TabLayout;
 
-public abstract class varchi_line extends AppCompatActivity {
+public abstract class varchi_line extends AppCompatActivity  {
 
     Toolbar toolbar;
     DrawerLayout drawerLayout;
@@ -74,6 +74,7 @@ public abstract class varchi_line extends AppCompatActivity {
 
                 Intent intent = new Intent(getApplicationContext(), administrtor_profile.class);
                 startActivity(intent);
+                finish();
                 finishActivity(R.id.managestaff);
 
             }
@@ -84,7 +85,7 @@ public abstract class varchi_line extends AppCompatActivity {
                 drawerLayout.closeDrawer(GravityCompat.START);
                 Intent intent=new Intent(getApplicationContext(), administrotor_panel.class);
                 startActivity(intent);
-
+                finish();
                 return false;
             }
         });
@@ -93,6 +94,7 @@ public abstract class varchi_line extends AppCompatActivity {
             public boolean onMenuItemClick(@NonNull MenuItem item) {
                 Intent intent=new Intent(getApplicationContext(), administrotor_panel.class);
                 startActivity(intent);
+                finish();
                 drawerLayout.closeDrawer(GravityCompat.START);
                 if(tabLayout!=null) {
                     tabLayout.setScrollPosition(1, 0f, true);
@@ -112,6 +114,20 @@ public abstract class varchi_line extends AppCompatActivity {
 
         return true;
 
+    }
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        // Handle your menu items here
+        if (id == R.id.nav_notification && getactionbarTiile_in_varchi_line()!= "NOTICE FOR COLLEGE") {
+
+            Intent intent=new Intent(getApplicationContext(), all_college_notiFication_from_Administrator.class);
+            startActivity(intent);
+            finish();
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
 
