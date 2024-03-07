@@ -21,18 +21,23 @@
     </style>
 
     <style name="TEXT">
-        <item name="android:textColor" >#ffff</item>
-    </style>
+        <item name="android:textColor" Parent="Theme.AppCompat.DayNight.NoActionBar">#FFFFFF</item>
 
+        <item name="android:text" Parent="Theme.AppCompat.DayNight.NoActionBar">#000000</item>
+    </style>
+    <style name="INAPPTEXT" parent="Base.Theme.LOginForm">
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:background">@drawable/inapptextnight</item>
+    </style>
     <style name="edittextLoginblue">
         <item name="android:textColor" Parent="Theme.AppCompat.DayNight.NoActionBar" >#ffff</item>
         <item name="android:background" Parent="Theme.AppCompat.DayNight.NoActionBar" >@drawable/edittextloginblue</item>
     </style>
 
-<!--    &lt;!&ndash; res/values-night/themes.xml (night) &ndash;&gt;-->
-<!--    <style name="logo" parent="Theme.AppCompat">-->
-<!--        <item name="android:windowBackground">@drawable/teacherwhitelogo</item>-->
-<!--        <item name="nightModeIcon">@drawable/teacherwhitelogo</item>-->
-<!--    </style>-->
+    <!--    &lt;!&ndash; res/values-night/themes.xml (night) &ndash;&gt;-->
+    <!--    <style name="logo" parent="Theme.AppCompat">-->
+    <!--        <item name="android:windowBackground">@drawable/teacherwhitelogo</item>-->
+    <!--        <item name="nightModeIcon">@drawable/teacherwhitelogo</item>-->
+    <!--    </style>-->
 
 </resources>
