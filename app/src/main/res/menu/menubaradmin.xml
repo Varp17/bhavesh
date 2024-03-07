@@ -37,7 +37,7 @@
             android:title="@string/Notification"
             android:background="@drawable/item_background"
             android:icon="@drawable/notification_icon"
-            app:showAsAction="ifRoom"
+            app:showAsAction="always"
             />
 
         <item
