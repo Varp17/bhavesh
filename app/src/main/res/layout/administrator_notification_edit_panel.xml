@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="370dp"
+    android:layout_height="550dp"
+    android:layout_gravity="center"
+    android:fillViewport="true"
+    tools:context="administratorpkg.fragment_classroom">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/edit_notification"
+        android:layout_width="370dp"
+        android:layout_height="550dp"
+        android:layout_gravity="center"
+        android:filterTouchesWhenObscured="true"
+        android:background="#00DDFF"
+        android:orientation="vertical">
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/subjectname"
+            android:layout_width="370dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="92dp"
+            android:layout_marginBottom="210dp"
+            app:errorEnabled="true"
+            app:layout_constraintBottom_toTopOf="@+id/checkBoxstaff"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/fullname"
+                style="@style/INAPPTEXT"
+                android:layout_width="324dp"
+                android:layout_height="60dp"
+                android:layout_marginStart="20sp"
+                android:layout_marginEnd="20sp"
+                android:hint="Subject"
+
+                android:gravity="center"
+                android:textSize="20sp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayout4"
+
+            android:layout_width="@+id/subjectname"
+            android:layout_height="182dp"
+            app:errorEnabled="true"
+            app:layout_constraintBottom_toTopOf="@+id/checkBoxstaff"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/subjectname"
+            app:layout_constraintVertical_bias="0.35000002">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/address"
+                android:layout_width="match_parent"
+                android:layout_height="158dp"
+                android:layout_marginStart="20sp"
+                android:layout_marginEnd="20sp"
+                android:gravity="center"
+                style="@style/INAPPTEXT"
+                android:hint="Description"
+                android:textSize="20sp" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <TextView
+            android:id="@+id/editnotificationHeading"
+            style="@style/TEXT"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/Notification"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/subjectname"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/notification_submit_btn"
+            style="@style/TEXT"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
+            android:text="Submit"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/notification_close_btn"
+            app:layout_constraintHorizontal_bias="0.519"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <Button
+            android:id="@+id/notification_close_btn"
+            style="@style/TEXT"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_marginEnd="64dp"
+            android:layout_marginBottom="24dp"
+            android:text="Close"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <CheckBox
+            android:id="@+id/checkBoxcollege"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="64dp"
+            android:text="College"
+            app:layout_constraintBottom_toTopOf="@+id/notification_submit_btn"
+            app:layout_constraintEnd_toStartOf="@+id/checkBoxstaff"
+            app:layout_constraintHorizontal_bias="0.235"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <CheckBox
+            android:id="@+id/checkBoxstudent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="64dp"
+            android:text="Students"
+            app:layout_constraintBottom_toTopOf="@+id/notification_close_btn"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toEndOf="@+id/checkBoxstaff" />
+
+        <CheckBox
+            android:id="@+id/checkBoxstaff"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:text="Staff"
+            app:layout_constraintEnd_toStartOf="@+id/notification_close_btn"
+            app:layout_constraintTop_toTopOf="@+id/checkBoxstudent" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

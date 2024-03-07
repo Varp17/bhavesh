@@ -1,5 +1,6 @@
 package administratorpkg;
 
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.os.Bundle;
 
@@ -12,11 +13,17 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.example.loginform.R;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -38,6 +45,9 @@ public class staffNotification extends Fragment {
     private String[] subjectname;
     private String[] teachername;
     private RecyclerView recyclerview;
+
+    Dialog notifydialog;
+    Button notifycollegebtn ;
     Dialog myDialog;
 
 
@@ -63,6 +73,8 @@ public class staffNotification extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
@@ -80,6 +92,7 @@ public class staffNotification extends Fragment {
 
         return rootView;
     }
+    @SuppressLint("NotifyDataSetChanged")
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         dataInitialize();
@@ -87,10 +100,30 @@ public class staffNotification extends Fragment {
         recyclerview = view.findViewById(R.id.notificationrecyclerview);
         recyclerview.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerview.setHasFixedSize(true);
-        notificationviewadapter classrromViewAdapter = new notificationviewadapter(getContext(),subjectsArrayList1);
+        notificationviewadapter classrromViewAdapter;
+        classrromViewAdapter = new notificationviewadapter(getContext(),subjectsArrayList1);
         recyclerview.setAdapter(classrromViewAdapter);
         classrromViewAdapter.notifyDataSetChanged();
 
+
+        notifycollegebtn = view.findViewById(R.id.notifycollegebtn);
+        notifycollegebtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                TextView notification_close_btn;
+                myDialog = new Dialog(requireContext());
+                myDialog.setContentView(R.layout.administrator_notification_edit_panel);
+                notification_close_btn = myDialog.findViewById(R.id.notification_close_btn);
+                notification_close_btn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        myDialog.dismiss();
+                    }
+                });
+
+                myDialog.show();
+            }
+        });
 
     }
     private void dataInitialize(){

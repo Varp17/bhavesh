@@ -8,11 +8,10 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="393dp"
+        android:layout_width="match_parent"
         android:layout_height="114dp"
         android:layout_margin="10dp"
         android:layout_marginTop="10dp"
-        android:layout_gravity="center"
         android:background="@drawable/classroomviewcardsdesign"
         android:paddingBottom="10dp"
         app:layout_constraintBottom_toTopOf="@+id/teachername"
@@ -25,7 +24,7 @@
 
             android:layout_width="0dp"
 
-            android:layout_height="38dp"
+            android:layout_height="41dp"
             android:layout_marginEnd="7dp"
             android:layout_marginBottom="32dp"
             android:gravity="center"
@@ -41,7 +40,7 @@
             android:id="@+id/teachername"
             style="@style/TEXT"
             android:layout_width="0dp"
-            android:layout_height="23dp"
+            android:layout_height="28dp"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="24dp"
             android:gravity="center"

@@ -128,7 +128,6 @@ public class fragment_classroom extends Fragment {
 
 
 
-
                 startActivity(intent);
             }
         };
