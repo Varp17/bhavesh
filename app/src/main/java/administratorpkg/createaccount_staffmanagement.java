@@ -107,31 +107,42 @@ EditText fullname,email,mobileno,address,atuogenrated_password;
             }
         });
         // Inflate the layout for this fragment
-        EditText[] obj ={fullname,email,mobileno,address};
-        String value[]= new String[4];
+
 
 
         createbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                for (int i = 0; i < obj.length; i++) {
-                    value[i] = obj[i].getText().toString();
-                    if (TextUtils.isEmpty(value[i])) {
-                        obj[i].setError("Fill this field");
-                       // Stop execution if any field is empty
-                    }
-                }
+                if (validateFields()) {
+                    String message = "Values are: " +
+                            fullname.getText().toString() + ", " +
+                            email.getText().toString() + ", " +
+                            mobileno.getText().toString() + ", " +
+                            address.getText().toString();
 
-                // Displaying all values in toast
-                StringBuilder message = new StringBuilder("Values are: ");
-                for (String val : value) {
-                    message.append(val).append(", ");
+                    Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+                    updatebtn.setVisibility(View.VISIBLE);
                 }
-                Toast.makeText(getContext(), message.toString(), Toast.LENGTH_SHORT).show();
-
-                updatebtn.setVisibility(View.VISIBLE);
             }
         });
+
+                // Displaying all values in toast
+
+
+
         return rootView;
     }
+    private boolean validateFields() {
+        EditText[] fields = {fullname, email, mobileno, address};
+
+        for (EditText field : fields) {
+            if (TextUtils.isEmpty(field.getText().toString())) {
+                field.setError("Fill this field");
+                return false;
+            }
+            // Add more specific validation logic if needed (e.g., email validation)
+        }
+        return true;
+    }
 }
+
