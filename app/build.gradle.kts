@@ -62,6 +62,7 @@ dependencies {
     implementation("com.sothree.slidinguppanel:library:3.4.0")
 
     implementation("androidx.appcompat:appcompat:1.3.0")
+    implementation("de.hdodenhof:circleimageview:3.1.0")
 
 
     configurations.implementation{

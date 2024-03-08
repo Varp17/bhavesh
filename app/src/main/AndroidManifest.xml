@@ -16,6 +16,9 @@
             android:name="administratorpkg.all_college_notiFication_from_Administrator"
             android:exported="false" />
         <activity
+            android:name="administratorpkg.Detailed_Activity"
+            android:exported="false" />
+        <activity
             android:name="administratorpkg.classroomClicked_activity"
             android:exported="false" />
         <activity
