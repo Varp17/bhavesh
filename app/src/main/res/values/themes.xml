@@ -3,7 +3,6 @@
     <style name="Base.Theme.LOginForm" parent="Theme.AppCompat.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
         <item name="titleTextColor">@color/white</item>
-        <item name="actionOverflowButtonStyle" />
         <item name="android:statusBarColor">#00F</item>
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
     </style>
@@ -33,7 +32,11 @@
         <item name="android:textColor" Parent="Theme.AppCompat.DayNight.NoActionBar">#D7000000</item>
         <item name="android:background" Parent="Theme.AppCompat.DayNight.NoActionBar">@drawable/edittextloginblueday</item>
     </style>
-
+    <style name="INAPPTEXT" parent="Base.Theme.LOginForm">
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:textColorHint">#651FFF</item>
+        <item name="android:background">@drawable/inapptextnight</item>
+    </style>
 
 <!--    <style name="logo" parent="Theme.AppCompat.Light.DarkActionBar">-->
 <!--        <item name="android:windowBackground">@drawable/teacher</item>-->
