@@ -32,11 +32,11 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textInputLayout7"
-            android:layout_width="404dp"
-            android:layout_height="79dp"
-            android:layout_marginStart="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
             android:layout_marginTop="52dp"
-            android:layout_marginEnd="16dp"
+            android:layout_marginEnd="20dp"
             android:orientation="vertical"
             app:errorEnabled="true"
             app:layout_constraintEnd_toEndOf="parent"
@@ -48,8 +48,8 @@
                 android:id="@+id/fullname"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20sp"
-                android:layout_marginEnd="20sp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
                 android:hint="FullName"
                 android:textSize="20sp" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -57,11 +57,11 @@
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textInputLayout2"
 
-            android:layout_width="416dp"
-            android:layout_height="85dp"
-            android:layout_marginStart="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
             android:layout_marginTop="32dp"
-            android:layout_marginEnd="16dp"
+            android:layout_marginEnd="20dp"
             app:errorEnabled="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -69,10 +69,10 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/email"
-                android:layout_width="372dp"
-                android:layout_height="58dp"
-                android:layout_marginStart="20sp"
-                android:layout_marginEnd="20sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
                 android:hint="Em@il"
                 android:inputType="textEmailAddress"
                 android:textSize="20sp" />
@@ -81,11 +81,11 @@
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textInputLayout4"
 
-            android:layout_width="405dp"
-            android:layout_height="182dp"
-            android:layout_marginStart="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
             android:layout_marginTop="53dp"
-            android:layout_marginEnd="16dp"
+            android:layout_marginEnd="20dp"
             app:errorEnabled="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -94,10 +94,10 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/address"
                 android:layout_width="match_parent"
-                android:layout_height="138dp"
-                android:layout_marginStart="20sp"
-                android:layout_marginEnd="20sp"
-                android:gravity="start|top"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:gravity=""
                 android:hint="Address"
                 android:textSize="20sp" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -134,9 +134,9 @@
 
             android:layout_width="408dp"
             android:layout_height="89dp"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="50dp"
             android:layout_marginTop="32dp"
-            android:layout_marginEnd="16dp"
+            android:layout_marginEnd="50dp"
             app:errorEnabled="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -146,8 +146,8 @@
                 android:id="@+id/mobileno"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20sp"
-                android:layout_marginEnd="20sp"
+                android:layout_marginStart="50dp"
+                android:layout_marginEnd="50dp"
                 android:hint="MobileNo"
                 android:inputType="phone"
                 android:textSize="20sp" />

@@ -31,7 +31,7 @@ public class administrotor_panel extends AppCompatActivity implements Navigation
       TabLayout tabLayout;
       FragmentAdapter myFragmentAdapter;
       Menu menu;
-      MenuItem menu_home,menu_classroom;
+      MenuItem menu_home,menu_classroom,menu_notification;
       ImageView profileimg;
 
 
@@ -56,6 +56,16 @@ public class administrotor_panel extends AppCompatActivity implements Navigation
         menu=navigationView.getMenu();
         menu_home=menu.findItem(R.id.nav_home);
         menu_classroom=menu.findItem(R.id.nav_classroom);
+        menu_notification=menu.findItem(R.id.nav_notification);
+        menu_notification.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(@NonNull MenuItem item) {
+                Intent intent=new Intent(getApplicationContext(), all_college_notiFication_from_Administrator.class);
+                startActivity(intent);
+
+                return false;
+            }
+        });
         profileImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -121,6 +131,19 @@ public class administrotor_panel extends AppCompatActivity implements Navigation
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         return true;
     }
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
 
+        // Handle your menu items here
+        if (id == R.id.nav_notification ) {
+
+            Intent intent=new Intent(getApplicationContext(), all_college_notiFication_from_Administrator.class);
+            startActivity(intent);
+
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
 
 }

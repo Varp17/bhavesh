@@ -19,7 +19,7 @@ public class all_college_notiFication_from_Administrator extends varchi_line {
 
     @Override
     String getactionbarTiile_in_varchi_line() {
-        return "NOTICE FOR COLLEGE";
+        return "NOTIFICATIONS";
     }
 
     @Override

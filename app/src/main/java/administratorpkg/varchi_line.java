@@ -119,7 +119,7 @@ public abstract class varchi_line extends AppCompatActivity  {
         int id = item.getItemId();
 
         // Handle your menu items here
-        if (id == R.id.nav_notification && getactionbarTiile_in_varchi_line()!= "NOTICE FOR COLLEGE") {
+        if (id == R.id.nav_notification && getactionbarTiile_in_varchi_line()!= "NOTIFICATIONS") {
 
             Intent intent=new Intent(getApplicationContext(), all_college_notiFication_from_Administrator.class);
             startActivity(intent);
