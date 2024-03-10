@@ -3,6 +3,7 @@
     <style name="Base.Theme.LOginForm" parent="Theme.AppCompat.DayNight.NoActionBar">
         <!-- Customize your dark theme here. -->
         <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
+        <item name="colorPrimaryDark">#049DB5</item>
     </style>
 
 
