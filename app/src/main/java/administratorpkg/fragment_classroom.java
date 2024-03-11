@@ -117,6 +117,7 @@ public class fragment_classroom extends Fragment {
         recyclerview = view.findViewById(R.id.classroomrecyclerview1);
         recyclerview.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerview.setHasFixedSize(true);
+
         recyclerviewonclick recyclerviewonclick=new recyclerviewonclick() {
             @Override
             public void onItemClick(int position) {
@@ -130,7 +131,9 @@ public class fragment_classroom extends Fragment {
 
                 startActivity(intent);
             }
+
         };
+
         ClassrromViewAdapter classrromViewAdapter = new ClassrromViewAdapter(getContext(),subjectsArrayList, recyclerviewonclick);
         recyclerview.setAdapter(classrromViewAdapter);
         classrromViewAdapter.notifyDataSetChanged();
@@ -225,6 +228,7 @@ public class fragment_classroom extends Fragment {
     private void dataInitialize(){
         subjectsArrayList = new ArrayList<>();
         subjectname = new String[]{
+                "CLASS TEACHER'S",
                 getString(R.string.sub1),
                 getString(R.string.sub2),
                 getString(R.string.sub3),
@@ -232,6 +236,7 @@ public class fragment_classroom extends Fragment {
 
         };
         teachername = new String[]{
+                "Swapnil Sir",
                 getString(R.string.tech1),
                 getString(R.string.tech2),
                 getString(R.string.tech3),
