@@ -36,7 +36,7 @@ public abstract class varchi_line extends AppCompatActivity  {
 
     Menu menu;
     MenuItem menu_home;
-    MenuItem menu_classroom,menu_documents,menu_attendence;
+    MenuItem menu_classroom,menu_documents,menu_attendence,menu_notification;
 
     abstract int getLayoutresId() ;
     abstract String getactionbarTiile_in_varchi_line();
@@ -68,6 +68,7 @@ public abstract class varchi_line extends AppCompatActivity  {
         menu_classroom=menu.findItem(R.id.nav_classroom);
         menu_documents=menu.findItem(R.id.nav_document);
         menu_attendence=menu.findItem(R.id.nav_attendance);
+        menu_notification=menu.findItem(R.id.nav_notification);
         ImageView profileImg = navigationView.getHeaderView(0).findViewById(R.id.profileimg);
         profileImg.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -115,6 +116,9 @@ public abstract class varchi_line extends AppCompatActivity  {
 
                     startActivity(intent);
                     finish();
+                }else{
+                    Intent intent=new Intent(getApplicationContext(),classroomClicked_activity.class);
+                    intent.putExtra("atsamedoc",true);
                 }
 
                 return false;
@@ -134,9 +138,29 @@ public abstract class varchi_line extends AppCompatActivity  {
                     startActivity(intent);
                     finish();
                 }
+                else{
+                    Intent intent=new Intent(getApplicationContext(),classroomClicked_activity.class);
+                    intent.putExtra("atsameattend",true);
+
+                }
                 return false;
             }
         });
+
+            menu_notification.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+                @Override
+                public boolean onMenuItemClick(@NonNull MenuItem item) {
+                    if(getactionbarTiile_in_varchi_line()!="NOTIFICATIONS") {
+                        Intent intent1 = new Intent(getApplicationContext(), all_college_notiFication_from_Administrator.class);
+                        startActivity(intent1);
+                        finish();
+                    }
+                    return false;
+                }
+            });
+
+
+
     }
 
     @Override

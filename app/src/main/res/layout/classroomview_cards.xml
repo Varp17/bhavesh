@@ -10,57 +10,62 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/classroomviewcardsdesign"
+        android:layout_margin="10dp"
         android:layout_marginTop="10dp"
 
-        android:layout_margin="10dp"
-        android:paddingBottom="10dp"
-        >
+        android:background="@drawable/classroomviewcardsdesign"
+        android:paddingBottom="10dp">
 
 
-        <ImageView
+        <ImageButton
             android:id="@+id/imageView2"
             android:layout_width="30dp"
             android:layout_height="26dp"
-            android:layout_marginEnd="29dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/subjectname"
+            app:layout_constraintHorizontal_bias="0.846"
+            app:layout_constraintStart_toEndOf="@+id/teachername"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.237"
-            app:srcCompat="@android:drawable/ic_menu_edit" />
+            app:layout_constraintVertical_bias="0.942"
+            android:src="@drawable/edit_icon"
+            android:background="@null"/>
+
 
         <TextView
-            android:paddingTop="10dp"
             android:id="@+id/subjectname"
+            style="@style/TEXT"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="110dp"
-            android:layout_marginEnd="30dp"
-            android:text="Subject_name"
-            style="@style/TEXT"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="100dp"
 
+            android:text="Subject_name"
             android:textSize="30sp"
             android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/imageView2"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
 
         <TextView
             android:id="@+id/teachername"
+            style="@style/TEXT"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
 
+            android:layout_height="wrap_content"
             android:layout_marginBottom="4dp"
             android:text="Teacher_name"
-            style="@style/TEXT"
             android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/subjectname" />
+            app:layout_constraintTop_toBottomOf="@+id/subjectname"
+            app:layout_constraintVertical_bias="1.0" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>
