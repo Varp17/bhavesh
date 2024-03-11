@@ -32,12 +32,11 @@ public abstract class varchi_line extends AppCompatActivity  {
     NavigationView navigationView;
 //    ImageButton notification;
 
-    ViewPager vpagermanage;
-    TabLayout tabLayout;
-    FragmentAdapter managestaffadapter ;
+
+
     Menu menu;
     MenuItem menu_home;
-    MenuItem menu_classroom;
+    MenuItem menu_classroom,menu_documents,menu_attendence;
 
     abstract int getLayoutresId() ;
     abstract String getactionbarTiile_in_varchi_line();
@@ -67,6 +66,8 @@ public abstract class varchi_line extends AppCompatActivity  {
         menu=navigationView.getMenu();
         menu_home=menu.findItem(R.id.nav_home);
         menu_classroom=menu.findItem(R.id.nav_classroom);
+        menu_documents=menu.findItem(R.id.nav_document);
+        menu_attendence=menu.findItem(R.id.nav_attendance);
         ImageView profileImg = navigationView.getHeaderView(0).findViewById(R.id.profileimg);
         profileImg.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -92,18 +93,50 @@ public abstract class varchi_line extends AppCompatActivity  {
         menu_classroom.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(@NonNull MenuItem item) {
-                Intent intent=new Intent(getApplicationContext(), administrotor_panel.class);
-                startActivity(intent);
-                finish();
+
+
+                    Intent intent=new Intent(getApplicationContext(), administrotor_panel.class);
+                    startActivity(intent);
+                    finish();
                 drawerLayout.closeDrawer(GravityCompat.START);
-                if(tabLayout!=null) {
-                    tabLayout.setScrollPosition(1, 0f, true);
-                    vpagermanage.setCurrentItem(1);
+
+                return false;
+            }
+        });
+        menu_documents.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+
+            public boolean onMenuItemClick(@NonNull MenuItem item) {
+                drawerLayout.closeDrawer(GravityCompat.START);
+                if(getSupportActionBar().getTitle()!="CLASS TEACHER'S") {
+
+                    Intent intent = new Intent(getApplicationContext(), classroomClicked_activity.class);
+                    intent.putExtra("flagfordocuments", true);
+
+                    startActivity(intent);
+                    finish();
                 }
+
                 return false;
             }
         });
 
+        menu_attendence.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+
+            public boolean onMenuItemClick(@NonNull MenuItem item) {
+                drawerLayout.closeDrawer(GravityCompat.START);
+                if(getSupportActionBar().getTitle()!="CLASS TEACHER'S") {
+
+                    Intent intent = new Intent(getApplicationContext(), classroomClicked_activity.class);
+                    intent.putExtra("flagforattendence", true);
+
+                    startActivity(intent);
+                    finish();
+                }
+                return false;
+            }
+        });
     }
 
     @Override

@@ -31,7 +31,6 @@ public class classroomClicked_activity extends varchi_line{
     ViewPager vpager;
     TabLayout tabLayout;
     classroom_activity_adapter myFragmentAdapter;
-    Menu menu;
 
     @Override
     int getLayoutresId() {
@@ -57,6 +56,29 @@ public class classroomClicked_activity extends varchi_line{
         vpager.setAdapter(myFragmentAdapter);
         tabLayout=findViewById(R.id.tabLayout);
         tabLayout.setupWithViewPager(vpager);
+
+
+        Intent intent=getIntent();
+
+        boolean flag=intent.getBooleanExtra("flagfordocuments",false);
+
+        boolean flagattend=intent.getBooleanExtra("flagforattendence",false);
+        if(flag)
+        {
+        //document
+            getSupportActionBar().setTitle("CLASS TEACHER'S");
+
+            tabLayout.setScrollPosition(1, 0f, true);
+            vpager.setCurrentItem(1);
+        }   if(flagattend) {
+            //attendence
+
+            getSupportActionBar().setTitle("CLASS TEACHER'S");
+
+
+        }
+
+
 
 
 

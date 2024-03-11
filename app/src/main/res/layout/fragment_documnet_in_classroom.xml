@@ -1,14 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="20dp"
+    android:background="@color/apna_color"
+    android:gravity="center"
     tools:context="administratorpkg.fragment_documnet_in_classroom">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+
+    <GridView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:id="@+id/gridView"
+        android:numColumns="2"
+        tools:listitem="@layout/documentview_cards"/>
 
-</FrameLayout>
+    <!-- TODO: Update blank fragment layout -->
+
+</LinearLayout>

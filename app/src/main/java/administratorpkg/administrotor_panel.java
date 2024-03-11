@@ -31,7 +31,7 @@ public class administrotor_panel extends AppCompatActivity implements Navigation
       TabLayout tabLayout;
       FragmentAdapter myFragmentAdapter;
       Menu menu;
-      MenuItem menu_home,menu_classroom,menu_notification;
+      MenuItem menu_home,menu_classroom,menu_notification,menu_documents,menu_attendence;
       ImageView profileimg;
 
 
@@ -57,6 +57,8 @@ public class administrotor_panel extends AppCompatActivity implements Navigation
         menu_home=menu.findItem(R.id.nav_home);
         menu_classroom=menu.findItem(R.id.nav_classroom);
         menu_notification=menu.findItem(R.id.nav_notification);
+        menu_attendence=menu.findItem(R.id.nav_attendance);
+        menu_documents=menu.findItem(R.id.nav_document);
         menu_notification.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(@NonNull MenuItem item) {
@@ -96,6 +98,40 @@ public class administrotor_panel extends AppCompatActivity implements Navigation
                 drawerLayout.closeDrawer(GravityCompat.START);
                 tabLayout.setScrollPosition(1,0f,true);
                 vpager.setCurrentItem(1);
+                return false;
+            }
+        });
+        menu_documents.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+
+            public boolean onMenuItemClick(@NonNull MenuItem item) {
+                drawerLayout.closeDrawer(GravityCompat.START);
+
+
+                    Intent intent = new Intent(getApplicationContext(), classroomClicked_activity.class);
+                    intent.putExtra("flagfordocuments", true);
+
+                    startActivity(intent);
+
+
+
+                return false;
+            }
+        });
+
+        menu_attendence.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+
+            public boolean onMenuItemClick(@NonNull MenuItem item) {
+                drawerLayout.closeDrawer(GravityCompat.START);
+
+
+                    Intent intent = new Intent(getApplicationContext(), classroomClicked_activity.class);
+                    intent.putExtra("flagforattendence", true);
+
+                    startActivity(intent);
+
+
                 return false;
             }
         });
