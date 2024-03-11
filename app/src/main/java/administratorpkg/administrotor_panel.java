@@ -15,6 +15,8 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.Toast;
+import android.window.OnBackInvokedDispatcher;
 
 import com.example.loginform.R;
 import com.google.android.material.navigation.NavigationView;
@@ -24,6 +26,10 @@ public class administrotor_panel extends AppCompatActivity implements Navigation
     Toolbar toolbar;
 
     DrawerLayout drawerLayout;
+
+
+
+
     NavigationView navigationView;
 //    ImageButton notification;
 

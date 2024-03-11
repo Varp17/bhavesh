@@ -63,6 +63,9 @@ public class classroomClicked_activity extends varchi_line{
         boolean flag=intent.getBooleanExtra("flagfordocuments",false);
 
         boolean flagattend=intent.getBooleanExtra("flagforattendence",false);
+        boolean atsameattend=intent.getBooleanExtra("atsameattend",false);
+        boolean atsamedoc=intent.getBooleanExtra("atsamedoc",false);
+
         if(flag)
         {
         //document
@@ -76,6 +79,14 @@ public class classroomClicked_activity extends varchi_line{
             getSupportActionBar().setTitle("CLASS TEACHER'S");
 
 
+        }if (atsameattend){
+
+            tabLayout.setScrollPosition(0,0f,true);
+            vpager.setCurrentItem(0);
+        }if (atsamedoc){
+
+            tabLayout.setScrollPosition(1,0f,true);
+            vpager.setCurrentItem(1);
         }
 
 
