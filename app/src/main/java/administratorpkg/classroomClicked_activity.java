@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
@@ -28,9 +29,11 @@ import administratorpkg.FragmentAdapter;
 public class classroomClicked_activity extends varchi_line{
 
 
+    private static final int MENU_ITEM_ITEM1 = 1;
     ViewPager vpager;
     TabLayout tabLayout;
     classroom_activity_adapter myFragmentAdapter;
+    String title;
 
     @Override
     int getLayoutresId() {
@@ -41,14 +44,17 @@ public class classroomClicked_activity extends varchi_line{
     String getactionbarTiile_in_varchi_line() {
 
         Intent intent=getIntent();
-        String title = intent.getStringExtra("name");
+        this.title = intent.getStringExtra("name");
         return title;
     }
 
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+
         super.onCreate(savedInstanceState);
 
         vpager=findViewById(R.id.vpager);
@@ -56,6 +62,9 @@ public class classroomClicked_activity extends varchi_line{
         vpager.setAdapter(myFragmentAdapter);
         tabLayout=findViewById(R.id.tabLayout);
         tabLayout.setupWithViewPager(vpager);
+        
+
+
 
 
         Intent intent=getIntent();
@@ -88,6 +97,7 @@ public class classroomClicked_activity extends varchi_line{
             tabLayout.setScrollPosition(1,0f,true);
             vpager.setCurrentItem(1);
         }
+
 
 
 

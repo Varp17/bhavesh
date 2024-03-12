@@ -36,11 +36,13 @@ public abstract class varchi_line extends AppCompatActivity  {
 
     Menu menu;
     MenuItem menu_home;
-    MenuItem menu_classroom,menu_documents,menu_attendence,menu_notification;
+    MenuItem menu_classroom,menu_documents,menu_attendence,menu_notification,menu_managestudent;
 
     abstract int getLayoutresId() ;
     abstract String getactionbarTiile_in_varchi_line();
 
+
+    private static final int MENU_ITEM_ITEM1 = 1;
 
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,15 +71,20 @@ public abstract class varchi_line extends AppCompatActivity  {
         menu_documents=menu.findItem(R.id.nav_document);
         menu_attendence=menu.findItem(R.id.nav_attendance);
         menu_notification=menu.findItem(R.id.nav_notification);
+        menu_attendence=menu.findItem(R.id.nav_attendance);
+
+
         ImageView profileImg = navigationView.getHeaderView(0).findViewById(R.id.profileimg);
         profileImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(toolbar.getTitle()!="PROFIlE") {
 
-                Intent intent = new Intent(getApplicationContext(), administrtor_profile.class);
-                startActivity(intent);
-                finish();
-                finishActivity(R.id.managestaff);
+                    Intent intent = new Intent(getApplicationContext(), administrtor_profile.class);
+                    startActivity(intent);
+                    finish();
+                    finishActivity(R.id.managestaff);
+                }
 
             }
         });
@@ -108,19 +115,16 @@ public abstract class varchi_line extends AppCompatActivity  {
             @Override
 
             public boolean onMenuItemClick(@NonNull MenuItem item) {
+
                 drawerLayout.closeDrawer(GravityCompat.START);
-                if(getSupportActionBar().getTitle()!="CLASS TEACHER'S") {
+                if(!"CLASS TEACHER'S".equals(toolbar.getTitle())) {
 
                     Intent intent = new Intent(getApplicationContext(), classroomClicked_activity.class);
                     intent.putExtra("flagfordocuments", true);
 
                     startActivity(intent);
                     finish();
-                }else{
-                    Intent intent=new Intent(getApplicationContext(),classroomClicked_activity.class);
-                    intent.putExtra("atsamedoc",true);
                 }
-
                 return false;
             }
         });
@@ -129,8 +133,9 @@ public abstract class varchi_line extends AppCompatActivity  {
             @Override
 
             public boolean onMenuItemClick(@NonNull MenuItem item) {
+
                 drawerLayout.closeDrawer(GravityCompat.START);
-                if(getSupportActionBar().getTitle()!="CLASS TEACHER'S") {
+                if(!"CLASS TEACHER'S".equals(toolbar.getTitle())) {
 
                     Intent intent = new Intent(getApplicationContext(), classroomClicked_activity.class);
                     intent.putExtra("flagforattendence", true);
@@ -138,11 +143,7 @@ public abstract class varchi_line extends AppCompatActivity  {
                     startActivity(intent);
                     finish();
                 }
-                else{
-                    Intent intent=new Intent(getApplicationContext(),classroomClicked_activity.class);
-                    intent.putExtra("atsameattend",true);
 
-                }
                 return false;
             }
         });
@@ -168,6 +169,9 @@ public abstract class varchi_line extends AppCompatActivity  {
 
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menubaradmin, menu);
+        updateMenuVisibility(menu.findItem(R.id.nav_managestu));
+
+
 
         return true;
 
@@ -184,9 +188,30 @@ public abstract class varchi_line extends AppCompatActivity  {
             return true;
         }
 
+
         return super.onOptionsItemSelected(item);
+    }
+    private void updateMenuVisibility(MenuItem menuItem) {
+        // Check if the action bar title is "CLASS TEACHER'S"
+        if (getSupportActionBar() != null && getSupportActionBar().getTitle() != null &&
+                getSupportActionBar().getTitle().toString().equals("CLASS TEACHER'S")) {
+            menuItem.setVisible(true); // Show the menu item
+            menuItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+                @Override
+                public boolean onMenuItemClick(@NonNull MenuItem item) {
+                    Intent intent=new Intent(getApplicationContext(), ManageStudent_classTeacher.class);
+                    startActivity(intent);
+                    return false;
+                }
+            });
+        } else {
+            menuItem.setVisible(false); // Hide the menu item
+            menuItem.setOnMenuItemClickListener(null); // Clear the listener
+            menu.removeItem(R.id.nav_managestu);
+        }
+        }
     }
 
 
 
-}
+

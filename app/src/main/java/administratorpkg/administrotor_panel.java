@@ -37,7 +37,7 @@ public class administrotor_panel extends AppCompatActivity implements Navigation
       TabLayout tabLayout;
       FragmentAdapter myFragmentAdapter;
       Menu menu;
-      MenuItem menu_home,menu_classroom,menu_notification,menu_documents,menu_attendence;
+      MenuItem menu_home,menu_classroom,menu_notification,menu_documents,menu_attendence,menu_managestu;
       ImageView profileimg;
 
 
@@ -65,6 +65,8 @@ public class administrotor_panel extends AppCompatActivity implements Navigation
         menu_notification=menu.findItem(R.id.nav_notification);
         menu_attendence=menu.findItem(R.id.nav_attendance);
         menu_documents=menu.findItem(R.id.nav_document);
+        menu_managestu=menu.findItem(R.id.nav_managestu);
+
         menu_notification.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(@NonNull MenuItem item) {
@@ -147,6 +149,7 @@ public class administrotor_panel extends AppCompatActivity implements Navigation
 
 
 
+
     }
 
 
@@ -155,7 +158,7 @@ public class administrotor_panel extends AppCompatActivity implements Navigation
 
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menubaradmin, menu);
-
+        updateMenuVisibility(menu.findItem(R.id.nav_managestu));
         return true;
 
     }
@@ -186,6 +189,19 @@ public class administrotor_panel extends AppCompatActivity implements Navigation
         }
 
         return super.onOptionsItemSelected(item);
+    }
+    private void updateMenuVisibility(MenuItem menuItem) {
+        // Check if the action bar title is "CLASS TEACHER'S"
+        if (getSupportActionBar() != null && getSupportActionBar().getTitle() != null &&
+                getSupportActionBar().getTitle().toString().equals("CLASS TEACHER'S")) {
+            menuItem.setVisible(true);// Show the menu item
+            menu.removeItem(R.id.nav_managestu);
+
+
+        } else {
+            menuItem.setVisible(false); // Hide the menu item
+            menu.removeItem(R.id.nav_managestu);
+        }
     }
 
 }
