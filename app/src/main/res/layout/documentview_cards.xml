@@ -4,7 +4,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:gravity="center"
-    android:background="@drawable/documentviewcards"
+    android:padding="5dp"
     android:layout_marginTop="10dp"
     android:paddingHorizontal="10dp"
     android:layout_margin="10dp"
@@ -12,9 +12,11 @@
 
     <TextView
         android:id="@+id/documentviewcard"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="1in"
+        android:layout_height="match_parent"
+        android:singleLine="true"
         android:gravity="center"
+        android:background="@drawable/documentviewcards"
         android:text="@string/Document"
         android:textSize="30dp" />
 </LinearLayout>
