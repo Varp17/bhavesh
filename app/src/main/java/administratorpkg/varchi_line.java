@@ -210,7 +210,14 @@ public abstract class varchi_line extends AppCompatActivity  {
             menu.removeItem(R.id.nav_managestu);
         }
         }
+    public void onBackPressed() {
+        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            drawerLayout.closeDrawer(GravityCompat.START);
+        }else
+            super.onBackPressed();
+        }
     }
+
 
 
 

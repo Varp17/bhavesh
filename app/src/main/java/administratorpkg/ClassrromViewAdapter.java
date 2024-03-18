@@ -1,10 +1,14 @@
 package administratorpkg;
 
+import android.app.AlertDialog;
 import android.content.ClipData;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -57,12 +61,47 @@ public class ClassrromViewAdapter extends RecyclerView.Adapter<ClassrromViewAdap
     public static class ClassroomViewHolder extends RecyclerView.ViewHolder {
 
         TextView subjectname,teachername;
+        ImageButton edit_class;
+        private void showPopup() {
+            AlertDialog.Builder builder = new AlertDialog.Builder(itemView.getContext());
+            LayoutInflater inflater = LayoutInflater.from(itemView.getContext());
+            View dialogView = inflater.inflate(R.layout.popupbutton, null);
+            builder.setView(dialogView);
+
+            Button buttonInPopup = dialogView.findViewById(R.id.buttompopupyes);
+            buttonInPopup.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    // Handle button click inside the popup
+                    // You can dismiss the popup here or perform any other action
+                }
+            });
+
+            builder.setPositiveButton("Close", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                }
+            });
+
+            AlertDialog alertDialog = builder.create();
+            alertDialog.show();
+        }
 
         public ClassroomViewHolder(@NonNull View itemView,recyclerviewonclick recyclerviewonclick) {
             super(itemView);
 
             subjectname = itemView.findViewById(R.id.subjectname);
             teachername = itemView.findViewById(R.id.teachername);
+            edit_class=itemView.findViewById(R.id.editclass);
+            edit_class.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                            showPopup();
+
+                }
+            });
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -82,5 +121,6 @@ public class ClassrromViewAdapter extends RecyclerView.Adapter<ClassrromViewAdap
 
 
     }
+
 
 }
