@@ -14,6 +14,7 @@ import java.util.List;
 
 public class FeedbackAdapter extends RecyclerView.Adapter<FeedbackAdapter.FeedbackViewHolder> {
 
+
     private List<Feedback> feedbackList;
     private OnFeedbackClickListener onFeedbackClickListener;
 

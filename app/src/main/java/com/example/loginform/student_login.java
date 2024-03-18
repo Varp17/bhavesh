@@ -1,4 +1,4 @@
-package studentpakage;
+package com.example.loginform;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,8 +10,8 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.loginform.ForgotPasswordActivity;
-import com.example.loginform.R;
+import administratorpkg.Addministrator_0r_Teacher_Login;
+import studentpakage.student_panel;
 
 public class student_login extends AppCompatActivity {
 
@@ -42,7 +42,7 @@ public class student_login extends AppCompatActivity {
         teacher_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(student_login.this, student_panel.class));
+                startActivity(new Intent(student_login.this,  Addministrator_0r_Teacher_Login.class));
             }
         });
         login.setOnClickListener(new View.OnClickListener() {

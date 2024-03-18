@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="studentpakage.student_home_fragment">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="20dp"
+            android:text="Upcoming Events"
+            style="@style/TEXT"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toTopOf="@+id/image_slider"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.497"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.denzcoskun.imageslider.ImageSlider
+            android:id="@+id/image_slider"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginBottom="30dp"
+
+            app:iss_auto_cycle="true"
+            app:iss_corner_radius="100"
+            app:iss_delay="1000"
+            app:iss_period="1000"
+            app:iss_text_align="CENTER"
+            app:layout_constraintBottom_toTopOf="@+id/teachernamemsg"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView" >
+
+            <ImageView
+                android:id="@+id/imageView5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/icons8_create_32" />
+        </com.denzcoskun.imageslider.ImageSlider>
+
+        <TextView
+            android:id="@+id/hellomsg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="7dp"
+            android:layout_marginEnd="3dp"
+            android:text="Hello"
+            style="@style/TEXT"
+            android:textSize="20sp"
+            app:layout_constraintBaseline_toBaselineOf="@+id/teachernamemsg"
+            app:layout_constraintEnd_toStartOf="@+id/teachernamemsg"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/teachernamemsg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/TEXT"
+            android:layout_marginBottom="42dp"
+            android:text="Teacher Name"
+
+            android:textSize="20sp"
+            app:layout_constraintBottom_toTopOf="@+id/datemsg"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/hellomsg"
+            app:layout_constraintTop_toBottomOf="@+id/image_slider" />
+
+        <TextView
+            android:id="@+id/datemsg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="21dp"
+            android:layout_marginBottom="8dp"
+            android:text="07 Feb, Wednesday"
+            style="@style/TEXT"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toTopOf="@+id/todshcedule"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/teachernamemsg" />
+
+        <TextView
+            android:id="@+id/todshcedule"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_marginBottom="13dp"
+            android:text="Today's Schedule"
+            style="@style/TEXT"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/scheduleimg"
+            app:layout_constraintStart_toStartOf="@+id/datemsg"
+            app:layout_constraintTop_toBottomOf="@+id/datemsg" />
+
+        <ImageView
+            android:id="@+id/scheduleimg"
+            android:layout_width="232dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="36dp"
+            android:layout_marginBottom="40dp"
+            android:src="@drawable/aaaaa"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/todshcedule"
+            app:layout_constraintTop_toBottomOf="@+id/todshcedule" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+

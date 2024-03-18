@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="studentpakage.student_panel"
+    android:layout_width="match_parent"
+    android:layout_height="130dp"
+    android:background="@drawable/yellowback"
+    android:gravity="bottom"
+    android:padding="30dp">
+
+
+        <ImageView
+            android:id="@+id/profileimg"
+            android:layout_width="69dp"
+            android:layout_height="71dp"
+            android:layout_marginStart="2dp"
+            android:background="@null"
+            android:clickable="true"
+            android:src="@drawable/profile_icon"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:layout_width="173dp"
+            android:layout_height="32dp"
+            android:layout_marginTop="8dp"
+            android:text="Teacher Name"
+            style="@style/TEXT"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:layout_width="144dp"
+            android:layout_height="30dp"
+            android:text="Teacher id"
+            style="@style/TEXT"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.913"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
