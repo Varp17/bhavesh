@@ -115,7 +115,7 @@ public class administrotor_panel extends AppCompatActivity implements Navigation
 
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menubaradmin, menu);
-
+        updateMenuVisibility(menu.findItem(R.id.nav_managestu));
         return true;
 
     }
@@ -138,5 +138,23 @@ public class administrotor_panel extends AppCompatActivity implements Navigation
         return true;
     }
 
-
+    private void updateMenuVisibility(MenuItem menuItem) {
+        // Check if the action bar title is "CLASS TEACHER'S"
+        if (getSupportActionBar() != null && getSupportActionBar().getTitle() != null &&
+                getSupportActionBar().getTitle().toString().equals("CLASS TEACHER'S")) {
+            menuItem.setVisible(true); // Show the menu item
+            menuItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+                @Override
+                public boolean onMenuItemClick(@NonNull MenuItem item) {
+                    Intent intent=new Intent(getApplicationContext(), ManageStudent_classTeacher.class);
+                    startActivity(intent);
+                    return false;
+                }
+            });
+        } else {
+            menuItem.setVisible(false); // Hide the menu item
+            menuItem.setOnMenuItemClickListener(null); // Clear the listener
+            menu.removeItem(R.id.nav_managestu);
+        }
+    }
 }
