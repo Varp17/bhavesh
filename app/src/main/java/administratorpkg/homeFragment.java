@@ -75,7 +75,7 @@ public class homeFragment extends Fragment {
     ImageSlider image_slider;
     ImageView scheduleimg;
     ImageView profile;
-    com.google.android.material.floatingactionbutton.FloatingActionButton floabtnmange;
+    com.google.android.material.floatingactionbutton.FloatingActionButton floabtnmange,feedbackbtn;
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
@@ -91,6 +91,17 @@ public class homeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent= new Intent(getContext(), Managestaff_activity.class);
+                startActivity(intent);
+
+            }
+        });
+
+        feedbackbtn=rootView.findViewById(R.id.floatbtnfeedback);
+
+        feedbackbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(),feedback_activity_administrator.class);
                 startActivity(intent);
             }
         });

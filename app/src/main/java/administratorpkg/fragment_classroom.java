@@ -147,6 +147,8 @@ public class fragment_classroom extends Fragment {
                 myDialog.setContentView(R.layout.add_subject_floating_panel);
                 closebtn = myDialog.findViewById(R.id.closeaddsubjectpanel);
 
+                myDialog.setCanceledOnTouchOutside(false);
+
                 Spinner spinnerTeacher = myDialog.findViewById(R.id.spinnerTeacher);
                 Spinner spinnerSubject = myDialog.findViewById(R.id.spinnerSubject);
                 Spinner spinnerYear = myDialog.findViewById(R.id.spinnerYear);
