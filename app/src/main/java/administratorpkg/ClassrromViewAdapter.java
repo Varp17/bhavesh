@@ -63,13 +63,13 @@ public class ClassrromViewAdapter extends RecyclerView.Adapter<ClassrromViewAdap
 
             subjectname = itemView.findViewById(R.id.subjectname);
             teachername = itemView.findViewById(R.id.teachername);
+
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     if(recyclerviewonclick!=null){
                         int pos=getAdapterPosition();
                         if(pos!=RecyclerView.NO_POSITION){
-
 
                             recyclerviewonclick.onItemClick(pos);
                         }

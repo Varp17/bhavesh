@@ -36,7 +36,7 @@ public abstract class varchi_line extends AppCompatActivity  {
 
     Menu menu;
     MenuItem menu_home;
-    MenuItem menu_classroom,menu_documents,menu_attendence,menu_notification,menu_managestudent;
+    MenuItem menu_classroom,menu_documents,menu_attendence,menu_notification,menu_managestudent,menu_feedback;
 
     abstract int getLayoutresId() ;
     abstract String getactionbarTiile_in_varchi_line();
@@ -72,6 +72,16 @@ public abstract class varchi_line extends AppCompatActivity  {
         menu_attendence=menu.findItem(R.id.nav_attendance);
         menu_notification=menu.findItem(R.id.nav_notification);
         menu_attendence=menu.findItem(R.id.nav_attendance);
+        menu_feedback = menu.findItem(R.id.nav_feedback);
+
+        menu_feedback.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(@NonNull MenuItem item) {
+                Intent intent = new Intent(getApplicationContext(), feedback_activity_administrator.class);
+                startActivity(intent);
+                return false;
+            }
+        });
 
 
         ImageView profileImg = navigationView.getHeaderView(0).findViewById(R.id.profileimg);

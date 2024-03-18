@@ -25,6 +25,9 @@
             android:name="administratorpkg.Detailed_Activity"
             android:exported="false" />
         <activity
+            android:name="administratorpkg.feedback_activity_administrator"
+            android:exported="false" />
+        <activity
             android:name="administratorpkg.classroomClicked_activity"
             android:exported="false" />
         <activity
