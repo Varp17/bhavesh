@@ -1,4 +1,4 @@
-package administratorpkg;
+package teacherpkg;
 
 import android.content.Context;
 import android.view.LayoutInflater;
