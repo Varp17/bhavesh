@@ -9,15 +9,13 @@ import android.widget.TextView;
 
 import com.example.loginform.R;
 
-import teacherpkg.teacher_fragment_document_classroom;
-
 public class documentgridadapter extends BaseAdapter {
 
     Context context;
     String[] documentnames;
     LayoutInflater inflater;
 
-    public documentgridadapter(teacher_fragment_document_classroom context, String[] documentnames) {
+    public documentgridadapter(fragment_documnet_in_classroom context, String[] documentnames) {
         this.context = context.getActivity(); // Use getActivity() to get the context from the Fragment
         this.documentnames = documentnames;
     }

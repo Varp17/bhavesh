@@ -84,7 +84,7 @@ public class teacher_home_fragment extends Fragment {
         imageList.add(new SlideModel(R.drawable.ronaldo, ScaleTypes.FIT));
         imageList.add(new SlideModel(R.drawable.sunilchettri,ScaleTypes.FIT));
         scheduleimg=rootView.findViewById(R.id.scheduleimg);
-        profile=inflater.inflate(R.layout.header, container, false).findViewById(R.id.profileimg);
+        profile=inflater.inflate(R.layout.teacher_header, container, false).findViewById(R.id.profileimg);
 //        floabtnmange.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {

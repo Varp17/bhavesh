@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "36224814626",
+    "project_id": "presencepro-40e3b",
+    "storage_bucket": "presencepro-40e3b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:36224814626:android:3d1ace0e058825a0d7447b",
+        "android_client_info": {
+          "package_name": "com.example.loginform"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "36224814626-0hnkkq8nh182e87va3le8h6gg8opikt9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB6PeaU7aVWjVvhmdHiM1dJpnSK6zdTpto"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "36224814626-0hnkkq8nh182e87va3le8h6gg8opikt9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

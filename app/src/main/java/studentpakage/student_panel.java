@@ -49,7 +49,6 @@ public class student_panel extends AppCompatActivity implements NavigationView.O
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_panel);
-//        notification=findViewById(R.id.notificationbtn);
         drawerLayout=findViewById(R.id.Drawer_lay);
         navigationView=findViewById(R.id.nav_view);
         toolbar=findViewById(R.id.toolbar);
