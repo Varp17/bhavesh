@@ -71,7 +71,7 @@ public class student_panel extends AppCompatActivity implements NavigationView.O
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(student_panel.this, administrtor_profile.class);
+                Intent intent = new Intent(student_panel.this, Student_Profile.class);
                 startActivity(intent);
                 finishActivity(R.id.managestaff);
 

@@ -4,11 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ImageView;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 public class maximizeimage extends AppCompatActivity {
 
@@ -17,7 +13,7 @@ public class maximizeimage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.maximizeimage);
-        scheduleimg=(ImageView) findViewById(R.id.imageView);
+        scheduleimg=(ImageView) findViewById(R.id.student_image);
         intent=getIntent();
         int id=intent.getIntExtra("img",0);
         scheduleimg.setImageResource(id);

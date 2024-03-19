@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="studentpakage.Student_Profile">
+
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/profile_branch"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <ImageView
+
+                android:id="@+id/student_image"
+                android:layout_width="216dp"
+                android:layout_height="216dp"
+
+                android:layout_marginStart="98dp"
+                android:layout_marginTop="53dp"
+                android:layout_marginEnd="97dp"
+                android:background="@color/apna_color"
+                android:backgroundTint="@null"
+                android:contentDescription="lock_open"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:src="@drawable/profile_icon" />
+
+            <TextView
+                android:id="@+id/student_profilename"
+                android:layout_width="285dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="64dp"
+                android:layout_marginTop="44dp"
+                android:layout_marginEnd="62dp"
+                android:gravity="center"
+                android:text="Name"
+                android:textSize="24sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/student_image" />
+
+            <TextView
+                android:id="@+id/student_profile_rid"
+                android:layout_width="283dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="64dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="64dp"
+                android:gravity="center"
+                android:text="Id"
+                android:textSize="24sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/student_profilename" />
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="339dp"
+                android:layout_height="99dp"
+                android:layout_marginStart="36dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="36dp"
+                android:ems="8"
+                android:gravity="center"
+                android:text="GODAVRI COLLEGE OF ENGINEERING AND POLYTECHNIC"
+                android:textSize="24sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/student_profile_rid" />
+
+            <TextView
+                android:id="@+id/student_profilebranch"
+                android:layout_width="143dp"
+                android:layout_height="32dp"
+                android:layout_marginStart="28dp"
+                android:layout_marginTop="16dp"
+                android:gravity="center"
+                android:text="branch"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
+            <TextView
+                android:id="@+id/student_profile_dob"
+                android:layout_width="143dp"
+                android:layout_height="32dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="14dp"
+                android:gravity="center"
+                android:text="DOB"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
+
+            <TextView
+                android:id="@+id/student_mobileno"
+                android:layout_width="282dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="65dp"
+                android:layout_marginTop="15dp"
+                android:gravity="center"
+                android:inputType="number"
+                android:text="mobno"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/profile_student_address" />
+
+            <TextView
+                android:id="@+id/profile_student_address"
+                android:layout_width="194dp"
+                android:layout_height="115dp"
+                android:layout_marginStart="109dp"
+                android:layout_marginTop="28dp"
+                android:ems="9"
+                android:gravity="center"
+                android:text="ADDRESS-GODAVARI COLLEGE MIDC AREA JALGOAN"
+                android:textSize="22dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/student_profilebranch" />
+
+            <View
+                android:id="@+id/view2"
+                android:layout_width="2400dp"
+                android:layout_height="15dp"
+                android:layout_marginTop="100dp"
+                android:background="@drawable/draw"
+                android:padding="0dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/student_mobileno" />
+
+            <LinearLayout
+                android:id="@+id/linearLayout"
+                android:layout_width="406dp"
+                android:layout_height="59dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginEnd="5dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/view2">
+
+                <ImageButton
+                    android:id="@+id/profile_forget_password_btn"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginStart="16dp"
+                    android:background="@null"
+                    android:src="@drawable/baseline_lock_open_24" />
+
+                <TextView
+                    android:id="@+id/student_profile_forget_password_textview"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignRight="@id/profile_forget_password_btn"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginStart="28dp"
+                    android:layout_marginLeft="87dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="0dp"
+                    android:text="Forget Password"
+                    android:textColor="@color/apna_color"
+                    android:textSize="24sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="417dp"
+                android:layout_height="100dp"
+
+                android:layout_marginTop="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+
+                <ImageButton
+                    android:id="@+id/profile_logout_btn"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginStart="16dp"
+                    android:background="@null"
+                    android:src="@drawable/logout_icon" />
+
+                <TextView
+                    android:id="@+id/student_profile_logout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignRight="@id/profile_forget_password_btn"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginStart="28dp"
+                    android:layout_marginLeft="87dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="0dp"
+                    android:text="Logout"
+                    android:textColor="@color/apna_color"
+                    android:textSize="24sp" />
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </ScrollView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
