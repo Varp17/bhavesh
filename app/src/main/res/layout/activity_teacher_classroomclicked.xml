@@ -5,7 +5,7 @@
     android:id="@+id/Drawer_lay"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="administratorpkg.administrotor_panel"
+    tools:context="teacherpkg.teacher_panel"
     android:orientation="vertical"
     android:fitsSystemWindows="true"
     tools:openDrawer="start">

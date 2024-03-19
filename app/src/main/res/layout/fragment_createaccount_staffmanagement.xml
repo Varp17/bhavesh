@@ -122,7 +122,7 @@
             android:layout_marginStart="108dp"
             android:layout_marginTop="51dp"
             android:layout_marginEnd="160dp"
-            android:background="@null"
+            android:background="@color/apna_color"
             android:contentDescription="Calendar"
             android:src="@drawable/timetable_icon"
             app:layout_constraintEnd_toEndOf="parent"
