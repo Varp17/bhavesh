@@ -157,4 +157,7 @@ public class administrotor_panel extends AppCompatActivity implements Navigation
             menu.removeItem(R.id.nav_managestu);
         }
     }
+
+
+
 }
