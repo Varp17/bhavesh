@@ -49,7 +49,6 @@ public class student_panel extends AppCompatActivity implements NavigationView.O
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_panel);
-//        notification=findViewById(R.id.notificationbtn);
         drawerLayout=findViewById(R.id.Drawer_lay);
         navigationView=findViewById(R.id.nav_view);
         toolbar=findViewById(R.id.toolbar);
@@ -71,7 +70,7 @@ public class student_panel extends AppCompatActivity implements NavigationView.O
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(student_panel.this, administrtor_profile.class);
+                Intent intent = new Intent(student_panel.this, Student_Profile.class);
                 startActivity(intent);
                 finishActivity(R.id.managestaff);
 

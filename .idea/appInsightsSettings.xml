@@ -9,9 +9,9 @@
               <option name="connection">
                 <ConnectionSetting>
                   <option name="appId" value="com.example.loginform" />
-                  <option name="mobileSdkAppId" value="1:80035983122:android:b0fbc3d9701bc156410dcb" />
-                  <option name="projectId" value="presence-pro-3bf73" />
-                  <option name="projectNumber" value="80035983122" />
+                  <option name="mobileSdkAppId" value="1:36224814626:android:3d1ace0e058825a0d7447b" />
+                  <option name="projectId" value="presencepro-40e3b" />
+                  <option name="projectNumber" value="36224814626" />
                 </ConnectionSetting>
               </option>
               <option name="signal" value="SIGNAL_UNSPECIFIED" />

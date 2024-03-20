@@ -1,4 +1,4 @@
-package administratorpkg;
+package teacherpkg;
 
 public class Subjects {
     public String subjectname;
