@@ -17,6 +17,7 @@ import androidx.core.view.GravityCompat;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
@@ -33,12 +34,13 @@ public class teacher_classroomclicked extends varchi_line{
     private static final int MENU_ITEM_ITEM1 = 1;
     ViewPager vpager;
     TabLayout tabLayout;
-    classroom_activity_adapter myFragmentAdapter;
+    teacher_classroom_adapter myFragmentAdapter1;
     String title;
+
 
     @Override
     int getLayoutresId() {
-        return R.layout.classroom_clicked_activity;
+        return R.layout.activity_teacher_classroomclicked;
     }
 
     @Override
@@ -56,14 +58,10 @@ public class teacher_classroomclicked extends varchi_line{
         super.onCreate(savedInstanceState);
 
         vpager=findViewById(R.id.vpager);
-        myFragmentAdapter=new classroom_activity_adapter(getSupportFragmentManager());
-        vpager.setAdapter(myFragmentAdapter);
+        myFragmentAdapter1=new teacher_classroom_adapter(getSupportFragmentManager());
+        vpager.setAdapter(myFragmentAdapter1);
         tabLayout=findViewById(R.id.tabLayout);
         tabLayout.setupWithViewPager(vpager);
-
-
-
-
 
         Intent intent=getIntent();
 

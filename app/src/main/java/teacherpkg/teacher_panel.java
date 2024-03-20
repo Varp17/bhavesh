@@ -112,11 +112,6 @@ public class teacher_panel extends AppCompatActivity implements NavigationView.O
             }
         });
 
-
-
-
-
-
     }
 
 
