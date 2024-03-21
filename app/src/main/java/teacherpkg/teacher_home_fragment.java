@@ -95,7 +95,7 @@ public class teacher_home_fragment extends Fragment {
         profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getContext(), "hello suyog home fragment", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "hello chuuyog home fragment", Toast.LENGTH_SHORT).show();
             }
         });
         scheduleimg.setOnClickListener(new View.OnClickListener() {

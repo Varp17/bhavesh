@@ -19,6 +19,9 @@
             android:name="studentpakage.student_classroomclicked"
             android:exported="false" />
         <activity
+            android:name="teacherpkg.teacher_classroomclicked"
+            android:exported="false" />
+        <activity
             android:name="studentpakage.student_classroom_fragment"
             android:exported="false" />
         <activity

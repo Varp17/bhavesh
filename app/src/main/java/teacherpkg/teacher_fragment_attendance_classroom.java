@@ -40,11 +40,11 @@ public class teacher_fragment_attendance_classroom extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment fragment_attendance_in_classroom.
+     * @return A new instance of fragment teacher_fragment_attendance_classroom.
      */
     // TODO: Rename and change types and number of parameters
-    public static administratorpkg.fragment_attendance_in_classroom newInstance(String param1, String param2) {
-        administratorpkg.fragment_attendance_in_classroom fragment = new administratorpkg.fragment_attendance_in_classroom();
+    public static teacherpkg.teacher_fragment_attendance_classroom newInstance(String param1, String param2) {
+        teacherpkg.teacher_fragment_attendance_classroom fragment = new teacherpkg.teacher_fragment_attendance_classroom();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -66,6 +66,6 @@ public class teacher_fragment_attendance_classroom extends Fragment {
                              Bundle savedInstanceState) {
 
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_attendance_in_classroom, container, false);
+        return inflater.inflate(R.layout.activity_teacher_fragment_attendance_classroom, container, false);
     }
 }
