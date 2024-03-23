@@ -323,8 +323,11 @@ public class fragment_classroom extends Fragment {
                                 }
                                 // Create a HashMap to hold your data
                                 Map<String, Object> teacherInfo = new HashMap<>();
-                                teacherInfo.put("classteacher_name", selectedTeacher);
                                 teacherInfo.put("classteacher_id", id);
+                                teacherInfo.put("classteacher_name", selectedTeacher);
+                                teacherInfo.put("class year", selectedYear);
+
+
                                 // Add more key-value pairs as needed
 
                                 // Get the Firestore reference
@@ -336,7 +339,7 @@ public class fragment_classroom extends Fragment {
                                             @Override
                                             public void onSuccess(Void aVoid) {
                                                 // Document successfully written
-                                                Log.d("er", "DocumentSnapshot successfully written!");
+                                                Toast.makeText(getContext(), "Class Teacher Assigned and Classroom Created", Toast.LENGTH_SHORT).show();
                                                 // You can put any success logic here
                                             }
                                         })
@@ -344,7 +347,7 @@ public class fragment_classroom extends Fragment {
                                             @Override
                                             public void onFailure(@NonNull Exception e) {
                                                 // Handle any errors
-                                                Log.w("er", "Error writing document", e);
+                                                Toast.makeText(getContext(), "Classroom creation failed", Toast.LENGTH_SHORT).show();
                                                 // You can put any failure logic here
                                             }
                                         });
