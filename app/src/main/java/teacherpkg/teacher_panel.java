@@ -41,7 +41,7 @@ public class teacher_panel extends AppCompatActivity implements NavigationView.O
 
     ViewPager vpager;
     TabLayout tabLayout;
-    FragmentAdapter myFragmentAdapter;
+    teacher_fragmentd_adapter myFragmentAdapter;
     Menu menu;
     MenuItem menu_home,menu_classroom,menu_feedback,menu_logout;
     ImageView profileimg;
@@ -110,7 +110,7 @@ public class teacher_panel extends AppCompatActivity implements NavigationView.O
             }
         });
         vpager=findViewById(R.id.vpager);
-        myFragmentAdapter=new FragmentAdapter(getSupportFragmentManager());
+        myFragmentAdapter=new teacher_fragmentd_adapter(getSupportFragmentManager());
         vpager.setAdapter(myFragmentAdapter);
         tabLayout=findViewById(R.id.tabLayout);
         tabLayout.setupWithViewPager(vpager);
@@ -123,11 +123,6 @@ public class teacher_panel extends AppCompatActivity implements NavigationView.O
                 return false;
             }
         });
-
-
-
-
-
 
     }
 

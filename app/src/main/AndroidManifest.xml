@@ -13,20 +13,42 @@
         android:theme="@style/Theme.LOginForm"
         tools:targetApi="31">
         <activity
+            android:name="teacherpkg.feedback_teacher"
+            android:exported="false" />
+        <activity
+            android:name="studentpakage.student_classroomclicked"
+            android:exported="false" />
+        <activity
+            android:name="teacherpkg.teacher_classroomclicked"
+            android:exported="false" />
+        <activity
+            android:name="studentpakage.student_classroom_fragment"
+            android:exported="false" />
+        <activity
+            android:name="studentpakage.student_classroom_adapter"
+            android:exported="false" />
+        <activity
+            android:name="teacherpkg.Take_Attendance_Activity"
+            android:exported="false" />
+        <activity
             android:name="teacherpkg.teacher_fragment_notification_classroom"
             android:exported="false" />
         <activity
             android:name="teacherpkg.teacher_fragment_document_classroom"
-            android:exported="false" />
+            android:exported="false"
+            tools:ignore="Instantiatable" />
         <activity
             android:name="teacherpkg.teacher_fragment_attendance_classroom"
-            android:exported="false" />
+            android:exported="false"
+            tools:ignore="Instantiatable" />
         <activity
             android:name="studentpakage.student_home_fragment"
-            android:exported="false" />
+            android:exported="false"
+            tools:ignore="Instantiatable" />
         <activity
             android:name="teacherpkg.teacher_home_fragment"
-            android:exported="false" />
+            android:exported="false"
+            tools:ignore="Instantiatable" />
         <activity
             android:name="teacherpkg.teacher_panel"
             android:exported="false" />

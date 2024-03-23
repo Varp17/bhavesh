@@ -124,7 +124,7 @@ public abstract class varchi_line extends AppCompatActivity  {
             @Override
             public boolean onMenuItemClick(@NonNull MenuItem item) {
                 drawerLayout.closeDrawer(GravityCompat.START);
-                Intent intent=new Intent(getApplicationContext(), administrotor_panel.class);
+                Intent intent=new Intent(getApplicationContext(), teacher_panel.class);
                 startActivity(intent);
                 finish();
                 return false;
@@ -135,7 +135,7 @@ public abstract class varchi_line extends AppCompatActivity  {
             public boolean onMenuItemClick(@NonNull MenuItem item) {
 
 
-                Intent intent=new Intent(getApplicationContext(), administrotor_panel.class);
+                Intent intent=new Intent(getApplicationContext(), teacher_panel.class);
                 startActivity(intent);
                 finish();
                 drawerLayout.closeDrawer(GravityCompat.START);
@@ -151,7 +151,7 @@ public abstract class varchi_line extends AppCompatActivity  {
                 drawerLayout.closeDrawer(GravityCompat.START);
                 if(!"CLASS TEACHER'S".equals(toolbar.getTitle())) {
 
-                    Intent intent = new Intent(getApplicationContext(), classroomClicked_activity.class);
+                    Intent intent = new Intent(getApplicationContext(),teacher_classroomclicked.class);
                     intent.putExtra("flagfordocuments", true);
 
                     startActivity(intent);
@@ -169,7 +169,7 @@ public abstract class varchi_line extends AppCompatActivity  {
                 drawerLayout.closeDrawer(GravityCompat.START);
                 if(!"CLASS TEACHER'S".equals(toolbar.getTitle())) {
 
-                    Intent intent = new Intent(getApplicationContext(), classroomClicked_activity.class);
+                    Intent intent = new Intent(getApplicationContext(), teacher_classroomclicked.class);
                     intent.putExtra("flagforattendence", true);
 
                     startActivity(intent);
