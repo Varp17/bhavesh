@@ -1,21 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 
+
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    style="@style/SCREEN"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    style="@style/SCREEN"
     tools:context=".student_login">
+
+
 
 
     <EditText
         android:id="@+id/editTextText"
+        style="@style/edittextLoginblue"
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:layout_margin="60dp"
         android:layout_marginTop="60dp"
-        style="@style/edittextLoginblue"
         android:hint="Enrollment No."
         android:inputType="number"
         android:padding="10dp"
@@ -25,12 +28,12 @@
 
     <EditText
         android:id="@+id/word"
+        style="@style/edittextLoginblue"
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:layout_marginLeft="60dp"
         android:layout_marginTop="32dp"
         android:layout_marginRight="60dp"
-        style="@style/edittextLoginblue"
         android:hint="Password"
         android:inputType="textPassword"
         android:padding="10dp"
@@ -42,15 +45,15 @@
 
     <Button
         android:id="@+id/button"
+        style="@style/BUTTON"
         android:layout_width="104dp"
         android:layout_height="53dp"
-        android:layout_marginTop="60dp"
-        android:layout_marginBottom="60dp"
-        android:layout_marginRight="60dp"
         android:layout_marginLeft="60dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginRight="60dp"
+        android:layout_marginBottom="60dp"
         android:background="@drawable/loginbutton"
         android:text="Login"
-        style="@style/BUTTON"
         app:layout_constraintBottom_toTopOf="@+id/teacherlogin"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -59,9 +62,9 @@
 
     <TextView
         android:id="@+id/forgot"
+        style="@style/TEXT"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        style="@style/TEXT"
         android:layout_marginTop="100dp"
         android:layout_marginEnd="20dp"
         android:text="Forgot Password?"
@@ -70,10 +73,10 @@
 
     <TextView
         android:id="@+id/teacherlogin"
+        style="@style/TEXT"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
-        style="@style/TEXT"
         android:text="Administrator/Teacher Login"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -102,8 +105,10 @@
     <ImageView
         android:id="@+id/imageView3"
         android:layout_width="153dp"
-        android:layout_height="76dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="86dp"
+        android:layout_marginBottom="123dp"
+        app:layout_constraintBottom_toTopOf="@+id/progressBar2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.937"
         app:layout_constraintStart_toStartOf="parent"
@@ -115,7 +120,6 @@
         android:id="@+id/imageView4"
         android:layout_width="197dp"
         android:layout_height="142dp"
-
         android:scaleType="fitXY"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -125,4 +129,31 @@
         app:srcCompat="@drawable/aaaaa" />
 
 
+    <FrameLayout
+        android:id="@+id/overlay"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="302dp">
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="75dp"
+            android:layout_height="78dp"
+            android:layout_gravity="center"/>
+        <ImageView
+            android:id="@+id/logo_spinner_main"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/t_title"
+            android:layout_gravity="center"
+            android:layout_marginBottom="100dp"
+            />
+    </FrameLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
+
