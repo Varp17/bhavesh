@@ -19,6 +19,7 @@ import android.widget.ImageView;
 import com.example.loginform.R;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.tabs.TabLayout;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class administrotor_panel extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     Toolbar toolbar;
@@ -31,7 +32,7 @@ public class administrotor_panel extends AppCompatActivity implements Navigation
       TabLayout tabLayout;
       FragmentAdapter myFragmentAdapter;
       Menu menu;
-      MenuItem menu_home,menu_classroom,menu_feedback;
+      MenuItem menu_home,menu_classroom,menu_feedback,menu_logout;
       ImageView profileimg;
 
 
@@ -56,6 +57,17 @@ public class administrotor_panel extends AppCompatActivity implements Navigation
         menu=navigationView.getMenu();
         menu_home=menu.findItem(R.id.nav_home);
         menu_classroom=menu.findItem(R.id.nav_classroom);
+        menu_logout=menu.findItem(R.id.nav_logout);
+
+        menu_logout.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(@NonNull MenuItem item) {
+                FirebaseAuth firebaseAuth=FirebaseAuth.getInstance();
+                firebaseAuth.signOut();
+                finish();
+                return false;
+            }
+        });
         profileImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

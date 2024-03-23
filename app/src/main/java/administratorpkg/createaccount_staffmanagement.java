@@ -169,7 +169,7 @@ EditText fullname,email,mobileno,address,atuogenrated_password;
                             userInfo.put("mobile no",mobileno.getText().toString());
                             userInfo.put("address",address.getText().toString());
                             userInfo.put("DOB",selectedDate);
-                            userInfo.put("isTeacher",1);
+                            userInfo.put("isTeacher",true);
                             df.set(userInfo).addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void unused) {

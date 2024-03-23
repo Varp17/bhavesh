@@ -24,6 +24,7 @@ import androidx.viewpager.widget.ViewPager;
 import com.example.loginform.R;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.tabs.TabLayout;
+import com.google.firebase.auth.FirebaseAuth;
 
 public abstract class varchi_line extends AppCompatActivity  {
 
@@ -36,7 +37,7 @@ public abstract class varchi_line extends AppCompatActivity  {
 
     Menu menu;
     MenuItem menu_home;
-    MenuItem menu_classroom,menu_documents,menu_attendence,menu_notification,menu_managestudent,menu_feedback;
+    MenuItem menu_classroom,menu_documents,menu_attendence,menu_notification,menu_managestudent,menu_feedback,menu_logout;
 
     abstract int getLayoutresId() ;
     abstract String getactionbarTiile_in_varchi_line();
@@ -73,7 +74,19 @@ public abstract class varchi_line extends AppCompatActivity  {
         menu_notification=menu.findItem(R.id.nav_notification);
         menu_attendence=menu.findItem(R.id.nav_attendance);
         menu_feedback = menu.findItem(R.id.nav_feedback);
+        menu_logout=menu.findItem(R.id.nav_logout);
 
+
+
+        menu_logout.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(@NonNull MenuItem item) {
+                FirebaseAuth firebaseAuth=FirebaseAuth.getInstance();
+                firebaseAuth.signOut();
+                finish();
+                return false;
+            }
+        });
         menu_feedback.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(@NonNull MenuItem item) {

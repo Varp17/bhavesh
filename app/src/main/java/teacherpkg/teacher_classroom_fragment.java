@@ -150,7 +150,6 @@ public class teacher_classroom_fragment extends Fragment {
                 myDialog.setCanceledOnTouchOutside(false);
 
                 Spinner spinnerTeacher = myDialog.findViewById(R.id.spinnerTeacher);
-                Spinner spinnerSubject = myDialog.findViewById(R.id.spinnerSubject);
                 Spinner spinnerYear = myDialog.findViewById(R.id.spinnerYear);
 
                 if(myDialog!=null){
@@ -165,7 +164,6 @@ public class teacher_classroom_fragment extends Fragment {
 
                     ArrayAdapter<String> subjectAdapter = new ArrayAdapter<>(requireContext(), android.R.layout.simple_spinner_item, subjectList);
                     subjectAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                    spinnerSubject.setAdapter(subjectAdapter);
 
                     ArrayAdapter<String> yearAdapter = new ArrayAdapter<>(requireContext(), android.R.layout.simple_spinner_item, yearList);
                     yearAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -186,18 +184,7 @@ public class teacher_classroom_fragment extends Fragment {
                     });
 
 // Listener for Subject Names spinner
-                    spinnerSubject.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                        @Override
-                        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                            String selectedSubject = (String) parent.getItemAtPosition(position);
-                            // Handle the selected subject as needed
-                        }
 
-                        @Override
-                        public void onNothingSelected(AdapterView<?> parent) {
-                            // Do nothing here if needed
-                        }
-                    });
 
 // Listener for Years spinner
                     spinnerYear.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {

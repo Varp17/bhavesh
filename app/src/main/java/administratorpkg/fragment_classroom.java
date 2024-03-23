@@ -1,5 +1,7 @@
 package administratorpkg;
 
+import static android.content.ContentValues.TAG;
+
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
@@ -18,18 +20,35 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.loginform.R;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.security.auth.Subject;
 
@@ -53,6 +72,8 @@ public class fragment_classroom extends Fragment {
     private String[] subjectname;
     private String[] teachername;
     private RecyclerView recyclerview;
+    private FirebaseAuth mAuth;
+    private FirebaseFirestore fstore;
     Dialog myDialog ;
 
 
@@ -102,12 +123,18 @@ public class fragment_classroom extends Fragment {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_classroom, container, false);
         dataInitialize();
+        mAuth = FirebaseAuth.getInstance();
+        fstore=FirebaseFirestore.getInstance();
 
 
         return rootView;
     }
 
-
+    String selectedTeacher;
+    String selectedYear;
+    Button submitbtn;
+    String id;
+    EditText classname;
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         dataInitialize();
@@ -146,36 +173,105 @@ public class fragment_classroom extends Fragment {
                 myDialog = new Dialog(requireContext());
                 myDialog.setContentView(R.layout.add_subject_floating_panel);
                 closebtn = myDialog.findViewById(R.id.closeaddsubjectpanel);
+                submitbtn=myDialog.findViewById(R.id.submit_subject_info_btn);
+
 
                 myDialog.setCanceledOnTouchOutside(false);
 
                 Spinner spinnerTeacher = myDialog.findViewById(R.id.spinnerTeacher);
-                Spinner spinnerSubject = myDialog.findViewById(R.id.spinnerSubject);
                 Spinner spinnerYear = myDialog.findViewById(R.id.spinnerYear);
+                CollectionReference collectionRef = fstore.collection("subjects");
+                ArrayList<String> yearList = new ArrayList<>();
+
+                // Fetching all documents from the collection
+                collectionRef.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            // Iterate through the documents
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                // Access the data of each document
+                                String documentId = document.getId();
+                                yearList.add(documentId);
+                                Log.d("doc", "onComplete: " + documentId);
+                            }
+                            // Set up spinner adapter inside onComplete
+                            ArrayAdapter<String> yearAdapter = new ArrayAdapter<>(requireContext(), android.R.layout.simple_spinner_item, yearList);
+                            yearAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                            spinnerYear.setAdapter(yearAdapter);
+                        } else {
+                            // Handle errors
+                            Log.e("Firestore", "Error getting documents: ", task.getException());
+                            Toast.makeText(getContext(), "Failed to retrieve data", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+                CollectionReference teachercollectionRef = fstore.collection("user");
+                ArrayList<String> teacherList  = new ArrayList<>();
+
+                // Fetching all documents from the collection
+                teachercollectionRef.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            // Iterate through the documents
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                // Access the data of each document
+                                String documentId = document.getId();
+                                DocumentReference df=fstore.collection("user").document(documentId);
+                                df.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                                    @Override
+                                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                                        if (documentSnapshot.exists()) {
+                                            // Access the 'name' field and do something with it
+                                            String userName = documentSnapshot.getString("fullname");
+                                            teacherList.add(userName);
+                                            ArrayAdapter<String> teacherAdapter = new ArrayAdapter<>(requireContext(), android.R.layout.simple_spinner_item, teacherList);
+                                            teacherAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                                            spinnerTeacher.setAdapter(teacherAdapter);
+
+                                        } else {
+                                            Log.d("Firestore", "No such document");
+                                        }
+                                    }
+                                }).addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        Log.e("Firestore", "Error getting user document", e);
+                                    }
+                                });
+
+
+                                Log.d("doc", "onComplete: " + documentId);
+                            }
+                            // Set up spinner adapter inside onComplete
+
+                        } else {
+                            // Handle errors
+                            Log.e("Firestore", "Error getting documents: ", task.getException());
+                            Toast.makeText(getContext(), "Failed to retrieve data", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
 
                 if(myDialog!=null){
 
-                    List<String> subjectList = Arrays.asList("MAD", "PHP", "Python", "ETI");
-                    List<String> teacherList = Arrays.asList("Prerana Mam", "Vaishnavi Mam", "Trupti Mam", "Shirin Mam");
-                    List<String> yearList = Arrays.asList("FY","SY","TY");
 
-                    ArrayAdapter<String> teacherAdapter = new ArrayAdapter<>(requireContext(), android.R.layout.simple_spinner_item, teacherList);
-                    teacherAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                    spinnerTeacher.setAdapter(teacherAdapter);
 
-                    ArrayAdapter<String> subjectAdapter = new ArrayAdapter<>(requireContext(), android.R.layout.simple_spinner_item, subjectList);
-                    subjectAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                    spinnerSubject.setAdapter(subjectAdapter);
 
-                    ArrayAdapter<String> yearAdapter = new ArrayAdapter<>(requireContext(), android.R.layout.simple_spinner_item, yearList);
-                    yearAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                    spinnerYear.setAdapter(yearAdapter);
+
+
+
+
+
+
+
 
                     // Listener for Teacher Names spinner
                     spinnerTeacher.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                         @Override
                         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                            String selectedTeacher = (String) parent.getItemAtPosition(position);
+                            selectedTeacher = (String) parent.getItemAtPosition(position);
                             // Handle the selected teacher as needed
                         }
 
@@ -186,24 +282,14 @@ public class fragment_classroom extends Fragment {
                     });
 
 // Listener for Subject Names spinner
-                    spinnerSubject.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                        @Override
-                        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                            String selectedSubject = (String) parent.getItemAtPosition(position);
-                            // Handle the selected subject as needed
-                        }
 
-                        @Override
-                        public void onNothingSelected(AdapterView<?> parent) {
-                            // Do nothing here if needed
-                        }
-                    });
+
 
 // Listener for Years spinner
                     spinnerYear.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                         @Override
                         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                            String selectedYear = (String) parent.getItemAtPosition(position);
+                            selectedYear = (String) parent.getItemAtPosition(position);
                             // Handle the selected year as needed
                         }
 
@@ -213,6 +299,68 @@ public class fragment_classroom extends Fragment {
                         }
                     });
                 }
+
+
+                submitbtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+
+
+                        CollectionReference userCollection = fstore.collection("user");
+
+// Query for documents where fullname equals "swapnil"
+                        Query query = userCollection.whereEqualTo("fullname", selectedTeacher);
+
+// Execute the query
+                        query.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                            @Override
+                            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                                for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
+                                    // Access the document data
+                                    String fullname = documentSnapshot.getString("fullname");
+                                    id=documentSnapshot.getId();
+                                }
+                                // Create a HashMap to hold your data
+                                Map<String, Object> teacherInfo = new HashMap<>();
+                                teacherInfo.put("classteacher_name", selectedTeacher);
+                                teacherInfo.put("classteacher_id", id);
+                                // Add more key-value pairs as needed
+
+                                // Get the Firestore reference
+                                DocumentReference dfr = fstore.collection("classteacher_" + selectedTeacher).document("classTeacherInfo");
+
+                                // Set the data to the document
+                                dfr.set(teacherInfo)
+                                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                            @Override
+                                            public void onSuccess(Void aVoid) {
+                                                // Document successfully written
+                                                Log.d("er", "DocumentSnapshot successfully written!");
+                                                // You can put any success logic here
+                                            }
+                                        })
+                                        .addOnFailureListener(new OnFailureListener() {
+                                            @Override
+                                            public void onFailure(@NonNull Exception e) {
+                                                // Handle any errors
+                                                Log.w("er", "Error writing document", e);
+                                                // You can put any failure logic here
+                                            }
+                                        });
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                // Handle any errors
+                                Log.e(TAG, "Error getting documents: ", e);
+                            }
+                        });
+
+                    }
+                });
+
+
 
                 closebtn.setOnClickListener(new View.OnClickListener() {
                     @Override

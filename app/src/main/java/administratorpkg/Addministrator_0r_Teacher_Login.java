@@ -124,4 +124,22 @@ public class Addministrator_0r_Teacher_Login extends AppCompatActivity {
     interface UserTypeCallback {
         void onUserTypeReceived(String userType);
     }
+
+   
+//    protected void onStart() {
+//        super.onStart();
+//        DocumentReference df = fstore.collection("user").document(mAuth.getCurrentUser().getUid());
+//        df.get().addOnSuccessListener(documentSnapshot -> {
+//            String userType = "Unknown";
+//            if (documentSnapshot.exists()) {
+//                if (documentSnapshot.getBoolean("isTeacher") != null && documentSnapshot.getBoolean("isTeacher") == true) {
+//                    Intent intent = new Intent(getApplicationContext(), teacher_panel.class);
+//                } else if (documentSnapshot.getBoolean("isAdmin") != null && documentSnapshot.getBoolean("isAdmin") == true) {
+//                    userType = "Admin";
+//                }
+//            } else {
+//                Log.d(TAG, "Document does not exist");
+//            }
+//        });
+//    }
 }
