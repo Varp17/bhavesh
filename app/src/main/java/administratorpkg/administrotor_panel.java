@@ -20,6 +20,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.loginform.R;
+import com.example.loginform.student_login;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
@@ -42,6 +43,7 @@ public class administrotor_panel extends AppCompatActivity implements Navigation
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_administrotor_panel);
+
 //        notification=findViewById(R.id.notificationbtn);
         drawerLayout=findViewById(R.id.Drawer_lay);
         navigationView=findViewById(R.id.nav_view);
@@ -70,7 +72,7 @@ public class administrotor_panel extends AppCompatActivity implements Navigation
                 if(toolbar.getTitle()!="NOTIFICATIONS") {
                     Intent intent1 = new Intent(getApplicationContext(), all_college_notiFication_from_Administrator.class);
                     startActivity(intent1);
-                    finish();
+
                 }
                 return false;
             }
@@ -81,6 +83,7 @@ public class administrotor_panel extends AppCompatActivity implements Navigation
             public boolean onMenuItemClick(@NonNull MenuItem item) {
                 FirebaseAuth firebaseAuth=FirebaseAuth.getInstance();
                 firebaseAuth.signOut();
+                startActivity(new Intent(getApplicationContext(), student_login.class));
                 finish();
                 return false;
             }

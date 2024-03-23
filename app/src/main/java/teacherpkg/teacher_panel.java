@@ -169,6 +169,7 @@ public class teacher_panel extends AppCompatActivity implements NavigationView.O
 
         }else {
             doubleBackToExitPressedOnce = true;
+            finish();
             Toast.makeText(this, "Please click BACK again to exit", Toast.LENGTH_SHORT).show();
 
             new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
