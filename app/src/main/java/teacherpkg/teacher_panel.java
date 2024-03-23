@@ -3,12 +3,15 @@ package teacherpkg;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
@@ -30,6 +33,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import administratorpkg.FragmentAdapter;
 import administratorpkg.administrotor_panel;
 import administratorpkg.administrtor_profile;
+import administratorpkg.all_college_notiFication_from_Administrator;
 import administratorpkg.feedback_activity_administrator;
 
 public class teacher_panel extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -43,7 +47,7 @@ public class teacher_panel extends AppCompatActivity implements NavigationView.O
     TabLayout tabLayout;
     teacher_fragmentd_adapter myFragmentAdapter;
     Menu menu;
-    MenuItem menu_home,menu_classroom,menu_feedback,menu_logout;
+    MenuItem menu_home,menu_classroom,menu_feedback,menu_notification,menu_logout;
     ImageView profileimg;
 
 
@@ -67,7 +71,21 @@ public class teacher_panel extends AppCompatActivity implements NavigationView.O
         menu=navigationView.getMenu();
         menu_home=menu.findItem(R.id.nav_home);
         menu_classroom=menu.findItem(R.id.nav_classroom);
+        menu_notification=menu.findItem(R.id.nav_notification);
         menu_logout=menu.findItem(R.id.nav_logout);
+
+
+        menu_notification.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(@NonNull MenuItem item) {
+                if(toolbar.getTitle()!="NOTIFICATIONS") {
+                    Intent intent1 = new Intent(getApplicationContext(), all_college_notiFication_from_Administrator.class);
+                    startActivity(intent1);
+                    finish();
+                }
+                return false;
+            }
+        });
 
         menu_logout.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
@@ -136,9 +154,13 @@ public class teacher_panel extends AppCompatActivity implements NavigationView.O
         return true;
 
     }
-
+    boolean doubleBackToExitPressedOnce=false;
     @Override
     public void onBackPressed() {
+        if (doubleBackToExitPressedOnce) {
+            super.onBackPressed();
+
+        }
         if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
             drawerLayout.closeDrawer(GravityCompat.START);
         }else if(vpager.getCurrentItem()==1){
@@ -146,7 +168,16 @@ public class teacher_panel extends AppCompatActivity implements NavigationView.O
             vpager.setCurrentItem(0);
 
         }else {
-            super.onBackPressed();
+            doubleBackToExitPressedOnce = true;
+            Toast.makeText(this, "Please click BACK again to exit", Toast.LENGTH_SHORT).show();
+
+            new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
+
+                @Override
+                public void run() {
+                    doubleBackToExitPressedOnce=false;
+                }
+            }, 2000);
         }
     }
 
@@ -155,5 +186,19 @@ public class teacher_panel extends AppCompatActivity implements NavigationView.O
         return true;
     }
 
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
 
+        // Handle your menu items here
+        if (id == R.id.nav_notification && toolbar.getTitle()!= "NOTIFICATIONS") {
+
+            Intent intent=new Intent(getApplicationContext(), all_college_notiFication_from_Administrator.class);
+            startActivity(intent);
+            finish();
+            return true;
+        }
+
+
+        return super.onOptionsItemSelected(item);
+    }
 }
