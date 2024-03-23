@@ -2,7 +2,7 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
     <color name="black">#FF000000</color>
     <color name="apna_color">#05C5E3</color>
-    <color name="teacher_color">#EC5221</color>
+    <color name="teacher_color">#EF5728</color>
     <color name="student_color">#F8E516</color>
     <color name="white">#FFFFFFFF</color>
     <color name="textcolor" android:state_focused="true">#FF4081</color>

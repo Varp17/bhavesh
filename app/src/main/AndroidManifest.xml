@@ -28,6 +28,9 @@
             android:name="studentpakage.student_classroom_adapter"
             android:exported="false" />
         <activity
+            android:name="teacherpkg.Take_Attendance_Activity"
+            android:exported="false" />
+        <activity
             android:name="teacherpkg.teacher_fragment_notification_classroom"
             android:exported="false" />
         <activity
