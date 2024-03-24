@@ -13,7 +13,9 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -75,6 +77,7 @@ public class fragment_classroom extends Fragment {
     private FirebaseAuth mAuth;
     private FirebaseFirestore fstore;
     private ArrayList<String> teacher;
+    private SwipeRefreshLayout swipeRefreshLayout;
     Dialog myDialog ;
 
 
@@ -132,7 +135,7 @@ public class fragment_classroom extends Fragment {
 
         return rootView;
     }
-
+    String documentId;
     String selectedTeacher;
     String selectedYear;
     Button submitbtn;
@@ -140,21 +143,36 @@ public class fragment_classroom extends Fragment {
     EditText classname;
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        dataInitialize();
+
 
 
 
         recyclerview = view.findViewById(R.id.classroomrecyclerview1);
         recyclerview.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerview.setHasFixedSize(true);
+        swipeRefreshLayout = view.findViewById(R.id.swipe_refresh_layout);
 
-        recyclerviewonclick recyclerviewonclick=new recyclerviewonclick() {
+        // Set an OnRefreshListener to handle the refresh action
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
-            public void onItemClick(int position) {
+            public void onRefresh() {
+                // Perform the actions you want to do when the user triggers a refresh
+                // For example, reload data from the server
+                dataInitialize();
 
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        // Stop the refreshing indicator
+                        swipeRefreshLayout.setRefreshing(false);
+
+                        // Hide the ProgressBar when refresh is complete
+
+                    }
+                }, 2000);
             }
+        });
 
-        };
 
 
 //        ClassrromViewAdapter classrromViewAdapter = new ClassrromViewAdapter(getContext(),subjectsArrayList, recyclerviewonclick);
@@ -297,63 +315,59 @@ public class fragment_classroom extends Fragment {
 
 
                 submitbtn.setOnClickListener(new View.OnClickListener() {
+
                     @Override
                     public void onClick(View v) {
 
+                        fstore.collection("user")
+                                .whereEqualTo("fullname", selectedTeacher)
+                                .get()
+                                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                                    @Override
+                                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                                        if (!queryDocumentSnapshots.isEmpty()) {
+                                            for (DocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
+                                                // Handle the document here
+                                                documentId = documentSnapshot.getId();
+                                                // Access other fields if needed
 
+                                                // Log or use the retrieved data
 
-                        CollectionReference userCollection = fstore.collection("user");
-
-// Query for documents where fullname equals "swapnil"
-                        Query query = userCollection.whereEqualTo("fullname", selectedTeacher);
-
-// Execute the query
-                        query.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-                            @Override
-                            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                                for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
-                                    // Access the document data
-                                    String fullname = documentSnapshot.getString("fullname");
-                                    id=documentSnapshot.getId();
-                                }
-                                // Create a HashMap to hold your data
-                                Map<String, Object> teacherInfo = new HashMap<>();
-                                teacherInfo.put("classteacher_id", id);
-                                teacherInfo.put("classteacher_name", selectedTeacher);
-                                teacherInfo.put("class year", selectedYear);
-
-
-                                // Add more key-value pairs as needed
-
-                                // Get the Firestore reference
-                                DocumentReference dfr = fstore.collection("classteacher_" + selectedTeacher).document("classTeacherInfo");
-
-                                // Set the data to the document
-                                dfr.set(teacherInfo)
-                                        .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                            @Override
-                                            public void onSuccess(Void aVoid) {
-                                                // Document successfully written
-                                                Toast.makeText(getContext(), "Class Teacher Assigned and Classroom Created", Toast.LENGTH_SHORT).show();
-                                                // You can put any success logic here
                                             }
-                                        })
-                                        .addOnFailureListener(new OnFailureListener() {
-                                            @Override
-                                            public void onFailure(@NonNull Exception e) {
-                                                // Handle any errors
-                                                Toast.makeText(getContext(), "Classroom creation failed", Toast.LENGTH_SHORT).show();
-                                                // You can put any failure logic here
-                                            }
-                                        });
-                            }
-                        }).addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                // Handle any errors
-                                Log.e(TAG, "Error getting documents: ", e);
-                            }
-                        });
+                                            DocumentReference teachersCollectionRef = fstore.collection("classteachers").document(documentId);
+
+                                            // Create a new teacher document with fields
+                                            Map<String, Object> teacherData = new HashMap<>();
+                                            teacherData.put("fullname", selectedTeacher);
+                                            teacherData.put("class year", selectedYear);
+
+
+                                            // Add the document to the collection
+                                            teachersCollectionRef.set(teacherData).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                @Override
+                                                public void onComplete(@NonNull Task<Void> task) {
+                                                    Toast.makeText(getContext(), "classroom added", Toast.LENGTH_SHORT).show();
+                                                }
+                                            }).addOnFailureListener(new OnFailureListener() {
+                                                @Override
+                                                public void onFailure(@NonNull Exception e) {
+
+                                                }
+                                            });
+
+
+                                        } else {
+                                            // No document found with the given name
+                                            Log.d(TAG, "No document found with name: " + selectedTeacher);
+                                        }
+                                    }
+                                })
+                                .addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        Log.w(TAG, "Error getting documents", e);
+                                    }
+                                });
 
                     }
                 });
@@ -381,18 +395,20 @@ public class fragment_classroom extends Fragment {
         subjectsArrayList = new ArrayList<>();
 
         // Get user names
-        CollectionReference userCollectionRef = fstore.collection("user");
+        CollectionReference userCollectionRef = fstore.collection("classteachers");
         userCollectionRef.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()) {
                     for (QueryDocumentSnapshot document : task.getResult()) {
                         String userName = document.getString("fullname");
-                        teacher.add(userName);
+
+                        teachername.add(userName);
+                        subjectname.add("classTeacher");
                     }
 
                     // After fetching user names, proceed to fetch class teacher names
-                    fetchClassTeacherNames();
+                    initializeAdapter();
                 } else {
                     Log.e("Firestore", "Error getting documents: ", task.getException());
                     Toast.makeText(getContext(), "Failed to retrieve data", Toast.LENGTH_SHORT).show();
@@ -401,55 +417,31 @@ public class fragment_classroom extends Fragment {
         });
     }
 
-    private void fetchClassTeacherNames() {
 
-        // Iterate through teacher names
 
-        for (String teacherName : teacher) {
 
-            DocumentReference crf = fstore.collection("classteacher_" + teacherName).document("classTeacherInfo");
-            crf.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                @Override
-                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                    if (task.isSuccessful()) {
-                        DocumentSnapshot document = task.getResult();
-                        if (document.exists()) {
-                            String classTeacherName = document.getString("classteacher_name");
 
-                            teachername.add(classTeacherName);
-
-                            subjectname.add("ClassTeacher");
-                                initializeAdapter();
-                            // Check if all teacher names have been processed
-
-                        } else {
-                            Log.d(TAG, "No classTeacherInfo document found for " + teacherName);
-
-                        }
-                    } else {
-                        Log.e(TAG, "Error getting classTeacherInfo document for " + teacherName, task.getException());
-                        Toast.makeText(getContext(), teacherName+"failed", Toast.LENGTH_SHORT).show();
-                    }
-                }
-            });
-        }
-    }
 
     private void initializeAdapter() {
         // Iterate through subject names and teacher names to create Subjects objects
+
         for (int j = 0; j < teachername.size(); j++) {
             Subjects subjects = new Subjects(subjectname.get(j), teachername.get(j));
+
             subjectsArrayList.add(subjects);
         }
 
         // Create and set adapter to RecyclerView
         ClassrromViewAdapter classrromViewAdapter = new ClassrromViewAdapter(getContext(), subjectsArrayList, new recyclerviewonclick() {
+
             @Override
             public void onItemClick(int position) {
                 // Handle item click if needed
             }
         });
+        classrromViewAdapter.notifyDataSetChanged();
         recyclerview.setAdapter(classrromViewAdapter);
+        classrromViewAdapter.notifyDataSetChanged();
     }
 
 }
