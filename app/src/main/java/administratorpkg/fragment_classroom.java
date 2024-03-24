@@ -404,7 +404,7 @@ public class fragment_classroom extends Fragment {
                         String userName = document.getString("fullname");
 
                         teachername.add(userName);
-                        subjectname.add("classTeacher");
+                        subjectname.add("Class Teacher");
                     }
 
                     // After fetching user names, proceed to fetch class teacher names
