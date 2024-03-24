@@ -69,11 +69,12 @@ public class fragment_classroom extends Fragment {
     private String mParam1;
     private String mParam2;
     private ArrayList<Subjects>subjectsArrayList;
-    private String[] subjectname;
-    private String[] teachername;
+    private ArrayList<String> subjectname;
+    private ArrayList<String> teachername;
     private RecyclerView recyclerview;
     private FirebaseAuth mAuth;
     private FirebaseFirestore fstore;
+    private ArrayList<String> teacher;
     Dialog myDialog ;
 
 
@@ -122,9 +123,11 @@ public class fragment_classroom extends Fragment {
 
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_classroom, container, false);
-        dataInitialize();
         mAuth = FirebaseAuth.getInstance();
         fstore=FirebaseFirestore.getInstance();
+        teacher = new ArrayList<>();
+        dataInitialize();
+
 
 
         return rootView;
@@ -148,22 +151,15 @@ public class fragment_classroom extends Fragment {
         recyclerviewonclick recyclerviewonclick=new recyclerviewonclick() {
             @Override
             public void onItemClick(int position) {
-                Intent intent=new Intent(getContext(), classroomClicked_activity.class);
 
-
-                    intent.putExtra("name",subjectname[position]);
-
-
-
-
-                startActivity(intent);
             }
 
         };
 
-        ClassrromViewAdapter classrromViewAdapter = new ClassrromViewAdapter(getContext(),subjectsArrayList, recyclerviewonclick);
-        recyclerview.setAdapter(classrromViewAdapter);
-        classrromViewAdapter.notifyDataSetChanged();
+
+//        ClassrromViewAdapter classrromViewAdapter = new ClassrromViewAdapter(getContext(),subjectsArrayList, recyclerviewonclick);
+//        recyclerview.setAdapter(classrromViewAdapter);
+
 
         openbtn = view.findViewById(R.id.addsubjectbtn);
         openbtn.setOnClickListener(new View.OnClickListener() {
@@ -255,7 +251,6 @@ public class fragment_classroom extends Fragment {
                 });
 
                 if(myDialog!=null){
-
 
 
 
@@ -378,28 +373,83 @@ public class fragment_classroom extends Fragment {
 
 
     }
-    private void dataInitialize(){
-        subjectsArrayList = new ArrayList<>();
-        subjectname = new String[]{
-                "CLASS TEACHER'S",
-                getString(R.string.sub1),
-                getString(R.string.sub2),
-                getString(R.string.sub3),
-                getString(R.string.sub4),
 
-        };
-        teachername = new String[]{
-                "Swapnil Sir",
-                getString(R.string.tech1),
-                getString(R.string.tech2),
-                getString(R.string.tech3),
-                getString(R.string.tech4)
-        };
-        for(int i=0;i<subjectname.length;i++){
-            Subjects subjects = new Subjects((subjectname[i]),teachername[i]);
+
+    private void dataInitialize() {
+        teachername = new ArrayList<>();
+        subjectname = new ArrayList<>();
+        subjectsArrayList = new ArrayList<>();
+
+        // Get user names
+        CollectionReference userCollectionRef = fstore.collection("user");
+        userCollectionRef.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        String userName = document.getString("fullname");
+                        teacher.add(userName);
+                    }
+
+                    // After fetching user names, proceed to fetch class teacher names
+                    fetchClassTeacherNames();
+                } else {
+                    Log.e("Firestore", "Error getting documents: ", task.getException());
+                    Toast.makeText(getContext(), "Failed to retrieve data", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+    }
+
+    private void fetchClassTeacherNames() {
+
+        // Iterate through teacher names
+
+        for (String teacherName : teacher) {
+
+            DocumentReference crf = fstore.collection("classteacher_" + teacherName).document("classTeacherInfo");
+            crf.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                    if (task.isSuccessful()) {
+                        DocumentSnapshot document = task.getResult();
+                        if (document.exists()) {
+                            String classTeacherName = document.getString("classteacher_name");
+
+                            teachername.add(classTeacherName);
+
+                            subjectname.add("ClassTeacher");
+                                initializeAdapter();
+                            // Check if all teacher names have been processed
+
+                        } else {
+                            Log.d(TAG, "No classTeacherInfo document found for " + teacherName);
+
+                        }
+                    } else {
+                        Log.e(TAG, "Error getting classTeacherInfo document for " + teacherName, task.getException());
+                        Toast.makeText(getContext(), teacherName+"failed", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+        }
+    }
+
+    private void initializeAdapter() {
+        // Iterate through subject names and teacher names to create Subjects objects
+        for (int j = 0; j < teachername.size(); j++) {
+            Subjects subjects = new Subjects(subjectname.get(j), teachername.get(j));
             subjectsArrayList.add(subjects);
         }
 
+        // Create and set adapter to RecyclerView
+        ClassrromViewAdapter classrromViewAdapter = new ClassrromViewAdapter(getContext(), subjectsArrayList, new recyclerviewonclick() {
+            @Override
+            public void onItemClick(int position) {
+                // Handle item click if needed
+            }
+        });
+        recyclerview.setAdapter(classrromViewAdapter);
     }
 
 }
