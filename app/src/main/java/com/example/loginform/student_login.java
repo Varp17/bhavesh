@@ -44,6 +44,7 @@ public class student_login extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
         mAuth = FirebaseAuth.getInstance();
         fstore = FirebaseFirestore.getInstance();
 
@@ -119,10 +120,13 @@ public class student_login extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        if (currentUser != null) {
-            // User is already logged in, redirect to the appropriate home page
-            navigateToHomePage(currentUser);
+
+        if(!getIntent().getBooleanExtra("userdeleted",true)) {
+            FirebaseUser currentUser = mAuth.getCurrentUser();
+            if (currentUser != null) {
+                // User is already logged in, redirect to the appropriate home page
+                navigateToHomePage(currentUser);
+            }
         }
     }
 
@@ -139,7 +143,9 @@ public class student_login extends AppCompatActivity {
                 finish();
             } else {
                 Toast.makeText(getApplicationContext(), "User not registered", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(getApplicationContext(), student_login.class));
+                Intent intent=new Intent(getApplicationContext(), student_login.class);
+                intent.putExtra("userdeleted",true);
+                startActivity(intent);
             }
             finish();
         });

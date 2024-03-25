@@ -214,7 +214,7 @@ public class administrotor_panel extends AppCompatActivity implements Navigation
 
             Intent intent=new Intent(getApplicationContext(), all_college_notiFication_from_Administrator.class);
             startActivity(intent);
-            finish();
+
             return true;
         }
 
