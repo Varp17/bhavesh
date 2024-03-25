@@ -345,6 +345,7 @@ public class fragment_classroom extends Fragment {
                                                 @Override
                                                 public void onComplete(@NonNull Task<Void> task) {
                                                     Toast.makeText(getContext(), "classroom added", Toast.LENGTH_SHORT).show();
+                                                    dataInitialize();
                                                 }
                                             }).addOnFailureListener(new OnFailureListener() {
                                                 @Override
@@ -392,6 +393,7 @@ public class fragment_classroom extends Fragment {
         subjectname = new ArrayList<>();
         subjectsArrayList = new ArrayList<>();
 
+
         // Get user names
         CollectionReference userCollectionRef = fstore.collection("classteachers");
         userCollectionRef.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -400,9 +402,11 @@ public class fragment_classroom extends Fragment {
                 if (task.isSuccessful()) {
                     for (QueryDocumentSnapshot document : task.getResult()) {
                         String userName = document.getString("fullname");
+                        String year=document.getString("class year");
 
                         teachername.add(userName);
-                        subjectname.add("Class Teacher");
+                        subjectname.add("Class Teacher: "+year);
+
                     }
 
                     // After fetching user names, proceed to fetch class teacher names

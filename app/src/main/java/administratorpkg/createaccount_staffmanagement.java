@@ -15,6 +15,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,19 +26,25 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.example.loginform.R;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.Firebase;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 import java.util.Objects;
+
+import kotlinx.coroutines.channels.ChannelResult;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -173,14 +180,15 @@ EditText fullname,email,mobileno,address,atuogenrated_password;
                             df.set(userInfo).addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void unused) {
-                                    Toast.makeText(getContext(), "account created succsfully", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getContext(), "classroom created", Toast.LENGTH_SHORT).show();
+
                                 }
                             });
                         }
                     }).addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(getContext(), "failded to create account check crediantial", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getContext(), "failed to create account check credential", Toast.LENGTH_SHORT).show();
                         }
                     });
 
