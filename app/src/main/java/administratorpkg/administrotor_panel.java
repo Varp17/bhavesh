@@ -153,7 +153,8 @@ public class administrotor_panel extends AppCompatActivity implements Navigation
         return true;
 
     }
-    boolean doubleBackToExitPressedOnce = false;
+
+    boolean doubleBackToExitPressedOnce=false;
     @Override
     public void onBackPressed() {
         if (doubleBackToExitPressedOnce) {
@@ -166,10 +167,9 @@ public class administrotor_panel extends AppCompatActivity implements Navigation
             tabLayout.setScrollPosition(0,0f,true);
             vpager.setCurrentItem(0);
 
-
         }else {
-
             doubleBackToExitPressedOnce = true;
+            finish();
             Toast.makeText(this, "Please click BACK again to exit", Toast.LENGTH_SHORT).show();
 
             new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
@@ -179,7 +179,6 @@ public class administrotor_panel extends AppCompatActivity implements Navigation
                     doubleBackToExitPressedOnce=false;
                 }
             }, 2000);
-
         }
     }
 

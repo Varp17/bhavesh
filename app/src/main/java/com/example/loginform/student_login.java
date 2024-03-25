@@ -37,7 +37,7 @@ public class student_login extends AppCompatActivity {
     private FirebaseFirestore fstore;
     private ProgressBar progressBar;
     private FrameLayout overlay;
-    private ImageView logo;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +59,7 @@ public class student_login extends AppCompatActivity {
 
         overlay = findViewById(R.id.overlay);
         progressBar = findViewById(R.id.progressBar);
-        logo = findViewById(R.id.logo_spinner_main);
+
 
         // Hide UI elements initially
         login.setVisibility(View.GONE);
@@ -84,13 +84,11 @@ public class student_login extends AppCompatActivity {
                 login.setVisibility(View.GONE);
                 overlay.setVisibility(View.VISIBLE);
                 progressBar.setVisibility(View.VISIBLE);
-                logo.setVisibility(View.VISIBLE);
                 Intent intent = new Intent(student_login.this, student_panel.class);
                 startActivity(intent);
                 finish();
                 progressBar.setVisibility(View.GONE);
                 overlay.setVisibility(View.GONE);
-                logo.setVisibility(View.GONE);
             }
 
         });
@@ -141,6 +139,7 @@ public class student_login extends AppCompatActivity {
                 finish();
             } else {
                 Toast.makeText(getApplicationContext(), "User not registered", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(getApplicationContext(), student_login.class));
             }
             finish();
         });

@@ -81,8 +81,6 @@ public class fragment_classroom extends Fragment {
     Dialog myDialog ;
 
 
-
-
     FloatingActionButton openbtn;
 
     public fragment_classroom() {

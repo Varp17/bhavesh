@@ -8,7 +8,7 @@
     tools:context="studentpakage.student_home_fragment">
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/teacher_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
@@ -35,7 +35,7 @@
             app:iss_text_align="CENTER"
             app:layout_constraintBottom_toTopOf="@+id/teachernamemsg"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView" >
+            app:layout_constraintTop_toBottomOf="@+id/teacher_name" >
 
             <ImageView
                 android:id="@+id/imageView5"

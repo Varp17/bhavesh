@@ -37,7 +37,6 @@ public class Addministrator_0r_Teacher_Login extends AppCompatActivity {
     private FirebaseFirestore fstore;
     private ProgressBar progressBar;
     private FrameLayout overlay;
-    private ImageView logo;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,7 +52,6 @@ public class Addministrator_0r_Teacher_Login extends AppCompatActivity {
 
         overlay = findViewById(R.id.overlay_teacher);
         progressBar = findViewById(R.id.progressBar_teacher);
-        logo = findViewById(R.id.logo_spinner);
 
         forgotPasswordLink.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -86,12 +84,11 @@ public class Addministrator_0r_Teacher_Login extends AppCompatActivity {
         }
         overlay.setVisibility(View.VISIBLE);
         progressBar.setVisibility(View.VISIBLE);
-        logo.setVisibility(View.VISIBLE);
+
         login.setVisibility(View.GONE);
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(task -> {
                     progressBar.setVisibility(View.GONE);
-                    logo.setVisibility(View.GONE);
                     if (task.isSuccessful()) {
                         FirebaseUser user = mAuth.getCurrentUser();
                         if (user != null) {
