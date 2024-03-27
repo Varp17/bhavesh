@@ -16,7 +16,7 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         app:headerLayout="@layout/teacher_header"
-        app:menu="@menu/menubaradmin"
+        app:menu="@menu/menubarteacher"
         tools:ignore="DuplicateIds">
 
     </com.google.android.material.navigation.NavigationView>

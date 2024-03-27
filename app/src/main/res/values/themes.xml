@@ -35,14 +35,14 @@
     </style>
     <style name="INAPPTEXT" parent="Base.Theme.LOginForm">
         <item name="android:textColor">#FFFFFF</item>
-        <item name="android:textColorHint">#651FFF</item>
+        <item name="android:textColorHint">#AD92EA</item>
         <item name="android:background">@drawable/inapptextnight</item>
     </style>
 
-<!--    <style name="logo" parent="Theme.AppCompat.Light.DarkActionBar">-->
-<!--        <item name="android:windowBackground">@drawable/teacher</item>-->
-<!--        <item name="nightModeIcon">@drawable/teacher</item>-->
-<!--    </style>-->
+    <!--    <style name="logo" parent="Theme.AppCompat.Light.DarkActionBar">-->
+    <!--        <item name="android:windowBackground">@drawable/teacher</item>-->
+    <!--        <item name="nightModeIcon">@drawable/teacher</item>-->
+    <!--    </style>-->
 
 
 

@@ -71,7 +71,7 @@ public class teacher_panel extends AppCompatActivity implements NavigationView.O
             @Override
             public boolean onMenuItemClick(@NonNull MenuItem item) {
                 if(toolbar.getTitle()!="NOTIFICATIONS") {
-                    Intent intent1 = new Intent(getApplicationContext(), all_college_notiFication_from_Administrator.class);
+                    Intent intent1 = new Intent(getApplicationContext(), notification_teacher.class);
                     startActivity(intent1);
                     finish();
                 }
@@ -104,7 +104,7 @@ public class teacher_panel extends AppCompatActivity implements NavigationView.O
         menu_feedback.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(@NonNull MenuItem item) {
-                Intent intent = new Intent(getApplicationContext(), feedback_activity_administrator.class);
+                Intent intent = new Intent(getApplicationContext(), feedback_teacher.class);
                 startActivity(intent);
                 return false;
             }
@@ -141,7 +141,7 @@ public class teacher_panel extends AppCompatActivity implements NavigationView.O
     public boolean onCreateOptionsMenu(Menu menu) {
 
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menubaradmin, menu);
+        inflater.inflate(R.menu.menubarteacher, menu);
 
 
         return true;
@@ -186,7 +186,7 @@ public class teacher_panel extends AppCompatActivity implements NavigationView.O
         // Handle your menu items here
         if (id == R.id.nav_notification && toolbar.getTitle()!= "NOTIFICATIONS") {
 
-            Intent intent=new Intent(getApplicationContext(), all_college_notiFication_from_Administrator.class);
+            Intent intent=new Intent(getApplicationContext(), notification_teacher.class);
             startActivity(intent);
             finish();
             return true;
