@@ -70,11 +70,11 @@ public class teacher_panel extends AppCompatActivity implements NavigationView.O
         menu_notification.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(@NonNull MenuItem item) {
-                if(toolbar.getTitle()!="NOTIFICATIONS") {
-                    Intent intent1 = new Intent(getApplicationContext(), notification_teacher.class);
-                    startActivity(intent1);
-                    finish();
-                }
+//                if(toolbar.getTitle()!="NOTIFICATIONS") {
+//                    Intent intent1 = new Intent(getApplicationContext(), notification_teacher.class);
+//                    startActivity(intent1);
+//                    finish();
+//                }
                 return false;
             }
         });
@@ -184,13 +184,13 @@ public class teacher_panel extends AppCompatActivity implements NavigationView.O
         int id = item.getItemId();
 
         // Handle your menu items here
-        if (id == R.id.nav_notification && toolbar.getTitle()!= "NOTIFICATIONS") {
-
-            Intent intent=new Intent(getApplicationContext(), notification_teacher.class);
-            startActivity(intent);
-            finish();
-            return true;
-        }
+//        if (id == R.id.nav_notification && toolbar.getTitle()!= "NOTIFICATIONS") {
+//
+//            Intent intent=new Intent(getApplicationContext(), notification_teacher.class);
+//            startActivity(intent);
+//            finish();
+//            return true;
+//        }
 
 
         return super.onOptionsItemSelected(item);
