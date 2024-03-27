@@ -36,7 +36,7 @@ public class classroomClicked_activity extends varchi_line{
     String title;
 
     @Override
-    int getLayoutresId() {
+    public int getLayoutresId() {
         return R.layout.classroom_clicked_activity;
     }
 

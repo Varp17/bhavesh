@@ -8,6 +8,7 @@
     tools:context="teacherpkg.teacher_panel"
     android:orientation="vertical"
     android:fitsSystemWindows="true"
+
     tools:openDrawer="start">
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/nav_view"
@@ -50,9 +51,9 @@
                 android:layout_height="wrap_content"
                 android:text="Home"
                 android:id="@+id/hometab"
-                android:background="#00f"
+                android:background="#111112"
 
-                android:foreground="#00f"
+                android:foreground="#0A0A0B"
                 tools:layout_editor_absoluteX="5dp"
                 tools:layout_editor_absoluteY="70dp" />
 
@@ -60,8 +61,8 @@
                 android:layout_width="wrap_content"
                 android:id="@+id/classroomtab"
                 android:layout_height="wrap_content"
-                android:background="#00f"
-                android:foreground="#00f"
+                android:background="#0B0B0B"
+                android:foreground="#0C0C0C"
                 android:text="Classroom" />
 
 

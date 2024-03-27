@@ -35,7 +35,7 @@ public class Managestaff_activity extends varchi_line {
 
 
     @Override
-    int getLayoutresId() {
+    public int getLayoutresId() {
         return R.layout.managestaff_activity;
     }
 

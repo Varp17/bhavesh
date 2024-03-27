@@ -9,29 +9,19 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 
-import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.graphics.Insets;
 import androidx.core.view.GravityCompat;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.fragment.app.FragmentPagerAdapter;
-import androidx.viewpager.widget.ViewPager;
 
 import com.example.loginform.R;
 import com.google.android.material.navigation.NavigationView;
-import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
 
-import administratorpkg.ManageStudent_classTeacher;
-import administratorpkg.administrotor_panel;
 import administratorpkg.administrtor_profile;
 import administratorpkg.all_college_notiFication_from_Administrator;
-import administratorpkg.classroomClicked_activity;
 import administratorpkg.feedback_activity_administrator;
 
 public abstract class varchi_line extends AppCompatActivity  {
@@ -99,8 +89,8 @@ public abstract class varchi_line extends AppCompatActivity  {
         menu_feedback.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(@NonNull MenuItem item) {
-                Intent intent = new Intent(getApplicationContext(), feedback_activity_administrator.class);
-                startActivity(intent);
+//                Intent intent = new Intent(getApplicationContext(), feedback_activity_administrator.class);
+//                startActivity(intent);
                 return false;
             }
         });
@@ -108,15 +98,15 @@ public abstract class varchi_line extends AppCompatActivity  {
 
         ImageView profileImg = navigationView.getHeaderView(0).findViewById(R.id.profileimg);
         profileImg.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(toolbar.getTitle()!="PROFIlE") {
+                @Override
+                public void onClick(View v) {
+                    if(toolbar.getTitle()!="PROFIlE") {
 
-                    Intent intent = new Intent(getApplicationContext(), administrtor_profile.class);
-                    startActivity(intent);
-                    finish();
-                    finishActivity(R.id.managestaff);
-                }
+//                    Intent intent = new Intent(getApplicationContext(), administrtor_profile.class);
+//                    startActivity(intent);
+//                    finish();
+//                    finishActivity(R.id.managestaff);
+                    }
 
             }
         });
@@ -183,11 +173,11 @@ public abstract class varchi_line extends AppCompatActivity  {
         menu_notification.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(@NonNull MenuItem item) {
-                if(getactionbarTiile_in_varchi_line()!="NOTIFICATIONS") {
-                    Intent intent1 = new Intent(getApplicationContext(), all_college_notiFication_from_Administrator.class);
-                    startActivity(intent1);
-                    finish();
-                }
+//                if(getactionbarTiile_in_varchi_line()!="NOTIFICATIONS") {
+//                    Intent intent1 = new Intent(getApplicationContext(), all_college_notiFication_from_Administrator.class);
+//                    startActivity(intent1);
+//                    finish();
+//                }
                 return false;
             }
         });
@@ -201,7 +191,7 @@ public abstract class varchi_line extends AppCompatActivity  {
 
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menubaradmin, menu);
-        updateMenuVisibility(menu.findItem(R.id.nav_managestu));
+
 
 
 
@@ -214,34 +204,16 @@ public abstract class varchi_line extends AppCompatActivity  {
         // Handle your menu items here
         if (id == R.id.nav_notification && getactionbarTiile_in_varchi_line()!= "NOTIFICATIONS") {
 
-            Intent intent=new Intent(getApplicationContext(), all_college_notiFication_from_Administrator.class);
-            startActivity(intent);
-            finish();
+//            Intent intent=new Intent(getApplicationContext(), all_college_notiFication_from_Administrator.class);
+//            startActivity(intent);
+//            finish();
             return true;
         }
 
 
         return super.onOptionsItemSelected(item);
     }
-    private void updateMenuVisibility(MenuItem menuItem) {
-        // Check if the action bar title is "CLASS TEACHER'S"
-        if (getSupportActionBar() != null && getSupportActionBar().getTitle() != null &&
-                getSupportActionBar().getTitle().toString().equals("CLASS TEACHER'S")) {
-            menuItem.setVisible(true); // Show the menu item
-            menuItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-                @Override
-                public boolean onMenuItemClick(@NonNull MenuItem item) {
-                    Intent intent=new Intent(getApplicationContext(), ManageStudent_classTeacher.class);
-                    startActivity(intent);
-                    return false;
-                }
-            });
-        } else {
-            menuItem.setVisible(false); // Hide the menu item
-            menuItem.setOnMenuItemClickListener(null); // Clear the listener
-            menu.removeItem(R.id.nav_managestu);
-        }
-    }
+
     public void onBackPressed() {
         if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
             drawerLayout.closeDrawer(GravityCompat.START);

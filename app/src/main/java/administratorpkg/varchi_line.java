@@ -26,7 +26,7 @@ import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
 
-public abstract class varchi_line extends AppCompatActivity  {
+ abstract class varchi_line extends AppCompatActivity  {
 
     Toolbar toolbar;
     DrawerLayout drawerLayout;
@@ -39,7 +39,7 @@ public abstract class varchi_line extends AppCompatActivity  {
     MenuItem menu_home;
     MenuItem menu_classroom,menu_documents,menu_attendence,menu_notification,menu_managestudent,menu_feedback,menu_logout;
 
-    abstract int getLayoutresId() ;
+    public abstract int getLayoutresId() ;
     abstract String getactionbarTiile_in_varchi_line();
 
 
@@ -192,7 +192,7 @@ public abstract class varchi_line extends AppCompatActivity  {
 
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menubaradmin, menu);
-        updateMenuVisibility(menu.findItem(R.id.nav_managestu));
+
 
 
 
@@ -214,25 +214,7 @@ public abstract class varchi_line extends AppCompatActivity  {
 
         return super.onOptionsItemSelected(item);
     }
-    private void updateMenuVisibility(MenuItem menuItem) {
-        // Check if the action bar title is "CLASS TEACHER'S"
-        if (getSupportActionBar() != null && getSupportActionBar().getTitle() != null &&
-                getSupportActionBar().getTitle().toString().equals("CLASS TEACHER'S")) {
-            menuItem.setVisible(true); // Show the menu item
-            menuItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-                @Override
-                public boolean onMenuItemClick(@NonNull MenuItem item) {
-                    Intent intent=new Intent(getApplicationContext(), ManageStudent_classTeacher.class);
-                    startActivity(intent);
-                    return false;
-                }
-            });
-        } else {
-            menuItem.setVisible(false); // Hide the menu item
-            menuItem.setOnMenuItemClickListener(null); // Clear the listener
-            menu.removeItem(R.id.nav_managestu);
-        }
-        }
+
     public void onBackPressed() {
         if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
             drawerLayout.closeDrawer(GravityCompat.START);

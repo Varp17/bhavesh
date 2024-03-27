@@ -53,8 +53,14 @@
             android:name="teacherpkg.teacher_panel"
             android:exported="false" />
         <activity
-            android:name="administratorpkg.ManageStudent_classTeacher"
-            android:exported="false" />
+            android:name="teacherpkg.ManageStudent_classTeacher"
+            android:exported="false"
+            />
+        <activity
+            android:name="teacherpkg.fragment_mangestudent_classteacher"
+            android:exported="false"
+            tools:ignore="Instantiatable"
+             />
         <activity
             android:name="studentpakage.student_panel"
             android:exported="false" />
@@ -99,6 +105,7 @@
         <activity
             android:name="administratorpkg.Addministrator_0r_Teacher_Login"
             android:exported="false" />
+
         <activity
             android:name=".ForgotPasswordActivity"
             android:exported="false" />

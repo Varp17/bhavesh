@@ -5,6 +5,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
+import teacherpkg.fragment_mangestudent_classteacher;
+
 public class manage_activityforclassteacher_adapter extends FragmentPagerAdapter {
 
     public manage_activityforclassteacher_adapter(@NonNull FragmentManager fm) {

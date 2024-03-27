@@ -20,7 +20,7 @@ public class feedback_activity_administrator extends varchi_line implements Feed
     private FeedbackAdapter feedbackAdapter;
 
     @Override
-    int getLayoutresId() {
+    public int getLayoutresId() {
         return R.layout.activity_feedback_administrator;
     }
 

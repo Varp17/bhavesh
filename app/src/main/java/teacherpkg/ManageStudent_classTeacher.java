@@ -1,4 +1,4 @@
-package administratorpkg;
+package teacherpkg;
 
 import android.os.Bundle;
 
@@ -12,12 +12,17 @@ import androidx.viewpager.widget.ViewPager;
 import com.example.loginform.R;
 import com.google.android.material.tabs.TabLayout;
 
-public class ManageStudent_classTeacher extends varchi_line {
+import administratorpkg.manage_activityforclassteacher_adapter;
+
+
+public  class ManageStudent_classTeacher extends varchi_line {
     ViewPager vpager;
     TabLayout tabLayout;
     manage_activityforclassteacher_adapter myFragmentAdapter;
+
+
     @Override
-    int getLayoutresId() {
+    public int getLayoutresId() {
         return R.layout.activity_manage_student_class_teacher;
     }
 

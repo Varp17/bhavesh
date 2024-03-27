@@ -5,7 +5,7 @@
     android:id="@+id/Drawer_lay"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="administratorpkg.ManageStudent_classTeacher"
+    tools:context="teacherpkg.ManageStudent_classTeacher"
     android:orientation="vertical"
     android:fitsSystemWindows="true"
     tools:openDrawer="start">
@@ -14,7 +14,7 @@
         android:layout_width="300dp"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        app:headerLayout="@layout/header"
+        app:headerLayout="@layout/teacher_header"
         app:menu="@menu/menubaradmin"
         tools:ignore="DuplicateIds">
 
@@ -30,7 +30,7 @@
         android:layout_height="match_parent"
 
         android:orientation="vertical">
-        <include layout="@layout/custlbar"/>
+        <include layout="@layout/teacher_custbar"/>
 
 
         <com.google.android.material.tabs.TabLayout
@@ -40,7 +40,7 @@
             android:layout_marginStart="0dp"
             android:layout_marginTop="0dp"
             android:layout_marginEnd="0dp"
-            android:background="#05C5E3"
+            android:background="@color/teacher_color"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">

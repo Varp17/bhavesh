@@ -17,7 +17,7 @@ public class all_college_notiFication_from_Administrator extends varchi_line {
     Button notifycollegebtn;
 
     @Override
-    int getLayoutresId() {
+    public int getLayoutresId() {
         return R.layout.activity_all_college_notification_from_administrator;
     }
 

@@ -34,7 +34,7 @@ int getProfile_values(){
     return 0;
 }
     @Override
-    int getLayoutresId() {
+    public int getLayoutresId() {
         return R.layout.activity_administrtor_profile;
 
     }

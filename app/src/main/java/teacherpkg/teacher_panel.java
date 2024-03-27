@@ -9,19 +9,14 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.graphics.Insets;
 import androidx.core.view.GravityCompat;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.viewpager.widget.ViewPager;
 
@@ -30,9 +25,6 @@ import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
 
-import administratorpkg.FragmentAdapter;
-import administratorpkg.administrotor_panel;
-import administratorpkg.administrtor_profile;
 import administratorpkg.all_college_notiFication_from_Administrator;
 import administratorpkg.feedback_activity_administrator;
 
@@ -151,6 +143,7 @@ public class teacher_panel extends AppCompatActivity implements NavigationView.O
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menubaradmin, menu);
 
+
         return true;
 
     }
@@ -202,4 +195,5 @@ public class teacher_panel extends AppCompatActivity implements NavigationView.O
 
         return super.onOptionsItemSelected(item);
     }
+
 }
