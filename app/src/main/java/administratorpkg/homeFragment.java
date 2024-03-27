@@ -70,7 +70,7 @@ public class homeFragment extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
 
-    }
+}
 
     ImageSlider image_slider;
     ImageView scheduleimg;
@@ -83,8 +83,8 @@ public class homeFragment extends Fragment {
         image_slider = rootView.findViewById(R.id.image_slider);
         floabtnmange=rootView.findViewById(R.id.floabtnmange);
         List<SlideModel> imageList = new ArrayList<>();
-        imageList.add(new SlideModel(R.drawable.ronaldo, ScaleTypes.FIT));
-        imageList.add(new SlideModel(R.drawable.sunilchettri,ScaleTypes.FIT));
+        imageList.add(new SlideModel(R.drawable.cristiano, ScaleTypes.FIT));
+        imageList.add(new SlideModel(R.drawable.mandeep,ScaleTypes.FIT));
         scheduleimg=rootView.findViewById(R.id.scheduleimg);
         profile=inflater.inflate(R.layout.header, container, false).findViewById(R.id.profileimg);
         floabtnmange.setOnClickListener(new View.OnClickListener() {

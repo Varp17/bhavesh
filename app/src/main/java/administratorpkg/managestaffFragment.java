@@ -271,11 +271,13 @@ public class managestaffFragment extends Fragment implements SwipeRefreshLayout.
                                     FirebaseUser user = mAuth.getCurrentUser();
                                     if (user != null) {
                                         user.delete()
+
                                                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                                                     @Override
                                                     public void onComplete(@NonNull Task<Void> task) {
                                                         if (task.isSuccessful()) {
                                                             Log.d(TAG, "User authentication information deleted.");
+                                                            Toast.makeText(getContext(), "varun", Toast.LENGTH_SHORT).show();
                                                         } else {
                                                             Log.e(TAG, "Error deleting user authentication information: " + task.getException());
                                                             // Handle error
