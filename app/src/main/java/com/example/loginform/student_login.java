@@ -39,6 +39,7 @@ public class student_login extends AppCompatActivity {
     private FrameLayout overlay;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -121,7 +122,7 @@ public class student_login extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
-        if(!getIntent().getBooleanExtra("userdeleted",true)) {
+        if(getIntent().getBooleanExtra("userdeleted",true)) {
             FirebaseUser currentUser = mAuth.getCurrentUser();
             if (currentUser != null) {
                 // User is already logged in, redirect to the appropriate home page
@@ -143,11 +144,9 @@ public class student_login extends AppCompatActivity {
                 finish();
             } else {
                 Toast.makeText(getApplicationContext(), "User not registered", Toast.LENGTH_SHORT).show();
-                Intent intent=new Intent(getApplicationContext(), student_login.class);
-                intent.putExtra("userdeleted",true);
-                startActivity(intent);
+                
             }
-            finish();
+
         });
     }
 

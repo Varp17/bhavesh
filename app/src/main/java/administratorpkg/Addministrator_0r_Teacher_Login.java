@@ -19,6 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.loginform.R;
+import com.example.loginform.student_login;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -88,7 +89,7 @@ public class Addministrator_0r_Teacher_Login extends AppCompatActivity {
         login.setVisibility(View.GONE);
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(task -> {
-                    progressBar.setVisibility(View.GONE);
+
                     if (task.isSuccessful()) {
                         FirebaseUser user = mAuth.getCurrentUser();
                         if (user != null) {
@@ -102,13 +103,19 @@ public class Addministrator_0r_Teacher_Login extends AppCompatActivity {
                                     finish();
                                 } else {
                                     Toast.makeText(getApplicationContext(), "Unknown user type", Toast.LENGTH_SHORT).show();
+                                    Intent intent=new Intent(getApplicationContext(), student_login.class);
+                                    intent.putExtra("userdeleted",false);
+                                    startActivity(intent);
+                                    finish();
                                 }
                             });
                         }
                     } else {
                         Toast.makeText(getApplicationContext(), "Credential Invalid " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+
                     }
                 });
+        progressBar.setVisibility(View.GONE);
     }
     String usertype ;
 
@@ -160,33 +167,33 @@ public class Addministrator_0r_Teacher_Login extends AppCompatActivity {
 //        });
 //    }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        Log.d(TAG, "onStart method called");
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        if (currentUser != null) {
-            navigateToHomePage(currentUser);
-        }
-    }
+//    @Override
+//    protected void onStart() {
+//        super.onStart();
+//        Log.d(TAG, "onStart method called");
+//        FirebaseUser currentUser = mAuth.getCurrentUser();
+//        if (currentUser != null) {
+//            navigateToHomePage(currentUser);
+//        }
+//    }
 
 
-    private void navigateToHomePage(@NonNull FirebaseUser user) {
-        Log.d(TAG, "navigateToHomePage method called");
-        String uid = user.getUid();
-        getUserType(uid, userType -> {
-            if ("Teacher".equals(userType)) {
-                startActivity(new Intent(getApplicationContext(), teacher_panel.class));
-                finish();
-            } else if ("Admin".equals(userType)) {
-                startActivity(new Intent(getApplicationContext(), administrotor_panel.class));
-                finish();
-            } else {
-                Toast.makeText(getApplicationContext(), "Unknown user type", Toast.LENGTH_SHORT).show();
-            }
-            finish();
-        });
-    }
+//    private void navigateToHomePage(@NonNull FirebaseUser user) {
+//        Log.d(TAG, "navigateToHomePage method called");
+//        String uid = user.getUid();
+//        getUserType(uid, userType -> {
+//            if ("Teacher".equals(userType)) {
+//                startActivity(new Intent(getApplicationContext(), teacher_panel.class));
+//                finish();
+//            } else if ("Admin".equals(userType)) {
+//                startActivity(new Intent(getApplicationContext(), administrotor_panel.class));
+//                finish();
+//            } else {
+//                Toast.makeText(getApplicationContext(), "Unknown user type", Toast.LENGTH_SHORT).show();
+//            }
+//            finish();
+//        });
+//    }
 
 
 
