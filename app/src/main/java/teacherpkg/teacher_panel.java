@@ -9,6 +9,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -45,6 +46,8 @@ public class teacher_panel extends AppCompatActivity implements NavigationView.O
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Window window=getWindow();
+        window.setStatusBarColor(getResources().getColor(R.color.teacher_color));
         setContentView(R.layout.activity_teacher_panel);
         drawerLayout=findViewById(R.id.Drawer_lay);
         navigationView=findViewById(R.id.nav_view);

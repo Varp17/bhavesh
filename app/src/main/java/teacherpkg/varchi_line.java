@@ -7,6 +7,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
@@ -47,6 +48,8 @@ public abstract class varchi_line extends AppCompatActivity  {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(getLayoutresId());
+        Window window=getWindow();
+        window.setStatusBarColor(getResources().getColor(R.color.teacher_color));
 //        notification=findViewById(R.id.notificationbtn);
         drawerLayout=findViewById(R.id.Drawer_lay);
         navigationView=findViewById(R.id.nav_view);
