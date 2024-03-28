@@ -39,6 +39,11 @@
         <item name="android:background">@drawable/inapptextnight</item>
     </style>
 
+    <style name="CustomButtonStyle" parent="Widget.AppCompat.Button">
+        <item name="android:spinnerStyle">?android:spinnerStyle</item>
+        <item name="android:textColor">#000</item>
+    </style>
+
     <!--    <style name="logo" parent="Theme.AppCompat.Light.DarkActionBar">-->
     <!--        <item name="android:windowBackground">@drawable/teacher</item>-->
     <!--        <item name="nightModeIcon">@drawable/teacher</item>-->
