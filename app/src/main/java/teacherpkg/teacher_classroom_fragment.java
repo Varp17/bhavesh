@@ -100,7 +100,7 @@ public class teacher_classroom_fragment extends Fragment {
 //        View view = inflater.inflate(R.layout.fragment_classroom, container, false);
 
         // Inflate the layout for this fragment
-        View rootView = inflater.inflate(R.layout.fragment_classroom, container, false);
+        View rootView = inflater.inflate(R.layout.activity_teacher_classroom_fragment, container, false);
         dataInitialize();
 
 
