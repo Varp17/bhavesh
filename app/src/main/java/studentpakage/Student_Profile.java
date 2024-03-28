@@ -26,7 +26,7 @@ TextView student_name,studenterno,studentbranch,studentdob,student_address,stude
             return insets;
         });
         student_name=findViewById(R.id.student_profilename);
-        studenterno =findViewById(R.id.student_enrollmet_no);
+        studenterno =findViewById(R.id.student_enrollment_no);
         studentbranch = findViewById(R.id.student_profilebranch);
         studentdob =findViewById(R.id.student_profile_dob);
         student_address = findViewById(R.id.profile_student_address);

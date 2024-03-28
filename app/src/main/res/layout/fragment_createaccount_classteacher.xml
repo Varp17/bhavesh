@@ -7,19 +7,17 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_constraintBottom_toTopOf="@+id/student_branch"
-        app:layout_constraintTop_toTopOf="@+id/student_branch"
+        android:layout_height="wrap_content"
         tools:context="teacherpkg.fragment_createaccount_classteacher">
 
         <!-- TODO: Update blank fragment layout -->
-
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textInputLayout3"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
+            android:layout_marginBottom="28dp"
+            app:layout_constraintBottom_toTopOf="@+id/email"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -28,79 +26,117 @@
                 android:id="@+id/studentfullname"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:inputType="text"
                 android:hint="FULLNAME" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/email"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="28dp"
+            app:layout_constraintBottom_toTopOf="@+id/textInputLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/email2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Email" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textInputLayout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginBottom="28dp"
+            app:layout_constraintBottom_toTopOf="@+id/datepicker1"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textInputLayout3">
+            app:layout_constraintStart_toStartOf="parent">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/student_enrollmet_no"
+                android:id="@+id/student_enrollment_no"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="ENROLLMENT NO"
-                android:inputType="number" />
+                android:inputType="number"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
             android:id="@+id/DOB"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="216dp"
+            android:layout_marginTop="8dp"
             android:text="DOB"
             android:textSize="24sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.087"
+            app:layout_constraintEnd_toStartOf="@+id/datepicker1"
+            app:layout_constraintHorizontal_bias="0.303"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="@+id/datepicker1" />
 
         <Button
             android:id="@+id/datepicker1"
             style="@style/CustomButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="104dp"
-            android:layout_marginBottom="104dp"
+            android:layout_marginBottom="28dp"
             android:onClick="openDatePicker"
-            android:text="Jan 01 2024"
+            android:text="MM DD YYYY"
             android:textAlignment="center"
             android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/datepicker2"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.849"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textInputLayout3"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintBottom_toTopOf="@+id/student_branch"
+            app:layout_constraintEnd_toEndOf="@+id/datepicker2"
+            app:layout_constraintStart_toStartOf="@+id/datepicker2" />
 
         <AutoCompleteTextView
             android:id="@+id/student_branch"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="43dp"
+            android:layout_marginBottom="24dp"
             android:hint="Branch"
             android:textSize="24sp"
+            app:layout_constraintBottom_toTopOf="@+id/datepicker2"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/textView8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="ADMISSION YEAR"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toStartOf="@+id/datepicker2"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/DOB" />
+            app:layout_constraintTop_toTopOf="@+id/datepicker2" />
+
+        <Button
+            android:id="@+id/datepicker2"
+            style="@style/CustomButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="28dp"
+            android:layout_marginBottom="24dp"
+            android:onClick="openDatePicker"
+            android:text="MM DD YYYY"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/textInputLayout8"
+            app:layout_constraintEnd_toEndOf="parent" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textInputLayout8"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="35dp"
+            android:layout_marginBottom="20dp"
+            app:layout_constraintBottom_toTopOf="@+id/textInputLayout9"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/datepicker2">
+            app:layout_constraintStart_toStartOf="parent">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:id="@+id/Student_address"
                 android:hint="ADDRESS" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -108,14 +144,15 @@
             android:id="@+id/textInputLayout9"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginBottom="20dp"
+            app:layout_constraintBottom_toTopOf="@+id/createbtn_student"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textInputLayout8">
+            app:layout_constraintStart_toStartOf="parent">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:id="@+id/student_mobileno"
                 android:hint="MOBILENO"
                 android:inputType="phone" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -125,54 +162,44 @@
             style="@style/BUTTON"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="4dp"
+            android:layout_marginBottom="10dp"
             android:background="@drawable/buttoncorner_teacher"
             android:backgroundTint="@color/teacher_color"
             android:text="create"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/updatebtn_student"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
         <Button
-            android:id="@+id/button4"
+            android:id="@+id/updatebtn_student"
             style="@style/BUTTON"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
             android:background="@drawable/buttoncorner_teacher"
             android:backgroundTint="@color/teacher_color"
-            android:text="updadte"
+            android:text="update"
+            android:layout_marginBottom="28dp"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="parent" />
+            app:layout_constraintBottom_toTopOf="@+id/autogenerated_password"
+            tools:layout_editor_absoluteY="602dp" />
 
-        <TextView
-            android:id="@+id/textView8"
-            android:layout_width="wrap_content"
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/autogenerated_password"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-
-            android:layout_marginTop="40dp"
-            android:text="ADMISSION YEAR"
-            android:textSize="20dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/student_branch" />
-
-        <Button
-            android:id="@+id/datepicker2"
-            style="@style/CustomButtonStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="384dp"
-            android:onClick="openDatePicker"
-            android:text="Jan 01 2024"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="@+id/datepicker1"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginBottom="44dp"
+            android:hint="@string/autogenerated_password"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintStart_toStartOf="parent" />
 
-        />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </ScrollView>
+</ScrollView>

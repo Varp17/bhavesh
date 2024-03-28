@@ -62,5 +62,7 @@ public class fragment_mangestudent_classteacher extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_mangestudent_classteacher, container, false);
+
+
     }
 }
