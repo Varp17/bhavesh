@@ -263,33 +263,6 @@ public class managestaffFragment extends Fragment implements SwipeRefreshLayout.
                                     // Delete the user document
                                     transaction.delete(userDocRef);
 
-
-                                    // Also delete the authentication information
-                                    // Note: You need to implement the logic to delete authentication info here
-                                    // This could be using Firebase Authentication APIs to delete the user account
-                                    // or using a separate authentication database where you store additional user information
-
-                                    // For example, if you're using Firebase Authentication
-
-
-                                    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                                    if (user != null) {
-                                        user.delete()
-
-                                                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                                    @Override
-                                                    public void onComplete(@NonNull Task<Void> task) {
-                                                        if (task.isSuccessful()) {
-                                                            Log.d(TAG, "User authentication information deleted.");
-                                                            Toast.makeText(getContext(), user.toString(), Toast.LENGTH_SHORT).show();
-                                                        } else {
-                                                            Log.e(TAG, "Error deleting user authentication information: " + task.getException());
-                                                            // Handle error
-                                                        }
-                                                    }
-                                                });
-                                    }
-
                                     return null;
                                 }
                             })
@@ -297,11 +270,31 @@ public class managestaffFragment extends Fragment implements SwipeRefreshLayout.
                                 @Override
                                 public void onSuccess(Void aVoid) {
                                     // Both operations succeeded
-                                    Toast.makeText(getContext(), "User information deleted successfully", Toast.LENGTH_SHORT).show();
-                                    // Remove the staff from the list and refresh the RecyclerView
-                                    staffArrayList.remove(staff);
-                                    recyclerview.getAdapter().notifyDataSetChanged();
-                                    staffmanagedialog.dismiss(); // Dismiss the dialog after delete
+                                    // Now, delete the authentication information
+                                    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                                    if (user != null) {
+                                        user.delete()
+                                                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                    @Override
+                                                    public void onComplete(@NonNull Task<Void> task) {
+                                                        if (task.isSuccessful()) {
+                                                            Log.d(TAG, "User authentication information deleted.");
+                                                        } else {
+                                                            Log.e(TAG, "Error deleting user authentication information: " + task.getException());
+                                                            // Handle error
+                                                        }
+                                                        // Regardless of the result, inform the user about the deletion of user information
+                                                        Toast.makeText(getContext(), "User information deleted successfully", Toast.LENGTH_SHORT).show();
+                                                        // Remove the staff from the list and refresh the RecyclerView
+                                                        staffArrayList.remove(staff);
+                                                        recyclerview.getAdapter().notifyDataSetChanged();
+                                                        staffmanagedialog.dismiss(); // Dismiss the dialog after delete
+                                                    }
+                                                });
+                                    } else {
+                                        // Handle the case where user is null
+                                        Toast.makeText(getContext(), "Current user is null", Toast.LENGTH_SHORT).show();
+                                    }
                                 }
                             })
                             .addOnFailureListener(new OnFailureListener() {
@@ -320,11 +313,13 @@ public class managestaffFragment extends Fragment implements SwipeRefreshLayout.
         });
 
 
+
         // Set close button click listener
         buttonClose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 staffmanagedialog.dismiss(); // Dismiss the dialog
+                Toast.makeText(getContext(),mAuth.getCurrentUser().getEmail(),Toast.LENGTH_SHORT).show();
             }
         });
 
