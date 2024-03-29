@@ -189,6 +189,7 @@ public class managestaffFragment extends Fragment implements SwipeRefreshLayout.
         task.addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                swipeRefreshLayout.setRefreshing(false);
                 if (task.isSuccessful()) {
                     for (QueryDocumentSnapshot document : task.getResult()) {
                         String userName = document.getString("fullname");
@@ -262,13 +263,16 @@ public class managestaffFragment extends Fragment implements SwipeRefreshLayout.
                                     // Delete the user document
                                     transaction.delete(userDocRef);
 
+
                                     // Also delete the authentication information
                                     // Note: You need to implement the logic to delete authentication info here
                                     // This could be using Firebase Authentication APIs to delete the user account
                                     // or using a separate authentication database where you store additional user information
 
                                     // For example, if you're using Firebase Authentication
-                                    FirebaseUser user = mAuth.getCurrentUser();
+
+
+                                    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                                     if (user != null) {
                                         user.delete()
 
@@ -277,7 +281,7 @@ public class managestaffFragment extends Fragment implements SwipeRefreshLayout.
                                                     public void onComplete(@NonNull Task<Void> task) {
                                                         if (task.isSuccessful()) {
                                                             Log.d(TAG, "User authentication information deleted.");
-                                                            Toast.makeText(getContext(), "varun", Toast.LENGTH_SHORT).show();
+                                                            Toast.makeText(getContext(), user.toString(), Toast.LENGTH_SHORT).show();
                                                         } else {
                                                             Log.e(TAG, "Error deleting user authentication information: " + task.getException());
                                                             // Handle error
