@@ -4,6 +4,8 @@ import static android.content.ContentValues.TAG;
 
 import android.accounts.AccountManagerFuture;
 import android.app.Dialog;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -32,6 +34,7 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
@@ -44,6 +47,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.firestore.Transaction;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -65,7 +69,7 @@ public class managestaffFragment extends Fragment implements SwipeRefreshLayout.
     private String mParam2;
     private ArrayList<Staff>staffArrayList;
     private ArrayList<String> teachername;
-    private ArrayList<String> teacherId;
+    private ArrayList<String> teacherId,password,staffemail;
     private RecyclerView recyclerview;
     private FirebaseAuth mAuth;
     private FirebaseFirestore fstore;
@@ -182,7 +186,8 @@ public class managestaffFragment extends Fragment implements SwipeRefreshLayout.
         teachername = new ArrayList<>();
         staffArrayList = new ArrayList<>();
         teacherId = new ArrayList<>(); // Initialize teacherId ArrayList
-
+        password=new ArrayList<>();
+        staffemail=new ArrayList<>();
         // Get user names
         CollectionReference userCollectionRef = fstore.collection("user");
         task = userCollectionRef.get(); // Initialize the task here
@@ -193,9 +198,12 @@ public class managestaffFragment extends Fragment implements SwipeRefreshLayout.
                     for (QueryDocumentSnapshot document : task.getResult()) {
                         String userName = document.getString("fullname");
                         String userId = document.getId(); // Fetch the user ID
-
+                        String pass=document.getString("password");
+                        String email=document.getString("email");
                         teachername.add(userName);
                         teacherId.add(userId); // Store the user ID
+                        password.add(pass);
+                        staffemail.add(email);
                     }
                     initializeAdapter();
                 } else {
@@ -214,7 +222,7 @@ public class managestaffFragment extends Fragment implements SwipeRefreshLayout.
 
         // Iterate through subject names and teacher names to create Subjects objects
         for (int j = 0; j < teachername.size(); j++) {
-            Staff staff_names = new Staff(teachername.get(j), teacherId.get(j));
+            Staff staff_names = new Staff(teachername.get(j), teacherId.get(j),password.get(j), staffemail.get(j));
             staffArrayList.add(staff_names);
         }
 
@@ -243,89 +251,88 @@ public class managestaffFragment extends Fragment implements SwipeRefreshLayout.
 
         // Set delete button click listener
         // Set delete button click listener
-        buttonDelete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String userId = staff.getTeacherID();
-                if (userId != null) {
-                    // Get a reference to the Firestore collection containing user documents
-                    usersCollectionRef = fstore.collection("user");
+        // Set delete button click listener
+       buttonDelete.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View v) {
+               DocumentReference userdoc= fstore.collection("user").document(staff.getTeacherID());
+               userdoc.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                   @Override
 
-                    // Query for the specific user document using the user ID
-                    userDocRef = usersCollectionRef.document(userId);
+                   public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                       if(task.isSuccessful())
+                       {
+                           userdoc.delete();
+                           mAuth.signOut();
+                           mAuth.signInWithEmailAndPassword(staff.getEmail(), staff.getpassword()).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+                               @Override
+                               public void onSuccess(AuthResult authResult) {
+                                   if(mAuth!=null)
+                                   {
+                                       mAuth.getCurrentUser().delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+                                           @Override
+                                           public void onSuccess(Void unused) {
+                                               Toast.makeText(getContext(), "acc deleted", Toast.LENGTH_SHORT).show();
 
-                    // Start a Firestore transaction
-                    fstore.runTransaction(new Transaction.Function<Void>() {
-                                @Nullable
-                                @Override
-                                public Void apply(@NonNull Transaction transaction) throws FirebaseFirestoreException {
-                                    // Delete the user document
-                                    transaction.delete(userDocRef);
+                                               mAuth.signInWithEmailAndPassword(getEmailFromSharedPreferences().toString(),getPasswordFromSharedPreferences().toString()).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+                                                   @Override
+                                                   public void onSuccess(AuthResult authResult) {
+                                                       Toast.makeText(getContext(), "previos acc login", Toast.LENGTH_SHORT).show();
+                                                   }
+                                               }).addOnFailureListener(new OnFailureListener() {
+                                                   @Override
+                                                   public void onFailure(@NonNull Exception e) {
+                                                       Toast.makeText(getContext(), "failed to login admin", Toast.LENGTH_SHORT).show();
+                                                   }
+                                               });
+                                           }
+                                       }).addOnFailureListener(new OnFailureListener() {
+                                           @Override
+                                           public void onFailure(@NonNull Exception e) {
+                                               Toast.makeText(getContext(), "failed to delete acc", Toast.LENGTH_SHORT).show();
+                                           }
+                                       });
+                                   }
+                               }
+                           }).addOnFailureListener(new OnFailureListener() {
+                               @Override
+                               public void onFailure(@NonNull Exception e) {
+                                   Toast.makeText(getContext(), "sign in failed", Toast.LENGTH_SHORT).show();
+                               }
+                           });
+                       }
+                   }
+               });
 
-                                    // Also delete the authentication information
-                                    // Note: You need to implement the logic to delete authentication info here
-                                    // This could be using Firebase Authentication APIs to delete the user account
-                                    // or using a separate authentication database where you store additional user information
+           }
+       });
 
-                                    // For example, if you're using Firebase Authentication
-                                    FirebaseUser user = mAuth.getCurrentUser();
-                                    if (user != null) {
-                                        user.delete()
-
-                                                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                                    @Override
-                                                    public void onComplete(@NonNull Task<Void> task) {
-                                                        if (task.isSuccessful()) {
-                                                            Log.d(TAG, "User authentication information deleted.");
-                                                            Toast.makeText(getContext(), "varun", Toast.LENGTH_SHORT).show();
-                                                        } else {
-                                                            Log.e(TAG, "Error deleting user authentication information: " + task.getException());
-                                                            // Handle error
-                                                        }
-                                                    }
-                                                });
-                                    }
-
-                                    return null;
-                                }
-                            })
-                            .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                @Override
-                                public void onSuccess(Void aVoid) {
-                                    // Both operations succeeded
-                                    Toast.makeText(getContext(), "User information deleted successfully", Toast.LENGTH_SHORT).show();
-                                    // Remove the staff from the list and refresh the RecyclerView
-                                    staffArrayList.remove(staff);
-                                    recyclerview.getAdapter().notifyDataSetChanged();
-                                    staffmanagedialog.dismiss(); // Dismiss the dialog after delete
-                                }
-                            })
-                            .addOnFailureListener(new OnFailureListener() {
-                                @Override
-                                public void onFailure(@NonNull Exception e) {
-                                    // Error occurred while deleting user document
-                                    Log.e(TAG, "Error deleting user information: " + e.getMessage());
-                                    Toast.makeText(getContext(), "Failed to delete user information", Toast.LENGTH_SHORT).show();
-                                }
-                            });
-                } else {
-                    // Handle the case where userId is null
-                    Toast.makeText(getContext(), "User ID is null", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
 
 
         // Set close button click listener
         buttonClose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                Toast.makeText(getContext(), staff.getEmail()+" : "+staff.getpassword(), Toast.LENGTH_SHORT).show();
                 staffmanagedialog.dismiss(); // Dismiss the dialog
+
+
             }
+
         });
 
         staffmanagedialog.show();
     }
+    private String getEmailFromSharedPreferences() {
+        SharedPreferences sharedPreferences = getContext().getSharedPreferences("CRED", Context.MODE_PRIVATE);
+        return sharedPreferences.getString("email", "");
+    }
 
+    // Method to retrieve password from SharedPreferences
+    private String getPasswordFromSharedPreferences() {
+        SharedPreferences sharedPreferences = getContext().getSharedPreferences("CRED", Context.MODE_PRIVATE);
+        return sharedPreferences.getString("password", "");
+    }
 
 }

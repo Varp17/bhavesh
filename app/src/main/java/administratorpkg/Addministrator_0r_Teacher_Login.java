@@ -5,7 +5,9 @@ import static android.content.ContentValues.TAG;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -92,13 +94,16 @@ public class Addministrator_0r_Teacher_Login extends AppCompatActivity {
 
                     if (task.isSuccessful()) {
                         FirebaseUser user = mAuth.getCurrentUser();
+
                         if (user != null) {
                             String uid = user.getUid();
                             getUserType(uid, userType -> {
                                 if ("Teacher".equals(userType)) {
+                                    saveCredentials(email, password);
                                     startActivity(new Intent(getApplicationContext(), teacher_panel.class));
                                     finish();
                                 } else if ("Admin".equals(userType)) {
+                                    saveCredentials(email, password);
                                     startActivity(new Intent(getApplicationContext(), administrotor_panel.class));
                                     finish();
                                 } else {
@@ -195,6 +200,12 @@ public class Addministrator_0r_Teacher_Login extends AppCompatActivity {
 //        });
 //    }
 
-
+    private void saveCredentials(String email, String password) {
+        SharedPreferences sharedPreferences = getSharedPreferences("CRED", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("email", email);
+        editor.putString("password", password);
+        editor.apply();
+    }
 
 }

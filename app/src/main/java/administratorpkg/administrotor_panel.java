@@ -23,7 +23,12 @@ import com.example.loginform.R;
 import com.example.loginform.student_login;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.tabs.TabLayout;
+
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.FirebaseOptions;
 import com.google.firebase.auth.FirebaseAuth;
+
+import java.io.FileInputStream;
 
 public class administrotor_panel extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     Toolbar toolbar;
@@ -45,11 +50,30 @@ public class administrotor_panel extends AppCompatActivity implements Navigation
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_administrotor_panel);
-
+        FirebaseApp.initializeApp(getApplicationContext());
 //        notification=findViewById(R.id.notificationbtn);
         drawerLayout=findViewById(R.id.Drawer_lay);
         navigationView=findViewById(R.id.nav_view);
         toolbar=findViewById(R.id.toolbar);
+
+
+//try {
+//
+//
+//    FileInputStream serviceAccount =
+//            new FileInputStream("/path/to/presencepro-40e3b-firebase-adminsdk-5dm9w-f182a89d1d.json");
+//
+//    FirebaseOptions options = new FirebaseOptions.Builder()
+//            .setProjectId(String.valueOf(GoogleCredentials.fromStream(serviceAccount)))
+//            .setDatabaseUrl("https://presencepro-40e3b-default-rtdb.firebaseio.com")
+//            .build();
+//
+//
+//    FirebaseApp.initializeApp(getApplicationContext());
+//}catch (Exception e)
+//{
+//    Toast.makeText(this, e.toString(), Toast.LENGTH_SHORT).show();
+//}
 
 
         setSupportActionBar(toolbar);
