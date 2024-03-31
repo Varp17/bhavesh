@@ -22,6 +22,7 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.loginform.R;
+import com.example.loginform.student_login;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
@@ -84,6 +85,7 @@ import com.google.firebase.auth.FirebaseAuth;
                 FirebaseAuth firebaseAuth=FirebaseAuth.getInstance();
                 firebaseAuth.signOut();
                 finish();
+                startActivity(new Intent(getApplicationContext(), student_login.class));
                 return false;
             }
         });

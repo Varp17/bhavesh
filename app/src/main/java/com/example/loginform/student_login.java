@@ -135,11 +135,30 @@ public class student_login extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
-        if(getIntent().getBooleanExtra("userdeleted",true)) {
+        // Check if the user is deleted and handle accordingly
+        if (getIntent().getBooleanExtra("userdeleted", true)) {
             FirebaseUser currentUser = mAuth.getCurrentUser();
             if (currentUser != null) {
                 // User is already logged in, redirect to the appropriate home page
                 navigateToHomePage(currentUser);
+            }
+        } else {
+            // If the user is not deleted, check if the user is already logged in
+            FirebaseUser currentUser = mAuth.getCurrentUser();
+            if (currentUser != null) {
+                // Show loading indicator while fetching user type
+                overlay.setVisibility(View.VISIBLE);
+                progressBar.setVisibility(View.VISIBLE);
+                // User is already logged in, redirect to the appropriate home page
+                navigateToHomePage(currentUser);
+            } else {
+                // Hide the progress bar
+                overlay.setVisibility(View.GONE);
+                progressBar.setVisibility(View.GONE);
+                // Show login UI elements if the user is not logged in
+                login.setVisibility(View.VISIBLE);
+                forgotPasswordLink.setVisibility(View.VISIBLE);
+                teacher_login.setVisibility(View.VISIBLE);
             }
         }
     }
@@ -156,8 +175,11 @@ public class student_login extends AppCompatActivity {
                 startActivity(new Intent(getApplicationContext(), administrotor_panel.class));
                 finish();
             } else {
+                mAuth.signOut();
+                startActivity(new Intent(getApplicationContext(), student_login.class));
+                overlay.setVisibility(View.GONE);
+                progressBar.setVisibility(View.GONE);
                 Toast.makeText(getApplicationContext(), "User not registered", Toast.LENGTH_SHORT).show();
-                
             }
 
         });

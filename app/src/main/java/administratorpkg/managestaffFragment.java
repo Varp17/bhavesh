@@ -24,11 +24,15 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.loginform.R;
+import com.github.ybq.android.spinkit.sprite.Sprite;
+import com.github.ybq.android.spinkit.style.ThreeBounce;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -77,7 +81,9 @@ public class managestaffFragment extends Fragment implements SwipeRefreshLayout.
     private SwipeRefreshLayout swipeRefreshLayout;
     private Dialog staffmanagedialog;
     private TextView tname;
+    private FrameLayout overlay;
     private Task<QuerySnapshot> task;
+    ProgressBar progressBar;
     CollectionReference usersCollectionRef;
     DocumentReference userDocRef;
 
@@ -128,6 +134,9 @@ public class managestaffFragment extends Fragment implements SwipeRefreshLayout.
         mAuth = FirebaseAuth.getInstance();
         fstore=FirebaseFirestore.getInstance();
         teacher = new ArrayList<>();
+
+
+
         dataInitialize();
 
         // Initialize SwipeRefreshLayout
@@ -161,6 +170,8 @@ public class managestaffFragment extends Fragment implements SwipeRefreshLayout.
         recyclerview = view.findViewById(R.id.managestaffrecyclerview);
         recyclerview.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerview.setHasFixedSize(true);
+
+
 
         StaffAdapter staffAdapter = new StaffAdapter(getContext(), staffArrayList, new recyclerviewonclick() {
             @Override
@@ -245,6 +256,10 @@ public class managestaffFragment extends Fragment implements SwipeRefreshLayout.
         TextView textViewStaffInfo = staffmanagedialog.findViewById(R.id.textViewStaffInfo);
         Button buttonDelete = staffmanagedialog.findViewById(R.id.buttonDelete);
         Button buttonClose = staffmanagedialog.findViewById(R.id.buttonClose);
+        overlay = staffmanagedialog.findViewById(R.id.overlay_delete_dialog);
+        progressBar = staffmanagedialog.findViewById(R.id.progressBar_delete);
+        Sprite threeBounce = new ThreeBounce();
+        progressBar.setIndeterminateDrawable(threeBounce);
 
         // Set staff information
         textViewStaffInfo.setText("Teacher Name: " + staff.getTeacherName()); // Assuming you have a getter method for teacher name in Staff class
@@ -255,6 +270,10 @@ public class managestaffFragment extends Fragment implements SwipeRefreshLayout.
        buttonDelete.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View v) {
+               buttonDelete.setVisibility(View.GONE);
+               progressBar.setVisibility(View.VISIBLE);
+
+
                DocumentReference userdoc= fstore.collection("user").document(staff.getTeacherID());
                userdoc.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                    @Override
@@ -272,12 +291,14 @@ public class managestaffFragment extends Fragment implements SwipeRefreshLayout.
                                        mAuth.getCurrentUser().delete().addOnSuccessListener(new OnSuccessListener<Void>() {
                                            @Override
                                            public void onSuccess(Void unused) {
+                                               staffmanagedialog.dismiss();
                                                Toast.makeText(getContext(), "acc deleted", Toast.LENGTH_SHORT).show();
 
                                                mAuth.signInWithEmailAndPassword(getEmailFromSharedPreferences().toString(),getPasswordFromSharedPreferences().toString()).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                                                    @Override
                                                    public void onSuccess(AuthResult authResult) {
                                                        Toast.makeText(getContext(), "previos acc login", Toast.LENGTH_SHORT).show();
+                                                       dataInitialize();
                                                    }
                                                }).addOnFailureListener(new OnFailureListener() {
                                                    @Override
