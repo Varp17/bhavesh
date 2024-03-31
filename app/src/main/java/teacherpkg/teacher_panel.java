@@ -99,8 +99,7 @@ public class teacher_panel extends AppCompatActivity implements NavigationView.O
 
                 Intent intent = new Intent(teacher_panel.this, Teacher_Profile.class);
                 startActivity(intent);
-                finishActivity(R.id.managestaff);
-
+               finish();
             }
         });
 

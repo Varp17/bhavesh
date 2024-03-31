@@ -67,6 +67,10 @@
         <activity
             android:name="studentpakage.student_panel"
             android:exported="false" />
+
+        <activity
+            android:name="teacherpkg.Teacher_Profile"
+            android:exported="false" />
         <activity
             android:name="administratorpkg.all_college_notiFication_from_Administrator"
             android:exported="false" />

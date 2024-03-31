@@ -274,7 +274,7 @@ public class managestaffFragment extends Fragment implements SwipeRefreshLayout.
                                            public void onSuccess(Void unused) {
                                                Toast.makeText(getContext(), "acc deleted", Toast.LENGTH_SHORT).show();
 
-                                               mAuth.signInWithEmailAndPassword(getEmailFromSharedPreferences().toString(),getPasswordFromSharedPreferences().toString()).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+                                               mAuth.signInWithEmailAndPassword(getEmailFromSharedPreferences(),getPasswordFromSharedPreferences()).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                                                    @Override
                                                    public void onSuccess(AuthResult authResult) {
                                                        Toast.makeText(getContext(), "previos acc login", Toast.LENGTH_SHORT).show();
@@ -298,6 +298,17 @@ public class managestaffFragment extends Fragment implements SwipeRefreshLayout.
                                @Override
                                public void onFailure(@NonNull Exception e) {
                                    Toast.makeText(getContext(), "sign in failed", Toast.LENGTH_SHORT).show();
+                                   mAuth.signInWithEmailAndPassword(getEmailFromSharedPreferences().toString(),getPasswordFromSharedPreferences().toString()).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+                                       @Override
+                                       public void onSuccess(AuthResult authResult) {
+                                           Toast.makeText(getContext(), "previos acc login", Toast.LENGTH_SHORT).show();
+                                       }
+                                   }).addOnFailureListener(new OnFailureListener() {
+                                       @Override
+                                       public void onFailure(@NonNull Exception e) {
+                                           Toast.makeText(getContext(), "failed to login admin", Toast.LENGTH_SHORT).show();
+                                       }
+                                   });
                                }
                            });
                        }

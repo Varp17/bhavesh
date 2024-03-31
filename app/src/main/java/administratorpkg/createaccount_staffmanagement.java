@@ -3,6 +3,8 @@ package administratorpkg;
 
 
 import android.app.DatePickerDialog;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import java.util.Calendar;
@@ -11,6 +13,7 @@ import java.util.Map;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -147,12 +150,25 @@ public class createaccount_staffmanagement extends Fragment {
                             userInfo.put("mobile no",mobileno.getText().toString());
                             userInfo.put("address",address.getText().toString());
                             userInfo.put("DOB", datePickerButton.getText().toString());
+                            userInfo.put("password",autopassword);
                             userInfo.put("isTeacher",true);
                             df.set(userInfo).addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void unused) {
-                                    Toast.makeText(getContext(), "classroom created", Toast.LENGTH_SHORT).show();
 
+                                    Toast.makeText(getContext(), "account  created", Toast.LENGTH_SHORT).show();
+                                    fAuth.signInWithEmailAndPassword(getEmailFromSharedPreferences(),getPasswordFromSharedPreferences()).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+                                        @Override
+                                        public void onSuccess(AuthResult authResult) {
+                                            Toast.makeText(getContext(), "delted and relogined", Toast.LENGTH_SHORT).show();
+                                        }
+                                    }).addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception e) {
+                                            Toast.makeText(getContext(), "varun", Toast.LENGTH_SHORT).show();
+                                            Log.d("login", "onFailure: failed ");
+                                        }
+                                    });
                                 }
                             });
                         }
@@ -171,6 +187,7 @@ public class createaccount_staffmanagement extends Fragment {
 
 
             }
+
         });
 
         // Displaying all values in toast
@@ -273,6 +290,17 @@ public class createaccount_staffmanagement extends Fragment {
         });
 
         datePickerDialog.show();
+
+    }
+    private String getEmailFromSharedPreferences() {
+        SharedPreferences sharedPreferences = getContext().getSharedPreferences("CRED", Context.MODE_PRIVATE);
+        return sharedPreferences.getString("email", "");
+    }
+
+    // Method to retrieve password from SharedPreferences
+    private String getPasswordFromSharedPreferences() {
+        SharedPreferences sharedPreferences = getContext().getSharedPreferences("CRED", Context.MODE_PRIVATE);
+        return sharedPreferences.getString("password", "");
     }
 }
 
