@@ -58,8 +58,6 @@ public class Teacher_Profile extends varchi_line {
     FirebaseFirestore fstore;
 
     TextView profilename,teacherId,branch,dob,teacheremail,address,phoneno;
-    private ImageView profileImage,editProfileImage;
-    private static final int PICK_IMAGE_REQUEST = 1;
 
 
     int getProfile_values(){
