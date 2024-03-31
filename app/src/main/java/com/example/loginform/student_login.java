@@ -18,6 +18,12 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.github.ybq.android.spinkit.sprite.Sprite;
+import com.github.ybq.android.spinkit.style.Circle;
+import com.github.ybq.android.spinkit.style.DoubleBounce;
+import com.github.ybq.android.spinkit.style.RotatingPlane;
+import com.github.ybq.android.spinkit.style.ThreeBounce;
+import com.github.ybq.android.spinkit.style.Wave;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
@@ -62,11 +68,18 @@ public class student_login extends AppCompatActivity {
         overlay = findViewById(R.id.overlay);
         progressBar = findViewById(R.id.progressBar);
 
+        Sprite circle = new Circle();
+        progressBar.setIndeterminateDrawable(circle);
+
+//        Sprite wave = new Wave();
+//        progressBar.setIndeterminateDrawable(wave);
+
+//        Sprite x = new ThreeBounce();
+//        progressBar.setIndeterminateDrawable(x);
 
         // Hide UI elements initially
         login.setVisibility(View.GONE);
-        forgotPasswordLink.setVisibility(View.GONE);
-        teacher_login.setVisibility(View.GONE);
+
 
         forgotPasswordLink.setOnClickListener(new View.OnClickListener() {
             @Override

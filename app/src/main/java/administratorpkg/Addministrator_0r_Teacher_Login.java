@@ -22,6 +22,12 @@ import android.widget.Toast;
 
 import com.example.loginform.R;
 import com.example.loginform.student_login;
+import com.github.ybq.android.spinkit.sprite.Sprite;
+import com.github.ybq.android.spinkit.style.Circle;
+import com.github.ybq.android.spinkit.style.DoubleBounce;
+import com.github.ybq.android.spinkit.style.RotatingPlane;
+import com.github.ybq.android.spinkit.style.ThreeBounce;
+import com.github.ybq.android.spinkit.style.Wave;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -55,6 +61,14 @@ public class Addministrator_0r_Teacher_Login extends AppCompatActivity {
 
         overlay = findViewById(R.id.overlay_teacher);
         progressBar = findViewById(R.id.progressBar_teacher);
+//        Sprite wave = new Wave();
+//        progressBar.setIndeterminateDrawable(wave);
+
+        Sprite circle = new Circle();
+        progressBar.setIndeterminateDrawable(circle);
+
+//        Sprite x = new ThreeBounce();
+//        progressBar.setIndeterminateDrawable(x);
 
         forgotPasswordLink.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -89,6 +103,7 @@ public class Addministrator_0r_Teacher_Login extends AppCompatActivity {
         progressBar.setVisibility(View.VISIBLE);
 
         login.setVisibility(View.GONE);
+
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(task -> {
 
@@ -117,10 +132,12 @@ public class Addministrator_0r_Teacher_Login extends AppCompatActivity {
                         }
                     } else {
                         Toast.makeText(getApplicationContext(), "Credential Invalid " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                        progressBar.setVisibility(View.GONE);
+                        overlay.setVisibility(View.GONE);
+                        login.setVisibility(View.VISIBLE);
 
                     }
                 });
-        progressBar.setVisibility(View.GONE);
     }
     String usertype ;
 

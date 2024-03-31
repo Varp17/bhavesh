@@ -48,6 +48,7 @@ dependencies {
 
 
 
+    implementation("com.github.ybq:Android-SpinKit:1.4.0")
 
     implementation("com.google.android.material:material:1.7.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
