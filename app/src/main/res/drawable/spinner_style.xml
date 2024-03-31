@@ -1,0 +1,15 @@
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape android:shape="rectangle">
+            <stroke
+                android:width="1.5dp"
+                android:color="@color/black"
+                /><!-- Background color -->
+        </shape>
+    </item>
+
+    <item android:drawable="@drawable/arrow_drop_down"
+        android:gravity="end|center_vertical"
+        android:color="@color/black">
+    </item>
+</layer-list>
