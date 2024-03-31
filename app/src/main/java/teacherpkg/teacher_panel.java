@@ -22,6 +22,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.loginform.R;
+import com.example.loginform.student_login;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
@@ -87,6 +88,7 @@ public class teacher_panel extends AppCompatActivity implements NavigationView.O
             public boolean onMenuItemClick(@NonNull MenuItem item) {
                 FirebaseAuth firebaseAuth=FirebaseAuth.getInstance();
                 firebaseAuth.signOut();
+                startActivity(new Intent(getApplicationContext(), student_login.class));
                 finish();
                 return false;
             }

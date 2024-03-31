@@ -18,6 +18,7 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.example.loginform.R;
+import com.example.loginform.student_login;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -86,6 +87,7 @@ public abstract class varchi_line extends AppCompatActivity  {
                 FirebaseAuth firebaseAuth=FirebaseAuth.getInstance();
                 firebaseAuth.signOut();
                 finish();
+                startActivity(new Intent(getApplicationContext(), student_login.class));
                 return false;
             }
         });
