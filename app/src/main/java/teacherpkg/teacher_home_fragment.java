@@ -3,6 +3,7 @@ package teacherpkg;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -16,7 +17,13 @@ import com.denzcoskun.imageslider.constants.ScaleTypes;
 import com.denzcoskun.imageslider.models.SlideModel;
 import com.example.loginform.R;
 import com.example.loginform.maximizeimage;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -87,13 +94,7 @@ public class teacher_home_fragment extends Fragment {
         scheduleimg=rootView.findViewById(R.id.scheduleimg);
         profile=inflater.inflate(R.layout.teacher_header, container, false).findViewById(R.id.profileimg);
         floatmanagestu=rootView.findViewById(R.id.floatmanagestu);
-        floatmanagestu.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent= new Intent(getContext(), ManageStudent_classTeacher.class);
-                startActivity(intent);
-            }
-        });
+        checkclassteacher();
         profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -114,4 +115,36 @@ public class teacher_home_fragment extends Fragment {
         return rootView;
 
     }
+    private void checkclassteacher() {
+        FirebaseFirestore fstore = FirebaseFirestore.getInstance();
+        FirebaseAuth fAuth = FirebaseAuth.getInstance();
+        String id = fAuth.getCurrentUser().getUid();
+        DocumentReference dr = fstore.collection("classteachers").document(id);
+        dr.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                if (documentSnapshot.exists()) {
+                    // User is a class teacher
+                    floatmanagestu.setVisibility(View.VISIBLE);
+                    floatmanagestu.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Intent intent = new Intent(getContext(), ManageStudent_classTeacher.class);
+                            startActivity(intent);
+                        }
+                    });
+                } else {
+                    // User is not a class teacher
+                    floatmanagestu.setVisibility(View.GONE);
+                }
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                // Error occurred, hide the button
+                floatmanagestu.setVisibility(View.GONE);
+            }
+        });
+    }
+
 }

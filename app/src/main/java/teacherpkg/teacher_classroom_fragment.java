@@ -1,8 +1,6 @@
 package teacherpkg;
 
-import android.app.Activity;
 import android.app.Dialog;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -12,26 +10,26 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
-import android.widget.Switch;
 import android.widget.TextView;
 
 import com.example.loginform.R;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
-import org.w3c.dom.Text;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
-import javax.security.auth.Subject;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -50,11 +48,12 @@ public class teacher_classroom_fragment extends Fragment {
     private String mParam1;
     private String mParam2;
     private ArrayList<Subjects>subjectsArrayList;
-    private String[] subjectname;
-    private String[] teachername;
+    private ArrayList<String> subjectname,teachername;
+
     private RecyclerView recyclerview;
     Dialog myDialog ;
-
+    FirebaseFirestore fstore = FirebaseFirestore.getInstance();
+    FirebaseAuth fAuth = FirebaseAuth.getInstance();
 
 
 
@@ -101,6 +100,8 @@ public class teacher_classroom_fragment extends Fragment {
 
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.activity_teacher_classroom_fragment, container, false);
+
+
         dataInitialize();
 
 
@@ -110,6 +111,8 @@ public class teacher_classroom_fragment extends Fragment {
 
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        checkclassteacher();
         dataInitialize();
 
 
@@ -124,7 +127,7 @@ public class teacher_classroom_fragment extends Fragment {
                 Intent intent=new Intent(getContext(), teacher_classroomclicked.class);
 
 
-                intent.putExtra("name",subjectname[position]);
+                intent.putExtra("name", subjectname.get(position));
 
 
 
@@ -139,76 +142,12 @@ public class teacher_classroom_fragment extends Fragment {
         teacherViewAdapter.notifyDataSetChanged();
 
         openbtn = view.findViewById(R.id.addsubjectbtn);
+
         openbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                TextView closebtn;
-                myDialog = new Dialog(requireContext());
-                myDialog.setContentView(R.layout.add_subject_floating_panel_teacher);
-                closebtn = myDialog.findViewById(R.id.closeaddsubjectpanel);
+                startActivity(new Intent(getContext(), mangesubject_classteacher.class));
 
-                myDialog.setCanceledOnTouchOutside(false);
-
-                Spinner spinnerTeacher = myDialog.findViewById(R.id.spinnerTeacher);
-                Spinner spinnerYear = myDialog.findViewById(R.id.spinnerYear);
-
-                if(myDialog!=null){
-
-                    List<String> subjectList = Arrays.asList("MAD", "PHP", "Python", "ETI");
-                    List<String> teacherList = Arrays.asList("Prerana Mam", "Vaishnavi Mam", "Trupti Mam", "Shirin Mam");
-                    List<String> yearList = Arrays.asList("FY","SY","TY");
-
-                    ArrayAdapter<String> teacherAdapter = new ArrayAdapter<>(requireContext(), android.R.layout.simple_spinner_item, teacherList);
-                    teacherAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                    spinnerTeacher.setAdapter(teacherAdapter);
-
-                    ArrayAdapter<String> subjectAdapter = new ArrayAdapter<>(requireContext(), android.R.layout.simple_spinner_item, subjectList);
-                    subjectAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
-                    ArrayAdapter<String> yearAdapter = new ArrayAdapter<>(requireContext(), android.R.layout.simple_spinner_item, yearList);
-                    yearAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                    spinnerYear.setAdapter(yearAdapter);
-
-                    // Listener for Teacher Names spinner
-                    spinnerTeacher.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                        @Override
-                        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                            String selectedTeacher = (String) parent.getItemAtPosition(position);
-                            // Handle the selected teacher as needed
-                        }
-
-                        @Override
-                        public void onNothingSelected(AdapterView<?> parent) {
-                            // Do nothing here if needed
-                        }
-                    });
-
-// Listener for Subject Names spinner
-
-
-// Listener for Years spinner
-                    spinnerYear.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                        @Override
-                        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                            String selectedYear = (String) parent.getItemAtPosition(position);
-                            // Handle the selected year as needed
-                        }
-
-                        @Override
-                        public void onNothingSelected(AdapterView<?> parent) {
-                            // Do nothing here if needed
-                        }
-                    });
-                }
-
-                closebtn.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        myDialog.dismiss();
-                    }
-                });
-
-                myDialog.show();
             }
         });
 
@@ -216,26 +155,51 @@ public class teacher_classroom_fragment extends Fragment {
     }
     private void dataInitialize(){
         subjectsArrayList = new ArrayList<>();
-        subjectname = new String[]{
-                "CLASS TEACHER'S",
-                getString(R.string.sub1),
-                getString(R.string.sub2),
-                getString(R.string.sub3),
-                getString(R.string.sub4),
+        teachername=new ArrayList<>();
+        subjectname=new ArrayList<>();
+        teachername.add("Suyog Teacher");
+        subjectname.add("CLASS TEACHRE'S");
+        teachername.add("Suyog Teacher");
+        subjectname.add("EDI");
+        teachername.add("Suyog Teacher");
+        subjectname.add("BEC");
+        teachername.add("Suyog Teacher");
+        subjectname.add("PCI");
 
-        };
-        teachername = new String[]{
-                "Swapnil Sir",
-                getString(R.string.tech1),
-                getString(R.string.tech2),
-                getString(R.string.tech3),
-                getString(R.string.tech4)
-        };
-        for(int i=0;i<subjectname.length;i++){
-            Subjects subjects = new Subjects((subjectname[i]),teachername[i]);
+
+        for(int i=0;i<subjectname.size();i++){
+            Subjects subjects = new Subjects((subjectname.get(i)), teachername.get(i));
             subjectsArrayList.add(subjects);
         }
 
     }
+    private void checkclassteacher() {
+         fstore = FirebaseFirestore.getInstance();
+        fAuth = FirebaseAuth.getInstance();
+        String id = fAuth.getCurrentUser().getUid();
+        DocumentReference dr = fstore.collection("classteachers").document(id);
+        dr.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                if (documentSnapshot.exists()) {
+                    // User is a class teacher
+                    openbtn.setVisibility(View.VISIBLE);
+
+
+
+                } else {
+                    // User is not a class teacher
+                    openbtn.setVisibility(View.GONE);
+                }
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                // Error occurred, hide the button
+               openbtn.setVisibility(View.GONE);
+            }
+        });
+    }
+
 
 }
