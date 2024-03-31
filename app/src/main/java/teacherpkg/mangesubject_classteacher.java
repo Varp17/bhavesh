@@ -21,13 +21,17 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.loginform.R;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -47,8 +51,11 @@ public class mangesubject_classteacher extends varchi_line {
     private RecyclerView recyclerview;
     Dialog myDialog ;
 
+    ArrayList<String> teacherList,subjectList;
 
-
+    FirebaseAuth mAuth=FirebaseAuth.getInstance();
+    FirebaseFirestore fstore=FirebaseFirestore.getInstance();
+    Spinner spinnerYear,spinnerTeacher;
 
     FloatingActionButton openbtn;
 
@@ -105,25 +112,24 @@ public class mangesubject_classteacher extends varchi_line {
 
                 myDialog.setCanceledOnTouchOutside(false);
 
-                Spinner spinnerTeacher = myDialog.findViewById(R.id.spinnerTeacher);
-                Spinner spinnerYear = myDialog.findViewById(R.id.spinnerYear);
+                 spinnerTeacher = myDialog.findViewById(R.id.spinnerTeacher);
+                 spinnerYear = myDialog.findViewById(R.id.spinnerYear);
 
                 if(myDialog!=null){
 
-                    List<String> subjectList = Arrays.asList("MAD", "PHP", "Python", "ETI");
-                    List<String> teacherList = Arrays.asList("Prerana Mam", "Vaishnavi Mam", "Trupti Mam", "Shirin Mam");
-                    List<String> yearList = Arrays.asList("FY","SY","TY");
+                     subjectList = new ArrayList<>();
+                    teacherList = new ArrayList<>();
 
-                    ArrayAdapter<String> teacherAdapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_item, teacherList);
-                    teacherAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                    spinnerTeacher.setAdapter(teacherAdapter);
 
-                    ArrayAdapter<String> subjectAdapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_item, subjectList);
-                    subjectAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    SetSubjectList();
+                    setTeachernameList();
 
-                    ArrayAdapter<String> yearAdapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_item, yearList);
-                    yearAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                    spinnerYear.setAdapter(yearAdapter);
+
+
+
+
+
+
 
                     // Listener for Teacher Names spinner
                     spinnerTeacher.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -170,6 +176,70 @@ public class mangesubject_classteacher extends varchi_line {
 
 
     }
+
+    private void setTeachernameList() {
+        CollectionReference teacherref= fstore.collection("user");
+        teacherref.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if(task.isSuccessful()){
+                    for(DocumentSnapshot documentSnapshot:task.getResult())
+                    {
+                        teacherList.add(documentSnapshot.getString("fullname"));
+                    }
+                    ArrayAdapter<String> teacherAdapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_item, teacherList);
+                    teacherAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    spinnerTeacher.setAdapter(teacherAdapter);
+                }
+            }
+        });
+    }
+
+    private void SetSubjectList() {
+
+        DocumentReference classteacherref=fstore.collection("classteachers").document(mAuth.getCurrentUser().getUid());
+        classteacherref.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if(task.isSuccessful()) {
+                    DocumentSnapshot documentSnapshot=task.getResult();
+                    if(documentSnapshot!=null) {
+                        String subdocid =documentSnapshot.getString("class year");
+
+
+                                DocumentReference
+                        drf = fstore.collection("subjects").document(subdocid);
+                                drf.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                        if(task.isSuccessful()) {
+                                            DocumentSnapshot documentSnapshot = task.getResult();
+                                            if (documentSnapshot != null) {
+                                                    int i=1;
+                                                    while (i<=documentSnapshot.getLong("total"))
+                                                    {
+                                                        String sub=documentSnapshot.getString("sub"+i);
+                                                        subjectList.add(sub);
+
+                                                        i++;
+                                                    }
+                                                ArrayAdapter<String> subjectAdapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_item, subjectList);
+                                                subjectAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                                                spinnerYear.setAdapter(subjectAdapter);
+                                                    i=1;
+
+                                            }
+                                        }
+
+                                    }
+                                });
+                    }
+                }
+            }
+        });
+
+    }
+
     private void dataInitialize(){
         subjectsArrayList = new ArrayList<>();
         subjectname = new String[]{
@@ -217,6 +287,7 @@ public class mangesubject_classteacher extends varchi_line {
                 openbtn.setVisibility(View.GONE);
             }
         });
+
     }
 
 
