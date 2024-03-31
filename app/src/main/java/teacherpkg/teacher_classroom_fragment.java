@@ -144,7 +144,7 @@ public class teacher_classroom_fragment extends Fragment {
             public void onClick(View v) {
                 TextView closebtn;
                 myDialog = new Dialog(requireContext());
-                myDialog.setContentView(R.layout.add_subject_floating_panel);
+                myDialog.setContentView(R.layout.add_subject_floating_panel_teacher);
                 closebtn = myDialog.findViewById(R.id.closeaddsubjectpanel);
 
                 myDialog.setCanceledOnTouchOutside(false);

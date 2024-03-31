@@ -44,6 +44,15 @@
             />
 
         <item
+            android:id="@+id/nav_notification"
+            android:title="@string/Notification"
+            android:color="@color/textcolor2"
+            android:background="@drawable/item_background"
+            android:icon="@drawable/notification_icon"
+            app:showAsAction="always"
+            />
+
+        <item
             android:id="@+id/nav_document"
             android:title="@string/Document"
             android:color="@color/textcolor2"
