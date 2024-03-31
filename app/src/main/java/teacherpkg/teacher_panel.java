@@ -140,12 +140,6 @@ public class teacher_panel extends AppCompatActivity implements NavigationView.O
 
     }
 
-    public void logout(View view){
-        startActivity(new Intent(getApplicationContext(),student_login.class));
-    }
-
-
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
