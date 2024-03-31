@@ -275,12 +275,14 @@ public class managestaffFragment extends Fragment implements SwipeRefreshLayout.
 
 
                DocumentReference userdoc= fstore.collection("user").document(staff.getTeacherID());
+               DocumentReference classteacher_doc = fstore.collection("classteachers").document(staff.getTeacherID());
                userdoc.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                    @Override
 
                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                        if(task.isSuccessful())
                        {
+                           classteacher_doc.delete();
                            userdoc.delete();
                            mAuth.signOut();
                            mAuth.signInWithEmailAndPassword(staff.getEmail(), staff.getpassword()).addOnSuccessListener(new OnSuccessListener<AuthResult>() {

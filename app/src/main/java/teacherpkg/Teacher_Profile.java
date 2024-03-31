@@ -3,13 +3,21 @@ package teacherpkg;
 import static android.content.ContentValues.TAG;
 
 import android.app.FragmentTransaction;
+import android.content.ContentResolver;
+import android.content.Context;
+import android.content.Intent;
 import android.credentials.CreateCredentialRequest;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
@@ -34,13 +42,26 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileDescriptor;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+
 public class Teacher_Profile extends varchi_line {
 
     EditText profile_name,profile_id,profile_branch,profile_dob,profile_address,profile_mobno;
     FirebaseAuth mAuth;
     FirebaseFirestore fstore;
 
-    TextView profilename;
+    TextView profilename,teacherId,branch,dob,teacheremail,address,phoneno;
+    private ImageView profileImage,editProfileImage;
+    private static final int PICK_IMAGE_REQUEST = 1;
+
+
     int getProfile_values(){
 
 
@@ -61,11 +82,19 @@ public class Teacher_Profile extends varchi_line {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mAuth=FirebaseAuth.getInstance();
-        fstore=FirebaseFirestore.getInstance();
-        profilename=findViewById(R.id.student_profilename);
 
-        DocumentReference df=fstore.collection("user").document(mAuth.getCurrentUser().getUid());
+        mAuth = FirebaseAuth.getInstance();
+        fstore = FirebaseFirestore.getInstance();
+        profilename = findViewById(R.id.teacher_name_profile);
+        dob = findViewById(R.id.teacher_profile_dob);
+        branch = findViewById(R.id.teacher_profile_address);
+        teacherId = findViewById(R.id.profile_teacherid);
+        phoneno = findViewById(R.id.teacher_profile_number);
+        address = findViewById(R.id.teacher_profile_address);
+        teacheremail = findViewById(R.id.teacher_profile_email);
+
+
+        DocumentReference df = fstore.collection("user").document(mAuth.getCurrentUser().getUid());
         df.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -75,6 +104,13 @@ public class Teacher_Profile extends varchi_line {
                         // DocumentSnapshot contains the data of the document
                         String fullName = document.getString("fullname");
                         profilename.setText(fullName);
+                        String dobb = document.getString("DOB");
+                        dob.setText(dobb);
+                        branch.setText("Computer");
+                        phoneno.setText(document.getString("mobile no"));
+                        address.setText(document.getString("address"));
+                        teacheremail.setText(document.getString("email"));
+
                         // Use the fullName as needed
                         Log.d(TAG, "Full Name: " + fullName);
 
@@ -87,7 +123,9 @@ public class Teacher_Profile extends varchi_line {
                 }
             }
         });
-
     }
+
+
+
 }
 

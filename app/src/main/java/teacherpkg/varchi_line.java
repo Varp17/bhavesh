@@ -111,6 +111,10 @@ public abstract class varchi_line extends AppCompatActivity  {
 //                    startActivity(intent);
 //                    finish();
 //                    finishActivity(R.id.managestaff);
+
+                        Intent intent = new Intent(getApplicationContext(), Teacher_Profile.class);
+                        startActivity(intent);
+                        finish();
                     }
 
             }
