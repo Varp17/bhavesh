@@ -14,12 +14,29 @@
         android:textStyle="bold"
         android:text="Staff Information" />
 
-    <!-- Button for delete action -->
-    <Button
-        android:id="@+id/buttonDelete"
+    <FrameLayout
+        android:id="@+id/overlay_delete_dialog"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Delete" />
+        >
+
+        <com.github.ybq.android.spinkit.SpinKitView xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/progressBar_delete"
+            style="@style/SpinKitView.Wave"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="gone"
+            app:SpinKit_Color="#F1EDED" />
+        <Button
+            android:id="@+id/buttonDelete"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Delete" />
+
+    </FrameLayout>
+
 
     <!-- Button for close action -->
     <Button
