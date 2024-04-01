@@ -2,6 +2,7 @@ package teacherpkg;
 
 import static android.content.ContentValues.TAG;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -85,6 +86,17 @@ public class Teacher_Profile extends varchi_line {
                 }
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        // Start the home page activity
+        super.onBackPressed();
+        Intent intent = new Intent(this, teacher_panel.class);
+        startActivity(intent);
+
+        // Finish the current activity
+        finish();
     }
 
 }

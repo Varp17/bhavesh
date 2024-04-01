@@ -70,6 +70,8 @@ dependencies {
     implementation("com.google.android.material:material:1.11.0")
     implementation("com.sothree.slidinguppanel:library:3.4.0")
 
+    implementation("com.google.android.material:material:1.9.0")
+
     implementation("com.android.support:cardview-v7:28.0.0")
 
     implementation("androidx.appcompat:appcompat:1.3.0")

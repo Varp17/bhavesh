@@ -8,25 +8,25 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
-    android:background="@drawable/loginbkg1"
+    android:background="@drawable/loginpge"
     tools:context=".student_login">
 
     <FrameLayout
         android:id="@+id/overlay"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginBottom="-40dp"
         android:background="@drawable/apna_logo_2"
         android:visibility="gone">
 
 
-        <com.github.ybq.android.spinkit.SpinKitView
-            xmlns:app="http://schemas.android.com/apk/res-auto"
+        <com.github.ybq.android.spinkit.SpinKitView xmlns:app="http://schemas.android.com/apk/res-auto"
             android:id="@+id/progressBar"
             style="@style/SpinKitView.Wave"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="100dp"
             android:layout_gravity="center"
+            android:layout_marginTop="100dp"
             app:SpinKit_Color="#F1EDED" />
 
     </FrameLayout>
@@ -55,7 +55,7 @@
                 android:textSize="36sp"
                 android:textAlignment="center"
                 android:textStyle="bold"
-                android:textColor="@color/purple"/>
+                android:textColor="#E97A7B"/>
 
             <EditText
                 android:layout_width="match_parent"
@@ -90,8 +90,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="10dp"
-                android:text="Forgot Password"
-                android:textColor="@color/purple"
+                android:text="Forgot Password ?"
+                android:textColor="#E97A7B"
                 android:layout_gravity="end"
                 android:textSize="14sp" />
 
@@ -102,24 +102,24 @@
                 android:text="Login"
                 android:textSize="18sp"
                 android:layout_marginTop="10dp"
-                android:backgroundTint="@color/purple"
-                app:cornerRadius = "20dp"/>
+                android:backgroundTint="#E97A7B"
+                app:cornerRadius = "10dp"/>
 
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>
 
+
     <TextView
+        android:id="@+id/teacherlogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
         android:padding="8dp"
         android:text="Aministrator/Teacher Login"
-        android:textSize="14sp"
         android:textAlignment="center"
-        android:id="@+id/teacherlogin"
-        android:textColor="@color/purple"
-        android:layout_marginBottom="20dp"/>
-
-
+        android:textColor="#E97A7B"
+        android:textSize="14sp" />
 
 </LinearLayout>

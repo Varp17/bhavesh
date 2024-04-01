@@ -84,8 +84,6 @@ public class managestaffFragment extends Fragment implements SwipeRefreshLayout.
     private FrameLayout overlay;
     private Task<QuerySnapshot> task;
     ProgressBar progressBar;
-    CollectionReference usersCollectionRef;
-    DocumentReference userDocRef;
 
 
     public managestaffFragment() {
@@ -133,9 +131,6 @@ public class managestaffFragment extends Fragment implements SwipeRefreshLayout.
         View rootView = inflater.inflate(R.layout.fragment_managestaff, container, false);
         mAuth = FirebaseAuth.getInstance();
         fstore=FirebaseFirestore.getInstance();
-        teacher = new ArrayList<>();
-
-
 
         dataInitialize();
 
@@ -184,12 +179,6 @@ public class managestaffFragment extends Fragment implements SwipeRefreshLayout.
         });
         recyclerview.setAdapter(staffAdapter);
 
-        // Set an OnRefreshListener to handle the refresh action
-
-
-//        ClassrromViewAdapter classrromViewAdapter = new ClassrromViewAdapter(getContext(),subjectsArrayList, recyclerviewonclick);
-//        recyclerview.setAdapter(classrromViewAdapter);
-
     }
 
 
@@ -224,7 +213,6 @@ public class managestaffFragment extends Fragment implements SwipeRefreshLayout.
             }
         });
     }
-
 
 
     private void initializeAdapter() {
@@ -264,8 +252,6 @@ public class managestaffFragment extends Fragment implements SwipeRefreshLayout.
         // Set staff information
         textViewStaffInfo.setText("Teacher Name: " + staff.getTeacherName()); // Assuming you have a getter method for teacher name in Staff class
 
-        // Set delete button click listener
-        // Set delete button click listener
         // Set delete button click listener
        buttonDelete.setOnClickListener(new View.OnClickListener() {
            @Override
