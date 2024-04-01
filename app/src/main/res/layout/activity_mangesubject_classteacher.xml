@@ -39,11 +39,12 @@
                 android:layout_height="match_parent">
 
 
-
                 <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
                     android:id="@+id/swipe_refresh_layout"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    tools:layout_editor_absoluteX="-16dp"
+                    tools:layout_editor_absoluteY="-29dp">
 
                     <!-- Your RecyclerView or other content here -->
 
@@ -52,12 +53,13 @@
                         android:id="@+id/classroomrecyclerview1"
                         android:layout_width="0dp"
                         android:layout_height="0dp"
+                        android:background="@android:color/transparent"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        android:background="@android:color/transparent"
-                        tools:listitem="@layout/classroomview_cards" />
+                        tools:listitem="@layout/classroomview_cards"
+                        />
 
                 </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 

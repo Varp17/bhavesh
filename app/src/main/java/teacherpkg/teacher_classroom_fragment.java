@@ -1,5 +1,7 @@
 package teacherpkg;
 
+import static android.content.ContentValues.TAG;
+
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,7 +11,10 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,15 +22,20 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.loginform.R;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -54,7 +64,7 @@ public class teacher_classroom_fragment extends Fragment {
     Dialog myDialog ;
     FirebaseFirestore fstore = FirebaseFirestore.getInstance();
     FirebaseAuth fAuth = FirebaseAuth.getInstance();
-
+    recyclerviewonclick recyclerviewonclick;
 
 
     FloatingActionButton openbtn;
@@ -113,7 +123,7 @@ public class teacher_classroom_fragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         checkclassteacher();
-        dataInitialize();
+
 
 
 
@@ -121,7 +131,30 @@ public class teacher_classroom_fragment extends Fragment {
         recyclerview.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerview.setHasFixedSize(true);
 
-        recyclerviewonclick recyclerviewonclick=new recyclerviewonclick() {
+        SwipeRefreshLayout swipeRefreshLayout = view.findViewById(R.id.swipe_refresh_layout);
+
+        // Set an OnRefreshListener to handle the refresh action
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                // Perform the actions you want to do when the user triggers a refresh
+                // For example, reload data from the server
+                dataInitialize();
+
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        // Stop the refreshing indicator
+                        swipeRefreshLayout.setRefreshing(false);
+
+                        // Hide the ProgressBar when refresh is complete
+
+                    }
+                }, 2000);
+            }
+        });
+
+        recyclerviewonclick=new recyclerviewonclick() {
             @Override
             public void onItemClick(int position) {
                 Intent intent=new Intent(getContext(), teacher_classroomclicked.class);
@@ -137,9 +170,7 @@ public class teacher_classroom_fragment extends Fragment {
 
         };
 
-        teacherviewadapter teacherViewAdapter = new teacherviewadapter(getContext(),subjectsArrayList, recyclerviewonclick);
-        recyclerview.setAdapter(teacherViewAdapter);
-        teacherViewAdapter.notifyDataSetChanged();
+
 
         openbtn = view.findViewById(R.id.addsubjectbtn);
 
@@ -153,26 +184,104 @@ public class teacher_classroom_fragment extends Fragment {
 
 
     }
+    String username;
     private void dataInitialize(){
         subjectsArrayList = new ArrayList<>();
         teachername=new ArrayList<>();
         subjectname=new ArrayList<>();
-        teachername.add("Suyog Teacher");
-        subjectname.add("CLASS TEACHRE'S");
-        teachername.add("Suyog Teacher");
-        subjectname.add("EDI");
-        teachername.add("Suyog Teacher");
-        subjectname.add("BEC");
-        teachername.add("Suyog Teacher");
-        subjectname.add("PCI");
 
 
-        for(int i=0;i<subjectname.size();i++){
-            Subjects subjects = new Subjects((subjectname.get(i)), teachername.get(i));
-            subjectsArrayList.add(subjects);
-        }
+        DocumentReference documentReference=fstore.collection("user").document(fAuth.getCurrentUser().getUid());
+        documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if(task.isSuccessful())
+                {
+                    DocumentSnapshot documentSnapshot= task.getResult();
+                    username=documentSnapshot.getString("fullname");
+
+
+                }
+            }
+        });
+
+        addclassteacher();
+        CollectionReference crf=fstore.collection("classroom_subject");
+        crf.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if(task.isSuccessful()) {
+                    for (DocumentSnapshot documentSnapshot : task.getResult()) {
+
+                        String name = documentSnapshot.getString("fullname");
+
+
+                                if(name.equals(username))
+                                {
+                                    teachername.add(documentSnapshot.getString("fullname"));
+                                    subjectname.add(documentSnapshot.getId());
+
+                                }
+
+                    }
+                    for(int i=0;i<subjectname.size();i++){
+                        Subjects subjects = new Subjects((subjectname.get(i)), teachername.get(i));
+                        subjectsArrayList.add(subjects);
+                    }
+                    intializeadapter();
+
+                }else {
+                    Toast.makeText(getContext(), "No Document Found", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+
+
 
     }
+
+    private void addclassteacher() {
+
+        DocumentReference dr = fstore.collection("classteachers").document(fAuth.getCurrentUser().getUid());
+        dr.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                if (documentSnapshot.exists()) {
+                    // User is a class teacher
+
+                        teachername.add(documentSnapshot.getString("fullname"));
+                        subjectname.add("CLASS TEACHER'S");
+
+
+
+
+                } else {
+                    // User is not a class teacher
+                    Toast.makeText(getContext(), "No Classteacher", Toast.LENGTH_SHORT).show();
+                }
+            }
+        }).addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                intializeadapter();
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                // Error occurred, hide the button
+                Log.d(TAG, "onFailure: failed classteaccher");
+            }
+        });
+    }
+
+    private void intializeadapter() {
+        teacherviewadapter teacherViewAdapter = new teacherviewadapter(getContext(),subjectsArrayList, recyclerviewonclick);
+        recyclerview.setAdapter(teacherViewAdapter);
+        teacherViewAdapter.notifyDataSetChanged();
+
+    }
+
     private void checkclassteacher() {
          fstore = FirebaseFirestore.getInstance();
         fAuth = FirebaseAuth.getInstance();

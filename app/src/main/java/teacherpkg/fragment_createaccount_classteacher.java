@@ -166,6 +166,7 @@ private String classteacherUID;
                             userInfo.put("DOB", datePickerButton.getText().toString()); // Set the selected date from datePickerButton
                             userInfo.put("AdmissionYear", datePickerButton2.getText().toString());// Set the selected date from datePickerButton2
                             userInfo.put("password",autopassword);
+                            userInfo.put("isStudent",true);
 
 
                             df.set(userInfo).addOnSuccessListener(new OnSuccessListener<Void>() {

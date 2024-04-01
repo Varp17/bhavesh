@@ -81,7 +81,6 @@ public class ClassrromViewAdapter extends RecyclerView.Adapter<ClassrromViewAdap
                     public void onClick(View v) {
                         FirebaseFirestore db = FirebaseFirestore.getInstance();
                         db.collection("classteachers")
-                                // Query for documents where "fullname" field is equal to "swapnil"
                                 .whereEqualTo("fullname", sub.teachername)
                                 // Limiting the query to fetch only one document
                                 .limit(1)
