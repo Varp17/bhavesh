@@ -87,7 +87,5 @@ public class Teacher_Profile extends varchi_line {
         });
     }
 
-
-
 }
 

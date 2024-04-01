@@ -18,6 +18,7 @@
         app:menu="@menu/menubarstudent"
         tools:ignore="DuplicateIds">
 
+
     </com.google.android.material.navigation.NavigationView>
 
     <ScrollView
@@ -33,36 +34,36 @@
         <include layout="@layout/student_custbar"/>
 
 
-<!--        <com.google.android.material.tabs.TabLayout-->
-<!--            android:id="@+id/tabLayout"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginStart="0dp"-->
-<!--            android:layout_marginTop="0dp"-->
-<!--            android:layout_marginEnd="0dp"-->
-<!--            android:background="@color/student_color"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintTop_toTopOf="parent">-->
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tabLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginEnd="0dp"
+            android:background="@color/student_color"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-<!--            <com.google.android.material.tabs.TabItem-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:text="Home"-->
-<!--                android:id="@+id/hometab"-->
-<!--                android:background="@drawable/yellowback"-->
-<!--                tools:layout_editor_absoluteX="5dp"-->
-<!--                tools:layout_editor_absoluteY="70dp" />-->
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Home"
+                android:id="@+id/hometab"
+                android:background="@drawable/yellowback"
+                tools:layout_editor_absoluteX="5dp"
+                tools:layout_editor_absoluteY="70dp" />
 
-<!--            <com.google.android.material.tabs.TabItem-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:id="@+id/classroomtab"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:background="@drawable/yellowback"-->
-<!--                android:text="Classroom" />-->
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:id="@+id/classroomtab"
+                android:layout_height="wrap_content"
+                android:background="@drawable/yellowback"
+                android:text="Classroom" />
 
 
-<!--        </com.google.android.material.tabs.TabLayout>-->
+        </com.google.android.material.tabs.TabLayout>
 
         <androidx.viewpager.widget.ViewPager
 

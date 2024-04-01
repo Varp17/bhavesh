@@ -10,6 +10,7 @@
     <color name="textcolor2" android:state_checked="true" >#00E5FF</color>
     <color name="textcolor3" android:state_pressed="true" >#00E5FF</color>
     <color name="textcolor4" android:state_window_focused="true" >#00E5FF</color>
+    <color name="purple">#8692f7</color>
 
 
 

@@ -78,8 +78,6 @@ public class student_login extends AppCompatActivity {
 //        progressBar.setIndeterminateDrawable(x);
 
         // Hide UI elements initially
-        login.setVisibility(View.GONE);
-
 
         forgotPasswordLink.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -95,15 +93,14 @@ public class student_login extends AppCompatActivity {
         });
         login.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                login.setVisibility(View.GONE);
+            public void onClick(View v){
                 overlay.setVisibility(View.VISIBLE);
                 progressBar.setVisibility(View.VISIBLE);
                 Intent intent = new Intent(student_login.this, student_panel.class);
                 startActivity(intent);
                 finish();
-                progressBar.setVisibility(View.GONE);
-                overlay.setVisibility(View.GONE);
+//                progressBar.setVisibility(View.GONE);
+//                overlay.setVisibility(View.GONE);
             }
 
         });
