@@ -6,10 +6,12 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.SpannableString;
+import android.text.TextUtils;
 import android.text.style.UnderlineSpan;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -44,6 +46,7 @@ public class student_login extends AppCompatActivity {
     private FirebaseFirestore fstore;
     private ProgressBar progressBar;
     private FrameLayout overlay;
+    private EditText editTextUsername, editTextPassword;
 
 
 
@@ -65,6 +68,9 @@ public class student_login extends AppCompatActivity {
         content = new SpannableString("Administrator\\Teacher Login");
         content.setSpan(new UnderlineSpan(), 0, content.length(), 0);
         teacher_login.setText(content);
+        editTextPassword=findViewById(R.id.word);
+        editTextUsername=findViewById(R.id.editTextText); // Fix this line
+
 
         overlay = findViewById(R.id.overlay);
         progressBar = findViewById(R.id.progressBar);
@@ -95,13 +101,10 @@ public class student_login extends AppCompatActivity {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
-                overlay.setVisibility(View.VISIBLE);
-                progressBar.setVisibility(View.VISIBLE);
-                Intent intent = new Intent(student_login.this, student_panel.class);
-                startActivity(intent);
-                finish();
-//                progressBar.setVisibility(View.GONE);
-//                overlay.setVisibility(View.GONE);
+
+
+
+                loginUser();
             }
 
         });
@@ -172,7 +175,13 @@ public class student_login extends AppCompatActivity {
 
                 startActivity(new Intent(getApplicationContext(), administrotor_panel.class));
                 finish();
-            } else {
+
+            } else if("Student".equals(userType))
+            {
+                startActivity(new Intent(getApplicationContext(), student_panel.class));
+                finish();
+            }
+            else {
                 mAuth.signOut();
                 startActivity(new Intent(getApplicationContext(), student_login.class));
                 overlay.setVisibility(View.GONE);
@@ -195,6 +204,9 @@ public class student_login extends AppCompatActivity {
                     userType = "Teacher";
                 } else if (documentSnapshot.getBoolean("isAdmin") != null && documentSnapshot.getBoolean("isAdmin")) {
                     userType = "Admin";
+                }else if(documentSnapshot.getBoolean("isAdmin") != null && documentSnapshot.getBoolean("isStudent"))
+                {
+                    userType="Student";
                 }
             } else {
                 Log.d(TAG, "Document does not exist");
@@ -209,5 +221,54 @@ public class student_login extends AppCompatActivity {
     // Define an interface for callback
     public interface UserTypeCallback {
         void onUserTypeReceived(String userType);
+    }
+    private void loginUser() {
+        String email = editTextUsername.getText().toString().trim();
+        String password = editTextPassword.getText().toString().trim();
+
+        if (TextUtils.isEmpty(email)) {
+            editTextUsername.setError("Email is required");
+            return;
+        }
+
+        if (TextUtils.isEmpty(password)) {
+            editTextPassword.setError("Password is required");
+            return;
+        }
+        overlay.setVisibility(View.VISIBLE);
+        progressBar.setVisibility(View.VISIBLE);
+
+        login.setVisibility(View.GONE);
+
+        mAuth.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener(task -> {
+
+                    if (task.isSuccessful()) {
+                        FirebaseUser user = mAuth.getCurrentUser();
+
+                        if (user != null) {
+                            String uid = user.getUid();
+                            getUserType(uid, userType -> {
+                                if ("Student".equals(userType)) {
+
+                                    startActivity(new Intent(getApplicationContext(), teacher_panel.class));
+                                    finish();
+                                }
+                                 else {
+                                    Toast.makeText(getApplicationContext(), "Unknown user type", Toast.LENGTH_SHORT).show();
+                                    progressBar.setVisibility(View.GONE);
+                                    overlay.setVisibility(View.GONE);
+                                    login.setVisibility(View.VISIBLE);
+                                }
+                            });
+                        }
+                    } else {
+                        Toast.makeText(getApplicationContext(), "Credential Invalid " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                        progressBar.setVisibility(View.GONE);
+                        overlay.setVisibility(View.GONE);
+                        login.setVisibility(View.VISIBLE);
+
+                    }
+                });
     }
 }
