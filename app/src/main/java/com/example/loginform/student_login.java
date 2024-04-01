@@ -2,6 +2,7 @@ package com.example.loginform;
 
 import static androidx.fragment.app.FragmentManager.TAG;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.SpannableString;
@@ -182,6 +183,7 @@ public class student_login extends AppCompatActivity {
         });
     }
 
+    @SuppressLint("RestrictedApi")
     public void getUserType(String uid, UserTypeCallback callback) {
         Log.d(TAG, "getUserType method called");
 
