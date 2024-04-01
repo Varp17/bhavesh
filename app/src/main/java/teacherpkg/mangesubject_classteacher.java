@@ -5,11 +5,15 @@ import static java.security.AccessController.getContext;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
@@ -19,6 +23,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.loginform.R;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -35,7 +40,9 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import teacherpkg.Subjects;
 import teacherpkg.recyclerviewonclick;
@@ -46,8 +53,8 @@ public class mangesubject_classteacher extends varchi_line {
 
 
     private ArrayList<Subjects>subjectsArrayList;
-    private String[] subjectname;
-    private String[] teachername;
+    private ArrayList<String> subjectname;
+    private ArrayList<String> teachername ;
     private RecyclerView recyclerview;
     Dialog myDialog ;
 
@@ -58,7 +65,10 @@ public class mangesubject_classteacher extends varchi_line {
     Spinner spinnerYear,spinnerTeacher;
 
     FloatingActionButton openbtn;
-
+    Button submitbtn;
+    String selectedYear;
+    String selectedTeacher;
+    recyclerviewonclick recyclerviewonclick;
     @Override
     int getLayoutresId() {
         return R.layout.activity_mangesubject_classteacher;
@@ -79,14 +89,36 @@ public class mangesubject_classteacher extends varchi_line {
         recyclerview = findViewById(R.id.classroomrecyclerview1);
         recyclerview.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         recyclerview.setHasFixedSize(true);
+        SwipeRefreshLayout swipeRefreshLayout = findViewById(R.id.swipe_refresh_layout);
 
-        recyclerviewonclick recyclerviewonclick=new recyclerviewonclick() {
+        // Set an OnRefreshListener to handle the refresh action
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                // Perform the actions you want to do when the user triggers a refresh
+                // For example, reload data from the server
+                dataInitialize();
+
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        // Stop the refreshing indicator
+                        swipeRefreshLayout.setRefreshing(false);
+
+                        // Hide the ProgressBar when refresh is complete
+
+                    }
+                }, 2000);
+            }
+        });
+
+         recyclerviewonclick=new recyclerviewonclick() {
             @Override
             public void onItemClick(int position) {
                 Intent intent=new Intent(getApplicationContext(), teacher_classroomclicked.class);
 
 
-                intent.putExtra("name",subjectname[position]);
+                intent.putExtra("name", subjectname.get(position));
 
 
 
@@ -96,9 +128,7 @@ public class mangesubject_classteacher extends varchi_line {
 
         };
 
-        teacherviewadapter teacherViewAdapter = new teacherviewadapter(getApplicationContext(),subjectsArrayList, recyclerviewonclick);
-        recyclerview.setAdapter(teacherViewAdapter);
-        teacherViewAdapter.notifyDataSetChanged();
+
 
         openbtn = findViewById(R.id.addsubjectbtn);
         checkclassteacher();
@@ -109,6 +139,7 @@ public class mangesubject_classteacher extends varchi_line {
                 myDialog = new Dialog(mangesubject_classteacher.this);
                 myDialog.setContentView(R.layout.add_subject_floating_panel_teacher);
                 closebtn = myDialog.findViewById(R.id.closeaddsubjectpanel);
+                submitbtn=myDialog.findViewById(R.id.submit_subject_info_btn);
 
                 myDialog.setCanceledOnTouchOutside(false);
 
@@ -120,10 +151,18 @@ public class mangesubject_classteacher extends varchi_line {
                      subjectList = new ArrayList<>();
                     teacherList = new ArrayList<>();
 
+                    // set subject spiner
 
                     SetSubjectList();
+                    // set teachername spiner
                     setTeachernameList();
 
+                    submitbtn.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                           addSubjectClassroom();
+                        }
+                    });
 
 
 
@@ -135,7 +174,7 @@ public class mangesubject_classteacher extends varchi_line {
                     spinnerTeacher.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                         @Override
                         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                            String selectedTeacher = (String) parent.getItemAtPosition(position);
+                             selectedTeacher = (String) parent.getItemAtPosition(position);
                             // Handle the selected teacher as needed
                         }
 
@@ -152,7 +191,7 @@ public class mangesubject_classteacher extends varchi_line {
                     spinnerYear.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                         @Override
                         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                            String selectedYear = (String) parent.getItemAtPosition(position);
+                             selectedYear = (String) parent.getItemAtPosition(position);
                             // Handle the selected year as needed
                         }
 
@@ -173,6 +212,30 @@ public class mangesubject_classteacher extends varchi_line {
                 myDialog.show();
             }
         });
+
+
+    }
+
+    private void addSubjectClassroom() {
+
+
+
+        DocumentReference dr=fstore.collection("classroom_subject").document(selectedYear);
+        Map<String,Object> userInfo=new HashMap<>();
+        userInfo.put("fullname",selectedTeacher);
+        userInfo.put("class teacher",mAuth.getCurrentUser().getUid());
+
+        dr.set(userInfo).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if(task.isSuccessful())
+                {
+                    Toast.makeText(getApplicationContext(), "Subject Classroom Added", Toast.LENGTH_SHORT).show();
+                    dataInitialize();
+                }
+            }
+        });
+
 
 
     }
@@ -239,29 +302,40 @@ public class mangesubject_classteacher extends varchi_line {
         });
 
     }
-
-    private void dataInitialize(){
+    String classteacher;
+    private void dataInitialize() {
         subjectsArrayList = new ArrayList<>();
-        subjectname = new String[]{
-                "CLASS TEACHER'S",
-                getString(R.string.sub1),
-                getString(R.string.sub2),
-                getString(R.string.sub3),
-                getString(R.string.sub4),
+        teachername = new ArrayList<>();
+        subjectname = new ArrayList<>();
 
-        };
-        teachername = new String[]{
-                "Swapnil Sir",
-                getString(R.string.tech1),
-                getString(R.string.tech2),
-                getString(R.string.tech3),
-                getString(R.string.tech4)
-        };
-        for(int i=0;i<subjectname.length;i++){
-            Subjects subjects = new Subjects((subjectname[i]),teachername[i]);
-            subjectsArrayList.add(subjects);
-        }
-
+        CollectionReference classref = fstore.collection("classroom_subject");
+        classref.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    for (DocumentSnapshot document : task.getResult()) {
+                        // Get the document reference
+                        String classTeacher = document.getString("class teacher");
+                        if (classTeacher != null && classTeacher.equals(mAuth.getCurrentUser().getUid())) {
+                            subjectname.add(document.getId());
+                            teachername.add(document.getString("fullname"));
+                        }
+                    }
+                    // Initialize subjectsArrayList after data retrieval is complete
+                    for (int i = 0; i < subjectname.size(); i++) {
+                        Subjects subjects = new Subjects(subjectname.get(i), teachername.get(i));
+                        subjectsArrayList.add(subjects);
+                    }
+                    managesubjectrecycler teacherViewAdapter = new managesubjectrecycler(mangesubject_classteacher.this,subjectsArrayList);
+                    recyclerview.setAdapter(teacherViewAdapter);
+                    teacherViewAdapter.notifyDataSetChanged();
+                } else {
+                    // Handle errors
+                    Toast.makeText(mangesubject_classteacher.this, "Failed to retrieve data", Toast.LENGTH_SHORT).show();
+                    Log.e("Firestore", "Error getting documents: ", task.getException());
+                }
+            }
+        });
     }
     private void checkclassteacher() {
         FirebaseFirestore fstore = FirebaseFirestore.getInstance();
