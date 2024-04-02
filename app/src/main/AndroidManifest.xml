@@ -37,10 +37,12 @@
             android:exported="false" />
         <activity
             android:name="studentpakage.student_classroom_fragment"
-            android:exported="false" />
+            android:exported="false"
+            tools:ignore="Instantiatable" />
         <activity
             android:name="studentpakage.student_classroom_adapter"
-            android:exported="false" />
+            android:exported="false"
+            tools:ignore="Instantiatable" />
         <activity
             android:name="teacherpkg.Take_Attendance_Activity"
             android:exported="false" />
@@ -67,9 +69,6 @@
             android:name="teacherpkg.teacher_panel"
             android:exported="false" />
         <activity
-            android:name="teacherpkg.ManageStudent_classTeacher"
-            android:exported="false" />
-        <activity
             android:name="teacherpkg.fragment_mangestudent_classteacher"
             android:exported="false"
             tools:ignore="Instantiatable" />
@@ -77,8 +76,20 @@
             android:name="studentpakage.student_panel"
             android:exported="false" />
         <activity
+            android:name="studentpakage.student_profile"
+            android:exported="false" />
+
+        <activity
+            android:name="studentpakage.student_feedback"
+            android:exported="false" />
+        <activity
             android:name="teacherpkg.Teacher_Profile"
             android:exported="false" />
+
+        <activity
+            android:name="studentpakage.student_profile"
+            android:exported="false"
+            tools:ignore="DuplicateActivity" />
         <activity
             android:name="administratorpkg.all_college_notiFication_from_Administrator"
             android:exported="false" />

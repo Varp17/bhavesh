@@ -15,7 +15,7 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         app:headerLayout="@layout/student_header"
-        app:menu="@menu/menubaradmin"
+        app:menu="@menu/menubarstudent"
         tools:ignore="DuplicateIds">
 
     </com.google.android.material.navigation.NavigationView>
@@ -48,7 +48,7 @@
                     android:src="@drawable/profile_icon"
                     android:onClick="onProfileImageClick"
 
-                    />
+                    tools:ignore="OnClick" />
 
                 <ImageView
                     android:id="@+id/edit_profile_image"

@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
@@ -50,6 +51,9 @@ public class Addministrator_0r_Teacher_Login extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_addministrator0r_teacher_login);
+        Window window=getWindow();
+        window.setStatusBarColor(getResources().getColor(R.color.teacher_header));
+
 
         forgotPasswordLink = findViewById(R.id.forgot);
         login = findViewById(R.id.button);

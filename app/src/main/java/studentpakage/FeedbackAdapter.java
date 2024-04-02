@@ -12,7 +12,6 @@ import com.example.loginform.R;
 
 import java.util.List;
 
-import studentpakage.Feedback;
 
 public class FeedbackAdapter extends RecyclerView.Adapter<FeedbackAdapter.FeedbackViewHolder> {
 

@@ -64,14 +64,15 @@ public class student_attendance_fragment1 extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        barChart.findViewById(R.id.barchart);
-        getdata();
-        barDataSet=new BarDataSet(list,"Dataset");
-        barData=new BarData(barDataSet);
-        barChart.setData(barData);
-        barDataSet.setColors(ColorTemplate.MATERIAL_COLORS);
-        barDataSet.setValueTextColor(Color.BLACK);
-        barDataSet.setValueTextSize(17f);
+//        barChart.findViewById(R.id.barchart);
+//        getdata();
+//        barDataSet=new BarDataSet(list,"Dataset");
+//        barData=new BarData(barDataSet);
+//        barChart.setData(barData);
+//        barDataSet.setColors(ColorTemplate.MATERIAL_COLORS);
+//        barDataSet.setValueTextColor(Color.BLACK);
+//        barDataSet.setValueTextSize(17f);
+//        barChart.getDescription().setEnabled(true);
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);

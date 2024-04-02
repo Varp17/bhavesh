@@ -7,6 +7,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageView;
 
@@ -28,10 +29,7 @@ import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
 
-import administratorpkg.FragmentAdapter;
-import administratorpkg.administrotor_panel;
-import administratorpkg.administrtor_profile;
-import administratorpkg.feedback_activity_administrator;
+
 
 public class student_panel extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     Toolbar toolbar;
@@ -42,15 +40,19 @@ public class student_panel extends AppCompatActivity implements NavigationView.O
 
     ViewPager vpager;
     TabLayout tabLayout;
-    FragmentAdapter myFragmentAdapter;
+    student_fragmentadpter myFragmentAdapter;
     Menu menu;
-    MenuItem menu_home,menu_classroom,menu_feedback,menu_logout;
+    MenuItem menu_home;
+    MenuItem menu_classroom,menu_documents,menu_attendence,menu_notification,menu_feedback,menu_logout;
+
     ImageView profileimg;
 
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_panel);
+        Window window=getWindow();
+        window.setStatusBarColor(getResources().getColor(R.color.student_color));
         drawerLayout=findViewById(R.id.Drawer_lay);
         navigationView=findViewById(R.id.nav_view);
         toolbar=findViewById(R.id.toolbar);
@@ -69,6 +71,11 @@ public class student_panel extends AppCompatActivity implements NavigationView.O
         menu_home=menu.findItem(R.id.nav_home);
         menu_classroom=menu.findItem(R.id.nav_classroom);
         menu_logout=menu.findItem(R.id.nav_logout);
+        menu_feedback = menu.findItem(R.id.nav_feedback);
+        menu_documents = menu.findItem(R.id.nav_document);
+        menu_attendence = menu.findItem(R.id.nav_attendance);
+        menu_notification = menu.findItem(R.id.nav_notification);
+
 
         menu_logout.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
@@ -87,12 +94,12 @@ public class student_panel extends AppCompatActivity implements NavigationView.O
 
                 Intent intent = new Intent(student_panel.this, student_profile.class);
                 startActivity(intent);
-                finishActivity(R.id.managestaff);
+                finishActivity(R.id.student_profilename);
 
             }
         });
 
-        menu_feedback = menu.findItem(R.id.nav_feedback);
+
 
         menu_feedback.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
@@ -113,7 +120,7 @@ public class student_panel extends AppCompatActivity implements NavigationView.O
             }
         });
         vpager=findViewById(R.id.vpager);
-        myFragmentAdapter=new FragmentAdapter(getSupportFragmentManager());
+        myFragmentAdapter=new student_fragmentadpter(getSupportFragmentManager());
         vpager.setAdapter(myFragmentAdapter);
         tabLayout=findViewById(R.id.tabLayout);
         tabLayout.setupWithViewPager(vpager);
@@ -131,6 +138,57 @@ public class student_panel extends AppCompatActivity implements NavigationView.O
 
 
 
+        menu_attendence.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(@NonNull MenuItem item) {
+
+
+                Intent intent=new Intent(getApplicationContext(), student_attendance_fragment1.class);
+                startActivity(intent);
+                finish();
+                drawerLayout.closeDrawer(GravityCompat.START);
+
+                return false;
+            }
+        });
+        menu_documents.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+
+            public boolean onMenuItemClick(@NonNull MenuItem item) {
+
+                drawerLayout.closeDrawer(GravityCompat.START);
+
+
+                Intent intent = new Intent(getApplicationContext(), student_document_fragment1.class);
+                intent.putExtra("flagfordocuments", true);
+
+                startActivity(intent);
+                finish();
+                return false;
+            }
+        });menu_notification.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+
+            public boolean onMenuItemClick(@NonNull MenuItem item) {
+
+                drawerLayout.closeDrawer(GravityCompat.START);
+
+
+                Intent intent = new Intent(getApplicationContext(), student_notification_fragment1.class);
+
+                startActivity(intent);
+                finish();
+                return false;
+            }
+        });
+
+
+
+
+
+
+
+
 
     }
 
@@ -139,7 +197,7 @@ public class student_panel extends AppCompatActivity implements NavigationView.O
     public boolean onCreateOptionsMenu(Menu menu) {
 
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menubaradmin, menu);
+        inflater.inflate(R.menu.menubarstudent, menu);
 
         return true;
 
