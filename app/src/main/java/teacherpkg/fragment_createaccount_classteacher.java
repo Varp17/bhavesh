@@ -51,8 +51,8 @@ public class fragment_createaccount_classteacher extends Fragment {
     EditText fullname,enrollment,branch,email,mobileno,address,atuogenrated_password;
     Button updatebtn,createbtn;
     String selectedDate;
-    FirebaseFirestore fstore=FirebaseFirestore.getInstance();
-    FirebaseAuth fAuth=FirebaseAuth.getInstance();
+    FirebaseFirestore fstore;
+    FirebaseAuth fAuth;
     ProgressBar progressBar;
 
 
@@ -63,7 +63,6 @@ private String classteacherUID;
     private Button datePickerButton;
     private Button datePickerButton2;
     private DatePickerDialog datePickerDialog;
-    private String mainUserID;
 
 
     public fragment_createaccount_classteacher() {
@@ -94,7 +93,6 @@ private String classteacherUID;
         progressBar = view.findViewById(R.id.progressBar_create);
         Sprite threeBounce = new ThreeBounce();
         progressBar.setIndeterminateDrawable(threeBounce);
-        mainUserID=fAuth.getCurrentUser().getUid();
 
         datePickerButton = view.findViewById(R.id.datepicker1);
         datePickerButton2 = view.findViewById(R.id.datepicker2);
@@ -168,7 +166,7 @@ private String classteacherUID;
                             userInfo.put("DOB", datePickerButton.getText().toString()); // Set the selected date from datePickerButton
                             userInfo.put("AdmissionYear", datePickerButton2.getText().toString());// Set the selected date from datePickerButton2
                             userInfo.put("password",autopassword);
-                            userInfo.put("classteacher",mainUserID);
+                            userInfo.put("isStudent",true);
 
 
                             df.set(userInfo).addOnSuccessListener(new OnSuccessListener<Void>() {

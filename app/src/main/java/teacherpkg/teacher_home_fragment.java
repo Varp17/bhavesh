@@ -118,7 +118,7 @@ public class teacher_home_fragment extends Fragment {
     private void checkclassteacher() {
         FirebaseFirestore fstore = FirebaseFirestore.getInstance();
         FirebaseAuth fAuth = FirebaseAuth.getInstance();
-        String id = fAuth.getCurrentUser().getUid();
+        String id = fAuth.getCurrentUser().getUid().toString();
         DocumentReference dr = fstore.collection("classteachers").document(id);
         dr.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
@@ -129,7 +129,7 @@ public class teacher_home_fragment extends Fragment {
                     floatmanagestu.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            Intent intent = new Intent(getContext(), ManageStudent_classTeacher.class);
+                            Intent intent = new Intent(getContext(), fragment_mangestudent_classteacher.class);
                             startActivity(intent);
                         }
                     });

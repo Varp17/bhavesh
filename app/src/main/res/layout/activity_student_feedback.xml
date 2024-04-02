@@ -5,7 +5,7 @@
     android:id="@+id/Drawer_lay"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="administratorpkg.feedback_activity_administrator"
+    tools:context="studentpakage.student_feedback"
     android:orientation="vertical"
     android:fitsSystemWindows="true"
     tools:openDrawer="start">
@@ -14,7 +14,7 @@
         android:layout_width="300dp"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        app:headerLayout="@layout/header"
+        app:headerLayout="@layout/student_header"
         app:menu="@menu/menubaradmin"
         tools:ignore="DuplicateIds">
 
@@ -29,7 +29,7 @@
         android:layout_height="match_parent"
 
         android:orientation="vertical">
-        <include layout="@layout/custlbar"/>
+        <include layout="@layout/student_custbar"/>
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
