@@ -1,26 +1,49 @@
 package studentpakage;
 
-import android.os.Bundle;
 
-import androidx.activity.EdgeToEdge;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
-import com.example.loginform.R;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentPagerAdapter;
 
-public class student_classroom_adapter extends AppCompatActivity {
+public class student_classroom_adapter extends FragmentPagerAdapter {
+    public student_classroom_adapter (FragmentManager fm)
+    {
+        super(fm);
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_student_classroom_adapter);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
+    }
+    public Fragment getItem(int position) {
+        switch (position)
+        {
+            case 0:  return new student_attendance_fragment1();
+            case 1:  return new student_notification_fragment1();
+            case 2:  return new student_document_fragment1();
+            default: return new student_attendance_fragment1();
+        }
+
+    }
+
+    public int getCount() {
+        return 3;
+    }
+
+
+    public CharSequence getPageTitle(int position) {
+        String title=null;
+        if(position==0)
+        {
+            title="ATTENDENCE";
+        }
+        if(position==1)
+        {
+            title="DOCUMENT";
+        }
+        if(position==2)
+        {
+            title="NOTIFICATION";
+        }
+
+        return title;
     }
 }
+

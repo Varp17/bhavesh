@@ -16,6 +16,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
 
 import com.example.loginform.R;
 import com.example.loginform.student_login;
@@ -40,6 +41,12 @@ public abstract class varchi_line extends AppCompatActivity  {
     MenuItem menu_classroom,menu_documents,menu_attendence,menu_notification,menu_managestudent,menu_feedback,menu_logout;
 
     abstract int getLayoutresId() ;
+
+    @NonNull
+    public abstract Fragment getItem(int position);
+
+    public abstract int getCount();
+
     abstract String getactionbarTiile_in_varchi_line();
 
 

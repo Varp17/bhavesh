@@ -1,4 +1,4 @@
-package teacherpkg;
+package studentpakage;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,14 +15,14 @@ import com.example.loginform.R;
 import java.util.ArrayList;
 import java.util.List;
 
-public class feedback_teacher extends varchi_line implements teacher_feedback_adapter.OnFeedbackClickListener {
+public class student_feedback extends varchi_line implements FeedbackAdapter.OnFeedbackClickListener {
 
     private RecyclerView recyclerView;
-    private teacher_feedback_adapter feedbackAdapter;
+    private FeedbackAdapter feedbackAdapter;
 
     @Override
-    int getLayoutresId() {
-        return R.layout.activity_feedback_teacher_;
+    public int getLayoutresId() {
+        return R.layout.activity_student_feedback;
     }
 
     @NonNull
@@ -52,7 +52,7 @@ public class feedback_teacher extends varchi_line implements teacher_feedback_ad
         // Mock data - replace this with your actual data retrieval logic
         List<Feedback> feedbackList = generateMockFeedbacks();
 
-        feedbackAdapter = new teacher_feedback_adapter(feedbackList, this);
+        feedbackAdapter = new FeedbackAdapter(feedbackList, this);
         recyclerView.setAdapter(feedbackAdapter);
     }
 

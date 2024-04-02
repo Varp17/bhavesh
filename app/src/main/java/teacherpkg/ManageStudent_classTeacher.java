@@ -3,10 +3,12 @@ package teacherpkg;
 import android.os.Bundle;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.loginform.R;
@@ -24,6 +26,17 @@ public  class ManageStudent_classTeacher extends varchi_line {
     @Override
     public int getLayoutresId() {
         return R.layout.activity_manage_student_class_teacher;
+    }
+
+    @NonNull
+    @Override
+    public Fragment getItem(int position) {
+        return null;
+    }
+
+    @Override
+    public int getCount() {
+        return 0;
     }
 
     @Override

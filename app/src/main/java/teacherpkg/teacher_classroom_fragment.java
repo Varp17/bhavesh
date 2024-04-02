@@ -112,7 +112,8 @@ public class teacher_classroom_fragment extends Fragment {
         View rootView = inflater.inflate(R.layout.activity_teacher_classroom_fragment, container, false);
 
 
-        dataInitialize();
+
+
 
 
         return rootView;
@@ -131,6 +132,8 @@ public class teacher_classroom_fragment extends Fragment {
         recyclerview.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerview.setHasFixedSize(true);
 
+        dataInitialize();
+
         SwipeRefreshLayout swipeRefreshLayout = view.findViewById(R.id.swipe_refresh_layout);
 
         // Set an OnRefreshListener to handle the refresh action
@@ -139,6 +142,7 @@ public class teacher_classroom_fragment extends Fragment {
             public void onRefresh() {
                 // Perform the actions you want to do when the user triggers a refresh
                 // For example, reload data from the server
+
                 dataInitialize();
 
                 new Handler().postDelayed(new Runnable() {
@@ -190,6 +194,8 @@ public class teacher_classroom_fragment extends Fragment {
         teachername=new ArrayList<>();
         subjectname=new ArrayList<>();
 
+        addclassteacher();
+
 
         DocumentReference documentReference=fstore.collection("user").document(fAuth.getCurrentUser().getUid());
         documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -205,36 +211,42 @@ public class teacher_classroom_fragment extends Fragment {
             }
         });
 
-        addclassteacher();
+
+
         CollectionReference crf=fstore.collection("classroom_subject");
         crf.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+
+
+
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if(task.isSuccessful()) {
+                if (task.isSuccessful()) {
+                    subjectsArrayList.clear(); // Clear existing data
                     for (DocumentSnapshot documentSnapshot : task.getResult()) {
-
                         String name = documentSnapshot.getString("fullname");
-
-
-                                if(name.equals(username))
-                                {
-                                    teachername.add(documentSnapshot.getString("fullname"));
-                                    subjectname.add(documentSnapshot.getId());
-
-                                }
-
+                        if (name.equals(username)) {
+                            teachername.add(documentSnapshot.getString("fullname"));
+                            subjectname.add(documentSnapshot.getId());
+                        }
                     }
-                    for(int i=0;i<subjectname.size();i++){
+                    for (int i = 0; i < subjectname.size(); i++) {
                         Subjects subjects = new Subjects((subjectname.get(i)), teachername.get(i));
                         subjectsArrayList.add(subjects);
                     }
                     intializeadapter();
-
-                }else {
+                } else {
+                    for (int i = 0; i < subjectname.size(); i++) {
+                        Subjects subjects = new Subjects((subjectname.get(i)), teachername.get(i));
+                        subjectsArrayList.add(subjects);
+                    }
+                    intializeadapter();
                     Toast.makeText(getContext(), "No Document Found", Toast.LENGTH_SHORT).show();
                 }
             }
         });
+
+
+       // Update adapter with new data
 
 
 
@@ -243,6 +255,10 @@ public class teacher_classroom_fragment extends Fragment {
 
     private void addclassteacher() {
 
+        subjectsArrayList = new ArrayList<>();
+        teachername=new ArrayList<>();
+        subjectname=new ArrayList<>();
+
         DocumentReference dr = fstore.collection("classteachers").document(fAuth.getCurrentUser().getUid());
         dr.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
@@ -250,26 +266,21 @@ public class teacher_classroom_fragment extends Fragment {
                 if (documentSnapshot.exists()) {
                     // User is a class teacher
 
-                        teachername.add(documentSnapshot.getString("fullname"));
-                        subjectname.add("CLASS TEACHER'S");
-
-
-
+                    teachername.add(documentSnapshot.getString("fullname"));
+                    subjectname.add("CLASS TEACHER'S :"+documentSnapshot.getString("class year"));
 
                 } else {
                     // User is not a class teacher
-                    Toast.makeText(getContext(), "No Classteacher", Toast.LENGTH_SHORT).show();
+                    Log.d(TAG, "you are not class teacher");
                 }
+
             }
-        }).addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-            @Override
-            public void onSuccess(DocumentSnapshot documentSnapshot) {
-                intializeadapter();
-            }
+
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
                 // Error occurred, hide the button
+
                 Log.d(TAG, "onFailure: failed classteaccher");
             }
         });
