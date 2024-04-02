@@ -74,6 +74,7 @@ dependencies {
 
     implementation("androidx.appcompat:appcompat:1.3.0")
     implementation("de.hdodenhof:circleimageview:3.1.0")
+    implementation ("com.github.PhilJay:MPAndroidChart:v3.1.0")
 
 //    implementation("com.google.firebase:firebase-admin:9.2.0") {
 //        exclude ( "com.google.protobuf",("protobuf-java"))

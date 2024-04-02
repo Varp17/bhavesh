@@ -1,4 +1,4 @@
-package teacherpkg;
+package studentpakage;
 
 import static android.content.ContentValues.TAG;
 
@@ -35,7 +35,7 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-public class Teacher_Profile extends varchi_line {
+public class student_profile extends varchi_line {
 
     EditText profile_name,profile_id,profile_branch,profile_dob,profile_address,profile_mobno;
     FirebaseAuth mAuth;
@@ -50,7 +50,7 @@ public class Teacher_Profile extends varchi_line {
     }
     @Override
     public int getLayoutresId() {
-        return R.layout.activity_teacher_profile;
+        return R.layout.activity_student_profile;
 
     }
 

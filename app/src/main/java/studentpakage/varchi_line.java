@@ -1,4 +1,5 @@
-package administratorpkg;
+package studentpakage;
+
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -6,39 +7,45 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 import android.widget.ImageView;
 
-import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.graphics.Insets;
 import androidx.core.view.GravityCompat;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.fragment.app.FragmentPagerAdapter;
-import androidx.viewpager.widget.ViewPager;
+import androidx.fragment.app.Fragment;
 
 import com.example.loginform.R;
 import com.example.loginform.student_login;
 import com.google.android.material.navigation.NavigationView;
-import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
 
- abstract class varchi_line extends AppCompatActivity  {
+import teacherpkg.teacher_classroomclicked;
+import teacherpkg.teacher_panel;
+
+public abstract class varchi_line extends AppCompatActivity  {
 
     Toolbar toolbar;
     DrawerLayout drawerLayout;
     NavigationView navigationView;
 //    ImageButton notification;
 
+
+
     Menu menu;
     MenuItem menu_home;
     MenuItem menu_classroom,menu_documents,menu_attendence,menu_notification,menu_managestudent,menu_feedback,menu_logout;
 
-    public abstract int getLayoutresId() ;
+    abstract int getLayoutresId() ;
+
+    @NonNull
+    public abstract Fragment getItem(int position);
+
+    public abstract int getCount();
+
     abstract String getactionbarTiile_in_varchi_line();
 
 
@@ -48,6 +55,8 @@ import com.google.firebase.auth.FirebaseAuth;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(getLayoutresId());
+        Window window=getWindow();
+        window.setStatusBarColor(getResources().getColor(R.color.teacher_color));
 //        notification=findViewById(R.id.notificationbtn);
         drawerLayout=findViewById(R.id.Drawer_lay);
         navigationView=findViewById(R.id.nav_view);
@@ -73,6 +82,7 @@ import com.google.firebase.auth.FirebaseAuth;
         menu_notification=menu.findItem(R.id.nav_notification);
         menu_attendence=menu.findItem(R.id.nav_attendance);
         menu_feedback = menu.findItem(R.id.nav_feedback);
+
         menu_logout=menu.findItem(R.id.nav_logout);
 
 
@@ -90,8 +100,8 @@ import com.google.firebase.auth.FirebaseAuth;
         menu_feedback.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(@NonNull MenuItem item) {
-                Intent intent = new Intent(getApplicationContext(), feedback_activity_administrator.class);
-                startActivity(intent);
+//                Intent intent = new Intent(getApplicationContext(), feedback_activity_administrator.class);
+//                startActivity(intent);
                 return false;
             }
         });
@@ -99,15 +109,15 @@ import com.google.firebase.auth.FirebaseAuth;
 
         ImageView profileImg = navigationView.getHeaderView(0).findViewById(R.id.profileimg);
         profileImg.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(toolbar.getTitle()!="PROFIlE") {
+                @Override
+                public void onClick(View v) {
+                    if(toolbar.getTitle()!="PROFIlE") {
 
-                    Intent intent = new Intent(getApplicationContext(), administrtor_profile.class);
-                    startActivity(intent);
-                    finish();
-                    finishActivity(R.id.managestaff);
-                }
+//                    Intent intent = new Intent(getApplicationContext(), administrtor_profile.class);
+//                    startActivity(intent);
+//                    finish();
+//                    finishActivity(R.id.managestaff);
+                    }
 
             }
         });
@@ -115,7 +125,7 @@ import com.google.firebase.auth.FirebaseAuth;
             @Override
             public boolean onMenuItemClick(@NonNull MenuItem item) {
                 drawerLayout.closeDrawer(GravityCompat.START);
-                Intent intent=new Intent(getApplicationContext(), administrotor_panel.class);
+                Intent intent=new Intent(getApplicationContext(), teacher_panel.class);
                 startActivity(intent);
                 finish();
                 return false;
@@ -126,9 +136,9 @@ import com.google.firebase.auth.FirebaseAuth;
             public boolean onMenuItemClick(@NonNull MenuItem item) {
 
 
-                    Intent intent=new Intent(getApplicationContext(), administrotor_panel.class);
-                    startActivity(intent);
-                    finish();
+                Intent intent=new Intent(getApplicationContext(), teacher_panel.class);
+                startActivity(intent);
+                finish();
                 drawerLayout.closeDrawer(GravityCompat.START);
 
                 return false;
@@ -142,7 +152,7 @@ import com.google.firebase.auth.FirebaseAuth;
                 drawerLayout.closeDrawer(GravityCompat.START);
                 if(!"CLASS TEACHER'S".equals(toolbar.getTitle())) {
 
-                    Intent intent = new Intent(getApplicationContext(), classroomClicked_activity.class);
+                    Intent intent = new Intent(getApplicationContext(), teacher_classroomclicked.class);
                     intent.putExtra("flagfordocuments", true);
 
                     startActivity(intent);
@@ -160,7 +170,7 @@ import com.google.firebase.auth.FirebaseAuth;
                 drawerLayout.closeDrawer(GravityCompat.START);
                 if(!"CLASS TEACHER'S".equals(toolbar.getTitle())) {
 
-                    Intent intent = new Intent(getApplicationContext(), classroomClicked_activity.class);
+                    Intent intent = new Intent(getApplicationContext(), teacher_classroomclicked.class);
                     intent.putExtra("flagforattendence", true);
 
                     startActivity(intent);
@@ -171,17 +181,17 @@ import com.google.firebase.auth.FirebaseAuth;
             }
         });
 
-            menu_notification.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-                @Override
-                public boolean onMenuItemClick(@NonNull MenuItem item) {
-                    if(getactionbarTiile_in_varchi_line()!="NOTIFICATIONS") {
-                        Intent intent1 = new Intent(getApplicationContext(), all_college_notiFication_from_Administrator.class);
-                        startActivity(intent1);
-                        finish();
-                    }
-                    return false;
-                }
-            });
+        menu_notification.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(@NonNull MenuItem item) {
+//                if(getactionbarTiile_in_varchi_line()!="NOTIFICATIONS") {
+//                    Intent intent1 = new Intent(getApplicationContext(), all_college_notiFication_from_Administrator.class);
+//                    startActivity(intent1);
+//                    finish();
+//                }
+                return false;
+            }
+        });
 
 
 
@@ -205,9 +215,9 @@ import com.google.firebase.auth.FirebaseAuth;
         // Handle your menu items here
         if (id == R.id.nav_notification && getactionbarTiile_in_varchi_line()!= "NOTIFICATIONS") {
 
-            Intent intent=new Intent(getApplicationContext(), all_college_notiFication_from_Administrator.class);
-            startActivity(intent);
-            finish();
+//            Intent intent=new Intent(getApplicationContext(), all_college_notiFication_from_Administrator.class);
+//            startActivity(intent);
+//            finish();
             return true;
         }
 
@@ -220,8 +230,9 @@ import com.google.firebase.auth.FirebaseAuth;
             drawerLayout.closeDrawer(GravityCompat.START);
         }else
             super.onBackPressed();
-        }
     }
+}
+
 
 
 

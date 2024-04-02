@@ -5,7 +5,7 @@
     tools:context="studentpakage.student_panel"
     android:layout_width="match_parent"
     android:layout_height="130dp"
-    android:background="@drawable/yellowback"
+    android:background="@color/student_color"
     android:gravity="bottom"
     android:padding="30dp">
 

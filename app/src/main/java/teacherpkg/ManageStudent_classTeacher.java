@@ -2,17 +2,13 @@ package teacherpkg;
 
 import android.os.Bundle;
 
-import androidx.activity.EdgeToEdge;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.loginform.R;
 import com.google.android.material.tabs.TabLayout;
 
-import administratorpkg.manage_activityforclassteacher_adapter;
 
 
 public  class ManageStudent_classTeacher extends varchi_line {
@@ -24,6 +20,39 @@ public  class ManageStudent_classTeacher extends varchi_line {
     @Override
     public int getLayoutresId() {
         return R.layout.activity_manage_student_class_teacher;
+    }
+
+    @NonNull
+    @Override
+    public Fragment getItem(int position) {
+        switch (position) {
+            case 0:
+                return new fragment_createaccount_classteacher();
+            case 1:
+                return new managestaffFragment();
+            default:
+                return new fragment_createaccount_classteacher();
+        }
+
+    }
+
+    @Override
+    public int getCount() {
+        return 2;
+    }
+    public CharSequence getPageTitle(int position) {
+        String title=null;
+        if(position==0)
+        {
+            title="Create Account";
+        }
+        if(position==1)
+        {
+            title="Manage Student";
+        }
+
+
+        return title;
     }
 
     @Override

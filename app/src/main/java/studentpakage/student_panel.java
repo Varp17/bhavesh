@@ -70,7 +70,7 @@ public class student_panel extends AppCompatActivity implements NavigationView.O
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(student_panel.this, Student_Profile.class);
+                Intent intent = new Intent(student_panel.this, student_profile.class);
                 startActivity(intent);
                 finishActivity(R.id.managestaff);
 
@@ -82,7 +82,7 @@ public class student_panel extends AppCompatActivity implements NavigationView.O
         menu_feedback.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(@NonNull MenuItem item) {
-                Intent intent = new Intent(getApplicationContext(), feedback_activity_administrator.class);
+                Intent intent = new Intent(getApplicationContext(), student_feedback.class);
                 startActivity(intent);
                 return false;
             }

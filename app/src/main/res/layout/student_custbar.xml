@@ -18,7 +18,7 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="70dp"
-            android:background="@drawable/yellowback">
+            android:background="@color/student_color">
 
 
         </androidx.appcompat.widget.Toolbar>
