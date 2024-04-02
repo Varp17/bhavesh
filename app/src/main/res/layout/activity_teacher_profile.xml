@@ -47,21 +47,8 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="15dp"
                 android:src="@drawable/profile_icon"
-                android:onClick="onProfileImageClick"
 
                 />
-
-            <ImageView
-                android:id="@+id/edit_profile_image"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignEnd="@id/profile_image_teacher"
-                android:layout_alignBottom="@id/profile_image_teacher"
-                android:layout_marginEnd="-20dp"
-                android:layout_marginBottom="-20dp"
-                android:background="?attr/selectableItemBackground"
-                android:padding="8dp"
-                android:src="@drawable/ic_edit" />
 
             <TextView
                 android:id="@+id/teacher_name_profile"

@@ -90,6 +90,8 @@ public class Addministrator_0r_Teacher_Login extends AppCompatActivity {
         String email = editTextUsername.getText().toString().trim();
         String password = editTextPassword.getText().toString().trim();
 
+        Toast.makeText(getApplicationContext(),email+" "+password,Toast.LENGTH_SHORT).show();
+
         if (TextUtils.isEmpty(email)) {
             editTextUsername.setError("Email is required");
             return;
