@@ -138,49 +138,49 @@ public class student_panel extends AppCompatActivity implements NavigationView.O
 
 
 
-        menu_attendence.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(@NonNull MenuItem item) {
-
-
-                Intent intent=new Intent(getApplicationContext(), student_attendance_fragment1.class);
-                startActivity(intent);
-                finish();
-                drawerLayout.closeDrawer(GravityCompat.START);
-
-                return false;
-            }
-        });
-        menu_documents.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-            @Override
-
-            public boolean onMenuItemClick(@NonNull MenuItem item) {
-
-                drawerLayout.closeDrawer(GravityCompat.START);
-
-
-                Intent intent = new Intent(getApplicationContext(), student_document_fragment1.class);
-                intent.putExtra("flagfordocuments", true);
-
-                startActivity(intent);
-                finish();
-                return false;
-            }
-        });menu_notification.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-            @Override
-
-            public boolean onMenuItemClick(@NonNull MenuItem item) {
-
-                drawerLayout.closeDrawer(GravityCompat.START);
-
-
-                Intent intent = new Intent(getApplicationContext(), student_notification_fragment1.class);
-
-                startActivity(intent);
-                finish();
-                return false;
-            }
-        });
+//        menu_attendence.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+//            @Override
+//            public boolean onMenuItemClick(@NonNull MenuItem item) {
+//
+//
+//                Intent intent=new Intent(getApplicationContext(), student_attendance_fragment1.class);
+//                startActivity(intent);
+//                finish();
+//                drawerLayout.closeDrawer(GravityCompat.START);
+//
+//                return false;
+//            }
+//        });
+//        menu_documents.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+//            @Override
+//
+//            public boolean onMenuItemClick(@NonNull MenuItem item) {
+//
+//                drawerLayout.closeDrawer(GravityCompat.START);
+//
+//
+//                Intent intent = new Intent(getApplicationContext(), student_document_fragment1.class);
+//                intent.putExtra("flagfordocuments", true);
+//
+//                startActivity(intent);
+//                finish();
+//                return false;
+//            }
+//        });menu_notification.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+//            @Override
+//
+//            public boolean onMenuItemClick(@NonNull MenuItem item) {
+//
+//                drawerLayout.closeDrawer(GravityCompat.START);
+//
+//
+//                Intent intent = new Intent(getApplicationContext(), student_notification_fragment1.class);
+//
+//                startActivity(intent);
+//                finish();
+//                return false;
+//            }
+//        });
 
 
 
