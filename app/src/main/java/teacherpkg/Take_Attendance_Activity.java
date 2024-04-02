@@ -1,9 +1,12 @@
 package teacherpkg;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,6 +18,10 @@ import com.example.loginform.R;
 
 public class Take_Attendance_Activity extends AppCompatActivity {
 
+
+
+    String subjectclass;
+    String subname;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,6 +34,13 @@ public class Take_Attendance_Activity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+      SharedPreferences sharedPreferences = getSharedPreferences("subname", Context.MODE_PRIVATE);
+
+         subname = sharedPreferences.getString("subname", null);
+
+        Toast.makeText(this, subname, Toast.LENGTH_SHORT).show();
+
     }
 
     public void attendancebackbtn(View view) {

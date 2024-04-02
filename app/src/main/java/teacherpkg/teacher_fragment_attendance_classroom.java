@@ -77,7 +77,9 @@ public class teacher_fragment_attendance_classroom extends Fragment {
         take_attendance_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getContext(),Take_Attendance_Activity.class));
+                Intent intent=new  Intent(getContext(),Take_Attendance_Activity.class);
+
+                startActivity(intent);
             }
         });
         return rootView;

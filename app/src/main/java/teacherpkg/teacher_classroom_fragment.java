@@ -111,8 +111,9 @@ public class teacher_classroom_fragment extends Fragment {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.activity_teacher_classroom_fragment, container, false);
 
-
+        addclassteacher();
         dataInitialize();
+
 
 
         return rootView;
@@ -139,6 +140,7 @@ public class teacher_classroom_fragment extends Fragment {
             public void onRefresh() {
                 // Perform the actions you want to do when the user triggers a refresh
                 // For example, reload data from the server
+                addclassteacher();
                 dataInitialize();
 
                 new Handler().postDelayed(new Runnable() {
@@ -191,6 +193,7 @@ public class teacher_classroom_fragment extends Fragment {
         subjectname=new ArrayList<>();
 
 
+
         DocumentReference documentReference=fstore.collection("user").document(fAuth.getCurrentUser().getUid());
         documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
@@ -205,32 +208,30 @@ public class teacher_classroom_fragment extends Fragment {
             }
         });
 
-        addclassteacher();
+
+
         CollectionReference crf=fstore.collection("classroom_subject");
         crf.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+
+
+
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if(task.isSuccessful()) {
+                if (task.isSuccessful()) {
+                    subjectsArrayList.clear(); // Clear existing data
                     for (DocumentSnapshot documentSnapshot : task.getResult()) {
-
                         String name = documentSnapshot.getString("fullname");
-
-
-                                if(name.equals(username))
-                                {
-                                    teachername.add(documentSnapshot.getString("fullname"));
-                                    subjectname.add(documentSnapshot.getId());
-
-                                }
-
+                        if (name.equals(username)) {
+                            teachername.add(documentSnapshot.getString("fullname"));
+                            subjectname.add(documentSnapshot.getId());
+                        }
                     }
-                    for(int i=0;i<subjectname.size();i++){
+                    for (int i = 0; i < subjectname.size(); i++) {
                         Subjects subjects = new Subjects((subjectname.get(i)), teachername.get(i));
                         subjectsArrayList.add(subjects);
                     }
-                    intializeadapter();
-
-                }else {
+                    intializeadapter(); // Update adapter with new data
+                } else {
                     Toast.makeText(getContext(), "No Document Found", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -250,16 +251,17 @@ public class teacher_classroom_fragment extends Fragment {
                 if (documentSnapshot.exists()) {
                     // User is a class teacher
 
-                        teachername.add(documentSnapshot.getString("fullname"));
-                        subjectname.add("CLASS TEACHER'S");
+                    teachername.add(documentSnapshot.getString("fullname"));
+                    subjectname.add("CLASS TEACHER'S");
 
 
 
 
                 } else {
                     // User is not a class teacher
-                    Toast.makeText(getContext(), "No Classteacher", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "No Class-teacher", Toast.LENGTH_SHORT).show();
                 }
+
             }
         }).addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override

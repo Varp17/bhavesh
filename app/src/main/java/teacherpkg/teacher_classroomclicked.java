@@ -1,6 +1,8 @@
 package teacherpkg;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -61,6 +63,7 @@ public class teacher_classroomclicked extends varchi_line{
         Intent intent=getIntent();
         this.title = intent.getStringExtra("name");
         return title;
+
     }
 
     @Override
@@ -74,7 +77,12 @@ public class teacher_classroomclicked extends varchi_line{
         vpager.setAdapter(myFragmentAdapter1);
         tabLayout=findViewById(R.id.tabLayout);
         tabLayout.setupWithViewPager(vpager);
+        SharedPreferences sharedPreferences = getSharedPreferences("subname", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("subname", title);
 
+// Use commit instead of apply for synchronous write
+        editor.commit();
         Intent intent=getIntent();
 
         boolean flag=intent.getBooleanExtra("flagfordocuments",false);
