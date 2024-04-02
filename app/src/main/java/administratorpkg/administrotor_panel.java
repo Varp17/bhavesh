@@ -8,10 +8,14 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.viewpager.widget.ViewPager;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -49,7 +53,24 @@ public class administrotor_panel extends AppCompatActivity implements Navigation
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
         setContentView(R.layout.activity_administrotor_panel);
+        connectionDetector connectionDetector = new connectionDetector(getApplicationContext());
+
+        if (!connectionDetector.isConnectedToInternet()) {
+            // Internet connection is available
+            // Perform your network operations here
+            Toast toast = new Toast(getApplicationContext());
+            toast.setDuration(Toast.LENGTH_LONG);
+            toast.setText("No Internet Connection");
+            toast.setGravity(Gravity.TOP | Gravity.CENTER_HORIZONTAL, 0, 0);
+            toast.show();
+
+        } else {
+            // No internet connection
+            // Display a message or take appropriate action
+        }
         FirebaseApp.initializeApp(getApplicationContext());
 //        notification=findViewById(R.id.notificationbtn);
         drawerLayout=findViewById(R.id.Drawer_lay);

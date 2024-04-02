@@ -14,12 +14,16 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.FrameLayout;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.example.loginform.R;
+import com.github.ybq.android.spinkit.sprite.Sprite;
+import com.github.ybq.android.spinkit.style.ThreeBounce;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.AuthResult;
@@ -49,6 +53,8 @@ public class fragment_createaccount_classteacher extends Fragment {
     String selectedDate;
     FirebaseFirestore fstore;
     FirebaseAuth fAuth;
+    ProgressBar progressBar;
+
 
 private String classteacherUID;
 
@@ -83,6 +89,11 @@ private String classteacherUID;
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_createaccount_classteacher, container, false);
         initDatePicker();
+
+        progressBar = view.findViewById(R.id.progressBar_create);
+        Sprite threeBounce = new ThreeBounce();
+        progressBar.setIndeterminateDrawable(threeBounce);
+
         datePickerButton = view.findViewById(R.id.datepicker1);
         datePickerButton2 = view.findViewById(R.id.datepicker2);
 //        datePickerButton.setText(getTodayDate());
@@ -128,6 +139,8 @@ private String classteacherUID;
                             mobileno.getText().toString() + ", " +
                             address.getText().toString();
 
+                    progressBar.setVisibility(View.VISIBLE);
+
 
                     String autopassword= tester.generatePassword(5).toString();
                     String username = getUsername(fullname.getText().toString());
@@ -135,7 +148,7 @@ private String classteacherUID;
                     fAuth.createUserWithEmailAndPassword(email.getText().toString(),autopassword).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                         @Override
                         public void onSuccess(AuthResult authResult) {
-
+                            progressBar.setVisibility(View.GONE);
                             atuogenrated_password.setVisibility(View.VISIBLE);
                             atuogenrated_password.setText(autopassword);
                             FirebaseUser user=fAuth.getCurrentUser();
@@ -195,6 +208,7 @@ private String classteacherUID;
                                             fAuth.signInWithEmailAndPassword(getEmailFromSharedPreferences(),getPasswordFromSharedPreferences()).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                                                 @Override
                                                 public void onSuccess(AuthResult authResult) {
+                                                    datareset();
                                                     Toast.makeText(getContext(), "relogin", Toast.LENGTH_SHORT).show();
                                                 }
                                             }).addOnFailureListener(new OnFailureListener() {
@@ -206,8 +220,6 @@ private String classteacherUID;
 
                                         }
                                     });
-
-
 
 
                                 }
@@ -222,8 +234,6 @@ private String classteacherUID;
                         }
                     });
 
-
-
                 }
 
 
@@ -234,6 +244,7 @@ private String classteacherUID;
         });
 
         // Displaying all values in toast
+
 
 
 
@@ -258,6 +269,16 @@ private String classteacherUID;
 
         return true;
     }
+
+    public void datareset(){
+        fullname.setText("");
+                enrollment.setText("");
+                email.setText("");
+                branch.setText("");
+                mobileno.setText("");
+                address.setText("");
+    }
+
     private String getUsername(String fullName) {
         // Split the full name into parts
         String[] parts = fullName.split(" ");

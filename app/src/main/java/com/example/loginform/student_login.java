@@ -27,10 +27,17 @@ import com.github.ybq.android.spinkit.style.DoubleBounce;
 import com.github.ybq.android.spinkit.style.RotatingPlane;
 import com.github.ybq.android.spinkit.style.ThreeBounce;
 import com.github.ybq.android.spinkit.style.Wave;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import administratorpkg.administrotor_panel;
 import administratorpkg.Addministrator_0r_Teacher_Login;
@@ -42,12 +49,12 @@ public class student_login extends AppCompatActivity {
     TextView forgotPasswordLink, teacher_login;
     SpannableString content;
     Button login;
-    private FirebaseAuth mAuth;
-    private FirebaseFirestore fstore;
+    private FirebaseAuth mAuth=FirebaseAuth.getInstance();
+    private FirebaseFirestore fstore=FirebaseFirestore.getInstance();
     private ProgressBar progressBar;
     private FrameLayout overlay;
     private EditText editTextUsername, editTextPassword;
-
+    private boolean flag;
 
 
     @Override
@@ -137,13 +144,7 @@ public class student_login extends AppCompatActivity {
         super.onStart();
 
         // Check if the user is deleted and handle accordingly
-        if (getIntent().getBooleanExtra("userdeleted", true)) {
-            FirebaseUser currentUser = mAuth.getCurrentUser();
-            if (currentUser != null) {
-                // User is already logged in, redirect to the appropriate home page
-                navigateToHomePage(currentUser);
-            }
-        } else {
+
             // If the user is not deleted, check if the user is already logged in
             FirebaseUser currentUser = mAuth.getCurrentUser();
             if (currentUser != null) {
@@ -162,7 +163,7 @@ public class student_login extends AppCompatActivity {
                 teacher_login.setVisibility(View.VISIBLE);
             }
         }
-    }
+
 
     private void navigateToHomePage(@NonNull FirebaseUser user) {
         String uid = user.getUid();
@@ -176,14 +177,12 @@ public class student_login extends AppCompatActivity {
                 startActivity(new Intent(getApplicationContext(), administrotor_panel.class));
                 finish();
 
-            } else if("Student".equals(userType))
-            {
+            } else if ("Unknown".equals(userType)) {
                 startActivity(new Intent(getApplicationContext(), student_panel.class));
                 finish();
-            }
-            else {
+            } else {
                 mAuth.signOut();
-                startActivity(new Intent(getApplicationContext(), student_login.class));
+
                 overlay.setVisibility(View.GONE);
                 progressBar.setVisibility(View.GONE);
                 Toast.makeText(getApplicationContext(), "User not registered", Toast.LENGTH_SHORT).show();
@@ -204,16 +203,15 @@ public class student_login extends AppCompatActivity {
                     userType = "Teacher";
                 } else if (documentSnapshot.getBoolean("isAdmin") != null && documentSnapshot.getBoolean("isAdmin")) {
                     userType = "Admin";
-                }else if(documentSnapshot.getBoolean("isAdmin") != null && documentSnapshot.getBoolean("isStudent"))
-                {
-                    userType="Student";
                 }
             } else {
                 Log.d(TAG, "Document does not exist");
+
             }
             callback.onUserTypeReceived(userType);
         }).addOnFailureListener(e -> {
             Log.e(TAG, "Error retrieving user type: ", e);
+
             callback.onUserTypeReceived("Unknown");
         });
     }
@@ -240,35 +238,118 @@ public class student_login extends AppCompatActivity {
 
         login.setVisibility(View.GONE);
 
-        mAuth.signInWithEmailAndPassword(email, password)
-                .addOnCompleteListener(task -> {
 
-                    if (task.isSuccessful()) {
-                        FirebaseUser user = mAuth.getCurrentUser();
 
-                        if (user != null) {
-                            String uid = user.getUid();
-                            getUserType(uid, userType -> {
-                                if ("Student".equals(userType)) {
+        mAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
 
-                                    startActivity(new Intent(getApplicationContext(), teacher_panel.class));
-                                    finish();
-                                }
-                                 else {
-                                    Toast.makeText(getApplicationContext(), "Unknown user type", Toast.LENGTH_SHORT).show();
-                                    progressBar.setVisibility(View.GONE);
-                                    overlay.setVisibility(View.GONE);
-                                    login.setVisibility(View.VISIBLE);
-                                }
-                            });
+
+
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if(task.isSuccessful()) {
+                    String uid = mAuth.getCurrentUser().getUid();
+                    getUserType(uid, userType -> {
+                        if ("Unknown".equals(userType)) {
+
+                            startActivity(new Intent(getApplicationContext(), student_panel.class));
+                            finish();
+                        } else {
+                            mAuth.signOut();
+
+                            overlay.setVisibility(View.GONE);
+                            progressBar.setVisibility(View.GONE);
+                            login.setVisibility(View.VISIBLE);
+                            Toast.makeText(getApplicationContext(), "Not Registered as student", Toast.LENGTH_SHORT).show();
                         }
-                    } else {
-                        Toast.makeText(getApplicationContext(), "Credential Invalid " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                        progressBar.setVisibility(View.GONE);
-                        overlay.setVisibility(View.GONE);
-                        login.setVisibility(View.VISIBLE);
 
-                    }
-                });
+                    });
+                }
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(student_login.this, "invalid Credential", Toast.LENGTH_SHORT).show();
+                overlay.setVisibility(View.GONE);
+                progressBar.setVisibility(View.GONE);
+                login.setVisibility(View.VISIBLE);
+            }
+        });
+
+
+
+        //        mAuth.signInWithEmailAndPassword(email, password)
+//                .addOnCompleteListener(task -> {
+//
+//                    if (task.isSuccessful()) {
+//                        FirebaseUser user = mAuth.getCurrentUser();
+//
+//                        if (user != null) {
+//
+//                            CollectionReference classt=fstore.collection("classteachers");
+//                            classt.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+//                                @Override
+//                                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+//                                    if(task.isSuccessful())
+//
+//                                    {
+//
+//
+//                                            for (DocumentSnapshot documentSnapshot : task.getResult()) {
+//                                                 DocumentReference stu = fstore.collection("class_students")
+//                                                        .document(mAuth.getCurrentUser().getUid());
+//
+//                                                stu.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+//                                                    @Override
+//                                                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+//                                                        DocumentSnapshot documentSnapshot1= task.getResult();
+//                                                        if (task.isSuccessful() && documentSnapshot1!=null) {
+//
+//
+//                                                            Toast.makeText(student_login.this, documentSnapshot.getString("classteacher")+" "+documentSnapshot1.getString("classteacher"), Toast.LENGTH_SHORT).show();
+//                                                                   if(documentSnapshot.getString("classteacher").equals(documentSnapshot1.getString("classteacher"))) {
+//                                                                       Toast.makeText(student_login.this, "found", Toast.LENGTH_SHORT).show();
+//
+//                                                                       startActivity(new Intent(getApplicationContext(), student_panel.class));
+//                                                                       finish();
+//                                                                   }
+//
+//                                                        }else{
+//                                                            flag = true;
+//                                                        }
+//                                                    }
+//                                                });
+//                                                if(flag)
+//                                                {
+//                                                    break;
+//                                                }
+//
+//                                        }
+//                                        if(flag) {
+//                                            mAuth.signOut();
+//                                            Toast.makeText(getApplicationContext(), "User Not registered as Student ", Toast.LENGTH_SHORT).show();
+//                                            progressBar.setVisibility(View.GONE);
+//                                            overlay.setVisibility(View.GONE);
+//                                            login.setVisibility(View.VISIBLE);
+//                                            flag=false;
+//                                        }
+//
+//                                    }
+//                                }
+//                            });
+
+
+
+
+
+//
+//
+//                        }
+//                    } else {
+//                        Toast.makeText(getApplicationContext(), "Credential Invalid " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+//                        progressBar.setVisibility(View.GONE);
+//                        overlay.setVisibility(View.GONE);
+//                        login.setVisibility(View.VISIBLE);
+
+//                    }
+//                });
     }
 }

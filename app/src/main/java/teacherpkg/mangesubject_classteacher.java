@@ -338,6 +338,7 @@ public class mangesubject_classteacher extends varchi_line {
                         Subjects subjects = new Subjects(subjectname.get(i), teachername.get(i));
                         subjectsArrayList.add(subjects);
                     }
+
                     managesubjectrecycler teacherViewAdapter = new managesubjectrecycler(mangesubject_classteacher.this,subjectsArrayList);
                     recyclerview.setAdapter(teacherViewAdapter);
                     teacherViewAdapter.notifyDataSetChanged();
