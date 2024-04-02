@@ -27,6 +27,9 @@
             android:name="teacherpkg.notification_teacher"
             android:exported="false" />
         <activity
+            android:name="teacherpkg.ManageStudent_classTeacher"
+            android:exported="false" />
+        <activity
             android:name="teacherpkg.feedback_teacher"
             android:exported="false" />
         <activity
