@@ -218,8 +218,6 @@ public class fragment_mangestudent_classteacher extends Fragment implements Swip
         recyclerview.setAdapter(studentAdapter);
     }
 
-
-
     //Refresh
     public void onRefresh() {
 

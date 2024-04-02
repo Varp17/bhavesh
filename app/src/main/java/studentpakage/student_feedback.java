@@ -22,7 +22,7 @@ public class student_feedback extends varchi_line implements FeedbackAdapter.OnF
 
     @Override
     public int getLayoutresId() {
-        return R.layout.activity_feedback_administrator;
+        return R.layout.activity_student_feedback;
     }
 
     @NonNull

@@ -10,6 +10,7 @@ import android.text.TextUtils;
 import android.text.style.UnderlineSpan;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
@@ -61,6 +62,8 @@ public class student_login extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Window window=getWindow();
+        window.setStatusBarColor(getResources().getColor(R.color.student_color));
 
 
         mAuth = FirebaseAuth.getInstance();

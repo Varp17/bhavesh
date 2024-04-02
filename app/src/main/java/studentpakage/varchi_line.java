@@ -23,9 +23,6 @@ import com.example.loginform.student_login;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 
-import teacherpkg.teacher_classroomclicked;
-import teacherpkg.teacher_panel;
-
 public abstract class varchi_line extends AppCompatActivity  {
 
     Toolbar toolbar;
@@ -56,7 +53,7 @@ public abstract class varchi_line extends AppCompatActivity  {
         super.onCreate(savedInstanceState);
         setContentView(getLayoutresId());
         Window window=getWindow();
-        window.setStatusBarColor(getResources().getColor(R.color.teacher_color));
+        window.setStatusBarColor(getResources().getColor(R.color.student_color));
 //        notification=findViewById(R.id.notificationbtn);
         drawerLayout=findViewById(R.id.Drawer_lay);
         navigationView=findViewById(R.id.nav_view);
@@ -100,8 +97,8 @@ public abstract class varchi_line extends AppCompatActivity  {
         menu_feedback.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(@NonNull MenuItem item) {
-//                Intent intent = new Intent(getApplicationContext(), feedback_activity_administrator.class);
-//                startActivity(intent);
+                Intent intent = new Intent(getApplicationContext(), student_feedback.class);
+                startActivity(intent);
                 return false;
             }
         });
@@ -125,7 +122,7 @@ public abstract class varchi_line extends AppCompatActivity  {
             @Override
             public boolean onMenuItemClick(@NonNull MenuItem item) {
                 drawerLayout.closeDrawer(GravityCompat.START);
-                Intent intent=new Intent(getApplicationContext(), teacher_panel.class);
+                Intent intent=new Intent(getApplicationContext(), student_panel.class);
                 startActivity(intent);
                 finish();
                 return false;
@@ -136,7 +133,7 @@ public abstract class varchi_line extends AppCompatActivity  {
             public boolean onMenuItemClick(@NonNull MenuItem item) {
 
 
-                Intent intent=new Intent(getApplicationContext(), teacher_panel.class);
+                Intent intent=new Intent(getApplicationContext(), student_classroom_fragment.class);
                 startActivity(intent);
                 finish();
                 drawerLayout.closeDrawer(GravityCompat.START);
@@ -144,55 +141,49 @@ public abstract class varchi_line extends AppCompatActivity  {
                 return false;
             }
         });
-        menu_documents.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-            @Override
-
-            public boolean onMenuItemClick(@NonNull MenuItem item) {
-
-                drawerLayout.closeDrawer(GravityCompat.START);
-                if(!"CLASS TEACHER'S".equals(toolbar.getTitle())) {
-
-                    Intent intent = new Intent(getApplicationContext(), teacher_classroomclicked.class);
-                    intent.putExtra("flagfordocuments", true);
-
-                    startActivity(intent);
-                    finish();
-                }
-                return false;
-            }
-        });
-
-        menu_attendence.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-            @Override
-
-            public boolean onMenuItemClick(@NonNull MenuItem item) {
-
-                drawerLayout.closeDrawer(GravityCompat.START);
-                if(!"CLASS TEACHER'S".equals(toolbar.getTitle())) {
-
-                    Intent intent = new Intent(getApplicationContext(), teacher_classroomclicked.class);
-                    intent.putExtra("flagforattendence", true);
-
-                    startActivity(intent);
-                    finish();
-                }
-
-                return false;
-            }
-        });
-
-        menu_notification.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(@NonNull MenuItem item) {
-//                if(getactionbarTiile_in_varchi_line()!="NOTIFICATIONS") {
-//                    Intent intent1 = new Intent(getApplicationContext(), all_college_notiFication_from_Administrator.class);
-//                    startActivity(intent1);
+//        menu_attendence.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+//            @Override
+//            public boolean onMenuItemClick(@NonNull MenuItem item) {
+//
+//
+//                Intent intent=new Intent(getApplicationContext(), student_attendance_fragment1.class);
+//                startActivity(intent);
+//                finish();
+//                drawerLayout.closeDrawer(GravityCompat.START);
+//
+//                return false;
+//            }
+//        });
+//        menu_documents.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+//            @Override
+//
+//            public boolean onMenuItemClick(@NonNull MenuItem item) {
+//
+//                drawerLayout.closeDrawer(GravityCompat.START);
+//
+//
+//                    Intent intent = new Intent(getApplicationContext(), student_document_fragment1.class);
+//                    intent.putExtra("flagfordocuments", true);
+//
+//                    startActivity(intent);
 //                    finish();
-//                }
-                return false;
-            }
-        });
-
+//                return false;
+//            }
+//        });menu_notification.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+//            @Override
+//
+//            public boolean onMenuItemClick(@NonNull MenuItem item) {
+//
+//                drawerLayout.closeDrawer(GravityCompat.START);
+//
+//
+//                    Intent intent = new Intent(getApplicationContext(), student_notification_fragment1.class);
+//
+//                    startActivity(intent);
+//                    finish();
+//                return false;
+//            }
+//        });
 
 
     }
@@ -201,7 +192,7 @@ public abstract class varchi_line extends AppCompatActivity  {
     public boolean onCreateOptionsMenu(Menu menu) {
 
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menubaradmin, menu);
+        inflater.inflate(R.menu.menubarstudent, menu);
 
 
 
@@ -215,9 +206,9 @@ public abstract class varchi_line extends AppCompatActivity  {
         // Handle your menu items here
         if (id == R.id.nav_notification && getactionbarTiile_in_varchi_line()!= "NOTIFICATIONS") {
 
-//            Intent intent=new Intent(getApplicationContext(), all_college_notiFication_from_Administrator.class);
-//            startActivity(intent);
-//            finish();
+            Intent intent=new Intent(getApplicationContext(), student_notification_fragment1.class);
+            startActivity(intent);
+            finish();
             return true;
         }
 
