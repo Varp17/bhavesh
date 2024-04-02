@@ -97,7 +97,7 @@ public class student_classroom_fragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-//        View view = inflater.inflate(R.layout.fragment_classroom, container, false);
+//        View view = inflater.inflate(R.layout.activity_student_classroom_fragment, container, false);
 
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.activity_student_classroom_fragment, container, false);

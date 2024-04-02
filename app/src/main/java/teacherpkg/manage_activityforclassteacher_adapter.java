@@ -18,7 +18,7 @@ public class manage_activityforclassteacher_adapter extends FragmentPagerAdapter
             case 0:
                 return new fragment_createaccount_classteacher();
             case 1:
-                return new managestaffFragment();
+                return new fragment_mangestudent_classteacher();
             default:
                return new fragment_createaccount_classteacher();
         }

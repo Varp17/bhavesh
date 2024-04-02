@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 
 import com.example.loginform.R;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -35,6 +36,17 @@ public class Teacher_Profile extends varchi_line {
     public int getLayoutresId() {
         return R.layout.activity_teacher_profile;
 
+    }
+
+    @NonNull
+    @Override
+    public Fragment getItem(int position) {
+        return null;
+    }
+
+    @Override
+    public int getCount() {
+        return 0;
     }
 
     @Override
