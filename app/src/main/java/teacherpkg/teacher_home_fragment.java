@@ -129,7 +129,7 @@ public class teacher_home_fragment extends Fragment {
                     floatmanagestu.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            Intent intent = new Intent(getContext(), fragment_mangestudent_classteacher.class);
+                            Intent intent = new Intent(getContext(), ManageStudent_classTeacher.class);
                             startActivity(intent);
                         }
                     });

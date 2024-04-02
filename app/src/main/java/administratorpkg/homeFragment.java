@@ -1,6 +1,7 @@
 package administratorpkg;
 
 import android.content.Intent;
+import android.icu.text.SimpleDateFormat;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -10,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.denzcoskun.imageslider.ImageSlider;
@@ -17,9 +19,18 @@ import com.denzcoskun.imageslider.constants.ScaleTypes;
 import com.denzcoskun.imageslider.models.SlideModel;
 import com.example.loginform.R;
 import com.example.loginform.maximizeimage;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -75,6 +86,9 @@ public class homeFragment extends Fragment {
     ImageSlider image_slider;
     ImageView scheduleimg;
     ImageView profile;
+    FirebaseFirestore fstore;
+    FirebaseAuth fAuth;
+    String date;
     com.google.android.material.floatingactionbutton.FloatingActionButton floabtnmange,feedbackbtn;
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -87,6 +101,22 @@ public class homeFragment extends Fragment {
         imageList.add(new SlideModel(R.drawable.mandeep,ScaleTypes.FIT));
         scheduleimg=rootView.findViewById(R.id.scheduleimg);
         profile=inflater.inflate(R.layout.header, container, false).findViewById(R.id.profileimg);
+        TextView teachername = rootView.findViewById(R.id.teachernamemsg);
+        TextView dateref=rootView.findViewById(R.id.datemsg);
+
+         fstore=FirebaseFirestore.getInstance();
+         fAuth=FirebaseAuth.getInstance();
+
+        DocumentReference documentReference=fstore.collection("user").document(fAuth.getCurrentUser().getUid());
+        documentReference.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                teachername.setText(documentSnapshot.getString("fullname"));
+            }
+        });
+        getdate();
+        dateref.setText(date);
+
         floabtnmange.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -123,6 +153,73 @@ public class homeFragment extends Fragment {
 
         image_slider.setImageList(imageList); // true for auto sliding
         return rootView;
+
+    }
+
+    private void getdate() {
+        String day = new SimpleDateFormat("dd", Locale.getDefault()).format(new Date());
+        String month = new SimpleDateFormat("MM", Locale.getDefault()).format(new Date());
+        int monthInt = Integer.parseInt(month);
+
+        String monthName; // Variable to hold the month name abbreviation
+
+        switch (monthInt) {
+            case 1:
+                // January
+                monthName = "Jan";
+                break;
+            case 2:
+                // February
+                monthName = "Feb";
+                break;
+            case 3:
+                // March
+                monthName = "Mar";
+                break;
+            case 4:
+                // April
+                monthName = "Apr";
+                break;
+            case 5:
+                // May
+                monthName = "May";
+                break;
+            case 6:
+                // June
+                monthName = "Jun";
+                break;
+            case 7:
+                // July
+                monthName = "Jul";
+                break;
+            case 8:
+                // August
+                monthName = "Aug";
+                break;
+            case 9:
+                // September
+                monthName = "Sep";
+                break;
+            case 10:
+                // October
+                monthName = "Oct";
+                break;
+            case 11:
+                // November
+                monthName = "Nov";
+                break;
+            case 12:
+                // December
+                monthName = "Dec";
+                break;
+            default:
+                // Default case, if the month is not in the range 1-12
+                // You can add code here for handling unexpected cases
+                monthName = ""; // or any default value indicating an error
+                break;
+        }
+        date=day+" "+monthName;
+
 
     }
 }

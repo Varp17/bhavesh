@@ -111,8 +111,8 @@ public class teacher_classroom_fragment extends Fragment {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.activity_teacher_classroom_fragment, container, false);
 
-        addclassteacher();
-        dataInitialize();
+
+
 
 
 
@@ -132,6 +132,8 @@ public class teacher_classroom_fragment extends Fragment {
         recyclerview.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerview.setHasFixedSize(true);
 
+        dataInitialize();
+
         SwipeRefreshLayout swipeRefreshLayout = view.findViewById(R.id.swipe_refresh_layout);
 
         // Set an OnRefreshListener to handle the refresh action
@@ -140,7 +142,7 @@ public class teacher_classroom_fragment extends Fragment {
             public void onRefresh() {
                 // Perform the actions you want to do when the user triggers a refresh
                 // For example, reload data from the server
-                addclassteacher();
+
                 dataInitialize();
 
                 new Handler().postDelayed(new Runnable() {
@@ -192,6 +194,7 @@ public class teacher_classroom_fragment extends Fragment {
         teachername=new ArrayList<>();
         subjectname=new ArrayList<>();
 
+        addclassteacher();
 
 
         DocumentReference documentReference=fstore.collection("user").document(fAuth.getCurrentUser().getUid());
@@ -230,12 +233,20 @@ public class teacher_classroom_fragment extends Fragment {
                         Subjects subjects = new Subjects((subjectname.get(i)), teachername.get(i));
                         subjectsArrayList.add(subjects);
                     }
-                    intializeadapter(); // Update adapter with new data
+                    intializeadapter();
                 } else {
+                    for (int i = 0; i < subjectname.size(); i++) {
+                        Subjects subjects = new Subjects((subjectname.get(i)), teachername.get(i));
+                        subjectsArrayList.add(subjects);
+                    }
+                    intializeadapter();
                     Toast.makeText(getContext(), "No Document Found", Toast.LENGTH_SHORT).show();
                 }
             }
         });
+
+
+       // Update adapter with new data
 
 
 
@@ -243,6 +254,10 @@ public class teacher_classroom_fragment extends Fragment {
     }
 
     private void addclassteacher() {
+
+        subjectsArrayList = new ArrayList<>();
+        teachername=new ArrayList<>();
+        subjectname=new ArrayList<>();
 
         DocumentReference dr = fstore.collection("classteachers").document(fAuth.getCurrentUser().getUid());
         dr.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
@@ -252,26 +267,20 @@ public class teacher_classroom_fragment extends Fragment {
                     // User is a class teacher
 
                     teachername.add(documentSnapshot.getString("fullname"));
-                    subjectname.add("CLASS TEACHER'S");
-
-
-
+                    subjectname.add("CLASS TEACHER'S :"+documentSnapshot.getString("class year"));
 
                 } else {
                     // User is not a class teacher
-                    Toast.makeText(getContext(), "No Class-teacher", Toast.LENGTH_SHORT).show();
+                    Log.d(TAG, "you are not class teacher");
                 }
 
             }
-        }).addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-            @Override
-            public void onSuccess(DocumentSnapshot documentSnapshot) {
-                intializeadapter();
-            }
+
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
                 // Error occurred, hide the button
+
                 Log.d(TAG, "onFailure: failed classteaccher");
             }
         });
