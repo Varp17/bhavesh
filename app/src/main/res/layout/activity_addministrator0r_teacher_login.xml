@@ -66,6 +66,8 @@
                 android:drawableLeft="@drawable/ic_baseline_person_24"
                 android:drawablePadding="8dp"
                 android:hint="Teacher ID"
+                android:singleLine="true"
+                android:imeOptions="actionNext"
                 android:padding="8dp"
                 android:textColor="@color/black"
                 android:textColorHighlight="@color/cardview_dark_background" />
@@ -80,6 +82,8 @@
                 android:drawableLeft="@drawable/ic_baseline_lock_24"
                 android:drawablePadding="8dp"
                 android:hint="Password"
+                android:imeOptions="actionDone"
+                android:singleLine="true"
                 android:inputType="textPassword"
                 android:padding="8dp"
                 android:textColor="@color/black"
