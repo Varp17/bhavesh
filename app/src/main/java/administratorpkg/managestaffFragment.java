@@ -341,7 +341,7 @@ public class managestaffFragment extends Fragment implements SwipeRefreshLayout.
         staffmanagedialog.show();
     }
 
-    
+
 
     private String getEmailFromSharedPreferences() {
         SharedPreferences sharedPreferences = getContext().getSharedPreferences("CRED", Context.MODE_PRIVATE);
