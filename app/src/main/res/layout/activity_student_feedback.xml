@@ -8,7 +8,11 @@
     tools:context="studentpakage.student_feedback"
     android:orientation="vertical"
     android:fitsSystemWindows="true"
-    tools:openDrawer="start">
+    tools:openDrawer="start"
+
+
+   >
+
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/nav_view"
         android:layout_width="300dp"
@@ -19,38 +23,173 @@
         tools:ignore="DuplicateIds">
 
     </com.google.android.material.navigation.NavigationView>
+
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent">
 
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-
-        android:orientation="vertical">
-        <include layout="@layout/student_custbar"/>
-
-
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-            <!--        add here Feedback page   -->
+            <include layout="@layout/student_custbar"/>
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/feedbackrecyclerview"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:listitem="@layout/feedback_card_design" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                <!-- Feedback Form -->
 
+                <TextView
+                    android:id="@+id/subject_label"
+                    style="@style/TEXT"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="44dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:text="@string/subject"
+                    android:textSize="20dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
+                <EditText
+                    android:id="@+id/subject_edit_text"
+                    style="@style/TEXT"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:background="@drawable/borderline"
+                    android:hint="@string/enter_subject"
+                    android:paddingStart="5dp"
+                    android:paddingEnd="5dp"
+                    android:padding="5dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/subject_label" />
 
-    </LinearLayout>
+                <TextView
+                    android:id="@+id/description_label"
+                    style="@style/TEXT"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="32dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:text="Description *"
+                    android:textSize="20dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/subject_edit_text" />
+
+                <EditText
+                    android:id="@+id/description_edit_text"
+                    style="@style/TEXT"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:background="@drawable/borderline"
+                    android:hint="@string/enter_description"
+                    android:paddingStart="5dp"
+                    android:paddingEnd="5dp"
+                    android:padding="5dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/description_label" />
+
+                <TextView
+                    android:id="@+id/like_app_label"
+                    style="@style/TEXT"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="32dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:text="@string/did_you_like_the_app"
+                    android:textSize="24dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/description_edit_text" />
+
+                <RadioGroup
+                    android:id="@+id/like_app_radio_group"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/like_app_label">
+
+                </RadioGroup>
+
+                <TextView
+                    android:id="@+id/rating_label"
+                    style="@style/TEXT"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="88dp"
+                    android:text="@string/rate_the_app_out_of_5"
+                    android:textSize="24dp"
+
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/like_app_radio_group" />
+
+                <RatingBar
+                    android:id="@+id/app_rating_bar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="28dp"
+                    android:rating="0"
+                    android:stepSize="1"
+                    app:layout_constraintEnd_toEndOf="@+id/rating_label"
+                    app:layout_constraintStart_toStartOf="@+id/rating_label"
+                    app:layout_constraintTop_toBottomOf="@id/rating_label" />
+
+                <Button
+                    android:id="@+id/submit_feedback_button"
+                    style="@style/TEXT"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/buttoncurve"
+                    android:backgroundTint="#E97A7B"
+                    android:paddingHorizontal="20dp"
+                    android:text="Submit Feedback"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.497"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/app_rating_bar" />
+
+                <RadioButton
+                    android:id="@+id/dislike_radio_button"
+                    style="@style/TEXT"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="No"
+                    android:textSize="20dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/like_radio_button"
+                    app:layout_constraintEnd_toEndOf="@+id/like_app_label"
+                    app:layout_constraintTop_toTopOf="@+id/like_radio_button" />
+
+                <RadioButton
+                    android:id="@+id/like_radio_button"
+                    style="@style/TEXT"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:text="Yes"
+                    android:textSize="20dp"
+                    app:layout_constraintEnd_toStartOf="@+id/dislike_radio_button"
+                    app:layout_constraintStart_toStartOf="@+id/like_app_label"
+                    app:layout_constraintTop_toBottomOf="@+id/like_app_label" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
+    </ScrollView>
 </androidx.drawerlayout.widget.DrawerLayout>
