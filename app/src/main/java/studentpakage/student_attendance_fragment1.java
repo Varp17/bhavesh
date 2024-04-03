@@ -27,7 +27,7 @@ public class student_attendance_fragment1 extends Fragment {
     BarChart barChart;
     BarData barData;
     BarDataSet barDataSet;
-    ArrayList list;
+
 
 
     // TODO: Rename parameter arguments, choose names that match
@@ -64,36 +64,42 @@ public class student_attendance_fragment1 extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        barChart.findViewById(R.id.barchart);
-//        getdata();
-//        barDataSet=new BarDataSet(list,"Dataset");
-//        barData=new BarData(barDataSet);
-//        barChart.setData(barData);
-//        barDataSet.setColors(ColorTemplate.MATERIAL_COLORS);
-//        barDataSet.setValueTextColor(Color.BLACK);
-//        barDataSet.setValueTextSize(17f);
-//        barChart.getDescription().setEnabled(true);
+
+
+
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
 
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_student_attendance_fragment1, container, false);
-    }
-    private void getdata()
-    {
-        list = new ArrayList<>();
-        list.add(new BarEntry(1f,2));
-        list.add(new BarEntry(2f,2));
-        list.add(new BarEntry(3f,7));
-        list.add(new BarEntry(4f,2));
-        list.add(new BarEntry(5f,4));
-        list.add(new BarEntry(6f,9));
+        View view= inflater.inflate(R.layout.fragment_student_attendance_fragment1, container, false);
+        barChart = view.findViewById(R.id.barchart1);
 
+        ArrayList<BarEntry> visitors = new ArrayList<>();
+        visitors.add(new BarEntry(2014, 420));
+        visitors.add(new BarEntry(2015, 475));
+        visitors.add(new BarEntry(2016, 508));
+        visitors.add(new BarEntry(2017, 660));
+        visitors.add(new BarEntry(2018, 550));
+        visitors.add(new BarEntry(2019, 630));
+        visitors.add(new BarEntry(2020, 470));
+        barDataSet = new BarDataSet(visitors, "Visitors");
+        barDataSet.setColors(ColorTemplate.MATERIAL_COLORS);
+        barDataSet.setValueTextColor(Color.BLACK); // Changed from android.R.color.black
+        barDataSet.setValueTextSize(16f);
+
+        barData = new BarData(barDataSet);
+        barChart.setFitBars(true);
+        barChart.setData(barData);
+        barChart.getDescription().setText("Bar chart");
+        barChart.animateY(2000);
+        return view;
     }
 }

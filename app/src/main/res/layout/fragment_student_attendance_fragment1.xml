@@ -10,6 +10,20 @@
     <com.github.mikephil.charting.charts.BarChart
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/barchart"
+        android:layout_marginTop="130dp"
+        android:id="@+id/barchart1"
         />
+
+    <ImageButton
+        android:id="@+id/imageView"
+        android:layout_width="113dp"
+        android:layout_height="98dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/student_circle"
+        android:src="@drawable/baseline_calendar_month_24"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:clickable="true"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
