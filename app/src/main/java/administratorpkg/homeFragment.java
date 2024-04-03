@@ -97,8 +97,8 @@ public class homeFragment extends Fragment {
         image_slider = rootView.findViewById(R.id.image_slider);
         floabtnmange=rootView.findViewById(R.id.floabtnmange);
         List<SlideModel> imageList = new ArrayList<>();
-        imageList.add(new SlideModel(R.drawable.cristiano, ScaleTypes.FIT));
-        imageList.add(new SlideModel(R.drawable.mandeep,ScaleTypes.FIT));
+        imageList.add(new SlideModel(R.drawable.event1, ScaleTypes.FIT));
+        imageList.add(new SlideModel(R.drawable.event2,ScaleTypes.FIT));
         scheduleimg=rootView.findViewById(R.id.scheduleimg);
         profile=inflater.inflate(R.layout.header, container, false).findViewById(R.id.profileimg);
         TextView teachername = rootView.findViewById(R.id.teachernamemsg);
@@ -146,7 +146,7 @@ public class homeFragment extends Fragment {
             public void onClick(View v) {
                 Intent intent=new Intent(rootView.getContext(), maximizeimage.class);
 
-                intent.putExtra("img",R.drawable.aaaaa);
+                intent.putExtra("img",R.drawable.timetable);
                 startActivity(intent);
             }
         });

@@ -73,8 +73,8 @@ public class student_home_fragment extends Fragment {
         View rootView = inflater.inflate(R.layout.activity_student_home_fragment, container, false);
         image_slider = rootView.findViewById(R.id.image_slider);
         List<SlideModel> imageList = new ArrayList<>();
-        imageList.add(new SlideModel(R.drawable.ronaldo, ScaleTypes.FIT));
-        imageList.add(new SlideModel(R.drawable.sunilchettri,ScaleTypes.FIT));
+        imageList.add(new SlideModel(R.drawable.event1, ScaleTypes.FIT));
+        imageList.add(new SlideModel(R.drawable.event2,ScaleTypes.FIT));
         scheduleimg=rootView.findViewById(R.id.scheduleimg);
         profile=inflater.inflate(R.layout.header, container, false).findViewById(R.id.profileimg);
 //        floabtnmange.setOnClickListener(new View.OnClickListener() {
@@ -95,7 +95,7 @@ public class student_home_fragment extends Fragment {
             public void onClick(View v) {
                 Intent intent=new Intent(rootView.getContext(), maximizeimage.class);
 
-                intent.putExtra("img",R.drawable.aaaaa);
+                intent.putExtra("img",R.drawable.timetable);
                 startActivity(intent);
             }
         });
