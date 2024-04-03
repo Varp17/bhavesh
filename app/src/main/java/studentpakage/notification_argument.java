@@ -1,8 +1,7 @@
-package administratorpkg;
+package studentpakage;
 
 public class notification_argument {
-    public String subjectname;
-    public String teachername;
+    String subjectname,teachername;
 
     public notification_argument(String subjectname, String teachername) {
         this.subjectname = subjectname;

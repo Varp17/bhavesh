@@ -2,6 +2,8 @@ package studentpakage;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -18,6 +20,7 @@ import java.util.List;
 public class student_feedback extends varchi_line implements FeedbackAdapter.OnFeedbackClickListener {
 
     private RecyclerView recyclerView;
+    Button button;
     private FeedbackAdapter feedbackAdapter;
 
     @Override
@@ -60,6 +63,12 @@ public class student_feedback extends varchi_line implements FeedbackAdapter.OnF
     @Override
     public void onFeedbackClick(int position) {
 
+
+    }
+    public void send_message(View view)
+    {
+        Toast toast=Toast.makeText(this,"Feedback send",Toast.LENGTH_LONG);
+        toast.show();
     }
 
 //    public void onFeedbackClick(int position) {

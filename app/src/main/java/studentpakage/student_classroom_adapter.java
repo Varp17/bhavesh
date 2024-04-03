@@ -16,8 +16,8 @@ public class student_classroom_adapter extends FragmentPagerAdapter {
         switch (position)
         {
             case 0:  return new student_attendance_fragment1();
-            case 1:  return new student_notification_fragment1();
-            case 2:  return new student_document_fragment1();
+            case 1:  return new student_document_fragment1();
+            case 2:  return new student_notification_fragment1();
             default: return new student_attendance_fragment1();
         }
 
