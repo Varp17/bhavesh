@@ -15,7 +15,7 @@
         android:id="@+id/gridView2"
         android:padding="2mm"
         android:numColumns="2"
-        tools:listitem="@layout/documentview_cards"/>
+        tools:listitem="@layout/documentview_cards_teacher"/>
 
     <!-- TODO: Update blank fragment layout -->
 

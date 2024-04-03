@@ -45,15 +45,6 @@ public class student_feedback extends varchi_line implements FeedbackAdapter.OnF
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
-        recyclerView = findViewById(R.id.feedbackrecyclerview);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-        // Mock data - replace this with your actual data retrieval logic
-        List<Feedback> feedbackList = generateMockFeedbacks();
-
-        feedbackAdapter = new FeedbackAdapter(feedbackList, this);
-        recyclerView.setAdapter(feedbackAdapter);
     }
 
     // Mock data for testing, replace with your actual data retrieval logic
@@ -68,12 +59,16 @@ public class student_feedback extends varchi_line implements FeedbackAdapter.OnF
 
     @Override
     public void onFeedbackClick(int position) {
-        Feedback feedback = feedbackAdapter.getItem(position);
 
-        // Example: Display feedback details in a Toast, you can open a new activity or fragment instead
-        String details = "Subject: " + feedback.getSubject() + "\n" +
-                "Description: " + feedback.getDescription() + "\n";
-
-        Toast.makeText(this, details, Toast.LENGTH_SHORT).show();
     }
+
+//    public void onFeedbackClick(int position) {
+//        Feedback feedback = feedbackAdapter.getItem(position);
+//
+//        // Example: Display feedback details in a Toast, you can open a new activity or fragment instead
+//        String details = "Subject: " + feedback.getSubject() + "\n" +
+//                "Description: " + feedback.getDescription() + "\n";
+//
+//        Toast.makeText(this, details, Toast.LENGTH_SHORT).show();
+//    }
 }

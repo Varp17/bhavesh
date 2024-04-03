@@ -108,4 +108,9 @@
     <string name="aministrator_teacher_login">Aministrator/Teacher Login</string>
     <string name="admin_teacher_login">Admin / Teacher Login</string>
     <string name="login">Login</string>
+    <string name="rate_the_app_out_of_5">Rate the App (out of 5)*</string>
+    <string name="did_you_like_the_app">Did you like the App?</string>
+    <string name="enter_description">Enter Description</string>
+    <string name="enter_subject">Enter subject</string>
+    <string name="subject">Subject *</string>
 </resources>
