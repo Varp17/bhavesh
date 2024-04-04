@@ -20,6 +20,7 @@
 
     </com.google.android.material.navigation.NavigationView>
 
+
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
@@ -50,20 +51,9 @@
 
                     tools:ignore="OnClick" />
 
-                <ImageView
-                    android:id="@+id/edit_profile_image"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignEnd="@id/profile_image_teacher"
-                    android:layout_alignBottom="@id/profile_image_teacher"
-                    android:layout_marginEnd="-20dp"
-                    android:layout_marginBottom="-20dp"
-                    android:background="?attr/selectableItemBackground"
-                    android:padding="8dp"
-                    android:src="@drawable/ic_edit" />
 
                 <TextView
-                    android:id="@+id/teacher_name_profile"
+                    android:id="@+id/student_name_profile"
                     android:layout_marginTop="5dp"
                     android:layout_gravity="center_horizontal"
                     android:layout_width="wrap_content"
@@ -93,6 +83,7 @@
                         android:layout_weight="1"
                         android:layout_height="match_parent">
                         <TextView
+                            android:id="@+id/student_id"
                             android:textStyle="bold"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -101,7 +92,7 @@
                             android:textSize="15sp"
                             />
                         <TextView
-                            android:id="@+id/profile_teacherid"
+                            android:id="@+id/profile_studentid"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Null"
@@ -128,7 +119,7 @@
                             />
                         <TextView
                             android:textColor="@color/teacher_color"
-                            android:id="@+id/profile_branch"
+                            android:id="@+id/profile_branch_student"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Comp"
@@ -154,10 +145,10 @@
                             />
                         <TextView
                             android:textColor="@color/teacher_color"
-                            android:id="@+id/teacher_profile_dob"
+                            android:id="@+id/student_profile_dob"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="360"
+                            android:text="DOB"
                             android:textStyle="bold"
                             android:textSize="15sp"
                             android:paddingTop="10dp"/>
@@ -184,7 +175,7 @@
                     android:layout_height="36dp"
                     android:src="@drawable/ic_email_black_24dp"/>
                 <TextView
-                    android:id="@+id/teacher_profile_email"
+                    android:id="@+id/student_profile_email"
                     android:textStyle="bold"
                     android:layout_gravity="center_vertical"
                     android:layout_width="wrap_content"
@@ -203,7 +194,7 @@
                     android:layout_height="36dp"
                     android:src="@drawable/ic_phone_android_black_24dp"/>
                 <TextView
-                    android:id="@+id/teacher_profile_number"
+                    android:id="@+id/student_profile_number"
                     android:textStyle="bold"
                     android:layout_gravity="center_vertical"
                     android:layout_width="wrap_content"
@@ -222,7 +213,7 @@
                     android:layout_height="36dp"
                     android:src="@drawable/ic_address_24dp"/>
                 <TextView
-                    android:id="@+id/teacher_profile_address"
+                    android:id="@+id/student_profile_address"
                     android:textStyle="bold"
                     android:layout_gravity="center_vertical"
                     android:layout_width="wrap_content"

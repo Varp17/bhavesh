@@ -37,11 +37,12 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 public class student_profile extends varchi_line {
 
-    EditText profile_name,profile_id,profile_branch,profile_dob,profile_address,profile_mobno;
     FirebaseAuth mAuth;
     FirebaseFirestore fstore;
 
-    TextView profilename;
+    TextView profilename,studentId,branch,dob,studentemail,address,phoneno;
+
+
     int getProfile_values(){
 
 
@@ -75,9 +76,17 @@ public class student_profile extends varchi_line {
         super.onCreate(savedInstanceState);
         mAuth=FirebaseAuth.getInstance();
         fstore=FirebaseFirestore.getInstance();
-        profilename=findViewById(R.id.student_profilename);
 
-        DocumentReference df=fstore.collection("user").document(mAuth.getCurrentUser().getUid());
+        profilename = findViewById(R.id.student_name_profile);
+        dob = findViewById(R.id.student_profile_dob);
+        studentId = findViewById(R.id.profile_studentid);
+        phoneno = findViewById(R.id.student_profile_number);
+        address = findViewById(R.id.student_profile_address);
+        studentemail = findViewById(R.id.student_profile_email);
+        branch = findViewById(R.id.profile_branch_student);
+
+        DocumentReference df=fstore.collection("classteachers").document().collection("class_students").document();
+
         df.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -85,7 +94,7 @@ public class student_profile extends varchi_line {
                     DocumentSnapshot document = task.getResult();
                     if (document.exists()) {
                         // DocumentSnapshot contains the data of the document
-                        String fullName = document.getString("fullname");
+                        String fullName = document.getString("Fullname");
                         profilename.setText(fullName);
                         // Use the fullName as needed
                         Log.d(TAG, "Full Name: " + fullName);
