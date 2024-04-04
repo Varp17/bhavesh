@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.denzcoskun.imageslider.ImageSlider;
@@ -27,6 +28,8 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import administratorpkg.dategiver;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -82,6 +85,9 @@ public class teacher_home_fragment extends Fragment {
     ImageSlider image_slider;
     ImageView scheduleimg;
     ImageView profile;
+
+    FirebaseAuth fAuth;
+    FirebaseFirestore fstore;
     FloatingActionButton floatmanagestu;
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -94,6 +100,23 @@ public class teacher_home_fragment extends Fragment {
         scheduleimg=rootView.findViewById(R.id.scheduleimg);
         profile=inflater.inflate(R.layout.teacher_header, container, false).findViewById(R.id.profileimg);
         floatmanagestu=rootView.findViewById(R.id.floatmanagestu);
+        TextView teachername = rootView.findViewById(R.id.teachernamemsg);
+        TextView dateref=rootView.findViewById(R.id.datemsg);
+
+        fstore=FirebaseFirestore.getInstance();
+        fAuth=FirebaseAuth.getInstance();
+
+
+        dateref.setText(dategiver.getdate());
+
+        DocumentReference documentReference=fstore.collection("user").document(fAuth.getCurrentUser().getUid());
+        documentReference.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                teachername.setText(documentSnapshot.getString("fullname"));
+            }
+        });
+        
         checkclassteacher();
         profile.setOnClickListener(new View.OnClickListener() {
             @Override
