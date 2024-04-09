@@ -55,6 +55,7 @@
         android:padding="5dp" />
 
 
+
     <!-- CardView for student information -->
 
     <!-- Present and Absent Buttons -->
@@ -175,6 +176,28 @@
             android:textColor="@color/white" />
 
     </LinearLayout>
+
+        <Button
+            android:id="@+id/buttonClearAll"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true"
+            android:layout_margin="16dp"
+            android:textColor="@color/teacher_color"
+            android:background="@color/white"
+            android:text="Clear All" />
+
+        <Button
+            android:id="@+id/buttonSubmit"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_margin="16dp"
+            android:textColor="@color/white"
+            android:background="@color/teacher_color"
+            android:text="Submit" />
 
 </RelativeLayout>
 </androidx.drawerlayout.widget.DrawerLayout>
