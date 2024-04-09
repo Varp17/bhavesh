@@ -1,6 +1,8 @@
 package teacherpkg;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
@@ -35,13 +37,13 @@ public class Take_Attendance_Activity extends varchi_line {
 
     TextView classname;
     TextView datetextview,textViewEnrollment,student_name;
-    Button next,previous,presentbtn,absentbtn;
+    Button next,previous,presentbtn,absentbtn,upload,clear;
     String subname;
     FirebaseFirestore fstore=FirebaseFirestore.getInstance();
     FirebaseAuth fAuth=FirebaseAuth.getInstance();
     String classteacherid;
     ArrayList<String> studentnamelist,studentENR;
-    ArrayList<String> prsent,absent;
+
     Spinner spinnerstudent;
 
     ArrayList<StudentAttendenceData> studentdataArrayList;
@@ -88,6 +90,10 @@ public class Take_Attendance_Activity extends varchi_line {
         presentbtn=findViewById(R.id.buttonPresent);
         absentbtn=findViewById(R.id.buttonAbsent);
         statustextview=findViewById(R.id.status);
+        upload=findViewById(R.id.buttonUpload);
+        clear=findViewById(R.id.buttonClearAll);
+
+
 
 
 
@@ -123,6 +129,7 @@ public class Take_Attendance_Activity extends varchi_line {
             public void onClick(View v) {
                 setinfo(selecteditempos);
                 selecteditempos++;
+
                 if (selecteditempos >= studentdataArrayList.size()) {
                     selecteditempos = 0;
 
@@ -187,6 +194,39 @@ public class Take_Attendance_Activity extends varchi_line {
 
             }
         });
+        clear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(Take_Attendance_Activity.this);
+                builder.setTitle("Confirmation");
+                builder.setMessage("Do you want to clear All attendance?" +
+                        "\nnote - once deleted can't be changed ");
+                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // Action to perform when "Yes" is clicked
+                        // For example, you can proceed with the operation
+
+                        for(int i=0;i< studentdataArrayList.size();i++)
+                        {
+                           studentdataArrayList.get(i).status="";
+                        }
+                        statustextview.setText("");
+
+                    }
+                });
+                builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // Action to perform when "No" is clicked
+                        // For example, you can cancel the operation
+                        dialog.dismiss();
+                    }
+                });
+                builder.show();
+
+            }
+        });
         absentbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -213,12 +253,51 @@ public class Take_Attendance_Activity extends varchi_line {
             }
         });
 
+        upload.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(statuscheckall())
+                {
+                    showConfirmationDialog();
+                }
+            }
+        });
 
+
+    }
+
+    private boolean statuscheckall() {
+        int c=0;
+        for(int i=0;i< studentdataArrayList.size();i++)
+        {
+            if(studentdataArrayList.get(i).status.equals(""))
+            {
+
+                selecteditempos=i;
+                student_name.setText(studentdataArrayList.get(i).name);
+                textViewEnrollment.setText(studentdataArrayList.get(i).enr);
+                statustextview.setText(studentdataArrayList.get(i).status);
+                Toast.makeText(this, "attendance pending", Toast.LENGTH_SHORT).show();
+                break;
+
+            }else if(studentdataArrayList.get(i).status.equals("P") || studentdataArrayList.get(i).status.equals("Ab"))
+            {
+                c++;
+            }
+        }
+        if(c==studentdataArrayList.size())
+        {
+
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 
     private void setPresent(int position)
     {
-        studentdataArrayList.get(position).status="p";
+        studentdataArrayList.get(position).status="P";
 
     }
     private void setAbsent(int position)
@@ -271,8 +350,7 @@ public class Take_Attendance_Activity extends varchi_line {
     private void dataintialize() {
         studentnamelist=new ArrayList<>();
         studentENR=new ArrayList<>();
-        prsent=new ArrayList<>();
-        absent=new ArrayList<>();
+
         studentdataArrayList = new ArrayList<>();
         status=new ArrayList<>();
 
@@ -292,15 +370,14 @@ public class Take_Attendance_Activity extends varchi_line {
                             {
                                 studentnamelist.add(documentSnapshot.getString("Fullname"));
                                 studentENR.add(documentSnapshot.getString("Enrollment"));
-                                prsent.add("Not Define");
-                                absent.add("Not Define");
+
                                 status.add("");
                             }
                             ArrayAdapter<String> subjectAdapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_item, studentnamelist);
                             subjectAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                             spinnerstudent.setAdapter(subjectAdapter);
                             for (int i = 0; i < studentnamelist.size(); i++) {
-                               studentdata = new StudentAttendenceData(studentnamelist.get(i), studentENR.get(i),prsent.get(i),absent.get(i),status.get(i));
+                               studentdata = new StudentAttendenceData(studentnamelist.get(i), studentENR.get(i),status.get(i));
                                 studentdataArrayList.add(studentdata);
                             }
                         }
@@ -316,7 +393,29 @@ public class Take_Attendance_Activity extends varchi_line {
 
     }
 
-    public void attendancebackbtn(View view) {
-        finish();
+
+    private void showConfirmationDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Confirmation");
+        builder.setMessage("Do you want to upload attendance?" +
+                "\nnote - once uploaded can't be changed ");
+        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // Action to perform when "Yes" is clicked
+                // For example, you can proceed with the operation
+                Toast.makeText(getApplicationContext(), "uploading to database", Toast.LENGTH_SHORT).show();
+            }
+        });
+        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // Action to perform when "No" is clicked
+                // For example, you can cancel the operation
+                dialog.dismiss();
+            }
+        });
+        builder.show();
     }
+
 }
