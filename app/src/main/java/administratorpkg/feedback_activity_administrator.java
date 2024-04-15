@@ -2,10 +2,11 @@ package administratorpkg;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -30,6 +31,14 @@ public class feedback_activity_administrator extends varchi_line implements Feed
     public int getLayoutresId() {
         return R.layout.activity_feedback_administrator;
     }
+    @NonNull
+    public Fragment getItem(int position) {
+        return null;
+    }
+
+    public int getCount() {
+        return 0;
+    }
 
     @Override
     String getactionbarTiile_in_varchi_line() {
@@ -39,14 +48,17 @@ public class feedback_activity_administrator extends varchi_line implements Feed
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_feedback_administrator);
 
         recyclerView = findViewById(R.id.feedbackrecyclerview);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         db = FirebaseFirestore.getInstance();
 
-        loadFeedbackFromFirestore(); // Load feedback data from Firestore
+        loadFeedbackFromFirestore();
+        // Load feedback data from Firestore
     }
+
     private void loadFeedbackFromFirestore() {
         db.collection("feedback")
                 .get()
@@ -65,6 +77,7 @@ public class feedback_activity_administrator extends varchi_line implements Feed
                     @Override
                     public void onFailure(@NonNull Exception e) {
                         Toast.makeText(feedback_activity_administrator.this, "Error loading feedback", Toast.LENGTH_SHORT).show();
+                        Log.e("FeedbackActivity", "Error loading feedback", e);
                     }
                 });
     }
@@ -75,24 +88,28 @@ public class feedback_activity_administrator extends varchi_line implements Feed
         recyclerView.setAdapter(feedbackAdapter);
     }
 
-    // Mock data for testing, replace with your actual data retrieval logic
-    private List<Feedback> generateMockFeedbacks() {
-        List<Feedback> feedbackList = new ArrayList<>();
-        feedbackList.add(new Feedback("Subject 1", "Description 1"));
-        feedbackList.add(new Feedback("Subject 2", "Description 2"));
-        feedbackList.add(new Feedback("Subject 3", "Description 3"));
-        // Add more feedback items as needed
-        return feedbackList;
+    @Override
+    public void onFeedbackClick(Feedback feedback) {
+
     }
 
     @Override
     public void onFeedbackClick(int position) {
-        Feedback feedback = feedbackAdapter.getItem(position);
-
-        // Example: Display feedback details in a Toast, you can open a new activity or fragment instead
-        String details = "Subject: " + feedback.getSubject() + "\n" +
-                "Description: " + feedback.getDescription() + "\n";
-
-        Toast.makeText(this, details, Toast.LENGTH_SHORT).show();
+        if (feedbackAdapter != null) {
+            Feedback feedback = feedbackAdapter.getItem(position);
+            if (feedback != null) {
+                Intent intent = new Intent(feedback_activity_administrator.this, FeedbackDetailActivity.class);
+                intent.putExtra("subject", feedback.getSubject());
+                intent.putExtra("description", feedback.getDescription());
+                startActivity(intent);
+            } else {
+                Log.e("FeedbackActivity", "Feedback item is null at position: " + position);
+                Toast.makeText(feedback_activity_administrator.this, "Feedback item is null", Toast.LENGTH_SHORT).show();
+            }
+        } else {
+            Log.e("FeedbackActivity", "Feedback adapter is null");
+            Toast.makeText(feedback_activity_administrator.this, "Feedback adapter is null", Toast.LENGTH_SHORT).show();
+        }
     }
 }
+
