@@ -14,8 +14,10 @@ import java.util.List;
 
 public class FeedbackAdapter extends RecyclerView.Adapter<FeedbackAdapter.FeedbackViewHolder> {
 
-
     private List<Feedback> feedbackList;
+    private static final int MAX_WORDS = 3; // Change this value as needed
+    private static final int MAX_WORDS1 = 7; // Change this value as needed
+
     private OnFeedbackClickListener onFeedbackClickListener;
 
     public FeedbackAdapter(List<Feedback> feedbackList, OnFeedbackClickListener onFeedbackClickListener) {
@@ -33,8 +35,9 @@ public class FeedbackAdapter extends RecyclerView.Adapter<FeedbackAdapter.Feedba
     @Override
     public void onBindViewHolder(@NonNull FeedbackViewHolder holder, int position) {
         Feedback feedback = feedbackList.get(position);
-        holder.subjectTextView.setText(feedback.getSubject());
-        holder.descriptionTextView.setText(feedback.getDescription());
+        holder.subjectTextView.setText(trimToWordCount(feedback.getSubject(), MAX_WORDS));
+        holder.descriptionTextView.setText(trimToWordCount(feedback.getDescription(), MAX_WORDS1));
+
     }
 
     @Override
@@ -42,13 +45,25 @@ public class FeedbackAdapter extends RecyclerView.Adapter<FeedbackAdapter.Feedba
         return feedbackList.size();
     }
 
+    private String trimToWordCount(String text, int wordCount) {
+        if (text == null || text.isEmpty()) {
+            return "";
+        }
+
+        String[] words = text.split("\\s+");
+        StringBuilder trimmedText = new StringBuilder();
+
+        for (int i = 0; i < Math.min(wordCount, words.length); i++) {
+            trimmedText.append(words[i]).append(" ");
+        }
+
+        return trimmedText.toString().trim();
+    }
     public Feedback getItem(int position) {
         return feedbackList.get(position);
     }
 
-
     public class FeedbackViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-
         TextView subjectTextView;
         TextView descriptionTextView;
         OnFeedbackClickListener onFeedbackClickListener;

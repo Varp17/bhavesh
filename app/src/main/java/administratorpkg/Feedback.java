@@ -3,14 +3,18 @@ package administratorpkg;
 public class Feedback {
     private String subject;
     private String description;
-    private String studentId;
+
+    // Default constructor
+    public Feedback() {
+        // Required empty constructor for Firestore deserialization
+    }
 
     public Feedback(String subject, String description) {
-
         this.subject = subject;
         this.description = description;
     }
 
+    // Getters and setters
     public String getSubject() {
         return subject;
     }
@@ -26,5 +30,4 @@ public class Feedback {
     public void setDescription(String description) {
         this.description = description;
     }
-
 }
