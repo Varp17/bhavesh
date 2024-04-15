@@ -41,6 +41,7 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
+import administratorpkg.dategiver;
 import administratorpkg.tester;
 
 public class fragment_createaccount_classteacher extends Fragment {
@@ -188,9 +189,7 @@ private String classteacherUID;
                                                                     .collection("class_students")
                                                                     .document(fAuth.getCurrentUser().getUid()).collection("attendance").document(sub);
                                                             Map<String, Object> userInfo = new HashMap<>();
-                                                            userInfo.put("1stMonth", 0);
-                                                            userInfo.put("2ndMonth", 0);
-                                                            userInfo.put("3rdMonth", 0);
+                                                            userInfo.put("acc created", dategiver.getdate());
                                                             dfr.set(userInfo).addOnSuccessListener(new OnSuccessListener<Void>() {
                                                                 @Override
                                                                 public void onSuccess(Void unused) {
@@ -199,8 +198,9 @@ private String classteacherUID;
                                                             });
                                                             i++;
                                                         }
+                                                        Toast.makeText(getContext(), "acc created", Toast.LENGTH_SHORT).show();
                                                         i=1;
-                                                        Toast.makeText(getContext(), getEmailFromSharedPreferences()+" : "+getPasswordFromSharedPreferences(), Toast.LENGTH_SHORT).show();
+
                                                         fAuth.signOut();
 
                                                     }

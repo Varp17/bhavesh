@@ -9,6 +9,7 @@ public class dategiver {
     public static String getdate() {
         String day = new SimpleDateFormat("dd", Locale.getDefault()).format(new Date());
         String month = new SimpleDateFormat("MM", Locale.getDefault()).format(new Date());
+        String year = new SimpleDateFormat("YYYY", Locale.getDefault()).format(new Date());
         int monthInt = Integer.parseInt(month);
 
         String monthName; // Variable to hold the month name abbreviation
@@ -69,7 +70,7 @@ public class dategiver {
                 monthName = ""; // or any default value indicating an error
                 break;
         }
-        return date=day+" "+monthName;
+        return date=day+" "+monthName+" "+year;
 
 
     }

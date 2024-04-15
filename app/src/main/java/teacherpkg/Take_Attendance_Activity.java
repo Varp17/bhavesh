@@ -21,6 +21,7 @@ import androidx.fragment.app.Fragment;
 import com.example.loginform.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
@@ -30,6 +31,8 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import administratorpkg.dategiver;
 
@@ -38,6 +41,7 @@ public class Take_Attendance_Activity extends varchi_line {
     TextView classname;
     TextView datetextview,textViewEnrollment,student_name;
     Button next,previous,presentbtn,absentbtn,upload,clear;
+    
     String subname;
     FirebaseFirestore fstore=FirebaseFirestore.getInstance();
     FirebaseAuth fAuth=FirebaseAuth.getInstance();
@@ -405,6 +409,74 @@ public class Take_Attendance_Activity extends varchi_line {
                 // Action to perform when "Yes" is clicked
                 // For example, you can proceed with the operation
                 Toast.makeText(getApplicationContext(), "uploading to database", Toast.LENGTH_SHORT).show();
+                CollectionReference attendsub = fstore.collection("classteachers").document(classteacherid).collection("class_students")
+                        ;
+                attendsub.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        int i=0;
+                        if(task.getResult()!=null)
+                        {
+
+                            for(DocumentSnapshot documentSnapshot:task.getResult())
+                            {
+
+                                if(documentSnapshot.getString("Fullname").equals(studentdataArrayList.get(i).name))
+                                {
+                                    DocumentReference documentReference= fstore.collection("classteachers").document(classteacherid)
+                                            .collection("class_students").document(documentSnapshot.getId()).collection("attendance")
+                                            .document(subname);
+
+                                    Map<String, Object> statusinfo = new HashMap<>();
+                                    statusinfo.put(dategiver.getdate(),studentdataArrayList.get(i).status);
+
+                                    documentReference.update(statusinfo).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                        @Override
+                                        public void onSuccess(Void unused) {
+                                            Toast.makeText(Take_Attendance_Activity.this, "pushed", Toast.LENGTH_SHORT).show();
+                                        }
+                                    }).addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception e) {
+                                            Toast.makeText(Take_Attendance_Activity.this, "game over", Toast.LENGTH_SHORT).show();
+                                        }
+                                    });
+                                }
+                                i++;
+                            }
+                            if(studentdataArrayList.size()==i)
+                            {
+                                DocumentReference classteacher;
+
+                                classteacher= fstore.collection("classteachers").document(classteacherid);
+                                classteacher.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                                    @Override
+                                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                                        if(documentSnapshot.getLong("attendance taken counter")!=null && !documentSnapshot.getString("latest attendance taken").equals(dategiver.getdate()))
+                                        {
+                                            long c=documentSnapshot.getLong("attendance taken counter");
+                                            DocumentReference counter= fstore.collection("classteachers").document(classteacherid);
+                                            Map<String, Object> cun = new HashMap<>();
+
+                                            c++;
+                                            cun.put("latest attendance taken",dategiver.getdate());
+                                            cun.put("attendance taken counter",c);
+                                            counter.update(cun);
+                                        }else if(documentSnapshot.getLong("attendance taken counter")==null){
+                                            DocumentReference classteacher1= fstore.collection("classteachers").document(classteacherid);
+                                            Map<String, Object> attendtaken1 = new HashMap<>();
+                                            attendtaken1.put("latest attendance taken",dategiver.getdate());
+                                            attendtaken1.put("attendance taken counter",1);
+                                            classteacher1.update(attendtaken1);
+                                        }
+                                    }
+                                });
+                            }
+                        }
+
+                    }
+                });
+
             }
         });
         builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
