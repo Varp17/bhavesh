@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Environment;
 import android.view.View;
 import android.view.Window;
 import android.widget.AdapterView;
@@ -30,6 +31,16 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -263,6 +274,7 @@ public class Take_Attendance_Activity extends varchi_line {
                 if(statuscheckall())
                 {
                     showConfirmationDialog();
+                    writeToExcelSheet();
                 }
             }
         });
@@ -311,22 +323,25 @@ public class Take_Attendance_Activity extends varchi_line {
     }
 
     private void setinfo(int position) {
+        if (studentdataArrayList != null && !studentdataArrayList.isEmpty()) {
+            if (position >= studentdataArrayList.size()) {
+                selecteditempos = 0;
+                position = 0;
+            }
 
-        if (position >= studentdataArrayList.size()) {
-            selecteditempos = 0;
-            position = 0;
+            if (position < 0) {
+                selecteditempos = studentdataArrayList.size() - 1;
+                position = studentdataArrayList.size() - 1;
+            }
+
+            student_name.setText(studentdataArrayList.get(position).name);
+            textViewEnrollment.setText(studentdataArrayList.get(position).enr);
+        } else {
+            // Handle the case where studentdataArrayList is null or empty
+            // For example, you can display an error message or take appropriate action
         }
-
-
-        if (position < 0) {
-            selecteditempos = studentdataArrayList.size() - 1;
-            position = studentdataArrayList.size() - 1;
-        }
-
-
-        student_name.setText(studentdataArrayList.get(position).name);
-        textViewEnrollment.setText(studentdataArrayList.get(position).enr);
     }
+
 
 
     private void getclassteacherid() {
@@ -489,4 +504,56 @@ public class Take_Attendance_Activity extends varchi_line {
         builder.show();
     }
 
+
+    private void writeToExcelSheet() {
+        // Create a new workbook
+        Workbook workbook = new XSSFWorkbook();
+        Sheet sheet = workbook.createSheet("Attendance1");
+
+        String Date1 = dategiver.getdate();
+        // Create header row
+        Row headerRow = sheet.createRow(0);
+        String[] headers = {"Name", "Enrollment", "Date1"};
+        for (int i = 0; i < headers.length; i++) {
+            Cell cell = headerRow.createCell(i);
+            cell.setCellValue(headers[i]);
+            if (i == 2) {
+                cell.setCellValue("(" + Date1 + ")");
+            } else {
+                cell.setCellValue(headers[i]);
+            }
+        }
+
+        // Write attendance data
+        for (int i = 0; i < studentdataArrayList.size(); i++) {
+            StudentAttendenceData studentData = studentdataArrayList.get(i);
+            Row row = sheet.createRow(i + 1);
+            row.createCell(0).setCellValue(studentData.getName());
+            row.createCell(1).setCellValue(studentData.getEnrollment());
+            row.createCell(2).setCellValue(studentData.getStatus());
+            row.createCell(3).setCellValue(dategiver.getdate());
+        }
+
+        // Set the path for saving the Excel file
+        String fileName = "Attendance1.xlsx";
+        File dir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS), "downloads");
+        if (!dir.exists()) {
+            dir.mkdirs(); // Create directories if they don't exist
+        }
+        File file = new File(dir, fileName);
+
+        try (OutputStream outputStream = new FileOutputStream(file)) {
+            workbook.write(outputStream);
+            Toast.makeText(this, "Attendance data saved to Excel sheet", Toast.LENGTH_SHORT).show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            Toast.makeText(this, "Failed to save attendance data", Toast.LENGTH_SHORT).show();
+        } finally {
+            try {
+                workbook.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 }

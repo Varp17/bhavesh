@@ -1,22 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="20dp"
+    android:padding="16dp">
 
-    android:gravity="center"
-    tools:context="teacherpkg.teacher_fragment_document_classroom">
-
-
-    <GridView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/gridView2"
-        android:padding="2mm"
-        android:numColumns="2"
-        tools:listitem="@layout/documentview_cards_teacher"/>
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-    <!-- TODO: Update blank fragment layout -->
+        <!-- File Upload ImageView -->
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:background="@drawable/teacher_circle_shape"
+            android:src="@drawable/upload"
+            android:padding="15dp"
+            android:layout_marginTop="10dp"
+            android:layout_gravity="center_horizontal"/>
 
-</LinearLayout>
+        <!-- Divider Line -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#D3D3D3"
+            android:layout_marginTop="10dp"/>
+
+        <!-- Select File TextView -->
+        <TextView
+            android:id="@+id/selectFileText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Select File"
+            android:textStyle="bold"
+            android:padding="5dp"
+            android:layout_marginTop="10dp"
+            android:layout_gravity="center_horizontal"/>
+
+        <!-- Document Title EditText -->
+        <EditText
+            android:id="@+id/edittext"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Document Title"
+            android:layout_marginTop="16dp"/>
+
+        <!-- Upload Button -->
+        <Button
+            android:id="@+id/uploadbutton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Upload"
+            android:layout_marginTop="18dp"/>
+
+    </LinearLayout>
+</ScrollView>
