@@ -181,8 +181,6 @@ public class View_Attendance_Activity_teacher extends varchi_line implements Swi
         }, 2000);
     }
     private void showStudentDialog(Student student) {
-        Toast.makeText(this, subname, Toast.LENGTH_SHORT).show();
-        Toast.makeText(this, student.getStudentname(), Toast.LENGTH_SHORT).show();
         viewattendancedialog = new Dialog(this);
         viewattendancedialog.setContentView(R.layout.dialog_view_attendace_record);
 
@@ -225,7 +223,7 @@ public class View_Attendance_Activity_teacher extends varchi_line implements Swi
                     }
 
                     // Calculate percentage
-                    float percentage = (presentCount / (float) totalCount) * 100;
+                    float percentage = (presentCount-1 / (float) totalCount) * 100;
 
                     if (percentage < 75) {
                         percentagetext.setTextColor(getResources().getColor(android.R.color.holo_red_dark));
@@ -234,7 +232,6 @@ public class View_Attendance_Activity_teacher extends varchi_line implements Swi
                         percentagetext.setTextColor(getResources().getColor(android.R.color.holo_green_dark));
                         progressBar1.getProgressDrawable().setColorFilter(getResources().getColor(android.R.color.holo_green_dark), android.graphics.PorterDuff.Mode.SRC_IN);
                     }
-                    Toast.makeText(getApplicationContext(),totalCount+"",Toast.LENGTH_SHORT).show();
 
                     ObjectAnimator.ofInt(progressBar1, "progress", 0, (int) percentage)
                             .setDuration(1000)
