@@ -7,7 +7,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 
 import com.example.loginform.R;
 
@@ -19,6 +19,12 @@ public class all_college_notiFication_from_Administrator extends varchi_line {
     @Override
     public int getLayoutresId() {
         return R.layout.activity_all_college_notification_from_administrator;
+    }
+
+    @NonNull
+    @Override
+    public Fragment getItem(int position) {
+        return null;
     }
 
     @Override

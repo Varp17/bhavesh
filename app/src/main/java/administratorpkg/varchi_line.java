@@ -8,23 +8,17 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 
-import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.graphics.Insets;
 import androidx.core.view.GravityCompat;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.fragment.app.FragmentPagerAdapter;
-import androidx.viewpager.widget.ViewPager;
+import androidx.fragment.app.Fragment;
 
 import com.example.loginform.R;
 import com.example.loginform.student_login;
 import com.google.android.material.navigation.NavigationView;
-import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
 
  abstract class varchi_line extends AppCompatActivity  {
@@ -39,7 +33,11 @@ import com.google.firebase.auth.FirebaseAuth;
     MenuItem menu_classroom,menu_documents,menu_attendence,menu_notification,menu_managestudent,menu_feedback,menu_logout;
 
     public abstract int getLayoutresId() ;
-    abstract String getactionbarTiile_in_varchi_line();
+
+     @NonNull
+     public abstract Fragment getItem(int position);
+
+     abstract String getactionbarTiile_in_varchi_line();
 
 
     private static final int MENU_ITEM_ITEM1 = 1;
