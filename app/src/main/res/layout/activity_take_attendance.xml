@@ -9,7 +9,7 @@
     android:orientation="vertical"
     android:fitsSystemWindows="true"
 
-    tools:openDrawer="start">
+    tools:openDrawer="">
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/nav_view"
         android:layout_width="300dp"
@@ -46,7 +46,7 @@
         <!-- Spinner at the top right corner for student list -->
         <Spinner
             android:id="@+id/spinnerStudents"
-            android:layout_width="200dp"
+            android:layout_width="150dp"
             android:layout_height="30dp"
             android:layout_marginTop="10dp"
             android:layout_below="@id/teacher_custbar"

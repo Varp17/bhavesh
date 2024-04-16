@@ -213,6 +213,7 @@ public class View_Attendance_Activity_teacher extends varchi_line implements Swi
                     // Get attendance data from Firestore
                     long presentCount = 0;
                     long totalCount = documentSnapshot.getData().size(); // Total number of attendance records
+                    totalCount--;
 
 
                     for (Map.Entry<String, Object> entry : documentSnapshot.getData().entrySet()) {
@@ -223,7 +224,7 @@ public class View_Attendance_Activity_teacher extends varchi_line implements Swi
                     }
 
                     // Calculate percentage
-                    float percentage = (presentCount-1 / (float) totalCount) * 100;
+                    float percentage = (presentCount / (float) totalCount) * 100;
 
                     if (percentage < 75) {
                         percentagetext.setTextColor(getResources().getColor(android.R.color.holo_red_dark));
