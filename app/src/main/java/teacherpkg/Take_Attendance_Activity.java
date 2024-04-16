@@ -28,8 +28,10 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.storage.StorageReference;
 
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
@@ -120,7 +122,7 @@ public class Take_Attendance_Activity extends varchi_line {
         if (datetextview != null) {
             datetextview.setText("Date: " + dategiver.getdate());
         }
-        Toast.makeText(this, subname, Toast.LENGTH_SHORT).show();
+
 
         spinnerstudent.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -274,7 +276,7 @@ public class Take_Attendance_Activity extends varchi_line {
                 if(statuscheckall())
                 {
                     showConfirmationDialog();
-                    writeToExcelSheet();
+
                 }
             }
         });
@@ -375,7 +377,7 @@ public class Take_Attendance_Activity extends varchi_line {
 
 
 
-        Toast.makeText(this, "helo"+classteacherid, Toast.LENGTH_SHORT).show();
+
 
         CollectionReference classstudents=fstore.collection("classteachers").document(classteacherid).
                 collection("class_students");
@@ -384,7 +386,7 @@ public class Take_Attendance_Activity extends varchi_line {
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if(task.isSuccessful())
                         {
-                            Toast.makeText(Take_Attendance_Activity.this, "bye", Toast.LENGTH_SHORT).show();
+
                             for (DocumentSnapshot documentSnapshot: task.getResult())
                             {
                                 studentnamelist.add(documentSnapshot.getString("Fullname"));
@@ -448,6 +450,22 @@ public class Take_Attendance_Activity extends varchi_line {
                                         @Override
                                         public void onSuccess(Void unused) {
                                             Toast.makeText(Take_Attendance_Activity.this, "pushed", Toast.LENGTH_SHORT).show();
+//                                            if (documentSnapshot.getString("acc created") != null) {
+//                                                DocumentReference deleteField = fstore.collection("classteachers").document(classteacherid)
+//                                                        .collection("class_students").document(subname);
+//                                                deleteField.update("acc created", FieldValue.delete())
+//                                                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+//                                                            @Override
+//                                                            public void onSuccess(Void unused) {
+//                                                                Toast.makeText(Take_Attendance_Activity.this, "acc created deleted", Toast.LENGTH_SHORT).show();
+//                                                            }
+//                                                        }).addOnFailureListener(new OnFailureListener() {
+//                                                            @Override
+//                                                            public void onFailure(@NonNull Exception e) {
+//                                                                Toast.makeText(Take_Attendance_Activity.this, "Error deleting acc created", Toast.LENGTH_SHORT).show();
+//                                                            }
+//                                                        });
+//                                            }
                                         }
                                     }).addOnFailureListener(new OnFailureListener() {
                                         @Override
@@ -460,6 +478,8 @@ public class Take_Attendance_Activity extends varchi_line {
                             }
                             if(studentdataArrayList.size()==i)
                             {
+                                writeToExcelSheet();
+                                
                                 DocumentReference classteacher;
 
                                 classteacher= fstore.collection("classroom_subject").document(subname);
@@ -483,6 +503,7 @@ public class Take_Attendance_Activity extends varchi_line {
                                             attendtaken1.put("attendance taken counter",1);
                                             classteacher1.update(attendtaken1);
                                         }
+
                                     }
                                 });
                             }
