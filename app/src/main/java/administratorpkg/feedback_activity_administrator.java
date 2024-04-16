@@ -8,6 +8,7 @@ import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -24,6 +25,8 @@ import java.util.List;
 
 public class feedback_activity_administrator extends varchi_line implements FeedbackAdapter.OnFeedbackClickListener {
 
+
+    private static final int REQUEST_CODE_FEEDBACK_DIALOG = 100;
     private RecyclerView recyclerView;
     private FeedbackAdapter feedbackAdapter;
 
@@ -97,6 +100,7 @@ public class feedback_activity_administrator extends varchi_line implements Feed
 
     }
 
+
     @Override
     public void onFeedbackClick(int position) {
         if (feedbackAdapter != null) {
@@ -105,7 +109,7 @@ public class feedback_activity_administrator extends varchi_line implements Feed
                 Intent intent = new Intent(feedback_activity_administrator.this, FeedbackDetailActivity.class);
                 intent.putExtra("subject", feedback.getSubject());
                 intent.putExtra("description", feedback.getDescription());
-                startActivity(intent);
+                startActivityForResult(intent, REQUEST_CODE_FEEDBACK_DIALOG); // Start as a dialog
             } else {
                 Log.e("FeedbackActivity", "Feedback item is null at position: " + position);
                 Toast.makeText(feedback_activity_administrator.this, "Feedback item is null", Toast.LENGTH_SHORT).show();
@@ -115,5 +119,16 @@ public class feedback_activity_administrator extends varchi_line implements Feed
             Toast.makeText(feedback_activity_administrator.this, "Feedback adapter is null", Toast.LENGTH_SHORT).show();
         }
     }
+
+    // Handle the result from the dialog activity
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_CODE_FEEDBACK_DIALOG && resultCode == RESULT_OK) {
+            // Refresh UI or perform any action if needed
+            loadFeedbackFromFirestore(); // Reload feedback data
+        }
+    }
 }
+
 

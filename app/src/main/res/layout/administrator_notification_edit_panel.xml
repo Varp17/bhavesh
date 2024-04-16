@@ -33,7 +33,7 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/fullname"
-                style="@style/INAPPTEXT"
+                style="@style/EDITTEXT"
                 android:layout_width="324dp"
                 android:layout_height="60dp"
                 android:layout_marginStart="20sp"
@@ -63,7 +63,7 @@
                 android:layout_marginStart="20sp"
                 android:layout_marginEnd="20sp"
                 android:gravity="center"
-                style="@style/INAPPTEXT"
+                style="@style/EDITTEXT"
                 android:hint="Description"
                 android:textSize="20sp" />
 

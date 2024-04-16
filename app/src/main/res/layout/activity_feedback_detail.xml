@@ -1,124 +1,72 @@
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/Drawer_lay"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/popup_layout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="administratorpkg.FeedbackDetailActivity"
-    android:orientation="vertical"
-    android:fitsSystemWindows="true"
-    tools:openDrawer="start">
-    <com.google.android.material.navigation.NavigationView
-        android:id="@+id/nav_view"
-        android:layout_width="300dp"
-        android:layout_height="match_parent"
-        android:layout_gravity="start"
-        app:headerLayout="@layout/header"
-        app:menu="@menu/menubaradmin"
-        tools:ignore="DuplicateIds">
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
 
-    </com.google.android.material.navigation.NavigationView>
+    android:background="@drawable/popupscreen"
+    android:orientation="vertical">
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-
-        android:orientation="vertical">
-        <include layout="@layout/custlbar"/>
-
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/main"
+    <TextView
+        android:id="@+id/textViewTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        >
+        android:text="Feedback"
+        style="@style/INAPPTEXT"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp" />
+
+    <!-- Feedback content -->
     <TextView
         android:id="@+id/textViewSubject"
-        style="@style/TEXT"
-        android:layout_width="wrap_content"
+        style="@style/INAPPTEXT"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="28dp"
-        android:layout_marginBottom="43dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
         android:text="Subject:"
-        android:textSize="25sp"
-        app:layout_constraintBottom_toTopOf="@+id/textViewSubjectValue"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        android:textSize="18sp" />
 
     <TextView
         android:id="@+id/textViewSubjectValue"
-        style="@style/TEXT"
-        android:layout_width="0dp"
+        style="@style/INAPPTEXT"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/textViewSubject"
-        android:layout_marginStart="28dp"
-        android:layout_marginEnd="28dp"
-        android:layout_marginBottom="40dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
         android:background="@drawable/borderline"
         android:ellipsize="end"
-        android:paddingStart="25dp"
-        android:paddingEnd="25dp"
-        android:textSize="21sp"
-        app:layout_constraintBottom_toTopOf="@+id/textViewDescription"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewSubject" />
+        android:padding="6dp"
+        android:textSize="15sp" />
 
     <TextView
         android:id="@+id/textViewDescription"
-        style="@style/TEXT"
-        android:layout_width="wrap_content"
+        style="@style/INAPPTEXT"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/textViewSubjectValue"
-        android:layout_marginStart="28dp"
-        android:layout_marginBottom="43dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
         android:text="Description:"
-        android:textSize="25sp"
-        app:layout_constraintBottom_toTopOf="@+id/textViewDescriptionValue"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewSubjectValue" />
+        android:textSize="18sp" />
 
     <TextView
         android:id="@+id/textViewDescriptionValue"
-        style="@style/TEXT"
-        android:layout_width="0dp"
+        style="@style/INAPPTEXT"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/textViewSubject"
-        android:layout_marginStart="28dp"
-        android:layout_marginEnd="28dp"
-        android:layout_marginBottom="157dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="28dp"
         android:background="@drawable/borderline"
         android:ellipsize="end"
-        android:paddingStart="25dp"
-        android:paddingEnd="25dp"
-        android:textSize="21sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewDescription" />
+        android:padding="6dp"
+        android:textSize="15sp" />
 
-            <TextView
-                android:id="@+id/textView"
-                style="@style/TEXT"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="40dp"
-                android:layout_marginBottom="54dp"
-                android:text="Feedback"
-                android:textSize="50dp"
-                app:layout_constraintBottom_toTopOf="@+id/textViewSubject"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-    </LinearLayout>
-</androidx.drawerlayout.widget.DrawerLayout>
+</LinearLayout>

@@ -12,8 +12,8 @@
     </style>
     <!-- texts background if dark mode on -->
     <style name="EDITTEXT">
-        <item name="android:textColor" Parent="Theme.AppCompat.DayNight.NoActionBar">#FFFFFF</item>
-        <item name="android:background" Parent="Theme.AppCompat.DayNight.NoActionBar">@drawable/teacheredittextnight</item>
+        <item name="android:textColor">#000</item>
+        <item name="android:background">@drawable/edittextcorner</item>
     </style>
 
     <!-- button background if light is on -->
@@ -25,9 +25,8 @@
         <item name="android:textColor" Parent="Theme.AppCompat.DayNight.NoActionBar">#FFFFFF</item>
     </style>
     <style name="INAPPTEXT" parent="Base.Theme.LOginForm">
-        <item name="android:textColor">#FFFFFF</item>
-        <item name="android:textColorHint">#AD92EA</item>
-        <item name="android:background">@drawable/inapptextnight</item>
+        <item name="android:textColor">#000000</item>
+
     </style>
     <style name="edittextLoginblue">
         <item name="android:textColor" Parent="Theme.AppCompat.DayNight.NoActionBar" >#ffff</item>

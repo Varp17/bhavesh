@@ -23,9 +23,7 @@
         <activity
             android:name="teacherpkg.View_Attendance_Activity_teacher"
             android:exported="false" />
-        <activity
-            android:name="administratorpkg.FeedbackDetailActivity"
-            android:exported="false" />
+
         <activity
             android:name="teacherpkg.mangesubject_classteacher"
             android:exported="false" />
@@ -41,6 +39,10 @@
         <activity
             android:name="studentpakage.student_classroomclicked"
             android:exported="false" />
+        <activity android:name="administratorpkg.FeedbackDetailActivity"
+            android:theme="@style/Theme.AppCompat.Dialog">
+        </activity>
+
         <activity
             android:name="teacherpkg.teacher_classroomclicked"
             android:exported="false" />
