@@ -3,8 +3,10 @@ package administratorpkg;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Window;
 import android.widget.Toast;
 
+import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -48,8 +50,9 @@ public class feedback_activity_administrator extends varchi_line implements Feed
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_feedback_administrator);
+        super.onCreate(savedInstanceState); EdgeToEdge.enable(this);
+        Window window=getWindow();
+        window.setStatusBarColor(getResources().getColor(R.color.apna_color));
 
         recyclerView = findViewById(R.id.feedbackrecyclerview);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
