@@ -20,7 +20,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageButton
-            android:id="@+id/imageButton1"
+            android:id="@+id/viewattendance"
             android:layout_width="166dp"
             android:layout_height="160dp"
             android:background="@null"

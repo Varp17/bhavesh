@@ -5,7 +5,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -14,17 +13,17 @@ import com.example.loginform.R;
 
 import java.util.ArrayList;
 
-import administratorpkg.Staff;
-import administratorpkg.StaffAdapter;
 import administratorpkg.recyclerviewonclick;
 
 public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.StudentViewHolder> implements recyclerviewonclick {
 
-    recyclerviewonclick recyclerviewonclick;
+    teacherpkg.recyclerviewonclick recyclerviewonclick;
     Context context;
     ArrayList<Student> studentArrayList;
 
-    public StudentAdapter(Context context, ArrayList<Student> student, recyclerviewonclick recyclerviewonclick) {
+
+
+    public StudentAdapter(Context context, ArrayList<Student> student, teacherpkg.recyclerviewonclick recyclerviewonclick) {
         this.context = context;
         this.studentArrayList = student;
         this.recyclerviewonclick = recyclerviewonclick;

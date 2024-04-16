@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="16dp"
+    android:background="@color/purple">
+
+    <!-- Profile Picture -->
+    <ImageView
+        android:id="@+id/imageViewProfile"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/profile_icon"
+        android:scaleType="centerCrop"
+        android:layout_centerHorizontal="true" />
+
+    <!-- Name TextView -->
+    <TextView
+        android:id="@+id/stdname_view_attendance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/imageViewProfile"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="8dp"
+        android:text="Mrugesh Patil"
+        android:textStyle="bold"
+        android:textColor="@android:color/black"
+        android:textSize="22sp" />
+
+    <!-- Enrollment Number TextView -->
+    <TextView
+        android:id="@+id/enroll_no_view_attendance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/stdname_view_attendance"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="8dp"
+        android:text="2116340019"
+        android:textColor="@android:color/black"
+        android:textSize="16sp" />
+
+    <!-- Attendance TextView -->
+    <TextView
+        android:id="@+id/Attendance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/enroll_no_view_attendance"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="8dp"
+        android:text="Attendance Record:"
+        android:textColor="@android:color/black"
+        android:textSize="18sp" />
+    <TextView
+        android:id="@+id/percentagetext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/Attendance"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="8dp"
+        android:text="00%"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:textSize="26sp" />
+
+    <!-- Progress Bar -->
+    <ProgressBar
+        android:id="@+id/progressBarAttendance"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/percentagetext"
+        android:layout_marginTop="5dp"
+        android:progressTint="@color/green"
+        android:progressBackgroundTint="@color/red"
+        android:max="100"
+        android:progress="0"/>
+    <Button
+        android:id="@+id/cloasebtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/progressBarAttendance"
+        android:layout_centerHorizontal="true"
+        android:text="Close"
+        android:layout_marginTop="20dp"
+        />
+
+</RelativeLayout>

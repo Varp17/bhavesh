@@ -68,7 +68,7 @@ public class fragment_mangestudent_classteacher extends Fragment implements Swip
 
     private ArrayList<Student> studentArrayList;
     private ArrayList<String> studentname;
-    private ArrayList<String> studentId,password,studentemail;
+    private ArrayList<String> studentId,password,studentemail,enrollment;
     private RecyclerView recyclerview;
     private ArrayList<String> student;
     private SwipeRefreshLayout swipeRefreshLayout;
@@ -199,7 +199,7 @@ public class fragment_mangestudent_classteacher extends Fragment implements Swip
         studentArrayList.clear();
 
         for (int j = 0; j < studentname.size(); j++) {
-            Student student_names = new Student(studentname.get(j), studentId.get(j),password.get(j), studentemail.get(j));
+            Student student_names = new Student(studentname.get(j), studentId.get(j),password.get(j), studentemail.get(j), enrollment.get(j));
             studentArrayList.add(student_names);
         }
 

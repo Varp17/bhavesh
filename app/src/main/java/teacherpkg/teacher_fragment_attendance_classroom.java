@@ -2,6 +2,7 @@
 
 package teacherpkg;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -21,7 +22,7 @@ import com.example.loginform.R;
  * create an instance of this fragment.
  */
 public class teacher_fragment_attendance_classroom extends Fragment {
-    ImageButton imageButton;
+    ImageButton viewattendance1;
     ImageButton imageButton1;
     Button take_attendance_btn ;
 
@@ -66,6 +67,7 @@ public class teacher_fragment_attendance_classroom extends Fragment {
         }
     }
 
+    @SuppressLint("MissingInflatedId")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -73,6 +75,15 @@ public class teacher_fragment_attendance_classroom extends Fragment {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.activity_teacher_fragment_attendance_classroom, container, false);
         take_attendance_btn = rootView.findViewById(R.id.takeattendancebtn);
+
+        viewattendance1 = rootView.findViewById(R.id.viewattendance);
+
+        viewattendance1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getContext(),View_Attendance_Activity_teacher.class));
+            }
+        });
 
         take_attendance_btn.setOnClickListener(new View.OnClickListener() {
             @Override

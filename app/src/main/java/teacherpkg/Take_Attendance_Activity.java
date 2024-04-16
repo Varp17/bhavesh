@@ -409,8 +409,7 @@ public class Take_Attendance_Activity extends varchi_line {
                 // Action to perform when "Yes" is clicked
                 // For example, you can proceed with the operation
                 Toast.makeText(getApplicationContext(), "uploading to database", Toast.LENGTH_SHORT).show();
-                CollectionReference attendsub = fstore.collection("classteachers").document(classteacherid).collection("class_students")
-                        ;
+                CollectionReference attendsub = fstore.collection("classteachers").document(classteacherid).collection("class_students");
                 attendsub.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
