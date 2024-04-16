@@ -157,6 +157,7 @@ public class fragment_mangestudent_classteacher extends Fragment implements Swip
         studentArrayList = new ArrayList<>();
         studentId = new ArrayList<>(); // Initialize teacherId ArrayList
         password=new ArrayList<>();
+        enrollment = new ArrayList<>();
         studentemail=new ArrayList<>();
 
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
@@ -177,10 +178,12 @@ public class fragment_mangestudent_classteacher extends Fragment implements Swip
                             String userId = document.getId(); // Fetch the user ID
                             String pass=document.getString("password");
                             String email=document.getString("Email");
+                            String enroll = document.getString("Enrollment");
                             studentname.add(userName);
                             studentId.add(userId); // Store the user ID
                             password.add(pass);
                             studentemail.add(email);
+                            enrollment.add(enroll);
                         }
                         initializeAdapter();
                     } else {
