@@ -448,14 +448,14 @@ public class Take_Attendance_Activity extends varchi_line {
                             {
                                 DocumentReference classteacher;
 
-                                classteacher= fstore.collection("classteachers").document(classteacherid);
+                                classteacher= fstore.collection("classroom_subject").document(subname);
                                 classteacher.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                                     @Override
                                     public void onSuccess(DocumentSnapshot documentSnapshot) {
                                         if(documentSnapshot.getLong("attendance taken counter")!=null && !documentSnapshot.getString("latest attendance taken").equals(dategiver.getdate()))
                                         {
                                             long c=documentSnapshot.getLong("attendance taken counter");
-                                            DocumentReference counter= fstore.collection("classteachers").document(classteacherid);
+                                            DocumentReference counter= fstore.collection("classroom_subject").document(subname);
                                             Map<String, Object> cun = new HashMap<>();
 
                                             c++;
@@ -463,7 +463,7 @@ public class Take_Attendance_Activity extends varchi_line {
                                             cun.put("attendance taken counter",c);
                                             counter.update(cun);
                                         }else if(documentSnapshot.getLong("attendance taken counter")==null){
-                                            DocumentReference classteacher1= fstore.collection("classteachers").document(classteacherid);
+                                            DocumentReference classteacher1= fstore.collection("classroom_subject").document(subname);
                                             Map<String, Object> attendtaken1 = new HashMap<>();
                                             attendtaken1.put("latest attendance taken",dategiver.getdate());
                                             attendtaken1.put("attendance taken counter",1);
