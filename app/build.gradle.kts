@@ -65,6 +65,7 @@ dependencies {
     implementation("com.google.firebase:firebase-firestore:24.11.1")
     implementation("com.google.firebase:firebase-storage:20.3.0")
     implementation("com.google.firebase:firebase-database:20.3.1")
+    implementation("androidx.cardview:cardview:1.0.0")
     testImplementation("junit:junit:4.13.2")
     implementation ("com.github.denzcoskun:ImageSlideshow:0.1.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
@@ -81,6 +82,10 @@ dependencies {
     implementation ("com.github.PhilJay:MPAndroidChart:v3.1.0")
     implementation ("org.apache.poi:poi:5.2.5")
     implementation ("org.apache.poi:poi-ooxml:5.2.5")
+    implementation("com.github.bumptech.glide:glide:4.12.0")
+    annotationProcessor("com.github.bumptech.glide:compiler:4.12.0")
+    implementation ("com.google.firebase:firebase-storage:20.0.0")
+
 
 
 //    implementation("com.google.firebase:firebase-admin:9.2.0") {
