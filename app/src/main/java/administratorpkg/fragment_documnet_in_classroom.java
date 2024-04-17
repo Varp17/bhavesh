@@ -1,55 +1,60 @@
 package administratorpkg;
 
 import android.os.Bundle;
-import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.GridView;
-import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.loginform.R;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class fragment_documnet_in_classroom extends Fragment {
 
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    private String mParam1;
-    private String mParam2;
-
-    public fragment_documnet_in_classroom() {
-        // Required empty public constructor
-    }
-
-    public static fragment_documnet_in_classroom newInstance(String param1, String param2) {
-        fragment_documnet_in_classroom fragment = new fragment_documnet_in_classroom();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
+    private RecyclerView recyclerView;
+    private DocumentGridAdapter adapter;
+    private DocumentRepository documentRepository;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_documnet_in_classroom, container, false);
+        return inflater.inflate(R.layout.fragment_documnet_in_classroom, container, false);
+    }
 
-        String[] documentnames = {"Java", "Python", "PHP", "C", "C++", "C", "SQL", "CSS", "JAVASCRIPT", "WEB_DL"};
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
 
-        documentgridadapter gridAdapter = new documentgridadapter(fragment_documnet_in_classroom.this, documentnames);
-        GridView gridView = view.findViewById(R.id.gridView);
-        gridView.setAdapter(gridAdapter);
+        recyclerView = view.findViewById(R.id.recyclerViewDocuments);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        documentRepository = new DocumentRepository();
+        adapter = new DocumentGridAdapter(getContext(), new ArrayList<>());
+
+        recyclerView.setAdapter(adapter);
+
+        // Retrieve documents from Firestore
+        retrieveDocumentsFromFolder("/Documents");
+    }
+
+    private void retrieveDocumentsFromFolder(String folderPath) {
+        documentRepository.getAllDocumentsFromFolder(folderPath, new DocumentRepository.OnDocumentFetchListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(getActivity(), "You Clicked On " + documentnames[position], Toast.LENGTH_SHORT).show();
+            public void onDocumentsFetched(List<Document> documents) {
+                adapter.updateDocuments(documents);
+            }
+
+            @Override
+            public void onFetchError(Exception e) {
+                // Handle fetch error
             }
         });
-
-        return view;
     }
 }
