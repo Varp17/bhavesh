@@ -1,6 +1,5 @@
 package teacherpkg;
 
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -27,154 +26,132 @@ import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
 
-import administratorpkg.all_college_notiFication_from_Administrator;
 import administratorpkg.feedback_activity_administrator;
 
 public class teacher_panel extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     Toolbar toolbar;
-
     DrawerLayout drawerLayout;
     NavigationView navigationView;
-//    ImageButton notification;
-
     ViewPager vpager;
     TabLayout tabLayout;
     teacher_fragmentd_adapter myFragmentAdapter;
-    Menu menu;
-    MenuItem menu_home,menu_classroom,menu_feedback,menu_notification,menu_logout;
-    ImageView profileimg;
 
-
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Window window=getWindow();
+        Window window = getWindow();
         window.setStatusBarColor(getResources().getColor(R.color.teacher_color));
         setContentView(R.layout.activity_teacher_panel);
-        drawerLayout=findViewById(R.id.Drawer_lay);
-        navigationView=findViewById(R.id.nav_view);
-        toolbar=findViewById(R.id.toolbar);
 
+        drawerLayout = findViewById(R.id.Drawer_lay);
+        navigationView = findViewById(R.id.nav_view);
+        toolbar = findViewById(R.id.toolbar);
 
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("PresencePro");
+        getSupportActionBar().setTitle("Clg Management Sys");
 
         navigationView.bringToFront();
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,drawerLayout,toolbar,R.string.navigation_drawer_open,R.string.navigation_drawer_close);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawerLayout, toolbar,
+                R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
+
         ImageView profileImg = navigationView.getHeaderView(0).findViewById(R.id.profileimg);
-        menu=navigationView.getMenu();
-        menu_home=menu.findItem(R.id.nav_home);
-        menu_classroom=menu.findItem(R.id.nav_classroom);
-        menu_notification=menu.findItem(R.id.nav_notification);
-        menu_logout=menu.findItem(R.id.nav_logout);
-
-
-        menu_notification.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(@NonNull MenuItem item) {
-//                if(toolbar.getTitle()!="NOTIFICATIONS") {
-//                    Intent intent1 = new Intent(getApplicationContext(), notification_teacher.class);
-//                    startActivity(intent1);
-//                    finish();
-//                }
-                return false;
-            }
+        profileImg.setOnClickListener(v -> {
+            Intent intent = new Intent(teacher_panel.this, Teacher_Profile.class);
+            startActivity(intent);
+            finish();
         });
 
-        menu_logout.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(@NonNull MenuItem item) {
-                FirebaseAuth firebaseAuth=FirebaseAuth.getInstance();
-                firebaseAuth.signOut();
-                startActivity(new Intent(getApplicationContext(), student_login.class));
-                finish();
-                return false;
-            }
-        });
-        profileImg.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                Intent intent = new Intent(teacher_panel.this, Teacher_Profile.class);
-                startActivity(intent);
-               finish();
-            }
-        });
-
-        menu_feedback = menu.findItem(R.id.nav_feedback);
-
-        menu_feedback.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(@NonNull MenuItem item) {
-                Intent intent = new Intent(getApplicationContext(), feedback_teacher.class);
-                startActivity(intent);
-                return false;
-            }
-        });
-
-        menu_home.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(@NonNull MenuItem item) {
-                drawerLayout.closeDrawer(GravityCompat.START);
-                tabLayout.setScrollPosition(0,0f,true);
-                vpager.setCurrentItem(0);
-                return false;
-            }
-        });
-        vpager=findViewById(R.id.vpager);
-        myFragmentAdapter=new teacher_fragmentd_adapter(getSupportFragmentManager());
+        vpager = findViewById(R.id.vpager);
+        myFragmentAdapter = new teacher_fragmentd_adapter(getSupportFragmentManager());
         vpager.setAdapter(myFragmentAdapter);
-        tabLayout=findViewById(R.id.tabLayout);
-        tabLayout.setupWithViewPager(vpager);
-        menu_classroom.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(@NonNull MenuItem item) {
-                drawerLayout.closeDrawer(GravityCompat.START);
-                tabLayout.setScrollPosition(1,0f,true);
-                vpager.setCurrentItem(1);
-                return false;
-            }
-        });
 
+        tabLayout = findViewById(R.id.tabLayout);
+        tabLayout.setupWithViewPager(vpager);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menubarteacher, menu);
 
+        // Get menu items and set click listeners
+        MenuItem menu_notification = menu.findItem(R.id.nav_notification);
+        MenuItem menu_logout = menu.findItem(R.id.nav_logout);
+        MenuItem menu_feedback = menu.findItem(R.id.nav_feedback);
+        MenuItem menu_home = menu.findItem(R.id.nav_home);
+        MenuItem menu_classroom = menu.findItem(R.id.nav_classroom);
+
+        if (menu_notification != null) {
+            menu_notification.setOnMenuItemClickListener(item -> {
+                Intent intent1 = new Intent(getApplicationContext(), notification_teacher.class);
+                startActivity(intent1);
+                finish();
+                return true;
+            });
+        }
+
+        if (menu_logout != null) {
+            menu_logout.setOnMenuItemClickListener(item -> {
+                FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+                firebaseAuth.signOut();
+                startActivity(new Intent(getApplicationContext(), student_login.class));
+                finish();
+                return true;
+            });
+        }
+
+        if (menu_feedback != null) {
+            menu_feedback.setOnMenuItemClickListener(item -> {
+                Intent intent = new Intent(getApplicationContext(), feedback_teacher.class);
+                startActivity(intent);
+                return true;
+            });
+        }
+
+        if (menu_home != null) {
+            menu_home.setOnMenuItemClickListener(item -> {
+                drawerLayout.closeDrawer(GravityCompat.START);
+                tabLayout.setScrollPosition(0, 0f, true);
+                vpager.setCurrentItem(0);
+                return true;
+            });
+        }
+
+        if (menu_classroom != null) {
+            menu_classroom.setOnMenuItemClickListener(item -> {
+                drawerLayout.closeDrawer(GravityCompat.START);
+                tabLayout.setScrollPosition(1, 0f, true);
+                vpager.setCurrentItem(1);
+                return true;
+            });
+        }
 
         return true;
-
     }
-    boolean doubleBackToExitPressedOnce=false;
+
+    boolean doubleBackToExitPressedOnce = false;
+
     @Override
     public void onBackPressed() {
         if (doubleBackToExitPressedOnce) {
             super.onBackPressed();
-
+            return;
         }
+
         if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
             drawerLayout.closeDrawer(GravityCompat.START);
-        }else if(vpager.getCurrentItem()==1){
-            tabLayout.setScrollPosition(0,0f,true);
+        } else if (vpager.getCurrentItem() == 1) {
+            tabLayout.setScrollPosition(0, 0f, true);
             vpager.setCurrentItem(0);
-
-        }else {
+        } else {
             doubleBackToExitPressedOnce = true;
-            finish();
             Toast.makeText(this, "Please click BACK again to exit", Toast.LENGTH_SHORT).show();
 
-            new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
-
-                @Override
-                public void run() {
-                    doubleBackToExitPressedOnce=false;
-                }
-            }, 2000);
+            new Handler(Looper.getMainLooper()).postDelayed(() -> doubleBackToExitPressedOnce = false, 2000);
         }
     }
 
@@ -182,21 +159,4 @@ public class teacher_panel extends AppCompatActivity implements NavigationView.O
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         return true;
     }
-
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-
-        // Handle your menu items here
-//        if (id == R.id.nav_notification && toolbar.getTitle()!= "NOTIFICATIONS") {
-//
-//            Intent intent=new Intent(getApplicationContext(), notification_teacher.class);
-//            startActivity(intent);
-//            finish();
-//            return true;
-//        }
-
-
-        return super.onOptionsItemSelected(item);
-    }
-
 }

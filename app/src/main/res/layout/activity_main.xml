@@ -8,7 +8,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
-    android:background="@drawable/loginpge"
+    android:background="@drawable/loginbkg12"
     tools:context=".student_login">
 
     <FrameLayout
@@ -122,7 +122,7 @@
         android:padding="3dp"
         android:text="@string/aministrator_teacher_login"
         android:textAlignment="center"
-        android:textColor="#E97A7B"
-        android:textSize="14sp" />
+        android:textColor="#FFFFFF"
+        android:textSize="18sp" />
 
 </LinearLayout>

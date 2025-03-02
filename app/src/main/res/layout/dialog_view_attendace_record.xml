@@ -22,7 +22,7 @@
         android:layout_below="@id/imageViewProfile"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="8dp"
-        android:text="Mrugesh Patil"
+        android:text="Bhavesh Sonawane"
         android:textStyle="bold"
         android:textColor="@android:color/white"
         android:textSize="22sp" />
@@ -71,7 +71,7 @@
         android:layout_below="@id/percentagetext"
         android:layout_marginTop="5dp"
         android:progressTint="@color/green"
-        android:progressBackgroundTint="@color/white"
+        android:progressBackgroundTint="@color/textcolor"
         android:max="100"
         android:progress="0"/>
     <Button

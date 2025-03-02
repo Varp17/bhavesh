@@ -59,7 +59,7 @@ public class student_panel extends AppCompatActivity implements NavigationView.O
 
 
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("PresencePro");
+        getSupportActionBar().setTitle("Clg Management Sys");
 
         navigationView.bringToFront();
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,drawerLayout,toolbar,R.string.navigation_drawer_open,R.string.navigation_drawer_close);

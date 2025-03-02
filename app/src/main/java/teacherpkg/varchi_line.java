@@ -3,6 +3,7 @@ package teacherpkg;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -91,21 +92,27 @@ public abstract class varchi_line extends AppCompatActivity  {
         menu_logout.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(@NonNull MenuItem item) {
-                FirebaseAuth firebaseAuth=FirebaseAuth.getInstance();
+                // Sign out the user from Firebase
+                FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
                 firebaseAuth.signOut();
+
+                // Close the drawer before navigating
+                if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+                    drawerLayout.closeDrawer(GravityCompat.START);
+                }
+
+                // Navigate back to the login screen
+                Intent intent = new Intent(getApplicationContext(), student_login.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK); // Clears the activity stack
+                startActivity(intent);
+
+                // Finish the current activity
                 finish();
-                startActivity(new Intent(getApplicationContext(), student_login.class));
-                return false;
+                return true;
             }
         });
-        menu_feedback.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(@NonNull MenuItem item) {
-//                Intent intent = new Intent(getApplicationContext(), feedback_activity_administrator.class);
-//                startActivity(intent);
-                return false;
-            }
-        });
+
+
 
 
         ImageView profileImg = navigationView.getHeaderView(0).findViewById(R.id.profileimg);
@@ -204,16 +211,20 @@ public abstract class varchi_line extends AppCompatActivity  {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menubaradmin, menu);
+        inflater.inflate(R.menu.menubaradmin, menu); // Ensure you are inflating the correct XML file
 
-
-
+        // Check if the menu items exist
+        MenuItem notificationItem = menu.findItem(R.id.nav_notification);
+        if (notificationItem == null) {
+            Log.e("MenuError", "MenuItem nav_notification not found! Check your XML.");
+        } else {
+            Log.d("MenuDebug", "nav_notification item found successfully.");
+        }
 
         return true;
-
     }
+
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 

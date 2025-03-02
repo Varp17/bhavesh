@@ -8,7 +8,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
-    android:background="@drawable/loginbkg1"
+    android:background="@drawable/studlogin"
     tools:context=".student_login">
 
     <FrameLayout
