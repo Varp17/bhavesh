@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Environment;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.AdapterView;
@@ -144,46 +145,49 @@ public class Take_Attendance_Activity extends varchi_line {
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setinfo(selecteditempos);
-                selecteditempos++;
+                if (studentdataArrayList != null && !studentdataArrayList.isEmpty()) {
+                    setinfo(selecteditempos);
+                    selecteditempos++;
 
-                if (selecteditempos >= studentdataArrayList.size()) {
-                    selecteditempos = 0;
+                    if (selecteditempos >= studentdataArrayList.size()) {
+                        selecteditempos = 0;
+                    }
 
+                    if (selecteditempos < 0) {
+                        selecteditempos = studentdataArrayList.size() - 1;
+                    }
+
+                    spinnerstudent.setSelection(selecteditempos);
+                    statustextview.setText(studentdataArrayList.get(selecteditempos).status);
+                } else {
+                    Log.e("Take_Attendance", "studentdataArrayList is null or empty");
                 }
-
-
-                if (selecteditempos < 0) {
-                    selecteditempos = studentdataArrayList.size() - 1;
-
-                }
-
-
-                spinnerstudent.setSelection(selecteditempos);
-                statustextview.setText(studentdataArrayList.get(selecteditempos).status);
             }
         });
+
         previous.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setinfo(selecteditempos);
-                selecteditempos--;
-                if (selecteditempos >= studentdataArrayList.size()) {
-                    selecteditempos = 0;
+                if (studentdataArrayList != null && !studentdataArrayList.isEmpty()) {
+                    setinfo(selecteditempos);
+                    selecteditempos--;
 
+                    if (selecteditempos >= studentdataArrayList.size()) {
+                        selecteditempos = 0;
+                    }
+
+                    if (selecteditempos < 0) {
+                        selecteditempos = studentdataArrayList.size() - 1;
+                    }
+
+                    spinnerstudent.setSelection(selecteditempos);
+                    statustextview.setText(studentdataArrayList.get(selecteditempos).status);
+                } else {
+                    Log.e("Take_Attendance", "studentdataArrayList is null or empty");
                 }
-
-
-                if (selecteditempos < 0) {
-                    selecteditempos = studentdataArrayList.size() - 1;
-
-                }
-
-
-                spinnerstudent.setSelection(selecteditempos);
-                statustextview.setText(studentdataArrayList.get(selecteditempos).status);
             }
         });
+
         presentbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -313,15 +317,20 @@ public class Take_Attendance_Activity extends varchi_line {
         }
     }
 
-    private void setPresent(int position)
-    {
-        studentdataArrayList.get(position).status="P";
-
+    private void setPresent(int position) {
+        if (studentdataArrayList != null && position >= 0 && position < studentdataArrayList.size()) {
+            studentdataArrayList.get(position).status = "P";
+        } else {
+            Log.e("Take_Attendance", "Invalid position for setPresent: " + position);
+        }
     }
-    private void setAbsent(int position)
-    {
-            studentdataArrayList.get(position).status="Ab";
 
+    private void setAbsent(int position) {
+        if (studentdataArrayList != null && position >= 0 && position < studentdataArrayList.size()) {
+            studentdataArrayList.get(position).status = "Ab";
+        } else {
+            Log.e("Take_Attendance", "Invalid position for setAbsent: " + position);
+        }
     }
 
     private void setinfo(int position) {

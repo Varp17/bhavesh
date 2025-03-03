@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "36224814626",
+    "firebase_url": "https://presencepro-40e3b-default-rtdb.firebaseio.com",
     "project_id": "presencepro-40e3b",
     "storage_bucket": "presencepro-40e3b.appspot.com"
   },
@@ -12,7 +13,20 @@
           "package_name": "com.example.loginform"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "36224814626-42hlsqsj5uqorasu991anpdsp36ffmr6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.loginform",
+            "certificate_hash": "54b3a93f254ea83b6c407063aa17da6e1712ace5"
+          }
+        },
+        {
+          "client_id": "36224814626-0hnkkq8nh182e87va3le8h6gg8opikt9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyB6PeaU7aVWjVvhmdHiM1dJpnSK6zdTpto"
@@ -20,7 +34,12 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "36224814626-0hnkkq8nh182e87va3le8h6gg8opikt9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }
