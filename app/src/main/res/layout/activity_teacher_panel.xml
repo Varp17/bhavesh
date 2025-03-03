@@ -5,11 +5,17 @@
     android:id="@+id/Drawer_lay"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="teacherpkg.teacher_panel"
-    android:orientation="vertical"
     android:fitsSystemWindows="true"
-
+    tools:context="teacherpkg.teacher_panel"
     tools:openDrawer="start">
+
+    <!-- Main Content Container (For Fragments) -->
+<!--    <FrameLayout-->
+<!--        android:id="@+id/fragment_container"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent" />-->
+
+    <!-- Navigation Drawer (Side Menu) -->
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/nav_view"
         android:layout_width="300dp"
@@ -17,9 +23,8 @@
         android:layout_gravity="start"
         app:headerLayout="@layout/teacher_header"
         app:menu="@menu/menubarteacher"
-        tools:ignore="DuplicateIds">
+        tools:ignore="DuplicateIds" />
 
-    </com.google.android.material.navigation.NavigationView>
 
     <ScrollView
         android:layout_width="match_parent"

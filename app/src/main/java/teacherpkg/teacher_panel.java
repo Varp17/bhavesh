@@ -41,7 +41,7 @@ public class teacher_panel extends AppCompatActivity implements NavigationView.O
     TabLayout tabLayout;
     teacher_fragmentd_adapter myFragmentAdapter;
     Menu menu;
-    MenuItem menu_home,menu_classroom,menu_feedback,menu_notification,menu_logout;
+    MenuItem menu_home,menu_classroom,menu_feedback,menu_notification,menu_logout,menu_document;
     ImageView profileimg;
 
 
@@ -69,16 +69,44 @@ public class teacher_panel extends AppCompatActivity implements NavigationView.O
         menu_classroom=menu.findItem(R.id.nav_classroom);
         menu_notification=menu.findItem(R.id.nav_notification);
         menu_logout=menu.findItem(R.id.nav_logout);
+        menu_document=menu.findItem(R.id.nav_document);
 
+        menu_document.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(@NonNull MenuItem item) {
+                if (!toolbar.getTitle().equals("Documents")) {
+                    getSupportFragmentManager().beginTransaction()
+                            .replace(R.id.fragment_container, new teacher_fragment_document_classroom()) // Replace with actual container ID
+                            .addToBackStack(null)
+                            .commit();
+                    toolbar.setTitle("Documents");
+                }
+                drawerLayout.closeDrawer(GravityCompat.START);
+                return true;
+            }
+        });
+
+
+        menu_classroom.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(@NonNull MenuItem item) {
+                if(toolbar.getTitle()!="Classroom") {
+                    Intent intent1 = new Intent(getApplicationContext(), teacher_classroom_adapter.class);
+                    startActivity(intent1);
+                    finish();
+                }
+                return false;
+            }
+        });
 
         menu_notification.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(@NonNull MenuItem item) {
-//                if(toolbar.getTitle()!="NOTIFICATIONS") {
-//                    Intent intent1 = new Intent(getApplicationContext(), notification_teacher.class);
-//                    startActivity(intent1);
-//                    finish();
-//                }
+                if(toolbar.getTitle()!="NOTIFICATIONS") {
+                    Intent intent1 = new Intent(getApplicationContext(), notification_teacher.class);
+                    startActivity(intent1);
+                    finish();
+                }
                 return false;
             }
         });
