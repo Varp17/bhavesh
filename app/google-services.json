@@ -1,45 +1,26 @@
 {
   "project_info": {
-    "project_number": "36224814626",
-    "firebase_url": "https://presencepro-40e3b-default-rtdb.firebaseio.com",
-    "project_id": "presencepro-40e3b",
-    "storage_bucket": "presencepro-40e3b.appspot.com"
+    "project_number": "742302534115",
+    "project_id": "presencepro-d6570",
+    "storage_bucket": "presencepro-d6570.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:36224814626:android:3d1ace0e058825a0d7447b",
+        "mobilesdk_app_id": "1:742302534115:android:4a76298519dde84fbeb8d6",
         "android_client_info": {
           "package_name": "com.example.loginform"
         }
       },
-      "oauth_client": [
-        {
-          "client_id": "36224814626-42hlsqsj5uqorasu991anpdsp36ffmr6.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.example.loginform",
-            "certificate_hash": "54b3a93f254ea83b6c407063aa17da6e1712ace5"
-          }
-        },
-        {
-          "client_id": "36224814626-0hnkkq8nh182e87va3le8h6gg8opikt9.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
+      "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyB6PeaU7aVWjVvhmdHiM1dJpnSK6zdTpto"
+          "current_key": "AIzaSyD-8h50ICtZB3vftpHcWgRZNV6YGNqOcB0"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "36224814626-0hnkkq8nh182e87va3le8h6gg8opikt9.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
+          "other_platform_oauth_client": []
         }
       }
     }

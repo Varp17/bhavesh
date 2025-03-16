@@ -74,13 +74,13 @@ public class teacher_panel extends AppCompatActivity implements NavigationView.O
         menu_document.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(@NonNull MenuItem item) {
-                if (!toolbar.getTitle().equals("Documents")) {
-                    getSupportFragmentManager().beginTransaction()
-                            .replace(R.id.fragment_container, new teacher_fragment_document_classroom()) // Replace with actual container ID
-                            .addToBackStack(null)
-                            .commit();
-                    toolbar.setTitle("Documents");
-                }
+//                if (!toolbar.getTitle().equals("Documents")) {
+//                    getSupportFragmentManager().beginTransaction()
+//                            .replace(R.id.fragment_container, new teacher_fragment_document_classroom()) // Replace with actual container ID
+//                            .addToBackStack(null)
+//                            .commit();
+//                    toolbar.setTitle("Documents");
+//                }
                 drawerLayout.closeDrawer(GravityCompat.START);
                 return true;
             }
