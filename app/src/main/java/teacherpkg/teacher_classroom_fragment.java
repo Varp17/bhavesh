@@ -224,8 +224,10 @@ public class teacher_classroom_fragment extends Fragment {
                     subjectsArrayList.clear(); // Clear existing data
                     for (DocumentSnapshot documentSnapshot : task.getResult()) {
                         String name = documentSnapshot.getString("fullname");
-                        if (name.equals(username)) {
-                            teachername.add(documentSnapshot.getString("fullname"));
+
+                        // Check if 'name' is null before calling equals
+                        if (name != null && name.equals(username)) {
+                            teachername.add(name);
                             subjectname.add(documentSnapshot.getId());
                         }
                     }
