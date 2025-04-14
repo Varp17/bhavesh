@@ -26,6 +26,7 @@ import com.github.ybq.android.spinkit.sprite.Sprite;
 import com.github.ybq.android.spinkit.style.ThreeBounce;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -40,6 +41,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Objects;
 
 import administratorpkg.dategiver;
 import administratorpkg.tester;
@@ -99,8 +101,9 @@ private String classteacherUID;
         datePickerButton2 = view.findViewById(R.id.datepicker2);
 //        datePickerButton.setText(getTodayDate());
 //        datePickerButton2.setText(getTodayDate());
-       fstore=FirebaseFirestore.getInstance();
-         fAuth=FirebaseAuth.getInstance();
+         fAuth = FirebaseAuth.getInstance(FirebaseApp.initializeApp(requireContext()));
+         fstore = FirebaseFirestore.getInstance();
+
         datePickerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -175,13 +178,14 @@ private String classteacherUID;
                                 public void onSuccess(Void unused) {
                                     DocumentReference classteacherref=fstore.collection("classteachers").document(classteacherUID);
                                     classteacherref.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+
                                         @Override
                                         public void onSuccess(DocumentSnapshot documentSnapshot) {
                                                 DocumentReference cr=fstore.collection("subjects").document(documentSnapshot.getString("class year"));
                                                 cr.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                                                     @Override
                                                     public void onSuccess(DocumentSnapshot documentSnapshot) {
-
+                                                        Log.d("FirestoreData", "Subject " + i + ": " + documentSnapshot.getLong("total"));
                                                         while (i<=documentSnapshot.getLong("total")) {
                                                             String sub=documentSnapshot.getString("sub"+i);
                                                             DocumentReference dfr = fstore.collection("classteachers")
@@ -193,10 +197,10 @@ private String classteacherUID;
                                                             dfr.set(userInfo).addOnSuccessListener(new OnSuccessListener<Void>() {
                                                                 @Override
                                                                 public void onSuccess(Void unused) {
-
+                                                                    i++;
                                                                 }
                                                             });
-                                                            i++;
+
                                                         }
                                                         Toast.makeText(getContext(), "acc created", Toast.LENGTH_SHORT).show();
                                                         i=1;
