@@ -60,11 +60,11 @@
 
         <TextView
             android:id="@+id/teachernamemsg"
+            style="@style/TEXT"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            style="@style/TEXT"
             android:layout_marginBottom="42dp"
-            android:text="Teacher Name"
+            android:text="Student Name"
 
             android:textSize="20sp"
             app:layout_constraintBottom_toTopOf="@+id/datemsg"

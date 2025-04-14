@@ -219,7 +219,7 @@ public class student_classroom_fragment extends Fragment {
 
         };
         teachername = new String[]{
-                "Swapnil Sir",
+                "Disha Ma'am",
                 getString(R.string.tech1),
                 getString(R.string.tech2),
                 getString(R.string.tech3),

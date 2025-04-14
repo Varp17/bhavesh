@@ -193,10 +193,10 @@ private String classteacherUID;
                                                             dfr.set(userInfo).addOnSuccessListener(new OnSuccessListener<Void>() {
                                                                 @Override
                                                                 public void onSuccess(Void unused) {
-
+                                                                    i++;
                                                                 }
                                                             });
-                                                            i++;
+
                                                         }
                                                         Toast.makeText(getContext(), "acc created", Toast.LENGTH_SHORT).show();
                                                         i=1;
